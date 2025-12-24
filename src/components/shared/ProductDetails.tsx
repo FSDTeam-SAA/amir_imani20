@@ -18,7 +18,7 @@ export default function ProductDetails() {
           </p>
           <p>
             The game is played across three stackable layers using tactics like switching, 
-            stacking, and predicting your opponent's next move.
+            stacking, and predicting your opponent&apos;s next move.
           </p>
         </div>
 
