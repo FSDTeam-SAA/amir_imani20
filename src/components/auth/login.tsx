@@ -1,76 +1,81 @@
 "use client";
 
-import Image from "next/image";
-import { z } from "zod";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-// Import ShadCN form components
 import {
   Form,
-  FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormControl,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
-const formSchema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string().min(6, "Minimum 6 characters"),
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
+import { Checkbox } from "../ui/checkbox";
+
+// ✅ Zod validation schema
+const loginSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  remember: z.boolean().optional(),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 const Login = () => {
-  const [isPending, setIsPending] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
-
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
+      remember: false,
     },
   });
 
-  async function onSubmit(values: FormValues) {
-    setIsPending(true);
-    setError("");
+  const onSubmit = async (values: LoginFormValues) => {
+    setIsLoading(true);
 
-    const result = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    });
+    try {
+      const result = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
 
-    if (result?.error) {
-      setError("Invalid email or password");
-      setIsPending(false);
-      return;
+      if (result?.ok) {
+        // Login successful → redirect to home
+        window.location.href = "/";
+        toast.success("Logged in successfully!");
+      } else {
+        // Login failed → show error
+        toast.error(result?.error || "Login failed. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-
-    router.push(callbackUrl);
-    router.refresh();
-  }
+  };
 
   return (
     <section
       className="min-h-screen flex items-center justify-center 
-  bg-[linear-gradient(0deg,rgba(212,161,50,0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
-  bg-cover bg-center bg-no-repeat bg-lightgray flex-col gap-5"
+      bg-[linear-gradient(0deg,rgba(212,161,50,0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
+      bg-cover bg-center bg-no-repeat bg-lightgray flex-col gap-5"
     >
       {/* Logo */}
       <div className="flex justify-center mb-4">
@@ -80,6 +85,7 @@ const Login = () => {
           width={50}
           height={60}
           className="w-full h-full"
+          priority
         />
       </div>
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
@@ -87,11 +93,6 @@ const Login = () => {
         <p className="text-gray-500 text-center mb-6">
           Manage your orders, track shipments, and configure products easily.
         </p>
-
-        {/* Error */}
-        {error && (
-          <p className="text-red-500 text-sm text-center mb-3">{error}</p>
-        )}
 
         {/* Form */}
         <Form {...form}>
@@ -104,7 +105,11 @@ const Login = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="hello@example.com" {...field} />
+                    <Input 
+                      placeholder="hello@example.com" 
+                      {...field} 
+                      disabled={isLoading}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -123,11 +128,13 @@ const Login = () => {
                       <Input
                         type={showPassword ? "text" : "password"}
                         {...field}
+                        disabled={isLoading}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-3 top-2.5 text-gray-500"
+                        disabled={isLoading}
                       >
                         {showPassword ? (
                           <EyeOff size={18} />
@@ -141,30 +148,52 @@ const Login = () => {
                 </FormItem>
               )}
             />
+
             <div className="flex justify-between items-center">
-              <p className="flex gap-3 items-center">
-                <input type="checkbox" />
-                <p>Remember me</p>
-              </p>
-              <Link href={'/reset-your-password'} className="text-sm font-medium  text-orange-500 hover:text-orange-700 cursor-pointer transition-colors">
+              {/* Remember Me Checkbox */}
+              <FormField
+                control={form.control}
+                name="remember"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center space-x-2 space-y-0">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        disabled={isLoading}
+                      />
+                    </FormControl>
+                    <FormLabel className="text-sm font-normal cursor-pointer">
+                      Remember me
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+
+              <Link 
+                href="/reset-your-password" 
+                className="text-sm font-medium text-orange-500 hover:text-orange-700 cursor-pointer transition-colors"
+              >
                 Forgot Password
               </Link>
             </div>
 
-            {/* Submit */}
+            {/* Submit Button */}
             <Button
               type="submit"
-              disabled={isPending}
-              className="w-full rounded-2xl bg-black"
+              disabled={isLoading}
+              className="w-full rounded-2xl bg-black hover:bg-gray-800"
             >
-              {isPending ? "Signing in..." : "Sign In"}
+              {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
         </Form>
 
         <p className="text-sm text-gray-500 mt-4 text-center">
           Don&apos;t have an account?{" "}
-          <span className="text-orange-500 cursor-pointer">Sign Up</span>
+          <Link href="/signup" className="text-orange-500 hover:text-orange-700 cursor-pointer">
+            Sign Up
+          </Link>
         </p>
       </div>
     </section>

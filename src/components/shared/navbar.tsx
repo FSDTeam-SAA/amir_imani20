@@ -1,48 +1,58 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, ChevronDown, LogOut, ShoppingBag, ShoppingBasket, Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import Link from "next/link";
+import {
+  Menu,
+  ChevronDown,
+  LogOut,
+  Search,
+  ShoppingCart,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
-import { usePathname } from "next/navigation"
-import Image from "next/image"
-import { useSession, signOut } from "next-auth/react"
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
 import { useUserProfile } from "@/hooks/use-user-profile";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const navigationItems = [
   { name: "Home", href: "/" },
-  { name: "Solution", href: "/solution" },
-  { name: "Contact", href: "/contact" },
-  { name: "About Us", href: "/solution#about" },
+  { name: "Merchandise", href: "/merchandise" },
   { name: "Blogs", href: "/blogs" },
-]
+  { name: "Fortune Telling", href: "/fortune-telling" },
+  { name: "Game", href: "/game" },
+  { name: "Contact", href: "/contact" },
+  { name: "About Us", href: "/about-us" },
+];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
-  const { data: session, status } = useSession()
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const { data: session, status } = useSession();
   const { profile, loading } = useUserProfile();
 
   const getUserInitials = () => {
-    if (!profile) return "U"
-    const firstInitial = profile.firstName ? profile.firstName[0] : ""
-    const lastInitial = profile.lastName ? profile.lastName[0] : ""
-    return `${firstInitial}${lastInitial}`.toUpperCase()
-  }
+    if (!profile) return "U";
+    const firstInitial = profile.firstName ? profile.firstName[0] : "";
+    const lastInitial = profile.lastName ? profile.lastName[0] : "";
+    return `${firstInitial}${lastInitial}`.toUpperCase();
+  };
 
   const getFullName = () => {
-    if (!profile) return "User"
-    return `${profile.firstName || ""} ${profile.lastName || ""}`.trim() || "User"
-  }
+    if (!profile) return "User";
+    return (
+      `${profile.firstName || ""} ${profile.lastName || ""}`.trim() || "User"
+    );
+  };
 
   return (
     <header className=" absolute top-0 z-50 w-full">
@@ -52,7 +62,13 @@ export default function Navbar() {
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center space-x-2">
-                <Image src="/logo.png" alt="Logo" width={50} height={60} className="w-36" />
+                <Image
+                  src="/logo.svg"
+                  alt="Logo"
+                  width={50}
+                  height={60}
+                  className="w-36"
+                />
               </Link>
             </div>
 
@@ -60,7 +76,7 @@ export default function Navbar() {
             <div className="hidden lg:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 {navigationItems.map((item) => {
-                  const isActive = item.href === pathname
+                  const isActive = item.href === pathname;
                   return (
                     <Link
                       key={item.name}
@@ -71,10 +87,12 @@ export default function Navbar() {
                     >
                       {item.name}
                     </Link>
-                  )
+                  );
                 })}
                 <div className="text-white text-lg font-medium transition-colors duration-200 hover:text-cyan-400">
-                  {session?.user?.role === "user" && <Link href="/account/data-sets">My Data Sets</Link>}
+                  {session?.user?.role === "user" && (
+                    <Link href="/account/data-sets">My Data Sets</Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -103,26 +121,38 @@ export default function Navbar() {
                             {loading ? (
                               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                             ) : (
-                              <span className="text-white font-medium text-sm">{getUserInitials()}</span>
+                              <span className="text-white font-medium text-sm">
+                                {getUserInitials()}
+                              </span>
                             )}
                           </div>
                         )}
-                        <span className="hidden sm:block">{loading ? "Loading..." : getFullName()}</span>
+                        <span className="hidden sm:block">
+                          {loading ? "Loading..." : getFullName()}
+                        </span>
                         <ChevronDown className="h-4 w-4" />
                       </div>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
                     <div className="flex flex-col space-y-1 p-2">
-                      <p className="text-sm font-medium">{loading ? "Loading..." : getFullName()}</p>
+                      <p className="text-sm font-medium">
+                        {loading ? "Loading..." : getFullName()}
+                      </p>
                       <p className="text-xs text-muted-foreground">
-                        {loading ? "Loading..." : profile?.email || session.user?.email || "No email"}
+                        {loading
+                          ? "Loading..."
+                          : profile?.email || session.user?.email || "No email"}
                       </p>
                       {profile?.role && (
-                        <p className="text-xs text-muted-foreground capitalize">Role: {profile.role}</p>
+                        <p className="text-xs text-muted-foreground capitalize">
+                          Role: {profile.role}
+                        </p>
                       )}
                       {profile?.companyName && (
-                        <p className="text-xs text-muted-foreground">Company: {profile.companyName}</p>
+                        <p className="text-xs text-muted-foreground">
+                          Company: {profile.companyName}
+                        </p>
                       )}
                     </div>
                     <DropdownMenuSeparator />
@@ -150,7 +180,10 @@ export default function Navbar() {
               ) : (
                 // Login button for non-authenticated users
                 <Link href="/login">
-                  <Button variant="outline" className="border-white hover:bg-white hover:text-black bg-transparent">
+                  <Button
+                    variant="outline"
+                    className="border-white hover:bg-white hover:text-black bg-transparent"
+                  >
                     Log In
                   </Button>
                 </Link>
@@ -158,23 +191,26 @@ export default function Navbar() {
               <Link href="/strategy-solution">
                 <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
                   {/* Strategy session */}
-              <ShoppingBasket />
+                  <ShoppingCart />
                 </Button>
               </Link>
-               <Link href="/strategy-solution">
+              <Link href="/strategy-solution">
                 <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
                   {/* Strategy session */}
-             <Search />
+                  <Search />
                 </Button>
               </Link>
-
             </div>
 
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-white hover:text-cyan-400 hover:bg-white/10">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-white hover:text-cyan-400 hover:bg-white/10"
+                  >
                     <Menu className="h-6 w-6" />
                     <span className="sr-only">Open main menu</span>
                   </Button>
@@ -198,16 +234,28 @@ export default function Navbar() {
                               {loading ? (
                                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                               ) : (
-                                <span className="text-white font-medium text-sm">{getUserInitials()}</span>
+                                <span className="text-white font-medium text-sm">
+                                  {getUserInitials()}
+                                </span>
                               )}
                             </div>
                           )}
                           <div>
-                            <p className="font-medium text-sm">{loading ? "Loading..." : getFullName()}</p>
-                            <p className="text-xs text-gray-600 truncate">
-                              {loading ? "Loading..." : profile?.email || session.user?.email || "No email"}
+                            <p className="font-medium text-sm">
+                              {loading ? "Loading..." : getFullName()}
                             </p>
-                            {profile?.role && <p className="text-xs text-gray-500 capitalize">Role: {profile.role}</p>}
+                            <p className="text-xs text-gray-600 truncate">
+                              {loading
+                                ? "Loading..."
+                                : profile?.email ||
+                                  session.user?.email ||
+                                  "No email"}
+                            </p>
+                            {profile?.role && (
+                              <p className="text-xs text-gray-500 capitalize">
+                                Role: {profile.role}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -215,7 +263,7 @@ export default function Navbar() {
 
                     {/* Navigation items */}
                     {navigationItems.map((item) => {
-                      const isActive = item.href === pathname
+                      const isActive = item.href === pathname;
                       return (
                         <Link
                           key={item.name}
@@ -227,7 +275,7 @@ export default function Navbar() {
                         >
                           {item.name}
                         </Link>
-                      )
+                      );
                     })}
 
                     {/* My Data Sets for mobile */}
@@ -250,20 +298,30 @@ export default function Navbar() {
 
                       {status === "authenticated" && session ? (
                         <>
-                          <Button variant="ghost" className="w-full justify-start" asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-start"
+                            asChild
+                          >
                             <Link
-                              href={profile?.role === "admin" ? "/dashboard" : "/account"}
+                              href={
+                                profile?.role === "admin"
+                                  ? "/dashboard"
+                                  : "/account"
+                              }
                               onClick={() => setIsOpen(false)}
                             >
-                              {profile?.role === "admin" ? "Dashboard" : "Account Settings"}
+                              {profile?.role === "admin"
+                                ? "Dashboard"
+                                : "Account Settings"}
                             </Link>
                           </Button>
                           <Button
                             variant="ghost"
                             className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
                             onClick={() => {
-                              signOut()
-                              setIsOpen(false)
+                              signOut();
+                              setIsOpen(false);
                             }}
                           >
                             <LogOut className="mr-2 h-4 w-4" />
@@ -272,13 +330,27 @@ export default function Navbar() {
                         </>
                       ) : (
                         <>
-                          <Button variant="ghost" className="w-full justify-start" asChild>
-                            <Link href="/login" onClick={() => setIsOpen(false)}>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-start"
+                            asChild
+                          >
+                            <Link
+                              href="/login"
+                              onClick={() => setIsOpen(false)}
+                            >
                               Log In
                             </Link>
                           </Button>
-                          <Button variant="ghost" className="w-full justify-start" asChild>
-                            <Link href="/signup" onClick={() => setIsOpen(false)}>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-start"
+                            asChild
+                          >
+                            <Link
+                              href="/signup"
+                              onClick={() => setIsOpen(false)}
+                            >
                               Sign Up
                             </Link>
                           </Button>
@@ -293,5 +365,5 @@ export default function Navbar() {
         </div>
       </nav>
     </header>
-  )
+  );
 }

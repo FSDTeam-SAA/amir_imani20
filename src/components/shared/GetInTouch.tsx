@@ -1,34 +1,39 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
+import type React from "react";
+import { useState } from "react";
 
 const GetInTouch = () => {
   const [formData, setFormData] = useState({
     email: "",
-    name: "",
-    company: "",
+    firstName: "",
+    lastName: "",
     message: "",
     phone: "",
-  })
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission
-    console.log("Form submitted:", formData)
-  }
+    console.log("Form submitted:", formData);
+  };
 
   return (
     <section className="py-16 bg-[#2A9BA0]">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-white mb-2 text-center">Get in touch</h2>
+        <h2 className="text-4xl font-bold text-white mb-2 text-center">
+          Get in touch
+        </h2>
         <p className="text-white/80 text-center mb-12 max-w-2xl mx-auto">
-          We&apos;d love to hear from you. Drop us a message or reach out to our team.
+          We&apos;d love to hear from you. Drop us a message or reach out to our
+          team.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -40,21 +45,20 @@ const GetInTouch = () => {
                   type="text"
                   name="name"
                   placeholder="Name"
-                  value={formData.name}
+                  value={formData.firstName}
                   onChange={handleChange}
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
+                  type="text"
+                  name="name"
+                  placeholder="name"
+                  value={formData.lastName}
                   onChange={handleChange}
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1  gap-4">
                 <input
                   type="tel"
                   name="phone"
@@ -63,11 +67,13 @@ const GetInTouch = () => {
                   onChange={handleChange}
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
+              </div>
+              <div className="grid grid-cols-1  gap-4">
                 <input
                   type="text"
-                  name="company"
-                  placeholder="Company"
-                  value={formData.company}
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
                   onChange={handleChange}
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
@@ -113,7 +119,7 @@ const GetInTouch = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default GetInTouch
+export default GetInTouch;

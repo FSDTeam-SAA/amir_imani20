@@ -83,7 +83,7 @@ const FAQ = () => {
           Frequently Asked Questions
         </h2>
 
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className=" mx-auto space-y-4">
           {faqs.map((faq) => (
             <div
               key={faq.id}
