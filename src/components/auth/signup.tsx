@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Image from "next/image";
@@ -6,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import {
   Form,
@@ -30,11 +32,12 @@ import { Button } from "@/components/ui/button";
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
-  phone: z.string().optional(),
   email: z.string().email("Invalid email"),
   gender: z.string().min(1, "Gender is required"),
-  age: z.string().min(1, "Age is required"),
-  address: z.string().min(1, "Address is required"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  age: z.string().optional(),
+  address: z.string().optional(),
+  phone: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -50,26 +53,44 @@ const Signup = () => {
     defaultValues: {
       firstName: "",
       lastName: "",
-      phone: "",
       email: "",
       gender: "",
+      password: "",
       age: "",
       address: "",
+      phone: "",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setIsPending(true);
     setError("");
-    
-    // Here you would implement your signup logic
-    console.log(values);
-    
-    // Simulate API call
-    setTimeout(() => {
+    console.log('values',values)
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const res = await fetch(`${baseUrl}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+
+      toast.success("Account created successfully!");
+      router.push("/login");
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Something went wrong");
+      toast.error(err.message || "Something went wrong");
+    } finally {
       setIsPending(false);
-      // router.push("/dashboard"); // Redirect after successful signup
-    }, 1000);
+    }
   }
 
   return (
@@ -166,48 +187,58 @@ const Signup = () => {
               )}
             />
 
-            {/* Gender & Age - Side by side */}
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="gender"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Gender</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your gender" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="male">Male</SelectItem>
-                        <SelectItem value="female">Female</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                        <SelectItem value="prefer-not-to-say">
-                          Prefer not to say
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="age"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Age</FormLabel>
+            {/* Gender */}
+            <FormField
+              control={form.control}
+              name="gender"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Gender</FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
-                      <Input placeholder="26" {...field} />
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your gender" />
+                      </SelectTrigger>
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+                    <SelectContent>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="age"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Age (Optional)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="26" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Password */}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="••••••••" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             {/* Address */}
             <FormField
@@ -215,7 +246,7 @@ const Signup = () => {
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel>Address (Optional)</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder="2972 Westheimer Rd. Santa Ana, Illinois 85488" 
