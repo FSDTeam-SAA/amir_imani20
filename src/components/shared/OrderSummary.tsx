@@ -1,0 +1,56 @@
+"use client"
+
+import React from "react"
+import { ShieldCheck } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+interface OrderSummaryProps {
+  subtotal: number
+  shipping: number
+  tax: number
+}
+
+export default function OrderSummary({ subtotal, shipping, tax }: OrderSummaryProps) {
+  const total = subtotal + shipping + tax
+
+  return (
+    <div className="bg-white border border-[#EFEFEF] rounded-2xl p-6 lg:p-10 shadow-[0px_8px_24px_rgba(0,0,0,0.03)] h-fit sticky top-24">
+      <h2 className="text-xl font-bold text-[#111111] mb-8">
+        Order Summary
+      </h2>
+
+      <div className="space-y-4 mb-8">
+        <div className="flex justify-between items-center text-sm font-medium">
+          <span className="text-[#333333]">Subtotal</span>
+          <span className="text-[#111111]">${subtotal.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between items-center text-sm font-medium">
+          <span className="text-[#333333]">Shipping</span>
+          <span className="text-[#111111]">${shipping.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between items-center text-sm font-medium">
+          <span className="text-[#333333]">Tax</span>
+          <span className="text-[#111111]">${tax.toFixed(2)}</span>
+        </div>
+      </div>
+
+      <div className="pt-6 border-t border-[#EFEFEF] mb-8">
+        <div className="flex justify-between items-center">
+          <span className="text-lg font-bold text-[#111111]">Total</span>
+          <span className="text-xl font-bold text-[#FF7F50]">
+            ${total.toFixed(2)}
+          </span>
+        </div>
+      </div>
+
+      <Button className="w-full h-12 bg-black hover:bg-[#111111] text-white rounded-full font-bold text-sm tracking-wide shadow-[0px_4px_16px_rgba(0,0,0,0.1)] mb-6">
+        Proceed to Checkout
+      </Button>
+
+      <div className="flex items-center justify-center gap-2 text-[13px] text-[#8B8B8B]">
+        <ShieldCheck className="w-4 h-4 text-[#2E8F8A]" />
+        <span>Secure checkout powered by Stripe</span>
+      </div>
+    </div>
+  )
+}
