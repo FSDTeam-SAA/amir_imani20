@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, ChevronDown, LogOut } from "lucide-react"
+import { Menu, ChevronDown, LogOut, ShoppingBag, ShoppingBasket, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -45,14 +45,14 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full">
-      <nav className="w-full bg-[#131313]">
+    <header className=" absolute top-0 z-50 w-full">
+      <nav className="w-full backdrop-blur-2xl">
         <div className="container mx-auto">
           <div className="flex items-center justify-between lg:h-20 h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center space-x-2">
-                <Image src="/images/logo.png" alt="Logo" width={144} height={60} className="w-36" />
+                <Image src="/logo.png" alt="Logo" width={50} height={60} className="w-36" />
               </Link>
             </div>
 
@@ -155,12 +155,19 @@ export default function Navbar() {
                   </Button>
                 </Link>
               )}
-
               <Link href="/strategy-solution">
                 <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
-                  Strategy session
+                  {/* Strategy session */}
+              <ShoppingBasket />
                 </Button>
               </Link>
+               <Link href="/strategy-solution">
+                <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
+                  {/* Strategy session */}
+             <Search />
+                </Button>
+              </Link>
+
             </div>
 
             {/* Mobile menu button */}

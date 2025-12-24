@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 const AboutGame = () => {
   return (
@@ -9,7 +10,7 @@ const AboutGame = () => {
           {/* Image */}
           <div className="flex justify-center">
             <div className="relative w-full max-w-sm">
-              <img src="/tabletop-game-card-wainzite-fantasy-card.jpg" alt="Wainzite Game" className="w-full rounded-lg shadow-lg" />
+              <Image src="/aboutgame.png" alt="Wainzite Game" width={700} height={600} className="w-full rounded-lg shadow-lg" />
             </div>
           </div>
 
