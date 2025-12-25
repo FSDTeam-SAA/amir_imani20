@@ -16,7 +16,7 @@ const CommingSoon = () => {
               />
             </div> */}
       <div className="container mx-auto py-12">
-        <h2 className="text-3xl md:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center">
+        <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center">
           Play, Explore & Discover Your Next Adventure
         </h2>
 
@@ -47,7 +47,7 @@ const CommingSoon = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="relative border-2 rounded-lg  flex flex-col items-center justify-center">
+          <div className="relative border-2 rounded-lg py-10  md:py-5   flex flex-col items-center justify-center">
             {/* <p className="absolute top-6 left-8 bg-black text-white px-3 py-1 rounded">
               New
             </p> */}
