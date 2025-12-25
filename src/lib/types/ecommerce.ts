@@ -9,19 +9,16 @@ export interface Product {
 }
 
 export interface CartItem {
-  productId: string | Product;
-  productName: string;
-  price: number;
+  productId: Product;
   quantity: number;
-  subtotal: number;
-  img: string;
 }
 
 export interface Cart {
   _id: string;
-  items: CartItem[];
-  totalItems: number;
-  totalPrice: number;
+  userId: string;
+  productIds: CartItem[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ProductsResponse {
@@ -37,5 +34,6 @@ export interface SingleProductResponse {
 
 export interface CartResponse {
   success: boolean;
+  message: string;
   data: Cart;
 }
