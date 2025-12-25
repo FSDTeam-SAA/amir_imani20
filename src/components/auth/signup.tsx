@@ -81,12 +81,12 @@ const Signup = () => {
       if (!res.ok) {
         throw new Error(data.message || "Registration failed");
       } else if (data.success === "mail already registered") {
-        router.push("/login");
+        router.push(`/email-verify?email=${values.email}`);
         throw new Error("Email already registered");
       }
 
       toast.success("Account created successfully!");
-      router.push("/login");
+      router.push(`/email-verify?email=${values.email}`);
     } catch (err: any) {
       console.error(err);
       setError(err.message || "Something went wrong");
