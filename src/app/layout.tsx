@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TanstackProvider from "@/provider/Tanstack-provider";
 import Provider from "@/provider/authprovider";
+import { CartProvider } from "@/provider/cart-provider";
 import { Toaster } from "sonner";
 // import { SessionProvider } from "next-auth/react";
 
@@ -33,10 +34,11 @@ export default function RootLayout({
       >
         <TanstackProvider>
           <Provider>
-            {children}
-             <Toaster position="top-right" richColors />
-            </Provider>
-
+            <CartProvider>
+              {children}
+              <Toaster position="top-right" richColors />
+            </CartProvider>
+          </Provider>
         </TanstackProvider>
       </body>
     </html>

@@ -8,6 +8,7 @@ import {
   LogOut,
   Search,
   ShoppingCart,
+  User2Icon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +23,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useUserProfile } from "@/hooks/use-user-profile";
+import { useCart } from "@/provider/cart-provider";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const navigationItems = [
@@ -39,6 +41,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const { profile, loading } = useUserProfile();
+  const { cart } = useCart();
+
+  const cartItemCount = cart?.totalItems || 0;
 
   const getUserInitials = () => {
     if (!profile) return "U";
@@ -107,31 +112,7 @@ export default function Navbar() {
                       variant="ghost"
                       className="flex items-center space-x-2 text-white hover:text-cyan-400 hover:bg-white/10"
                     >
-                      <div className="flex items-center space-x-2">
-                        {profile?.imageLink ? (
-                          <Image
-                            src={profile.imageLink}
-                            alt={getFullName()}
-                            width={40}
-                            height={40}
-                            className="h-10 w-10 rounded-full object-cover border-2 border-cyan-400"
-                          />
-                        ) : (
-                          <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center border-2 border-cyan-400">
-                            {loading ? (
-                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            ) : (
-                              <span className="text-white font-medium text-sm">
-                                {getUserInitials()}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                        <span className="hidden sm:block">
-                          {loading ? "Loading..." : getFullName()}
-                        </span>
-                        <ChevronDown className="h-4 w-4" />
-                      </div>
+                     <User2Icon/>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
@@ -188,18 +169,19 @@ export default function Navbar() {
                   </Button>
                 </Link>
               )}
-              <Link href="/strategy-solution">
-                <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
-                  {/* Strategy session */}
+              <Link href="/cart" className="relative">
+                <Button className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
                   <ShoppingCart />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartItemCount > 99 ? '99+' : cartItemCount}
+                    </span>
+                  )}
                 </Button>
               </Link>
-              <Link href="/strategy-solution">
-                <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
-                  {/* Strategy session */}
+             <Button className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
                   <Search />
-                </Button>
-              </Link>
+             </Button>
             </div>
 
             {/* Mobile menu button */}
