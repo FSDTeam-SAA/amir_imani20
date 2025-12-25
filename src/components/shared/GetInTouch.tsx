@@ -28,17 +28,16 @@ const GetInTouch = () => {
   return (
     <section className="py-16 bg-[#2A9BA0]">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-white mb-2 text-center">
-          Get in touch
-        </h2>
-        <p className="text-white/80 text-center mb-12 max-w-2xl mx-auto">
-          We&apos;d love to hear from you. Drop us a message or reach out to our
-          team.
-        </p>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form */}
           <div>
+            <h2 className="text-4xl font-bold text-white mb-2 text-start">
+              Get in touch
+            </h2>
+            <p className="text-white/80 text-start mb-5 max-w-2xl">
+              We&apos;d love to hear from you. Drop us a message or reach out to
+              our team.
+            </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
