@@ -56,7 +56,7 @@ export default function Navbar() {
 
   return (
     <header className=" absolute top-0 z-50 w-full">
-      <nav className="w-full backdrop-blur-2xl">
+      <nav className="w-full backdrop-blur-2xl bg-black/30 border-b border-white/10 py-4">
         <div className="container mx-auto">
           <div className="flex items-center justify-between lg:h-20 h-16">
             {/* Logo */}
@@ -82,7 +82,7 @@ export default function Navbar() {
                       key={item.name}
                       href={item.href}
                       className={`${
-                        isActive ? "text-cyan-400" : "text-white"
+                        isActive ? "text-[#D4A13D]" : "text-white"
                       } px-3 py-2 text-lg font-medium transition-colors duration-200 hover:text-cyan-400`}
                     >
                       {item.name}
@@ -127,10 +127,10 @@ export default function Navbar() {
                             )}
                           </div>
                         )}
-                        <span className="hidden sm:block">
+                        {/* <span className="hidden sm:block">
                           {loading ? "Loading..." : getFullName()}
-                        </span>
-                        <ChevronDown className="h-4 w-4" />
+                        </span> */}
+                        {/* <ChevronDown className="h-4 w-4" /> */}
                       </div>
                     </Button>
                   </DropdownMenuTrigger>
@@ -189,13 +189,13 @@ export default function Navbar() {
                 </Link>
               )}
               <Link href="/strategy-solution">
-                <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
+                <Button className="bg-transparent hover:bg-cyan-600 text-[#D4A13D] px-6 py-2 rounded-full font-medium">
                   {/* Strategy session */}
                   <ShoppingCart />
                 </Button>
               </Link>
               <Link href="/strategy-solution">
-                <Button className="bg-[#38B1EA] hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium">
+                <Button className="bg-transparent hover:bg-cyan-600 text-[#D4A13D] px-6 py-2 rounded-md font-medium">
                   {/* Strategy session */}
                   <Search />
                 </Button>

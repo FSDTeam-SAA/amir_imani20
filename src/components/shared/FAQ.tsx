@@ -79,9 +79,10 @@ const FAQ = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
+        <h2 className="text-2xl md:text-5xl font-bold text-center text-[#181D27]">
           Frequently Asked Questions
         </h2>
+        <p className="text-[#6C757D] text-base md:text-xl leading-[150%]  mb-12 text-center mt-2">Here are the top questions our players ask before getting started.</p>
 
         <div className=" mx-auto space-y-4">
           {faqs.map((faq) => (
