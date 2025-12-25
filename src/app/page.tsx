@@ -1,5 +1,5 @@
 import About from "@/components/home/About";
-
+import Products from "@/components/home/Products";
 import FAQ from "@/components/shared/FAQ";
 import Footer from "@/components/shared/Footer";
 import GetInTouch from "@/components/shared/GetInTouch";
@@ -12,6 +12,7 @@ export default function Home() {
       
       <Hero />
       <About />
+      <Products />
       <GetInTouch />
       <FAQ />
  

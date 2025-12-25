@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TanstackProvider from "@/provider/Tanstack-provider";
 import Provider from "@/provider/authprovider";
+import { CartProvider } from "@/provider/cart-provider";
 import { Toaster } from "sonner";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/Footer";
@@ -35,15 +36,16 @@ export default function RootLayout({
       >
         <TanstackProvider>
           <Provider>
-            <div className=" h-screen flex flex-col justify-between">
+          <CartProvider>
+             <div className=" h-screen flex flex-col justify-between">
 
-            <Navbar />
-            {children}
-            <Footer />
+              <Navbar />
+              {children}
+              <Footer />
             </div>
-             <Toaster position="top-right" richColors />
-            </Provider>
-
+              <Toaster position="top-right" richColors />
+            </CartProvider>
+          </Provider>
         </TanstackProvider>
       </body>
     </html>
