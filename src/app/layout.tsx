@@ -4,6 +4,8 @@ import "./globals.css";
 import TanstackProvider from "@/provider/Tanstack-provider";
 import Provider from "@/provider/authprovider";
 import { Toaster } from "sonner";
+import Navbar from "@/components/shared/navbar";
+import Footer from "@/components/shared/Footer";
 // import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
@@ -33,7 +35,12 @@ export default function RootLayout({
       >
         <TanstackProvider>
           <Provider>
+            <div className=" h-screen flex flex-col justify-between">
+
+            <Navbar />
             {children}
+            <Footer />
+            </div>
              <Toaster position="top-right" richColors />
             </Provider>
 
