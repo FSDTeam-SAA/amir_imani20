@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import TanstackProvider from "@/provider/Tanstack-provider";
 import Provider from "@/provider/authprovider";
@@ -9,15 +9,12 @@ import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/Footer";
 // import { SessionProvider } from "next-auth/react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
   subsets: ["latin"],
+  variable: "--font-poppins",
+  weight:['300','400','500','600','700','800','900'],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Game creater App",
@@ -30,10 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={poppins.variable}>
+      <body className="antialiased">
         <TanstackProvider>
           <Provider>
           <CartProvider>

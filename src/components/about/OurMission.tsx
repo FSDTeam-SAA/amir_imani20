@@ -52,7 +52,7 @@ const OurMission = () => {
 
   return (
     <section 
-      className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50"
+      className="py-16 md:py-20  bg-gradient-to-b from-white to-gray-50"
       aria-labelledby="mission-heading"
       itemScope
       itemType="https://schema.org/AboutPage"
@@ -167,39 +167,7 @@ const OurMission = () => {
         </div>
 
         {/* Mission Statement Schema.org */}
-        <div 
-          className="mt-16 md:mt-24 bg-gradient-to-r from-blue-600 to-amber-500 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden"
-          itemScope
-          itemType="https://schema.org/CreativeWork"
-        >
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 right-0 w-48 h-48 bg-white rounded-full translate-x-1/2 translate-y-1/2"></div>
-          </div>
-          
-          <div className="relative z-10 max-w-3xl mx-auto text-center">
-            <svg 
-              className="w-12 h-12 mx-auto mb-6 text-white/80" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            
-            <blockquote 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6 italic"
-              itemProp="text"
-            >
-              &apos;To create experiences that inspire connection, creativity, and joy through meaningful play.&apos;
-            </blockquote>
-            
-            <cite className="not-italic text-white/90 text-lg">
-              — DoUndo Core Principle
-            </cite>
-          </div>
-        </div>
+    
 
         {/* Additional SEO Content - Hidden from view but accessible to screen readers */}
         <div className="sr-only" aria-hidden="false">

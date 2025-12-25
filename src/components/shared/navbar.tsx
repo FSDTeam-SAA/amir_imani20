@@ -61,11 +61,11 @@ export default function Navbar() {
 
   return (
     <header className=" absolute top-0 z-50 w-full">
-      <nav className="w-full backdrop-blur-2xl bg-black/30 border-b border-white/10 py-4">
+      <nav className="w-full backdrop-blur-2xl bg-black/30 border-b border-white/10 py-2 xl:py-4">
         <div className="container mx-auto">
           <div className="flex items-center justify-between lg:h-20 h-16">
             {/* Logo */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 pl-5 xl:pl-0">
               <Link href="/" className="flex items-center space-x-2">
                 <Image
                   src="/logo.svg"
@@ -78,7 +78,7 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 {navigationItems.map((item) => {
                   const isActive = item.href === pathname;
@@ -88,22 +88,22 @@ export default function Navbar() {
                       href={item.href}
                       className={`${
                         isActive ? "text-[#D4A13D]" : "text-white"
-                      } px-3 py-2 text-lg font-medium transition-colors duration-200 hover:text-cyan-400`}
+                      } px-3 py-2 text-sm 2xl:text-lg  font-medium transition-colors duration-200 hover:text-cyan-400`}
                     >
                       {item.name}
                     </Link>
                   );
                 })}
-                <div className="text-white text-lg font-medium transition-colors duration-200 hover:text-cyan-400">
+                {/* <div className="text-white text-lg font-medium transition-colors duration-200 hover:text-cyan-400">
                   {session?.user?.role === "user" && (
                     <Link href="/account/data-sets">My Data Sets</Link>
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
 
             {/* Right side - Desktop */}
-            <div className="hidden lg:flex items-center space-x-4">
+            <div className="hidden xl:flex items-center space-x-4">
               {status === "authenticated" && session ? (
                 // Profile Dropdown for authenticated users
                 <DropdownMenu>
@@ -185,7 +185,7 @@ export default function Navbar() {
             </div>
 
             {/* Mobile menu button */}
-            <div className="lg:hidden">
+            <div className="xl:hidden ">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button
@@ -197,7 +197,7 @@ export default function Navbar() {
                     <span className="sr-only">Open main menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <SheetContent side="right" className="w-[300px] sm:w-[400px] ">
                   <div className="flex flex-col space-y-4 mt-8">
                     {/* User info section for mobile */}
                     {status === "authenticated" && session && (
@@ -252,7 +252,7 @@ export default function Navbar() {
                           href={item.href}
                           className={`${
                             isActive ? "text-cyan-400" : "text-foreground"
-                          } text-lg font-medium hover:text-cyan-600 transition-colors duration-200`}
+                          } text-lg font-medium text-center hover:text-cyan-600 transition-colors duration-200`}
                           onClick={() => setIsOpen(false)}
                         >
                           {item.name}
@@ -261,7 +261,7 @@ export default function Navbar() {
                     })}
 
                     {/* My Data Sets for mobile */}
-                    {session?.user?.role === "user" && (
+                    {/* {session?.user?.role === "user" && (
                       <Link
                         href="/account/data-sets"
                         className="text-foreground text-lg font-medium hover:text-cyan-600 transition-colors duration-200"
@@ -269,9 +269,9 @@ export default function Navbar() {
                       >
                         My Data Sets
                       </Link>
-                    )}
+                    )} */}
 
-                    <div className="pt-4 border-t space-y-2">
+                    {/* <div className="pt-4 border-t space-y-2">
                       <Link href="/strategy-solution">
                         <Button className="w-full bg-[#38B1EA] hover:bg-cyan-600 text-white mb-4">
                           Strategy session
@@ -338,7 +338,7 @@ export default function Navbar() {
                           </Button>
                         </>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 </SheetContent>
               </Sheet>
