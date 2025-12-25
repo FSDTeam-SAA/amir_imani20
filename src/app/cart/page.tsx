@@ -19,22 +19,22 @@ import { debounce } from "@/lib/utils/debounce";
 export default function CartPage() {
   const { cart, loading, updateQuantity, removeFromCart } = useCart();
 
-  // Local state for optimistic UI updates
-  const [localQuantities, setLocalQuantities] = useState<
+  // Pending quantities for optimistic UI updates (only stores items being actively changed)
+  const [pendingQuantities, setPendingQuantities] = useState<
     Record<string, number>
   >({});
 
-  // Sync local state when cart updates from server
-  // This is intentional - we need to sync local optimistic state with server state
-  useEffect(() => {
+  // Compute quantities from cart data, with pending optimistic updates overlaid
+  const localQuantities = useMemo(() => {
+    const quantities: Record<string, number> = {};
     if (cart?.productIds) {
-      const quantities: Record<string, number> = {};
       cart.productIds.forEach((item) => {
         quantities[item.productId._id] = item.quantity;
       });
-      setLocalQuantities(quantities);
     }
-  }, [cart]);
+    // Overlay any pending optimistic updates
+    return { ...quantities, ...pendingQuantities };
+  }, [cart, pendingQuantities]);
 
   // Debounced API call - memoized to prevent recreation
   const debouncedUpdateRef = useRef<
@@ -46,30 +46,30 @@ export default function CartPage() {
       async (productId: string, quantity: number) => {
         try {
           await updateQuantity(productId, quantity);
+          // Clear the pending quantity once server confirms the update
+          setPendingQuantities((prev) => {
+            const next = { ...prev };
+            delete next[productId];
+            return next;
+          });
         } catch (error) {
           console.error("Failed to update quantity:", error);
-          // Revert optimistic update on error
-          if (cart?.productIds) {
-            const originalItem = cart.productIds.find(
-              (item) => item.productId._id === productId
-            );
-            if (originalItem) {
-              setLocalQuantities((prev) => ({
-                ...prev,
-                [productId]: originalItem.quantity,
-              }));
-            }
-          }
+          // Revert optimistic update on error by clearing the pending quantity
+          setPendingQuantities((prev) => {
+            const next = { ...prev };
+            delete next[productId];
+            return next;
+          });
         }
       },
       500
     );
-  }, [updateQuantity, cart]);
+  }, [updateQuantity]);
 
   const handleQuantityChange = useCallback(
     (productId: string, newQuantity: number) => {
       // Optimistic UI update - immediate feedback
-      setLocalQuantities((prev) => ({
+      setPendingQuantities((prev) => ({
         ...prev,
         [productId]: newQuantity,
       }));
