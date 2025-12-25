@@ -1,6 +1,12 @@
 "use client";
 
-import React from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+  useEffect,
+} from "react";
 import Link from "next/link";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import ProductNavbar from "@/components/shared/ProductNavbar";
@@ -8,22 +14,71 @@ import ProductFooter from "@/components/shared/ProductFooter";
 import CartItem from "@/components/shared/CartItem";
 import OrderSummary from "@/components/shared/OrderSummary";
 import { useCart } from "@/provider/cart-provider";
+import { debounce } from "@/lib/utils/debounce";
 
 export default function CartPage() {
   const { cart, loading, updateQuantity, removeFromCart } = useCart();
 
-  const items = cart?.productIds || [];
+  // Local state for optimistic UI updates
+  const [localQuantities, setLocalQuantities] = useState<
+    Record<string, number>
+  >({});
 
-  const handleQuantityChange = async (
-    productId: string,
-    newQuantity: number
-  ) => {
-    try {
-      await updateQuantity(productId, newQuantity);
-    } catch (error) {
-      console.error("Failed to update quantity:", error);
+  // Sync local state when cart updates from server
+  // This is intentional - we need to sync local optimistic state with server state
+  useEffect(() => {
+    if (cart?.productIds) {
+      const quantities: Record<string, number> = {};
+      cart.productIds.forEach((item) => {
+        quantities[item.productId._id] = item.quantity;
+      });
+      setLocalQuantities(quantities);
     }
-  };
+  }, [cart]);
+
+  // Debounced API call - memoized to prevent recreation
+  const debouncedUpdateRef = useRef<
+    ((productId: string, quantity: number) => void) | null
+  >(null);
+
+  useEffect(() => {
+    debouncedUpdateRef.current = debounce(
+      async (productId: string, quantity: number) => {
+        try {
+          await updateQuantity(productId, quantity);
+        } catch (error) {
+          console.error("Failed to update quantity:", error);
+          // Revert optimistic update on error
+          if (cart?.productIds) {
+            const originalItem = cart.productIds.find(
+              (item) => item.productId._id === productId
+            );
+            if (originalItem) {
+              setLocalQuantities((prev) => ({
+                ...prev,
+                [productId]: originalItem.quantity,
+              }));
+            }
+          }
+        }
+      },
+      500
+    );
+  }, [updateQuantity, cart]);
+
+  const handleQuantityChange = useCallback(
+    (productId: string, newQuantity: number) => {
+      // Optimistic UI update - immediate feedback
+      setLocalQuantities((prev) => ({
+        ...prev,
+        [productId]: newQuantity,
+      }));
+
+      // Debounced API call
+      debouncedUpdateRef.current?.(productId, newQuantity);
+    },
+    []
+  );
 
   const handleRemove = async (productId: string) => {
     try {
@@ -33,10 +88,16 @@ export default function CartPage() {
     }
   };
 
-  const subtotal = items.reduce(
-    (acc, item) => acc + item.productId.price * item.quantity,
-    0
-  );
+  const items = useMemo(() => cart?.productIds || [], [cart?.productIds]);
+
+  // Calculate subtotal using local quantities for immediate feedback
+  const subtotal = useMemo(() => {
+    return items.reduce((acc, item) => {
+      const quantity = localQuantities[item.productId._id] ?? item.quantity;
+      return acc + item.productId.price * quantity;
+    }, 0);
+  }, [items, localQuantities]);
+
   const shipping = 5.0;
   const tax = 5.0;
 
@@ -82,7 +143,9 @@ export default function CartPage() {
                     description={item.productId.description}
                     price={item.productId.price}
                     imageUrl={item.productId.img}
-                    quantity={item.quantity}
+                    quantity={
+                      localQuantities[item.productId._id] ?? item.quantity
+                    }
                     onQuantityChange={handleQuantityChange}
                     onRemove={handleRemove}
                   />
