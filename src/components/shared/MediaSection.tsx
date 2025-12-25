@@ -2,11 +2,24 @@ import React from "react"
 import { Play, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export default function MediaSection() {
+interface MediaSectionProps {
+  videoLink?: string
+}
+
+export default function MediaSection({ videoLink }: MediaSectionProps) {
+  const handlePlayClick = () => {
+    if (videoLink) {
+      window.open(videoLink, "_blank")
+    }
+  }
+
   return (
     <section className="py-12 border-t border-[#EFEFEF]">
       {/* Video Card */}
-      <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)] bg-gray-100 mb-8">
+      <div 
+        className="relative w-full aspect-video rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)] bg-gray-100 mb-8 cursor-pointer"
+        onClick={handlePlayClick}
+      >
         {/* Placeholder for video thumbnail image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -46,3 +59,4 @@ export default function MediaSection() {
     </section>
   )
 }
+
