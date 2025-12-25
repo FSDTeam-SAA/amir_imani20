@@ -61,7 +61,7 @@ export default function Navbar() {
 
   return (
     <header className=" absolute top-0 z-50 w-full">
-      <nav className="w-full backdrop-blur-2xl">
+      <nav className="w-full backdrop-blur-2xl bg-black/30 border-b border-white/10 py-4">
         <div className="container mx-auto">
           <div className="flex items-center justify-between lg:h-20 h-16">
             {/* Logo */}
@@ -87,7 +87,7 @@ export default function Navbar() {
                       key={item.name}
                       href={item.href}
                       className={`${
-                        isActive ? "text-cyan-400" : "text-white"
+                        isActive ? "text-[#D4A13D]" : "text-white"
                       } px-3 py-2 text-lg font-medium transition-colors duration-200 hover:text-cyan-400`}
                     >
                       {item.name}

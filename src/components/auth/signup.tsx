@@ -28,7 +28,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
@@ -65,9 +64,10 @@ const Signup = () => {
   async function onSubmit(values: FormValues) {
     setIsPending(true);
     setError("");
-    console.log('values',values)
+    console.log("values", values);
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const res = await fetch(`${baseUrl}/auth/register`, {
         method: "POST",
         headers: {
@@ -77,9 +77,12 @@ const Signup = () => {
       });
 
       const data = await res.json();
-
+      console.log("datas", data?.message);
       if (!res.ok) {
         throw new Error(data.message || "Registration failed");
+      } else if (data.success === "mail already registered") {
+        router.push("/login");
+        throw new Error("Email already registered");
       }
 
       toast.success("Account created successfully!");
@@ -109,7 +112,7 @@ const Signup = () => {
           className="w-auto h-auto"
         />
       </div>
-      
+
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
         <h2 className="text-2xl font-semibold text-center mb-1">
           Create Your Account
@@ -117,7 +120,7 @@ const Signup = () => {
         <p className="text-gray-500 text-center mb-6">
           Create your account to start booking, hosting, and sharing kitchens
         </p>
-        
+
         {/* Error */}
         {error && (
           <p className="text-red-500 text-sm text-center mb-3">{error}</p>
@@ -141,7 +144,7 @@ const Signup = () => {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="lastName"
@@ -210,7 +213,7 @@ const Signup = () => {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="age"
@@ -248,9 +251,9 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Address (Optional)</FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="2972 Westheimer Rd. Santa Ana, Illinois 85488" 
-                      {...field} 
+                    <Input
+                      placeholder="2972 Westheimer Rd. Santa Ana, Illinois 85488"
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -272,7 +275,7 @@ const Signup = () => {
         {/* Sign In link */}
         <p className="text-sm text-gray-500 mt-6 text-center">
           Already have an account?{" "}
-          <span 
+          <span
             className="text-orange-500 hover:text-orange-600 cursor-pointer font-medium transition-colors"
             onClick={() => router.push("/login")}
           >

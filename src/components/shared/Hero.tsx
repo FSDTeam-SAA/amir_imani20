@@ -29,7 +29,7 @@ export default function Hero() {
 
           {/* CTA Button */}
           <div className="flex justify-center">
-            <Button className="bg-black cursor-pointer hover:bg-gray-900 text-white px-8 py-6 rounded-full text-lg font-semibold inline-flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Button className="bg-black cursor-pointer hover:bg-gray-900 text-white px-8 py-6 rounded-full text-lg md:text-2xl font-semibold inline-flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300">
               Get Your Game Now
               <ArrowRight className="w-5 h-5" />
             </Button>
