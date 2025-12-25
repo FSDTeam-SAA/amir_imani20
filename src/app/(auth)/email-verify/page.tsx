@@ -1,11 +1,11 @@
 import EmailVerify from '@/components/auth/email-verify/EmailVerify'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const page = () => {
   return (
-    <div>
-        <EmailVerify />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <EmailVerify />
+    </Suspense>
   )
 }
 
