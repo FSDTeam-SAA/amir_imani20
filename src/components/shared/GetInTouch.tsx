@@ -1,13 +1,15 @@
 "use client";
 
+import { useContact } from "@/hooks/use-contact";
 import type React from "react";
 import { useState } from "react";
 
 const GetInTouch = () => {
+  const { mutate, isPending, isSuccess, isError, error } = useContact();
   const [formData, setFormData] = useState({
-    email: "",
     firstName: "",
     lastName: "",
+    email: "",
     message: "",
     phone: "",
   });
@@ -19,11 +21,18 @@ const GetInTouch = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-  };
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+
+  mutate({
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    email: formData.email,
+    phoneNumber: formData.phone,
+    message: formData.message,
+  });
+};
+
 
   return (
     <section className="py-16 bg-[#2A9BA0]">
@@ -42,17 +51,27 @@ const GetInTouch = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
-                  name="name"
-                  placeholder="Name"
+                  name="firstName"
+                  placeholder="First Name"
                   value={formData.firstName}
                   onChange={handleChange}
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
                 <input
                   type="text"
-                  name="name"
-                  placeholder="name"
+                  name="lastName"
+                  placeholder="Last Name"
                   value={formData.lastName}
+                  onChange={handleChange}
+                  className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+                />
+              </div>
+                   <div className="grid grid-cols-1  gap-4">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
                   onChange={handleChange}
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
@@ -67,16 +86,7 @@ const GetInTouch = () => {
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
               </div>
-              <div className="grid grid-cols-1  gap-4">
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
-                />
-              </div>
+         
 
               <textarea
                 name="message"

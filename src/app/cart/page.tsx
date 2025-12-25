@@ -54,7 +54,7 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-[#FBFBFB]">
-      <ProductNavbar />
+      {/* <ProductNavbar /> */}
 
       <main className="container mx-auto px-6 pt-32 pb-20 max-w-[1240px]">
         {/* Back Link */}
@@ -105,7 +105,7 @@ export default function CartPage() {
         </div>
       </main>
 
-      <ProductFooter />
+      {/* <ProductFooter /> */}
     </div>
   )
 }
