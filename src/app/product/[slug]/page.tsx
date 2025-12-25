@@ -1,20 +1,66 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useParams } from "next/navigation"
 import ProductNavbar from "@/components/shared/ProductNavbar"
 import ProductHero from "@/components/shared/ProductHero"
 import ProductDetails from "@/components/shared/ProductDetails"
 import MediaSection from "@/components/shared/MediaSection"
 import ProductFooter from "@/components/shared/ProductFooter"
+import { Product } from "@/lib/types/ecommerce"
+import { productService } from "@/lib/api/product-service"
 
 export default function ProductPage() {
+  const params = useParams()
+  const productId = params.slug as string
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!productId) return
+      try {
+        const response = await productService.getProductById(productId)
+        if (response.success) {
+          setProduct(response.data)
+        } else {
+          setError("Failed to fetch product")
+        }
+      } catch (err) {
+        console.error("Error fetching product:", err)
+        setError("An error occurred while fetching the product.")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProduct()
+  }, [productId])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#FBFBFB] flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
+  }
+
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-[#FBFBFB] flex items-center justify-center">
+        <p className="text-red-500 text-lg">{error || "Product not found"}</p>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-[#FBFBFB] selection:bg-[#2E8F8A]/20 selection:text-[#2E8F8A]">
       {/* Patterned Background Overlay (Subtle) */}
       <div 
         className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
         style={{ 
-          backgroundImage: 'url("/images/pattern-bg.png")', // Placeholder for patterned texture
+          backgroundImage: 'url("/images/pattern-bg.png")',
           backgroundSize: '400px',
           backgroundRepeat: 'repeat'
         }}
@@ -23,9 +69,9 @@ export default function ProductPage() {
       <ProductNavbar />
       
       <main className="relative z-10 pt-20 lg:pt-24 pb-20 container mx-auto px-6 lg:px-0 max-w-[1000px]">
-        <ProductHero />
-        <ProductDetails />
-        <MediaSection />
+        <ProductHero product={product} />
+        <ProductDetails product={product} />
+        <MediaSection videoLink={product.videoLink} />
       </main>
 
       <ProductFooter />

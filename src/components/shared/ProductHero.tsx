@@ -4,21 +4,49 @@ import React, { useState } from "react"
 import { Heart, Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { Product } from "@/lib/types/ecommerce"
+import { useCart } from "@/provider/cart-provider"
+import { toast } from "sonner"
 
-export default function ProductHero() {
+interface ProductHeroProps {
+  product: Product
+}
+
+export default function ProductHero({ product }: ProductHeroProps) {
   const [quantity, setQuantity] = useState(1)
+  const [isAdding, setIsAdding] = useState(false)
+  const { addToCart } = useCart()
+
+  const handleAddToCart = async () => {
+    setIsAdding(true)
+    try {
+      await addToCart(product._id, quantity)
+      toast.success(`${product.productName} added to cart!`)
+    } catch (error) {
+      toast.error("Failed to add to cart. Please try again.")
+      console.error("Add to cart error:", error)
+    } finally {
+      setIsAdding(false)
+    }
+  }
 
   return (
     <section className="py-12 lg:py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
         <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
-          <Image
-            src="/images/placeholder-product.jpg" // Placeholder for uploaded_image_1766533417951.jpg
-            alt="DoUndo Game"
-            fill
-            className="object-cover"
-          />
+          {product.img ? (
+            <Image
+              src={product.img}
+              alt={product.productName}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-200">
+              <span className="text-gray-400">No Image</span>
+            </div>
+          )}
         </div>
 
         {/* Right Column: Product Info */}
@@ -32,32 +60,29 @@ export default function ProductHero() {
 
           {/* Title and Price */}
           <h1 className="text-4xl lg:text-[40px] font-bold text-[#111111] mb-2 leading-tight">
-            DoUndo
+            {product.productName}
           </h1>
           <div className="text-3xl font-bold text-[#111111] mb-6">
-            $1,299
+            ${product.price}
           </div>
 
-          {/* Summary */}
-          <p className="text-[#333333] text-base leading-relaxed mb-6">
-            A 4×4 grid with 16 spaces.
-            <br />
-            12 unique symbols, 6 copies each.
-            <br />
-            A thematic companion booklet with backstory and flavor.
+          {/* Summary / Features */}
+          <p className="text-[#333333] text-base leading-relaxed mb-6 whitespace-pre-line">
+            {product.feature}
           </p>
 
           {/* Controls */}
           <div className="space-y-6 mb-8">
             <div className="flex flex-col gap-2">
               <label className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
-                Size
+                Quantity
               </label>
               <div className="flex items-center space-x-2">
                 <div className="flex items-center border border-[#EFEFEF] rounded-md overflow-hidden bg-[#FBFBFB]">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="px-2 py-2 hover:bg-[#EFEFEF] transition-colors"
+                    disabled={isAdding}
                   >
                     <Minus className="w-3 h-3 text-[#111111]" />
                   </button>
@@ -67,6 +92,7 @@ export default function ProductHero() {
                   <button
                     onClick={() => setQuantity(quantity + 1)}
                     className="px-2 py-2 hover:bg-[#EFEFEF] transition-colors"
+                    disabled={isAdding}
                   >
                     <Plus className="w-3 h-3 text-[#111111]" />
                   </button>
@@ -75,8 +101,12 @@ export default function ProductHero() {
             </div>
 
             {/* CTA Button */}
-            <Button className="w-full h-14 bg-[#000000] hover:bg-[#111111] text-white rounded-full text-base font-semibold shadow-[0px_8px_16px_rgba(0,0,0,0.15)] transition-all transform active:scale-[0.98]">
-              Add to Cart
+            <Button
+              onClick={handleAddToCart}
+              disabled={isAdding}
+              className="w-full h-14 bg-[#000000] hover:bg-[#111111] text-white rounded-full text-base font-semibold shadow-[0px_8px_16px_rgba(0,0,0,0.15)] transition-all transform active:scale-[0.98] disabled:opacity-50"
+            >
+              {isAdding ? "Adding..." : "Add to Cart"}
             </Button>
 
             {/* Secondary Action */}
