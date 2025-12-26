@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { authService } from "@/lib/api/auth-service";
+import Image from "next/image";
 
 // ✅ Validation schema
 const resetPasswordSchema = z
@@ -72,6 +73,20 @@ export default function ResetPassword() {
   };
 
   return (
+    <section
+      className="min-h-screen flex items-center justify-center 
+      bg-[linear-gradient(0deg,rgba(212,161,50,0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
+      bg-cover bg-center bg-no-repeat bg-lightgray flex-col gap-5"
+    >
+    <div className="flex justify-center mb-2">
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          width={50}
+          height={60}
+          className="w-auto h-auto"
+        />
+      </div>
     <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
       <div className="w-full">
         {/* Header */}
@@ -167,5 +182,6 @@ export default function ResetPassword() {
         </Form>
       </div>
     </div>
+    </section>
   );
 }
