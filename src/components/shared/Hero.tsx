@@ -16,20 +16,20 @@ export default function Hero() {
       <div className="relative z-10 flex items-end pb-20 justify-end min-h-screen px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           {/* Main heading */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            <span className="text-balance">Different games</span>
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 md:mb-5 lg:mb-6 leading-[120%]">
+            <span className="text-balance">Different Games</span>
             <br />
-            <span className="text-balance">one language</span>
+            <span className="text-balance">One Language</span>
           </h1>
 
-          <p className="text-white pb-5">
+          <p className="text-[#FFFFFF] pb-5 md;pb-7 lg:pb-9 leading-[150%] ">
             DoUndo connects strategy, perception, imagination, and story through
             thirteen symbols that tie every experience together.
           </p>
 
           {/* CTA Button */}
           <div className="flex justify-center">
-            <Button className="bg-black cursor-pointer hover:bg-gray-900 text-white px-8 py-6 rounded-full text-base md:text-lg 2xl:text-xl font-semibold inline-flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Button className=" cursor-pointer   px-8 py-6 rounded-full text-base  font-semibold inline-flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300">
               Get Your Game Now
               <ArrowRight className="w-5 h-5" />
             </Button>

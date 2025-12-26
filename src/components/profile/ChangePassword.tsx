@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useChangePassword } from '@/hooks/useprofile'
+import { useSession } from 'next-auth/react'
 
 const passwordSchema = z.object({
   oldPassword: z.string().min(1, 'Old password is required'),
@@ -29,6 +31,7 @@ type PasswordFormValues = z.infer<typeof passwordSchema>;
 
 const ChangePassword = () => {
   const [isPending, setIsPending] = useState(false);
+  const {data:session}=useSession();
   const { mutate } = useChangePassword();
 
   const form = useForm<PasswordFormValues>({
@@ -39,22 +42,20 @@ const ChangePassword = () => {
       confirmPassword: '',
     },
   });
+  const token=session?.user.accessToken||'';
 
-  async function onSubmit(values: PasswordFormValues) {
+  function onSubmit(values: PasswordFormValues) {
     setIsPending(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Password change values:', values);
-      mutate({ oldPassword: values.oldPassword, newPassword: values.newPassword });
-      toast.success('Password changed successfully!');
-      form.reset();
-    } catch (error) {
-      toast.error('Failed to change password');
-      console.error(error);
-    } finally {
-      setIsPending(false);
-    }
+    console.log('Password change values:', values);
+    mutate(
+      { oldPassword: values.oldPassword, newPassword: values.newPassword, token },
+      {
+       
+        onSettled: () => {
+          setIsPending(false);
+        },
+      }
+    );
   }
 
   return (
