@@ -63,7 +63,7 @@ export default function Navbar() {
 
   return (
     <header className=" absolute top-0 z-50 w-full">
-      <nav className="w-full backdrop-blur-2xl bg-black/30 border-b border-white/10 py-2 xl:py-4">
+      <nav className="w-full backdrop-blur-2xl bg-black/30 border-b border-white/10 py-0 ">
         <div className="container mx-auto">
           <div className="flex items-center justify-between lg:h-20 h-16">
             {/* Logo */}
@@ -72,16 +72,16 @@ export default function Navbar() {
                 <Image
                   src="/logo.svg"
                   alt="Logo"
-                  width={50}
-                  height={60}
-                  className="w-36"
+                  width={271}
+                  height={40}
+                  className="maz-w-[271px] max-h-10"
                 />
               </Link>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden xl:block">
-              <div className="ml-10 flex items-baseline space-x-8">
+              <div className="ml-10 flex items-baseline space-x-6">
                 {navigationItems.map((item) => {
                   const isActive = item.href === pathname;
                   return (
@@ -89,7 +89,7 @@ export default function Navbar() {
                       key={item.name}
                       href={item.href}
                       className={`${
-                        isActive ? "text-[#D4A13D]" : "text-white"
+                        isActive ? "text-[#F1562D]" : "text-white"
                       } px-3 py-2 text-sm 2xl:text-lg  font-medium transition-colors duration-200 hover:text-cyan-400`}
                     >
                       {item.name}
@@ -112,9 +112,9 @@ export default function Navbar() {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="flex items-center space-x-2 text-white hover:text-cyan-400 hover:bg-white/10"
+                      className="flex items-center space-x-2 text-white hover:bg-orange-600  "
                     >
-                     <User2Icon/>
+                     <User2Icon className="w-7! h-7!"/>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
@@ -171,9 +171,9 @@ export default function Navbar() {
                   </Button>
                 </Link>
               )}
-              <Link href="/cart" className="relative">
+              <Link href="/cart" className="relative ">
                 <Button className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
-                  <ShoppingCart />
+                  <ShoppingCart className="w-7! h-7! "/>
                   {cartItemCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                       {cartItemCount > 99 ? '99+' : cartItemCount}
@@ -182,7 +182,7 @@ export default function Navbar() {
                 </Button>
               </Link>
              <Button onClick={() => setSearchOpen(!searchOpen)} className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
-                  <Search />
+                  <Search className="w-7! h-7!" />
              </Button>
             </div>
 

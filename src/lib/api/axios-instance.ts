@@ -27,7 +27,8 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const shouldIgnore401 = (error.config as any)?._ignore401;
+    if (error.response?.status === 401 && !shouldIgnore401) {
       localStorage.removeItem('authToken')
       window.location.href = '/login'
     }
