@@ -84,7 +84,7 @@ const FAQ = () => {
         </h2>
         <p className="text-[#6C757D] text-base md:text-xl leading-[150%]  mb-12 text-center mt-2">Here are the top questions our players ask before getting started.</p>
 
-        <div className=" mx-auto space-y-4">
+        <div className="max-w-4xl mx-auto space-y-4">
           {faqs.map((faq) => (
             <div
               key={faq.id}

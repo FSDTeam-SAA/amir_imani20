@@ -12,7 +12,7 @@ export default function Home() {
       
       <Hero />
       <About />
-      <Products />
+      {/* <Products /> */}
       <GetInTouch />
       <FAQ />
  

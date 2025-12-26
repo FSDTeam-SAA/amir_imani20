@@ -3,6 +3,8 @@
 import { useContact } from "@/hooks/use-contact";
 import type React from "react";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 const GetInTouch = () => {
   const { mutate, isPending, isSuccess, isError, error } = useContact();
@@ -21,31 +23,29 @@ const GetInTouch = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  mutate({
-    firstName: formData.firstName,
-    lastName: formData.lastName,
-    email: formData.email,
-    phoneNumber: formData.phone,
-    message: formData.message,
-  });
-};
-
+    mutate({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phoneNumber: formData.phone,
+      message: formData.message,
+    });
+  };
 
   return (
-    <section className="py-16 bg-[#2A9BA0]">
-      <div className="container mx-auto px-6">
+    <section className="py-16 ">
+      <div className="container mx-auto px-6 bg-[#F2E3C6] rounded-2xl shadow-xl py-6 md:py-12 md:px-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form */}
           <div>
-            <h2 className="text-4xl font-bold text-white mb-2 text-start">
+            <h2 className="text-4xl font-bold text-[#343A40] mb-2 text-start">
               Get in touch
             </h2>
-            <p className="text-white/80 text-start mb-5 max-w-2xl">
-              We&apos;d love to hear from you. Drop us a message or reach out to
-              our team.
+            <p className="text-p[#343A40] text-start mb-5 lg:mb-10 max-w-2xl">
+              Our friendly team would love to hear from you.
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -66,7 +66,7 @@ const handleSubmit = (e: React.FormEvent) => {
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
               </div>
-                   <div className="grid grid-cols-1  gap-4">
+              <div className="grid grid-cols-1  gap-4">
                 <input
                   type="email"
                   name="email"
@@ -86,7 +86,6 @@ const handleSubmit = (e: React.FormEvent) => {
                   className="bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
               </div>
-         
 
               <textarea
                 name="message"
@@ -99,17 +98,17 @@ const handleSubmit = (e: React.FormEvent) => {
 
               <div className="flex items-center gap-2">
                 <input type="checkbox" id="privacy" className="w-4 h-4" />
-                <label htmlFor="privacy" className="text-white text-sm">
-                  I agree to the privacy policy
+                <label htmlFor="privacy" className="text-[#343A40] text-sm">
+                  I agree to the <Link href="/privacy-policy" className="underline cursor-pointer">privacy policy</Link>
                 </label>
               </div>
 
-              <button
+              <Button
                 type="submit"
-                className="w-full bg-gray-900 text-white py-3 rounded-full font-medium hover:bg-black transition"
+                className="w-full  text-white py-3 rounded-full font-medium transition"
               >
                 Send message
-              </button>
+              </Button>
             </form>
           </div>
 
