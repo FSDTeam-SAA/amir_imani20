@@ -23,7 +23,7 @@ const OurStory = () => {
 
   return (
     <section 
-      className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white to-amber-50/30"
+      className="mt-20 py-16 md:py-20 bg-gradient-to-b from-white to-amber-50/30"
       aria-labelledby="story-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">

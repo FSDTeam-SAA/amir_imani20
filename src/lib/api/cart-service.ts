@@ -67,3 +67,16 @@ export const cartService = {
     return response.data;
   },
 };
+
+
+export async function sendContactForm(data:{firstName:string,lastName:string,email:string,phoneNumber:string,message:string}){
+  try{
+
+    const res= await axiosInstance.post("/contact-us",data);
+    return res.data;
+  }catch(err){
+    if(err instanceof Error){
+    throw new Error(err.message);
+  }}
+
+}

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SocialIcons from "../footer/SocialIcons";
 import FooterLinks from "../footer/FooterLinks";
-import NewsletterForm from "../footer/NewsletterForm";
+// import NewsletterForm from "../footer/NewsletterForm";
 
 
 // Constants for maintainability
@@ -15,8 +15,8 @@ const COMPANY_INFO = {
 
 const PRODUCTS_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Games", href: "/games" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Games", href: "/game" },
   { label: "Merchandise", href: "/merchandise" },
   { label: "Fortune Telling", href: "/fortune-telling" },
   { label: "Contact", href: "/contact" },
@@ -24,7 +24,7 @@ const PRODUCTS_LINKS = [
 
 const RESOURCES_LINKS = [
   { label: "Cart", href: "/cart" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "/blogs" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms and Conditions", href: "/terms" },
 ];
@@ -69,7 +69,7 @@ export default function Footer() {
 
       {/* Main Footer Content */}
       <div className="bg-[#2A9BA0] text-white py-10 md:py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             
             {/* Company Info - Column 1 */}
@@ -109,7 +109,7 @@ export default function Footer() {
             />
 
             {/* Newsletter - Column 4 */}
-            <div className="lg:col-span-1">
+            {/* <div className="lg:col-span-1">
               <h3 className="font-semibold text-lg mb-4">
                 Stay Updated
               </h3>
@@ -124,7 +124,7 @@ export default function Footer() {
                   By subscribing, you agree to our Privacy Policy and consent to receive updates.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

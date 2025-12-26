@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import TanstackProvider from "@/provider/Tanstack-provider";
 import Provider from "@/provider/authprovider";
 import { CartProvider } from "@/provider/cart-provider";
-import { Toaster } from "sonner";
+
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/Footer";
 // import { SessionProvider } from "next-auth/react";
@@ -31,8 +31,11 @@ export default function RootLayout({
         <TanstackProvider>
           <Provider>
             <CartProvider>
-              {children}
-              <Toaster position="top-right" richColors />
+              <div className=" h-screen flex flex-col justify-between">
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
             </CartProvider>
           </Provider>
         </TanstackProvider>
