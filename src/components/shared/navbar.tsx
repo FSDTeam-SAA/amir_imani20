@@ -25,6 +25,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useUserProfile } from "@/hooks/use-user-profile";
 import { useCart } from "@/provider/cart-provider";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import SearchMotal from "../search/SearchMotal";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -38,6 +39,7 @@ const navigationItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const { profile, loading } = useUserProfile();
@@ -103,7 +105,7 @@ export default function Navbar() {
             </div>
 
             {/* Right side - Desktop */}
-            <div className="hidden xl:flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
               {status === "authenticated" && session ? (
                 // Profile Dropdown for authenticated users
                 <DropdownMenu>
@@ -143,7 +145,7 @@ export default function Navbar() {
                           Dashboard
                         </Link>
                       ) : (
-                        <Link href="/account" className="cursor-pointer">
+                        <Link href="/profile" className="cursor-pointer">
                           Account Setting
                         </Link>
                       )}
@@ -179,7 +181,7 @@ export default function Navbar() {
                   )}
                 </Button>
               </Link>
-             <Button className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
+             <Button onClick={() => setSearchOpen(!searchOpen)} className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
                   <Search />
              </Button>
             </div>
@@ -345,6 +347,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
+        <SearchMotal open={searchOpen} onSetSearchOpen={setSearchOpen} />
       </nav>
     </header>
   );

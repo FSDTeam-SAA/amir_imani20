@@ -17,6 +17,7 @@ import React, { useEffect, useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const formSchema = z.object({
   otp: z.string().min(6, {
@@ -118,7 +119,21 @@ const EmailVerify = () => {
   };
 
   return (
-    <div>
+    <section
+      className="min-h-screen flex items-center justify-center 
+      bg-[linear-gradient(0deg,rgba(212,161,50,0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
+      bg-cover bg-center bg-no-repeat bg-lightgray flex-col gap-5"
+    >
+
+          <div className="flex justify-center mb-2">
+              <Image
+                src="/logo.svg"
+                alt="logo"
+                width={50}
+                height={60}
+                className="w-auto h-auto"
+              />
+            </div>
       <div className="w-full max-w-xl bg-white rounded-xl shadow-lg p-8">
         <h1 className="text-primary text-3xl md:text-[40px] font-bold mb-2 font-heading text-center">
           Enter OTP
@@ -206,7 +221,7 @@ const EmailVerify = () => {
           </form>
         </Form>
       </div>
-    </div>
+    </section>
   );
 };
 
