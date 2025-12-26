@@ -37,3 +37,20 @@ export interface CartResponse {
   message: string;
   data: Cart;
 }
+
+export interface PaymentData {
+  checkoutUrl: string;
+  paymentId: string;
+}
+
+export interface CreatePaymentRequest {
+  userId: string;
+  totalAmount: number;
+  itemIds: string;
+}
+
+export interface CreatePaymentResponse {
+  success: boolean;
+  message: string;
+  data: PaymentData;
+}

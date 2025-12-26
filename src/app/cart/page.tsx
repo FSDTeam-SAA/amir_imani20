@@ -15,6 +15,7 @@ import CartItem from "@/components/shared/CartItem";
 import OrderSummary from "@/components/shared/OrderSummary";
 import { useCart } from "@/provider/cart-provider";
 import { debounce } from "@/lib/utils/debounce";
+import { usePayment } from "@/hooks/use-payment";
 
 export default function CartPage() {
   const { cart, loading, updateQuantity, removeFromCart } = useCart();
@@ -101,6 +102,25 @@ export default function CartPage() {
   const shipping = 5.0;
   const tax = 5.0;
 
+  const { mutate: createPayment, isPending: isCheckoutLoading } = usePayment();
+
+  const handleCheckout = () => {
+    if (!cart) return;
+
+    // Calculate total amount including shipping and tax
+    // Using simple addition here, backend should ideally validate prices
+    const totalAmount = subtotal + shipping + tax;
+
+    // Get array of product IDs
+    const itemIds = cart._id;
+
+    createPayment({
+      userId: cart.userId,
+      totalAmount,
+      itemIds,
+    });
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#FBFBFB]">
@@ -171,7 +191,14 @@ export default function CartPage() {
 
           {/* Order Summary Sidebar */}
           <div className="w-full lg:w-[380px]">
-            <OrderSummary subtotal={subtotal} shipping={shipping} tax={tax} />
+            <OrderSummary
+              subtotal={subtotal}
+              shipping={shipping}
+              tax={tax}
+              onCheckout={handleCheckout}
+              isCheckoutLoading={isCheckoutLoading}
+              isDisabled={items.length === 0}
+            />
           </div>
         </div>
       </main>
