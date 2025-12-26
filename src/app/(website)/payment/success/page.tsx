@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Check, Package, Mail, Download } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function PaymentSuccess() {
   const [isVisible, setIsVisible] = useState(false);
@@ -72,7 +74,7 @@ export default function PaymentSuccess() {
           </div>
 
           {/* Order Details */}
-          <div
+          {/* <div
             className={`space-y-4 mb-8 transition-all duration-700 delay-400 ${
               showDetails ? "opacity-100" : "opacity-0"
             }`}
@@ -95,10 +97,10 @@ export default function PaymentSuccess() {
                 {orderDetails.total}
               </span>
             </div>
-          </div>
+          </div> */}
 
           {/* Info Box */}
-          <div className="bg-blue-50 rounded-lg p-4 mb-6 flex items-start space-x-3">
+          {/* <div className="bg-blue-50 rounded-lg p-4 mb-6 flex items-start space-x-3">
             <Mail className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
             <div className="text-sm text-blue-900">
               <p className="font-medium mb-1">Confirmation sent</p>
@@ -107,10 +109,10 @@ export default function PaymentSuccess() {
                 <span className="font-medium">{orderDetails.email}</span>
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Action Buttons */}
-          <div className="space-y-3">
+          {/* <div className="space-y-3">
             <button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3.5 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2">
               <Package className="w-5 h-5" />
               <span>Track Your Order</span>
@@ -120,17 +122,12 @@ export default function PaymentSuccess() {
               <Download className="w-5 h-5" />
               <span>Download Receipt</span>
             </button>
-          </div>
+          </div> */}
 
           {/* Footer Link */}
-          <div className="text-center mt-6">
-            <a
-              href="#"
-              className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors"
-            >
-              Continue Shopping →
-            </a>
-          </div>
+          <Link href="/">
+            <Button className="w-full mt-6">Continue Shopping →</Button>
+          </Link>
         </div>
       </div>
     </div>
