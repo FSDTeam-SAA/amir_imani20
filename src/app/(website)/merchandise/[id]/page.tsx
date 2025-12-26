@@ -10,6 +10,7 @@ import { useParams } from "next/navigation"
 import { Product } from "@/lib/types/ecommerce"
 import { productService } from "@/lib/api/product-service"
 import MerchandiseSingleCard from "@/components/merchandise/merchandiseSingleProduct/MerchandiseSingleCard"
+import ProductDetails from "@/components/shared/ProductDetails"
 
 export default function ProductPage() {
   const params = useParams()
@@ -71,7 +72,7 @@ export default function ProductPage() {
       
       <main className="relative z-10 pt-20 lg:pt-24 pb-20 container mx-auto px-6 lg:px-0 max-w-[1000px]">
         <MerchandiseSingleCard product={product} />
-        {/* <ProductDetails product={product} /> */}
+        <ProductDetails product={product} />
         {/* <MediaSection videoLink={product.videoLink} /> */}
       </main>
 
