@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SocialIcons from "../footer/SocialIcons";
 import FooterLinks from "../footer/FooterLinks";
-import NewsletterForm from "../footer/NewsletterForm";
+// import NewsletterForm from "../footer/NewsletterForm";
 
 
 // Constants for maintainability
@@ -15,8 +15,8 @@ const COMPANY_INFO = {
 
 const PRODUCTS_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Games", href: "/games" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Games", href: "/game" },
   { label: "Merchandise", href: "/merchandise" },
   { label: "Fortune Telling", href: "/fortune-telling" },
   { label: "Contact", href: "/contact" },
@@ -24,7 +24,7 @@ const PRODUCTS_LINKS = [
 
 const RESOURCES_LINKS = [
   { label: "Cart", href: "/cart" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "/blogs" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms and Conditions", href: "/terms" },
 ];

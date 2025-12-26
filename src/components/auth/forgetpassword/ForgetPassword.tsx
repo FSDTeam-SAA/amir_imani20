@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/hooks/useAuth";
+import Image from "next/image";
 
 // ✅ Validation schema
 const forgotSchema = z.object({
@@ -70,6 +71,20 @@ export default function ForgetPassword() {
   };
 
   return (
+    <section
+      className="min-h-screen flex items-center justify-center 
+      bg-[linear-gradient(0deg,rgba(212,161,50,0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
+      bg-cover bg-center bg-no-repeat bg-lightgray flex-col gap-5"
+    >
+    <div className="flex justify-center mb-2">
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          width={50}
+          height={60}
+          className="w-auto h-auto"
+        />
+      </div>
     <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
       <h2 className="text-3xl md:text-[48px] font-bold leading-[150%] font-playfair text-primary mb-2 font-heading text-center">
         Reset Your Password
@@ -113,5 +128,6 @@ export default function ForgetPassword() {
         </form>
       </Form>
     </div>
+    </section>
   );
 }

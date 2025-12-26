@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useSearchParams, useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function VerifyOTP() {
   const [email, setEmail] = useState<string | null>(null);
@@ -133,6 +134,21 @@ export default function VerifyOTP() {
   };
 
   return (
+    <section
+      className="min-h-screen flex items-center justify-center 
+      bg-[linear-gradient(0deg,rgba(212,161,50,0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
+      bg-cover bg-center bg-no-repeat bg-lightgray flex-col gap-5"
+    >
+         <div className="flex justify-center mb-4">
+            <Image
+              src="/logo.svg"
+              alt="logo"
+              width={50}
+              height={50}
+              className="w-full h-full"
+              priority
+            />
+          </div>
     <div className="w-full max-w-xl bg-white rounded-xl shadow-lg p-8">
       <h1 className="text-primary text-3xl md:text-[40px] font-bold mb-2 font-heading text-center">
         Enter OTP
@@ -212,5 +228,6 @@ export default function VerifyOTP() {
         </form>
       </Form>
     </div>
+    </section>
   );
 }
