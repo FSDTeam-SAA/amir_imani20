@@ -114,10 +114,10 @@ export default function ProductHero({ product }: ProductHeroProps) {
             </Button>
 
             {/* Secondary Action */}
-            <button className="flex items-center gap-2 text-[13px] text-[#8B8B8B] hover:text-[#111111] transition-colors mx-auto lg:mx-0">
+            {/* <button className="flex items-center gap-2 text-[13px] text-[#8B8B8B] hover:text-[#111111] transition-colors mx-auto lg:mx-0">
               <Heart className="w-4 h-4" />
               Add to Wishlist
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

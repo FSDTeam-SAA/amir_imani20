@@ -45,8 +45,9 @@ export default function Navbar() {
   const { profile, loading } = useUserProfile();
   const { cart } = useCart();
 
-  const cartItemCount =
-    cart?.productIds?.reduce((total, item) => total + item.quantity, 0) || 0;
+  const cartItemCount =cart?.productIds?.length || 0;
+
+    // cart?.productIds?.reduce((total, item) => total + item.quantity, 0) || 0;
 
   const getUserInitials = () => {
     if (!profile) return "U";
