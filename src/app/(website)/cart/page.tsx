@@ -30,7 +30,7 @@ export default function CartPage() {
     const quantities: Record<string, number> = {};
     if (cart?.productIds) {
       cart.productIds.forEach((item) => {
-        quantities[item.productId._id] = item.quantity;
+        quantities[item?.productId?._id] = item.quantity;
       });
     }
     // Overlay any pending optimistic updates
@@ -94,8 +94,8 @@ export default function CartPage() {
   // Calculate subtotal using local quantities for immediate feedback
   const subtotal = useMemo(() => {
     return items.reduce((acc, item) => {
-      const quantity = localQuantities[item.productId._id] ?? item.quantity;
-      return acc + item.productId.price * quantity;
+      const quantity = localQuantities[item?.productId?._id] ?? item.quantity;
+      return acc + item?.productId?.price * quantity;
     }, 0);
   }, [items, localQuantities]);
 
@@ -157,18 +157,18 @@ export default function CartPage() {
               <div className="flex flex-col">
                 {items.map((item) => (
                   <CartItem
-                    key={item.productId._id}
-                    id={item.productId._id}
-                    title={item.productId.productName}
-                    description={item.productId.description}
-                    price={item.productId.price}
+                    key={item?.productId?._id}
+                    id={item?.productId?._id}
+                    title={item?.productId?.productName}
+                    description={item?.productId?.description}
+                    price={item?.productId?.price}
                     imageUrl={
-                      item.productId.imgs?.[0] ||
-                      item.productId.img ||
+                      item?.productId?.imgs?.[0] ||
+                      item?.productId?.img ||
                       "/no-image.jpg"
                     }
                     quantity={
-                      localQuantities[item.productId._id] ?? item.quantity
+                      localQuantities[item?.productId?._id] ?? item.quantity
                     }
                     onQuantityChange={handleQuantityChange}
                     onRemove={handleRemove}

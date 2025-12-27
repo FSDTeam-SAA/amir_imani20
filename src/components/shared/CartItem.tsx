@@ -59,7 +59,7 @@ export default function CartItem({
         {/* Price and Stepper */}
         <div className="flex flex-col items-end gap-3 shrink-0">
           <span className="text-lg font-bold text-[#FF7F50]">
-            ${price.toFixed(2)}
+            ${price?.toFixed(2)}
           </span>
           
           <div className="flex items-center border border-[#2E8F8A] rounded-md overflow-hidden h-8">

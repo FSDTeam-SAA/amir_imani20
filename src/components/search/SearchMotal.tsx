@@ -56,9 +56,9 @@ const SearchMotal = ({
 
   return (
     <section>
-      <div className="search-motal container mx-auto px-4">
+      <div className="search-motal  container mx-auto px-4">
         <AlertDialog open={open} onOpenChange={onSetSearchOpen}>
-          <AlertDialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
+          <AlertDialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
             <AlertDialogHeader className="flex flex-row items-center gap-3 space-y-0">
               <AlertDialogTitle className="hidden">Search Products</AlertDialogTitle>
               <Input
