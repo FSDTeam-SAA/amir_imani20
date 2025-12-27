@@ -23,7 +23,7 @@ const profileSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Invalid email address'),
-  phone: z.string().optional(),
+  phone: z.number().optional(),
   address: z.string().optional(),
 });
 
@@ -48,7 +48,7 @@ const ChangeInformation = () => {
       firstName: '',
       lastName: '',
       email: '',
-      phone: '',
+      phone: undefined,
       address: '',
     },
   });
@@ -60,7 +60,7 @@ const ChangeInformation = () => {
         firstName: firstName,
         lastName: lastName,
         email: session.user.email || '',
-        phone: '', 
+        phone: undefined, 
         address: '',
       });
     }
@@ -79,7 +79,7 @@ const ChangeInformation = () => {
         lastName: values.lastName,
         email: values.email, // Include email if API supports updating it
         address: values.address,
-        phoneNum: values.phone ? parseInt(values.phone.replace(/\D/g, ''), 10) : undefined
+        phoneNum: values.phone ? values.phone: undefined
       };
 
       const response = await updateUserInfo(session.user.id, updateData, session.accessToken);
