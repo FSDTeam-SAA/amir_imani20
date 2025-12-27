@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "./axios-instance";
 import { CartResponse } from "../types/ecommerce";
 
@@ -6,8 +7,24 @@ export const cartService = {
    * Fetch current user's cart.
    */
   getCart: async (): Promise<CartResponse> => {
-    const response = await axiosInstance.get<CartResponse>("/cart");
-    return response.data;
+    try {
+      const response = await axiosInstance.get<CartResponse>("/cart");
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.status === 404) {
+        // Return a default empty cart if not found (e.g. new user)
+        return {
+          success: true,
+          data: {
+            _id: "",
+            items: [],
+            totalItems: 0,
+            totalPrice: 0,
+          },
+        };
+      }
+      throw error;
+    }
   },
 
   /**
@@ -16,7 +33,7 @@ export const cartService = {
    */
   addToCart: async (productId: string, quantity: number, userId: string): Promise<CartResponse> => {
     const response = await axiosInstance.post<CartResponse>("/cart", {
-     userId: ""
+     userId: userId
       , productIds: {
       productId,
       quantity,}
