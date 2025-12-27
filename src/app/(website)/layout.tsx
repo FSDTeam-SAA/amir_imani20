@@ -31,7 +31,7 @@ export default function RootLayout({
         <TanstackProvider>
           <Provider>
             <CartProvider>
-              <div className=" h-screen flex flex-col justify-between">
+              <div className=" h-screen flex flex-col justify-between ">
                 <Navbar />
                 {children}
                 <Footer />

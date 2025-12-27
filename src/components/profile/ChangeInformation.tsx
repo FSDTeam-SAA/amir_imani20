@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useEffect } from 'react';
@@ -16,6 +17,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { updateUserInfo } from '@/lib/api/profile';
 
 const profileSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -65,16 +67,33 @@ const ChangeInformation = () => {
   }, [session, form]);
 
   async function onSubmit(values: ProfileFormValues) {
+    if (!session?.user?.id || !session?.accessToken) {
+      toast.error('You must be logged in to update your profile');
+      return;
+    }
+
     setIsPending(true);
     try {
-      // Simulate API call to update profile
-      console.log('Update Profile Values:', values);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const updateData = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email, // Include email if API supports updating it
+        address: values.address,
+        phoneNum: values.phone ? parseInt(values.phone.replace(/\D/g, ''), 10) : undefined
+      };
+
+      const response = await updateUserInfo(session.user.id, updateData, session.accessToken);
       
-      toast.success('Profile updated successfully!');
-    } catch (error) {
+      if (response && (response.success || response._id)) { // Adjust based on actual API response success indicator
+         toast.success('Profile updated successfully!');
+         // Ideally update session here using update() from useSession if NextAuth supports it
+      } else {
+         throw new Error(response.message || 'Update failed');
+      }
+
+    } catch (error: any) {
       console.error('Profile update error:', error);
-      toast.error('Failed to update profile.');
+      toast.error(error.message || 'Failed to update profile.');
     } finally {
       setIsPending(false);
     }

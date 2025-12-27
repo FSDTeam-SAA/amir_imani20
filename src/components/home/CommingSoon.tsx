@@ -93,11 +93,11 @@ const CommingSoon = () => {
           Play, Explore & Discover Your Next Adventure
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-[90%] mx-auto md:w-full">
           {/* Card 1 */}
           {products.slice(0, 3).map((product) => (
             <Link key={product._id} href={`/product/${product._id}`}>
-              <div className="relative outline-red-500  border-2 rounded-lg    flex flex-col  justify-center">
+              <div className="relative outline-red-500  border-2 rounded-lg  overflow-hidden  flex flex-col  justify-center">
                 <div className="relative">
                   <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded">
                     New
