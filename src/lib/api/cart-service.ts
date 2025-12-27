@@ -6,49 +6,47 @@ export const cartService = {
   /**
    * Fetch current user's cart.
    */
-  getCart: async (): Promise<CartResponse> => {
-    try {
-      const response = await axiosInstance.get<CartResponse>("/cart");
-      return response.data;
-    } catch (error: any) {
-      if (error.response && error.response.status === 404) {
-        // Return a default empty cart if not found (e.g. new user)
-        return {
-          success: true,
-          data: {
-            _id: "",
-            items: [],
-            totalItems: 0,
-            totalPrice: 0,
-          },
-        };
-      }
-      throw error;
-    }
+  getCart: async (userId: string): Promise<CartResponse> => {
+    const response = await axiosInstance.get<CartResponse>(
+      `/cart/user/${userId}`
+    );
+    return response.data;
   },
 
   /**
    * Add an item to the cart.
    * If item exists, backend increases quantity.
    */
-  addToCart: async (productId: string, quantity: number, userId: string): Promise<CartResponse> => {
+  addToCart: async (
+    productId: string,
+    quantity: number,
+    userId: string
+  ): Promise<CartResponse> => {
     const response = await axiosInstance.post<CartResponse>("/cart", {
-     userId: userId
-      , productIds: {
-      productId,
-      quantity,}
+      userId: userId,
+      productIds: [
+        {
+          productId,
+          quantity,
+        },
+      ],
     });
     return response.data;
   },
 
   /**
-   * Update item quantity in the cart.
+   * Update cart items - replaces the entire productIds array.
+   * @param userId - The user's ID
+   * @param productIds - Array of { productId, quantity } objects
    */
-  updateCartItem: async (productId: string, quantity: number): Promise<CartResponse> => {
-    const response = await axiosInstance.patch<CartResponse>("/cart/update", {
-      productId,
-      quantity,
-    });
+  updateCart: async (
+    userId: string,
+    productIds: { productId: string; quantity: number }[]
+  ): Promise<CartResponse> => {
+    const response = await axiosInstance.put<CartResponse>(
+      `/cart/user/${userId}`,
+      { productIds }
+    );
     return response.data;
   },
 
@@ -56,7 +54,9 @@ export const cartService = {
    * Remove a specific item from the cart.
    */
   removeFromCart: async (productId: string): Promise<CartResponse> => {
-    const response = await axiosInstance.delete<CartResponse>(`/cart/remove/${productId}`);
+    const response = await axiosInstance.delete<CartResponse>(
+      `/cart/remove/${productId}`
+    );
     return response.data;
   },
 
@@ -69,15 +69,19 @@ export const cartService = {
   },
 };
 
-
-export async function sendContactForm(data:{firstName:string,lastName:string,email:string,phoneNumber:string,message:string}){
-  try{
-
-    const res= await axiosInstance.post("/contact-us",data);
+export async function sendContactForm(data: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+}) {
+  try {
+    const res = await axiosInstance.post("/contact-us", data);
     return res.data;
-  }catch(err){
-    if(err instanceof Error){
-    throw new Error(err.message);
-  }}
-
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+  }
 }

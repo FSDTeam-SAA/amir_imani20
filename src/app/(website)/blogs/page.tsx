@@ -1,14 +1,35 @@
-import BlogHero from '@/components/blog/BlogHero'
-import FAQ from '@/components/shared/FAQ'
-import React from 'react'
+"use client";
 
-const page = () => {
+import BlogCard from "@/components/blog/blog-card";
+import { useBlogs } from "@/hooks/use-blogs";
+import { Loader2 } from "lucide-react";
+
+const BlogsPage = () => {
+  const { data, isLoading, error } = useBlogs();
+
   return (
-    <div>
-        <BlogHero />
-         {/* <FAQ /> */}
-    </div>
-  )
-}
+    <div className="min-h-screen bg-white pt-24">
+      {/* <BlogHero /> */}
 
-export default page
+      <div className="container mx-auto px-4 py-12">
+        {isLoading ? (
+          <div className="flex h-64 w-full items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
+          </div>
+        ) : error ? (
+          <div className="flex h-64 w-full items-center justify-center text-red-500">
+            Error loading blogs. Please try again later.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {data?.data.map((blog) => (
+              <BlogCard key={blog._id} blog={blog} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default BlogsPage;
