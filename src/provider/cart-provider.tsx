@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { Cart } from "../lib/types/ecommerce";
 import { cartService } from "../lib/api/cart-service";
 import { useSession } from "next-auth/react";
@@ -9,7 +15,11 @@ interface CartContextType {
   cart: Cart | null;
   loading: boolean;
   refreshCart: () => Promise<void>;
-  addToCart: (productId: string, quantity: number) => Promise<void>;
+  addToCart: (
+    productId: string,
+    quantity: number,
+    userId: string
+  ) => Promise<void>;
   updateQuantity: (productId: string, quantity: number) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -17,19 +27,22 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cart, setCart] = useState<Cart | null>(null);
   const [loading, setLoading] = useState(false);
-  const { status } = useSession();
+  const { data: session } = useSession();
+  console.log(session?.user.id);
 
   const refreshCart = useCallback(async () => {
-    if (status !== "authenticated") {
+    if (!session?.user?.id) {
       setCart(null);
       return;
     }
     setLoading(true);
     try {
-      const response = await cartService.getCart();
+      const response = await cartService.getCart(session.user.id);
       if (response.success) {
         setCart(response.data);
       }
@@ -38,35 +51,57 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       setLoading(false);
     }
-  }, [status]);
+  }, [session?.user?.id]);
 
   useEffect(() => {
     refreshCart();
   }, [refreshCart]);
 
-  const addToCart = useCallback(async (productId: string, quantity: number) => {
-    try {
-      const response = await cartService.addToCart(productId, quantity, "");
-      if (response.success) {
-        setCart(response.data);
+  const addToCart = useCallback(
+    async (productId: string, quantity: number, userId: string) => {
+      try {
+        const response = await cartService.addToCart(
+          productId,
+          quantity,
+          userId
+        );
+        if (response.success) {
+          setCart(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to add to cart:", error);
+        throw error;
       }
-    } catch (error) {
-      console.error("Failed to add to cart:", error);
-      throw error;
-    }
-  }, []);
+    },
+    []
+  );
 
-  const updateQuantity = useCallback(async (productId: string, quantity: number) => {
-    try {
-      const response = await cartService.updateCartItem(productId, quantity);
-      if (response.success) {
-        setCart(response.data);
+  const updateQuantity = useCallback(
+    async (productId: string, quantity: number) => {
+      if (!session?.user?.id || !cart) return;
+
+      try {
+        // Build updated productIds array
+        const updatedProductIds = cart.productIds.map((item) =>
+          item.productId._id === productId
+            ? { productId: item.productId._id, quantity }
+            : { productId: item.productId._id, quantity: item.quantity }
+        );
+
+        const response = await cartService.updateCart(
+          session.user.id,
+          updatedProductIds
+        );
+        if (response.success) {
+          setCart(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to update cart quantity:", error);
+        throw error;
       }
-    } catch (error) {
-      console.error("Failed to update cart quantity:", error);
-      throw error;
-    }
-  }, []);
+    },
+    [session?.user?.id, cart]
+  );
 
   const removeFromCart = useCallback(async (productId: string) => {
     try {

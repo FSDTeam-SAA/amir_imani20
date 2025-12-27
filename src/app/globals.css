@@ -127,3 +127,7 @@
     font-family: var(--font-sans);
   }
 }
+
+Link {
+  cursor: pointer;
+}

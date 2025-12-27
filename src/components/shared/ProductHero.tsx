@@ -7,6 +7,7 @@ import Image from "next/image"
 import { Product } from "@/lib/types/ecommerce"
 import { useCart } from "@/provider/cart-provider"
 import { toast } from "sonner"
+import { useSession } from "next-auth/react"
 
 interface ProductHeroProps {
   product: Product
@@ -16,11 +17,14 @@ export default function ProductHero({ product }: ProductHeroProps) {
   const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
   const { addToCart } = useCart()
+  const {data: session} = useSession()
+
+  console.log(session?.user.id)
 
   const handleAddToCart = async () => {
     setIsAdding(true)
     try {
-      await addToCart(product._id, quantity)
+      await addToCart(product._id, quantity, session?.user.id as string)
       toast.success(`${product.productName} added to cart!`)
     } catch (error) {
       toast.error("Failed to add to cart. Please try again.")

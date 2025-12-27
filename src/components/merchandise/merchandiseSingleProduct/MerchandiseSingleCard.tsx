@@ -7,21 +7,30 @@ import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { useCart } from "@/provider/cart-provider";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 interface ProductHeroProps {
   product: Product;
 }
+
 const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [selectColor, setSelectColor] = useState<string | null>("green");
   const [selectSize, setSelectSize] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { addToCart } = useCart();
+
+  const { data: session } = useSession();
 
   const handleAddToCart = async () => {
     setIsAdding(true);
+    if (!session?.user?.id) {
+      toast.error("Please sign in to add to cart.");
+      return;
+    }
     try {
-      await addToCart(product._id, quantity);
+      await addToCart(product._id, quantity, session?.user?.id as string);
       toast.success(`${product.productName} added to cart!`);
     } catch (error) {
       toast.error("Failed to add to cart. Please try again.");
@@ -36,36 +45,51 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
         {/* Left Column: Product Image */}
         <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
           <div className="flex gap-3 relative aspect-square">
-            <div className="w-20 flex flex-col gap-3 overflow-y-auto ">
-              {[...Array(4)].map((_, index) => (
-                <div key={index} className="relative w-full h-64">
-                  {product.img ? (
+            <div className="w-20 flex flex-col gap-3 overflow-y-auto no-scrollbar">
+              {product.imgs && product.imgs.length > 0 ? (
+                product.imgs.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`relative w-full h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
+                      selectedImage === img || (!selectedImage && index === 0)
+                        ? "border-gray-900"
+                        : "border-transparent"
+                    }`}
+                    onClick={() => setSelectedImage(img)}
+                  >
                     <Image
-                      src={product.img}
-                      alt={product.productName || `Product ${index + 1}`}
+                      src={img}
+                      alt={`${product.productName} thumbnail ${index + 1}`}
                       fill
                       className="object-cover"
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                      <span className="text-gray-400">No Image</span>
-                    </div>
-                  )}
+                  </div>
+                ))
+              ) : (
+                <div className="relative w-full h-20 shrink-0 border-2 border-transparent">
+                  <Image
+                    src={product.img || "/no-image.jpg"}
+                    alt={product.productName}
+                    fill
+                    className="object-cover rounded-md"
+                  />
                 </div>
-              ))}
+              )}
             </div>
-            {product.img ? (
+            <div className="relative flex-1 h-full rounded-xl overflow-hidden bg-gray-50">
               <Image
-                src={product.img}
+                src={
+                  selectedImage ||
+                  (product.imgs && product.imgs.length > 0
+                    ? product.imgs[0]
+                    : product.img) ||
+                  "/no-image.jpg"
+                }
                 alt={product.productName}
                 fill
                 className="object-cover"
               />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                <span className="text-gray-400">No Image</span>
-              </div>
-            )}
+            </div>
           </div>
         </div>
 
@@ -121,51 +145,56 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
             </div>
             <div>
               {/* Color and Size Options */}
-              <div className="flex items-center gap-4 mb-7 md:mb-10 lg:mb-14">
-                <div className="flex items-center gap-2">
-                  <div
-                    onClick={() => setSelectColor("green")}
-                    className=" w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center"
-                  >
-                    {selectColor === "green" && <Check />}
-                  </div>
-                  <div
-                    onClick={() => setSelectColor("orange")}
-                    className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center"
-                  ></div>
-                  <div
-                    onClick={() => setSelectColor("blue")}
-                    className="w-8 h-8 bg-blue-950 rounded-lg flex items-center justify-center"
-                  ></div>
-                  <div
-                    onClick={() => setSelectColor("black")}
-                    className="w-8 h-8 bg-black rounded-lg flex items-center justify-center"
-                  ></div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-[#EFEFEF] rounded-lg flex items-center justify-center">
-                      <span className="text-xs font-bold text-[#111111]">
-                        S
-                      </span>
-                    </div>
-                    <div className="w-8 h-8 bg-[#EFEFEF] rounded-lg flex items-center justify-center">
-                      <span className="text-xs font-bold text-[#111111]">
-                        M
-                      </span>
-                    </div>
-                    <div className="w-8 h-8 bg-[#EFEFEF] rounded-lg flex items-center justify-center">
-                      <span className="text-xs font-bold text-[#111111]">
-                        xL
-                      </span>
-                    </div>
-                    <div className="w-8 h-8 bg-[#EFEFEF] rounded-lg flex items-center justify-center">
-                      <span className="text-xs font-bold text-[#111111]">
-                        xxL
-                      </span>
+              <div className="flex flex-col gap-6 mb-7 md:mb-10 lg:mb-14">
+                {product.colors && product.colors.length > 0 && (
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm font-medium min-w-[60px]">
+                      Colors:
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {product.colors.map((color) => (
+                        <div
+                          key={color}
+                          onClick={() => setSelectColor(color)}
+                          className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer border ${
+                            selectColor === color
+                              ? "border-black ring-1 ring-black"
+                              : "border-gray-200"
+                          }`}
+                          style={{ backgroundColor: color }}
+                          title={color}
+                        >
+                          {selectColor === color && (
+                            <Check className="text-white drop-shadow-md w-4 h-4" />
+                          )}
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
+                )}
+
+                {product.sizes && product.sizes.length > 0 && (
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm font-medium min-w-[60px]">
+                      Sizes:
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {product.sizes.map((size) => (
+                        <div
+                          key={size}
+                          onClick={() => setSelectSize(size)}
+                          className={`w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer text-xs font-bold transition-colors ${
+                            selectSize === size
+                              ? "bg-[#111111] text-white"
+                              : "bg-[#EFEFEF] text-[#111111] hover:bg-gray-200"
+                          }`}
+                        >
+                          {size}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               {/* CTA Button */}
               <Button

@@ -1,23 +1,31 @@
-"use client"
+"use client";
 
-import React from "react"
-import { ShieldCheck } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import React from "react";
+import { ShieldCheck, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface OrderSummaryProps {
-  subtotal: number
-  shipping: number
-  tax: number
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  onCheckout?: () => void;
+  isCheckoutLoading?: boolean;
+  isDisabled?: boolean;
 }
 
-export default function OrderSummary({ subtotal, shipping, tax }: OrderSummaryProps) {
-  const total = subtotal + shipping + tax
+export default function OrderSummary({
+  subtotal,
+  shipping,
+  tax,
+  onCheckout,
+  isCheckoutLoading,
+  isDisabled,
+}: OrderSummaryProps) {
+  const total = subtotal + shipping + tax;
 
   return (
     <div className="bg-white border border-[#EFEFEF] rounded-2xl p-6 lg:p-10 shadow-[0px_8px_24px_rgba(0,0,0,0.03)] h-fit sticky top-24">
-      <h2 className="text-xl font-bold text-[#111111] mb-8">
-        Order Summary
-      </h2>
+      <h2 className="text-xl font-bold text-[#111111] mb-8">Order Summary</h2>
 
       <div className="space-y-4 mb-8">
         <div className="flex justify-between items-center text-sm font-medium">
@@ -43,8 +51,16 @@ export default function OrderSummary({ subtotal, shipping, tax }: OrderSummaryPr
         </div>
       </div>
 
-      <Button className="w-full h-12 bg-black hover:bg-[#111111] text-white rounded-full font-bold text-sm tracking-wide shadow-[0px_4px_16px_rgba(0,0,0,0.1)] mb-6">
-        Proceed to Checkout
+      <Button
+        onClick={onCheckout}
+        disabled={isDisabled || isCheckoutLoading}
+        className="w-full h-12 bg-black hover:bg-[#111111] text-white rounded-full font-bold text-sm tracking-wide shadow-[0px_4px_16px_rgba(0,0,0,0.1)] mb-6"
+      >
+        {isCheckoutLoading ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : (
+          "Proceed to Checkout"
+        )}
       </Button>
 
       <div className="flex items-center justify-center gap-2 text-[13px] text-[#8B8B8B]">
@@ -52,5 +68,5 @@ export default function OrderSummary({ subtotal, shipping, tax }: OrderSummaryPr
         <span>Secure checkout powered by Stripe</span>
       </div>
     </div>
-  )
+  );
 }

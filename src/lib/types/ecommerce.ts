@@ -2,28 +2,28 @@ export interface Product {
   _id: string;
   productName: string;
   price: number;
+  productType?: "card" | "marchandice";
   feature: string;
   description: string;
   videoLink?: string;
-  img: string;
-  productType?: string;
+img?: string; // Keep for backward compatibility or if API still returns it as primary
   imgs?: string[];
+  colors?: string[];
+  sizes?: string[];
+  quantity?: number;
 }
 
 export interface CartItem {
-  productId: string | Product;
-  productName: string;
-  price: number;
+  productId: Product;
   quantity: number;
-  subtotal: number;
-  img: string;
 }
 
 export interface Cart {
   _id: string;
-  items: CartItem[];
-  totalItems: number;
-  totalPrice: number;
+  userId: string;
+  productIds: CartItem[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ProductsResponse {
@@ -39,5 +39,23 @@ export interface SingleProductResponse {
 
 export interface CartResponse {
   success: boolean;
+  message: string;
   data: Cart;
+}
+
+export interface PaymentData {
+  checkoutUrl: string;
+  paymentId: string;
+}
+
+export interface CreatePaymentRequest {
+  userId: string;
+  totalAmount: number;
+  itemIds: string;
+}
+
+export interface CreatePaymentResponse {
+  success: boolean;
+  message: string;
+  data: PaymentData;
 }
