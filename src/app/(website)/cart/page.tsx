@@ -162,7 +162,11 @@ export default function CartPage() {
                     title={item.productId.productName}
                     description={item.productId.description}
                     price={item.productId.price}
-                    imageUrl={item.productId.img}
+                    imageUrl={
+                      item.productId.imgs?.[0] ||
+                      item.productId.img ||
+                      "/no-image.jpg"
+                    }
                     quantity={
                       localQuantities[item.productId._id] ?? item.quantity
                     }
