@@ -6,6 +6,8 @@ export interface Product {
   description: string;
   videoLink?: string;
   img: string;
+  productType?: string;
+  imgs?: string[];
 }
 
 export interface CartItem {

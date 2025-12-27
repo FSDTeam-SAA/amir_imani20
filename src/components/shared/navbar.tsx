@@ -74,7 +74,7 @@ export default function Navbar() {
                   alt="Logo"
                   width={271}
                   height={40}
-                  className="maz-w-[271px] max-h-10"
+                  className="w-26 lg:max-w-[271px] max-h-10"
                 />
               </Link>
             </div>
@@ -105,16 +105,16 @@ export default function Navbar() {
             </div>
 
             {/* Right side - Desktop */}
-            <div className="flex items-center space-x-4">
+            <div className=" flex items-center space-x-4">
               {status === "authenticated" && session ? (
                 // Profile Dropdown for authenticated users
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="flex items-center space-x-2 text-white hover:bg-orange-600  "
+                      className="flex items-center space-x-2 relative bg-transparent text-white hover:bg-white/10 "
                     >
-                     <User2Icon className="w-7! h-7!"/>
+                      <User2Icon className="lg:w-7! lg:h-7! text-[#F04D2A]" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
@@ -164,26 +164,36 @@ export default function Navbar() {
                 // Login button for non-authenticated users
                 <Link href="/login">
                   <Button
-                    variant="outline"
-                    className="border-white hover:bg-white hover:text-black bg-transparent"
+                    // variant="outline"
+                    className="border-white hover:bg-white hover:text-black "
                   >
                     Log In
                   </Button>
                 </Link>
               )}
-              <Link href="/cart" className="relative ">
-                <Button className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
-                  <ShoppingCart className="w-7! h-7! "/>
+              <Link href="/cart" className="relative inline-block cursor-pointer">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative bg-transparent text-white hover:bg-white/10"
+                >
+                  <ShoppingCart className="lg:h-7! lg:w-7! text-[#F04D2A]" />
+
                   {cartItemCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                      {cartItemCount > 99 ? '99+' : cartItemCount}
+                      {cartItemCount > 99 ? "99+" : cartItemCount}
                     </span>
                   )}
                 </Button>
               </Link>
-             <Button onClick={() => setSearchOpen(!searchOpen)} className="bg-transparent text-white px-6 py-2 rounded-md font-medium">
-                  <Search className="w-7! h-7!" />
-             </Button>
+              <Button
+                  variant="ghost"
+
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="relative bg-transparent text-white hover:bg-white/10 cursor-pointer"
+              >
+                <Search className="lg:h-7! lg:w-7! text-[#F04D2A]" />
+              </Button>
             </div>
 
             {/* Mobile menu button */}
@@ -199,7 +209,7 @@ export default function Navbar() {
                     <span className="sr-only">Open main menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[400px] ">
+                <SheetContent side="right" className="w-75 sm:w-100 ">
                   <div className="flex flex-col space-y-4 mt-8">
                     {/* User info section for mobile */}
                     {status === "authenticated" && session && (
