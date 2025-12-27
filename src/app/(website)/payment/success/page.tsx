@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Check, Package, Mail, Download } from "lucide-react";
+import { Check } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function PaymentSuccess() {
   const [isVisible, setIsVisible] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+  const [, setShowDetails] = useState(false);
   const [orderNumber, setOrderNumber] = useState("");
   const [date, setDate] = useState("");
 

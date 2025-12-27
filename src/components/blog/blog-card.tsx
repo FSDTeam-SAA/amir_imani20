@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Blog } from "@/lib/types/blog";
+import Image from "next/image";
 
 interface BlogCardProps {
   blog: Blog;
@@ -19,9 +20,11 @@ const BlogCard = ({ blog }: BlogCardProps) => {
       {/* Image Container */}
       <div className="relative aspect-16/10 w-full overflow-hidden rounded-3xl bg-gray-100">
         {blog.img ? (
-          <img
+          <Image
             src={blog.img}
             alt={blog.title}
+            width={1900}
+            height={800}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (

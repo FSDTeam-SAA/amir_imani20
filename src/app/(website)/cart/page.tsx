@@ -143,7 +143,7 @@ export default function CartPage() {
       <main className="container mx-auto px-6 pt-32 pb-20 max-w-[1240px]">
         {/* Back Link */}
         <Link
-          href="/product/doundo"
+          href="/game"
           className="inline-flex items-center gap-2 text-[#FF7F50] text-sm font-semibold mb-8 hover:underline decoration-2 underline-offset-4 transition-all"
         >
           <ArrowLeft className="w-4 h-4" />

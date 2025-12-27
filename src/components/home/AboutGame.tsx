@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "../ui/button";
 
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
