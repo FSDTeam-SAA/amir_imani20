@@ -69,14 +69,14 @@ export default function Navbar() {
         <div className="container mx-auto">
           <div className="flex items-center justify-between lg:h-20 h-16">
             {/* Logo */}
-            <div className="flex-shrink-0 pl-5 xl:pl-0">
+            <div className="shrink-0 pl-5 xl:pl-0">
               <Link href="/" className="flex items-center space-x-2">
                 <Image
                   src="/logo.svg"
                   alt="Logo"
                   width={271}
                   height={40}
-                  className="w-26 lg:max-w-[271px] max-h-10"
+                  className="w-26 lg:max-w-67.75 max-h-10"
                 />
               </Link>
             </div>

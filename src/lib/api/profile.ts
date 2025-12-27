@@ -1,4 +1,4 @@
-import axiosInstance from "./axios-instance";
+// import axiosInstance from "./axios-instance";
 
 
 export async function changePassword(oldPassword: string, newPassword: string,token:string) {

@@ -2,6 +2,7 @@
 
 import { useBlog } from "@/hooks/use-blogs";
 import { Loader2, ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -63,9 +64,11 @@ const BlogDetailsPage = () => {
         {/* Hero Image */}
         {blog.img && (
           <div className="mb-10 aspect-video w-full overflow-hidden rounded-3xl bg-gray-100">
-            <img
+            <Image
               src={blog.img}
               alt={blog.title}
+              width={1900}
+              height={700}
               className="h-full w-full object-cover"
             />
           </div>
