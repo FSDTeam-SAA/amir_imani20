@@ -11,16 +11,42 @@ export const productService = {
     return response.data;
   },
   getmarchandice: async (): Promise<ProductsResponse> => {
-    const response = await axiosInstance.get<ProductsResponse>(`/products?type=marchandice`);
-    return response.data;
+    const response = await axiosInstance.get<ProductsResponse>(
+      `/products?type=marchandice`
+    );
+    const data = response.data;
+    // ensure backward compatibility if img is used
+    if (data.success && data.data) {
+      data.data = data.data.map((p) => ({
+        ...p,
+        img: p.imgs && p.imgs.length > 0 ? p.imgs[0] : p.img,
+      }));
+    }
+    return data;
   },
-   
+
+  getCards: async (): Promise<ProductsResponse> => {
+    const response = await axiosInstance.get<ProductsResponse>(
+      `/products?type=card`
+    );
+    const data = response.data;
+    // ensure backward compatibility if img is used
+    if (data.success && data.data) {
+      data.data = data.data.map((p) => ({
+        ...p,
+        img: p.imgs && p.imgs.length > 0 ? p.imgs[0] : p.img,
+      }));
+    }
+    return data;
+  },
 
   /**
    * Fetch full product details for product detail page.
    */
   getProductById: async (productId: string): Promise<SingleProductResponse> => {
-    const response = await axiosInstance.get<SingleProductResponse>(`/products/${productId}`);
+    const response = await axiosInstance.get<SingleProductResponse>(
+      `/products/${productId}`
+    );
     return response.data;
   },
   //   getMerchandiseById: async (productId: string): Promise<SingleProductResponse> => {

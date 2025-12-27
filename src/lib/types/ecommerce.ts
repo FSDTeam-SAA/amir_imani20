@@ -2,10 +2,15 @@ export interface Product {
   _id: string;
   productName: string;
   price: number;
+  productType?: "card" | "marchandice";
   feature: string;
   description: string;
   videoLink?: string;
-  img: string;
+  img: string; // Keep for backward compatibility or if API still returns it as primary
+  imgs?: string[];
+  colors?: string[];
+  sizes?: string[];
+  quantity?: number;
 }
 
 export interface CartItem {
