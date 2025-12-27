@@ -184,7 +184,7 @@ export default function CartPage() {
                 <p className="text-[#8B8B8B]">
                   Looks like you haven&apos;t added anything to your cart yet.
                 </p>
-                <Link href="/product/doundo">
+                <Link href="/game/">
                   <span className="inline-block bg-black text-white px-8 py-3 rounded-full font-bold text-sm tracking-wide hover:bg-[#111111] transition-colors">
                     Start Shopping
                   </span>

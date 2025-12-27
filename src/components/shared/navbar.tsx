@@ -45,7 +45,8 @@ export default function Navbar() {
   const { profile, loading } = useUserProfile();
   const { cart } = useCart();
 
-  const cartItemCount = cart?.totalItems || 0;
+  const cartItemCount =
+    cart?.productIds?.reduce((total, item) => total + item.quantity, 0) || 0;
 
   const getUserInitials = () => {
     if (!profile) return "U";
@@ -171,7 +172,10 @@ export default function Navbar() {
                   </Button>
                 </Link>
               )}
-              <Link href="/cart" className="relative inline-block cursor-pointer">
+              <Link
+                href="/cart"
+                className="relative inline-block cursor-pointer"
+              >
                 <Button
                   variant="ghost"
                   size="icon"
@@ -187,8 +191,7 @@ export default function Navbar() {
                 </Button>
               </Link>
               <Button
-                  variant="ghost"
-
+                variant="ghost"
                 onClick={() => setSearchOpen(!searchOpen)}
                 className="relative bg-transparent text-white hover:bg-white/10 cursor-pointer"
               >
