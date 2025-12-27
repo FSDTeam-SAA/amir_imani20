@@ -38,7 +38,7 @@ const GetInTouch = () => {
   return (
     <section className="py-16 ">
       <div className="container mx-auto px-6 bg-[#F2E3C6] rounded-2xl shadow-xl py-6 md:py-12 md:px-14">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
           <div>
             <h2 className="text-4xl font-bold text-[#343A40] mb-2 text-start">

@@ -6,7 +6,7 @@ export interface Product {
   feature: string;
   description: string;
   videoLink?: string;
-  img: string; // Keep for backward compatibility or if API still returns it as primary
+img?: string; // Keep for backward compatibility or if API still returns it as primary
   imgs?: string[];
   colors?: string[];
   sizes?: string[];

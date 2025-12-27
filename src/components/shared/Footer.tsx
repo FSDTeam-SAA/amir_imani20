@@ -8,7 +8,7 @@ import FooterLinks from "../footer/FooterLinks";
 // Constants for maintainability
 const COMPANY_INFO = {
   name: "DoUndo",
-  description: "Design amazing digital experiences that create more happiness in the world.",
+  description: "A Universe of Games for Curious Minds.",
   logo: "/logo.svg",
   logoAlt: "DoUndo Logo",
 };
