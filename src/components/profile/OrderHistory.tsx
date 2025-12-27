@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { useOrderHistory, Product } from '@/hooks/order';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const OrderHistory = () => {
   const { data: session } = useSession();
@@ -54,7 +55,7 @@ const OrderHistory = () => {
                   <td className='py-4 pl-4 text-sm font-medium text-gray-600'>#{order._id.slice(-6).toUpperCase()}</td>
                   <td className='py-4 text-sm text-gray-600'>
                     <div className="flex items-center gap-2">
-                      {order.img && <img src={order.img} alt={order.productName} className="w-8 h-8 rounded object-cover" />}
+                      {order.img && <Image width={40} height={40} src={order.img} alt={order.productName} className="w-8 h-8 rounded object-cover" />}
                       <span>{order.productName}</span>
                     </div>
                   </td>

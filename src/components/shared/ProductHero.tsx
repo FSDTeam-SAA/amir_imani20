@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { Heart, Minus, Plus } from "lucide-react"
+import {  Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Product } from "@/lib/types/ecommerce"
@@ -38,7 +38,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
     <section className="py-12 lg:py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
-        <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
+        <div className="relative aspect-square w-full max-w-120 mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
           {product.img ? (
             <Image
               src={product.img}
@@ -114,10 +114,10 @@ export default function ProductHero({ product }: ProductHeroProps) {
             </Button>
 
             {/* Secondary Action */}
-            <button className="flex items-center gap-2 text-[13px] text-[#8B8B8B] hover:text-[#111111] transition-colors mx-auto lg:mx-0">
+            {/* <button className="flex items-center gap-2 text-[13px] text-[#8B8B8B] hover:text-[#111111] transition-colors mx-auto lg:mx-0">
               <Heart className="w-4 h-4" />
               Add to Wishlist
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
