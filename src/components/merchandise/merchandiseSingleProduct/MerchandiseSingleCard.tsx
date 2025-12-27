@@ -8,6 +8,7 @@ import { Product } from "@/lib/types/ecommerce";
 import { useCart } from "@/provider/cart-provider";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProductHeroProps {
   product: Product;
@@ -212,6 +213,41 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
               </button> */}
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export const MerchandiseSingleCardSkeleton = () => {
+  return (
+    <section className="py-12 lg:py-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+        {/* Left Column Skeleton */}
+        <div className="flex gap-3 relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 overflow-hidden">
+          <div className="w-20 flex flex-col gap-3">
+            {[...Array(4)].map((_, i) => (
+              <Skeleton key={i} className="w-full h-20 rounded-md" />
+            ))}
+          </div>
+          <Skeleton className="flex-1 h-full rounded-xl" />
+        </div>
+
+        {/* Right Column Skeleton */}
+        <div className="flex flex-col gap-6">
+          <Skeleton className="h-6 w-20" />
+          <Skeleton className="h-12 w-full md:w-3/4" />
+          <Skeleton className="h-10 w-24" />
+          <div className="space-y-3">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+          <div className="space-y-4">
+            <Skeleton className="h-6 w-32" />
+            <Skeleton className="h-10 w-48" />
+          </div>
+          <Skeleton className="h-14 w-full rounded-full" />
         </div>
       </div>
     </section>

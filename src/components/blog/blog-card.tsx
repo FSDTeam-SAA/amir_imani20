@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Blog } from "@/lib/types/blog";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface BlogCardProps {
   blog: Blog;
@@ -47,6 +48,29 @@ const BlogCard = ({ blog }: BlogCardProps) => {
         </div>
 
         <p className="text-gray-600 line-clamp-3">{blog.description}</p>
+      </div>
+    </div>
+  );
+};
+
+export const BlogCardSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-4">
+      {/* Image Skeleton */}
+      <Skeleton className="aspect-16/10 w-full rounded-3xl" />
+
+      {/* Content Skeleton */}
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-4 w-24" />
+        <div className="flex items-start justify-between gap-4">
+          <Skeleton className="h-7 w-3/4" />
+          <Skeleton className="h-6 w-6 shrink-0" />
+        </div>
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-5/6" />
+          <Skeleton className="h-4 w-2/3" />
+        </div>
       </div>
     </div>
   );

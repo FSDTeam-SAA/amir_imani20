@@ -1,8 +1,7 @@
 "use client";
 
-import BlogCard from "@/components/blog/blog-card";
+import BlogCard, { BlogCardSkeleton } from "@/components/blog/blog-card";
 import { useBlogs } from "@/hooks/use-blogs";
-import { Loader2 } from "lucide-react";
 
 const BlogsPage = () => {
   const { data, isLoading, error } = useBlogs();
@@ -13,8 +12,10 @@ const BlogsPage = () => {
 
       <div className="container mx-auto px-4 py-12">
         {isLoading ? (
-          <div className="flex h-64 w-full items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(6)].map((_, i) => (
+              <BlogCardSkeleton key={i} />
+            ))}
           </div>
         ) : error ? (
           <div className="flex h-64 w-full items-center justify-center text-red-500">
