@@ -6,7 +6,7 @@ export interface Product {
   feature: string;
   description: string;
   videoLink?: string;
-img?: string; // Keep for backward compatibility or if API still returns it as primary
+  img?: string; // Keep for backward compatibility or if API still returns it as primary
   imgs?: string[];
   colors?: string[];
   sizes?: string[];
@@ -16,6 +16,15 @@ img?: string; // Keep for backward compatibility or if API still returns it as p
 export interface CartItem {
   productId: Product;
   quantity: number;
+  color?: string;
+  size?: string;
+}
+
+export interface CartItemInput {
+  productId: string;
+  quantity: number;
+  color?: string;
+  size?: string;
 }
 
 export interface Cart {

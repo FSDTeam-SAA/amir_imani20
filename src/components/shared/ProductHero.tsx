@@ -1,38 +1,51 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import {  Minus, Plus } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { Product } from "@/lib/types/ecommerce"
-import { useCart } from "@/provider/cart-provider"
-import { toast } from "sonner"
-import { useSession } from "next-auth/react"
+import React, { useState } from "react";
+import { Minus, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { Product } from "@/lib/types/ecommerce";
+import { useCart } from "@/provider/cart-provider";
+import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 interface ProductHeroProps {
-  product: Product
+  product: Product;
 }
 
 export default function ProductHero({ product }: ProductHeroProps) {
-  const [quantity, setQuantity] = useState(1)
-  const [isAdding, setIsAdding] = useState(false)
-  const { addToCart } = useCart()
-  const {data: session} = useSession()
+  const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
+  const { addToCart } = useCart();
+  const { data: session } = useSession();
 
-  console.log(session?.user.id)
+  console.log(session?.user.id);
 
   const handleAddToCart = async () => {
-    setIsAdding(true)
-    try {
-      await addToCart(product._id, quantity, session?.user.id as string)
-      toast.success(`${product.productName} added to cart!`)
-    } catch (error) {
-      toast.error("Failed to add to cart. Please try again.")
-      console.error("Add to cart error:", error)
-    } finally {
-      setIsAdding(false)
+    setIsAdding(true);
+    if (!session?.user?.id) {
+      toast.error("Please sign in to add to cart.");
+      setIsAdding(false);
+      return;
     }
-  }
+    try {
+      await addToCart(
+        [
+          {
+            productId: product._id,
+            quantity,
+          },
+        ],
+        session?.user?.id as string
+      );
+      toast.success(`${product.productName} added to cart!`);
+    } catch (error) {
+      toast.error("Failed to add to cart. Please try again.");
+      console.error("Add to cart error:", error);
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <section className="py-12 lg:py-16">
@@ -122,5 +135,5 @@ export default function ProductHero({ product }: ProductHeroProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }

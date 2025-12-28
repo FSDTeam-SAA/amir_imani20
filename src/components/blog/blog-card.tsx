@@ -50,7 +50,10 @@ const BlogCard = ({ blog }: BlogCardProps) => {
           </Link>
         </div>
 
-        <p className="text-gray-600 line-clamp-3">{blog.description}</p>
+        <p
+          className="text-gray-600 line-clamp-3"
+          dangerouslySetInnerHTML={{ __html: blog.description }}
+        />
       </div>
     </div>
   );

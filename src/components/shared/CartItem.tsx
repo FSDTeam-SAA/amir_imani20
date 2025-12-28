@@ -1,18 +1,20 @@
-"use client"
+"use client";
 
-import React from "react"
-import { Trash2, Minus, Plus } from "lucide-react"
-import Image from "next/image"
+import React from "react";
+import { Trash2, Minus, Plus } from "lucide-react";
+import Image from "next/image";
 
 interface CartItemProps {
-  id: string
-  title: string
-  description: string
-  price: number
-  imageUrl: string
-  quantity: number
-  onQuantityChange: (id: string, newQuantity: number) => void
-  onRemove: (id: string) => void
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  quantity: number;
+  color?: string;
+  size?: string;
+  onQuantityChange: (id: string, newQuantity: number) => void;
+  onRemove: (id: string) => void;
 }
 
 export default function CartItem({
@@ -22,13 +24,15 @@ export default function CartItem({
   price,
   imageUrl,
   quantity,
+  color,
+  size,
   onQuantityChange,
   onRemove,
 }: CartItemProps) {
   return (
     <div className="flex items-center gap-4 p-4 border border-[#EFEFEF] rounded-lg mb-4 bg-white hover:border-[#FF7F50]/30 transition-colors">
       {/* Remove Button */}
-      <button 
+      <button
         onClick={() => onRemove(id)}
         className="p-2 text-[#FF7F50] hover:bg-[#FF7F50]/10 rounded-full transition-colors shrink-0"
       >
@@ -37,12 +41,7 @@ export default function CartItem({
 
       {/* Product Image */}
       <div className="w-20 h-20 relative rounded-md overflow-hidden shrink-0 border border-[#EFEFEF]">
-        <Image
-          src={imageUrl}
-          alt={title}
-          fill
-          className="object-cover"
-        />
+        <Image src={imageUrl} alt={title} fill className="object-cover" />
       </div>
 
       {/* Product Details */}
@@ -54,6 +53,31 @@ export default function CartItem({
           <p className="text-xs text-[#8B8B8B] leading-relaxed">
             {description}
           </p>
+          {(color || size) && (
+            <div className="flex gap-3 mt-1">
+              {color && (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] uppercase font-bold text-[#8B8B8B]">
+                    Color:
+                  </span>
+                  <div
+                    className="w-3 h-3 rounded-full border border-gray-200"
+                    style={{ backgroundColor: color }}
+                  />
+                </div>
+              )}
+              {size && (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] uppercase font-bold text-[#8B8B8B]">
+                    Size:
+                  </span>
+                  <span className="text-[10px] font-bold text-[#111111]">
+                    {size}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Price and Stepper */}
@@ -61,7 +85,7 @@ export default function CartItem({
           <span className="text-lg font-bold text-[#FF7F50]">
             ${price?.toFixed(2)}
           </span>
-          
+
           <div className="flex items-center border border-[#2E8F8A] rounded-md overflow-hidden h-8">
             <button
               onClick={() => onQuantityChange(id, Math.max(0, quantity - 1))}
@@ -82,5 +106,5 @@ export default function CartItem({
         </div>
       </div>
     </div>
-  )
+  );
 }

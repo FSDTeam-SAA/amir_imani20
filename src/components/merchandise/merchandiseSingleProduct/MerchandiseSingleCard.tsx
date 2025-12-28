@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Heart, Minus, Plus } from "lucide-react";
+import { Check, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
@@ -30,8 +30,31 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
       toast.error("Please sign in to add to cart.");
       return;
     }
+
+    if (product.colors && product.colors.length > 0 && !selectColor) {
+      toast.error("Please select a color.");
+      setIsAdding(false);
+      return;
+    }
+
+    if (product.sizes && product.sizes.length > 0 && !selectSize) {
+      toast.error("Please select a size.");
+      setIsAdding(false);
+      return;
+    }
+
     try {
-      await addToCart(product._id, quantity, session?.user?.id as string);
+      await addToCart(
+        [
+          {
+            productId: product._id,
+            quantity,
+            color: selectColor || undefined,
+            size: selectSize || undefined,
+          },
+        ],
+        session?.user?.id as string
+      );
       toast.success(`${product.productName} added to cart!`);
     } catch (error) {
       toast.error("Failed to add to cart. Please try again.");

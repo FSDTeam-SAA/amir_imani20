@@ -15,7 +15,7 @@ import MerchandiseSingleCard, {
 import ProductDetails, {
   ProductDetailsSkeleton,
 } from "@/components/shared/ProductDetails";
-import { Skeleton } from "@/components/ui/skeleton";
+// import { Skeleton } from "@/components/ui/skeleton";
 
 const ProductPageSkeleton = () => {
   return (

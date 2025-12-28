@@ -16,12 +16,25 @@ interface CartContextType {
   loading: boolean;
   refreshCart: () => Promise<void>;
   addToCart: (
-    productId: string,
-    quantity: number,
+    items: {
+      productId: string;
+      quantity: number;
+      color?: string;
+      size?: string;
+    }[],
     userId: string
   ) => Promise<void>;
-  updateQuantity: (productId: string, quantity: number) => Promise<void>;
-  removeFromCart: (productId: string) => Promise<void>;
+  updateQuantity: (
+    productId: string,
+    quantity: number,
+    color?: string,
+    size?: string
+  ) => Promise<void>;
+  removeFromCart: (
+    productId: string,
+    color?: string,
+    size?: string
+  ) => Promise<void>;
   clearCart: () => Promise<void>;
 }
 
@@ -58,13 +71,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [refreshCart]);
 
   const addToCart = useCallback(
-    async (productId: string, quantity: number, userId: string) => {
+    async (
+      items: {
+        productId: string;
+        quantity: number;
+        color?: string;
+        size?: string;
+      }[],
+      userId: string
+    ) => {
       try {
-        const response = await cartService.addToCart(
-          productId,
-          quantity,
-          userId
-        );
+        const response = await cartService.addToCart(userId, items);
         if (response.success) {
           setCart(response.data);
         }
@@ -77,15 +94,32 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const updateQuantity = useCallback(
-    async (productId: string, quantity: number) => {
+    async (
+      productId: string,
+      quantity: number,
+      color?: string,
+      size?: string
+    ) => {
       if (!session?.user?.id || !cart) return;
 
       try {
         // Build updated productIds array
         const updatedProductIds = cart.productIds.map((item) =>
-          item.productId._id === productId
-            ? { productId: item.productId._id, quantity }
-            : { productId: item.productId._id, quantity: item.quantity }
+          item.productId._id === productId &&
+          item.color === color &&
+          item.size === size
+            ? {
+                productId: item.productId._id,
+                quantity,
+                color: item.color,
+                size: item.size,
+              }
+            : {
+                productId: item.productId._id,
+                quantity: item.quantity,
+                color: item.color,
+                size: item.size,
+              }
         );
 
         const response = await cartService.updateCart(
@@ -103,21 +137,29 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     [session?.user?.id, cart]
   );
 
-  const removeFromCart = useCallback(async (productId: string) => {
-    try {
-      const response = await cartService.removeFromCart(productId);
-      if (response.success) {
-        setCart(response.data);
+  const removeFromCart = useCallback(
+    async (productId: string, color?: string, size?: string) => {
+      if (!session?.user?.id || !cart) return;
+
+      try {
+        // Note: The specific DELETE endpoint as currently implemented in the backend
+        // removes all variations of the productId.
+        const response = await cartService.removeFromCart(cart._id, productId);
+        if (response.success) {
+          setCart(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to remove from cart:", error);
+        throw error;
       }
-    } catch (error) {
-      console.error("Failed to remove from cart:", error);
-      throw error;
-    }
-  }, []);
+    },
+    [session?.user?.id, cart]
+  );
 
   const clearCart = useCallback(async () => {
+    if (!session?.user?.id) return;
     try {
-      const response = await cartService.clearCart();
+      const response = await cartService.updateCart(session.user.id, []);
       if (response.success) {
         setCart(response.data);
       }
@@ -125,7 +167,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
       console.error("Failed to clear cart:", error);
       throw error;
     }
-  }, []);
+  }, [session?.user?.id]);
 
   return (
     <CartContext.Provider

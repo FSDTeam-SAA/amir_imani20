@@ -30,27 +30,41 @@ export default function CartPage() {
     const quantities: Record<string, number> = {};
     if (cart?.productIds) {
       cart.productIds.forEach((item) => {
-        quantities[item?.productId?._id] = item.quantity;
+        const key = `${item?.productId?._id}-${item.color || ""}-${
+          item.size || ""
+        }`;
+        quantities[key] = item.quantity;
       });
     }
     // Overlay any pending optimistic updates
     return { ...quantities, ...pendingQuantities };
   }, [cart, pendingQuantities]);
 
-  // Debounced API call - memoized to prevent recreation
-  const debouncedUpdateRef = useRef<
-    ((productId: string, quantity: number) => void) | null
-  >(null);
+  const debouncedUpdateRef =
+    useRef<
+      (
+        productId: string,
+        quantity: number,
+        color?: string,
+        size?: string
+      ) => void
+    >(null);
 
   useEffect(() => {
     debouncedUpdateRef.current = debounce(
-      async (productId: string, quantity: number) => {
+      async (
+        productId: string,
+        quantity: number,
+        color?: string,
+        size?: string
+      ) => {
+        const key = `${productId}-${color || ""}-${size || ""}`;
         try {
-          await updateQuantity(productId, quantity);
+          await updateQuantity(productId, quantity, color, size);
           // Clear the pending quantity once server confirms the update
           setPendingQuantities((prev) => {
             const next = { ...prev };
-            delete next[productId];
+            delete next[key];
             return next;
           });
         } catch (error) {
@@ -58,7 +72,7 @@ export default function CartPage() {
           // Revert optimistic update on error by clearing the pending quantity
           setPendingQuantities((prev) => {
             const next = { ...prev };
-            delete next[productId];
+            delete next[key];
             return next;
           });
         }
@@ -68,22 +82,27 @@ export default function CartPage() {
   }, [updateQuantity]);
 
   const handleQuantityChange = useCallback(
-    (productId: string, newQuantity: number) => {
+    (productId: string, newQuantity: number, color?: string, size?: string) => {
+      const key = `${productId}-${color || ""}-${size || ""}`;
       // Optimistic UI update - immediate feedback
       setPendingQuantities((prev) => ({
         ...prev,
-        [productId]: newQuantity,
+        [key]: newQuantity,
       }));
 
       // Debounced API call
-      debouncedUpdateRef.current?.(productId, newQuantity);
+      debouncedUpdateRef.current?.(productId, newQuantity, color, size);
     },
     []
   );
 
-  const handleRemove = async (productId: string) => {
+  const handleRemove = async (
+    productId: string,
+    color?: string,
+    size?: string
+  ) => {
     try {
-      await removeFromCart(productId);
+      await removeFromCart(productId, color, size);
     } catch (error) {
       console.error("Failed to remove item:", error);
     }
@@ -94,7 +113,10 @@ export default function CartPage() {
   // Calculate subtotal using local quantities for immediate feedback
   const subtotal = useMemo(() => {
     return items.reduce((acc, item) => {
-      const quantity = localQuantities[item?.productId?._id] ?? item.quantity;
+      const key = `${item?.productId?._id}-${item.color || ""}-${
+        item.size || ""
+      }`;
+      const quantity = localQuantities[key] ?? item.quantity;
       return acc + item?.productId?.price * quantity;
     }, 0);
   }, [items, localQuantities]);
@@ -137,7 +159,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FBFBFB]">
+    <div className=" bg-[#FBFBFB]">
       {/* <ProductNavbar /> */}
 
       <main className="container mx-auto px-6 pt-32 pb-20 max-w-[1240px]">
@@ -155,25 +177,38 @@ export default function CartPage() {
           <div className="w-full lg:flex-1">
             {items.length > 0 ? (
               <div className="flex flex-col">
-                {items.map((item) => (
-                  <CartItem
-                    key={item?.productId?._id}
-                    id={item?.productId?._id}
-                    title={item?.productId?.productName}
-                    description={item?.productId?.description}
-                    price={item?.productId?.price}
-                    imageUrl={
-                      item?.productId?.imgs?.[0] ||
-                      item?.productId?.img ||
-                      "/no-image.jpg"
-                    }
-                    quantity={
-                      localQuantities[item?.productId?._id] ?? item.quantity
-                    }
-                    onQuantityChange={handleQuantityChange}
-                    onRemove={handleRemove}
-                  />
-                ))}
+                {items.map((item) => {
+                  const key = `${item?.productId?._id}-${item.color || ""}-${
+                    item.size || ""
+                  }`;
+                  return (
+                    <CartItem
+                      key={key}
+                      id={item?.productId?._id}
+                      title={item?.productId?.productName}
+                      description={item?.productId?.description}
+                      price={item?.productId?.price}
+                      color={item.color}
+                      size={item.size}
+                      imageUrl={
+                        item?.productId?.imgs?.[0] ||
+                        item?.productId?.img ||
+                        "/no-image.jpg"
+                      }
+                      quantity={localQuantities[key] ?? item.quantity}
+                      onQuantityChange={(id, qty) =>
+                        handleQuantityChange(id, qty, item.color, item.size)
+                      }
+                      onRemove={() =>
+                        handleRemove(
+                          item?.productId?._id,
+                          item.color,
+                          item.size
+                        )
+                      }
+                    />
+                  );
+                })}
               </div>
             ) : (
               <div className="bg-white border border-[#EFEFEF] rounded-2xl p-12 text-center flex flex-col items-center gap-4">
