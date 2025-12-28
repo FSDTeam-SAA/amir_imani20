@@ -28,7 +28,7 @@ export async function changePassword(oldPassword: string, newPassword: string,to
 interface UpdateProfileData {
   firstName: string;
   lastName: string;
-  phoneNum?: number;
+  phoneNum?: string;
   address?: string;
   avatar?: string;
   gender?: string;

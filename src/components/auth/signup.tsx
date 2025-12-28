@@ -36,7 +36,7 @@ const formSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
   age: z.string().optional(),
   address: z.string().optional(),
-  phone: z.string().optional(),
+  phoneNum: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -57,7 +57,7 @@ const Signup = () => {
       password: "",
       age: "",
       address: "",
-      phone: "",
+      phoneNum: "",
     },
   });
 
@@ -99,7 +99,7 @@ const Signup = () => {
   return (
     <section
       className="min-h-screen flex items-center justify-center 
-  bg-[linear-gradient(0deg,rgba(212,161,50,0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
+  bg-[linear-gradient(0deg,rgba(212,161,50,phoneNum0.90)_0%,rgba(212,161,50,0.90)_100%),url('/bg.png')] 
   bg-cover bg-center bg-no-repeat bg-lightgray flex-col gap-5 py-8"
     >
       {/* Logo */}
@@ -163,7 +163,7 @@ const Signup = () => {
             {/* Phone Number */}
             <FormField
               control={form.control}
-              name="phone"
+              name="phoneNum"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Phone Number (Optional)</FormLabel>

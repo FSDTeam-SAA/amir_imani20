@@ -95,7 +95,7 @@ const MerchandiseProduct = () => {
                   href={`/merchandise/${product._id}`}
                   className="absolute inset-0 z-10"
                 />
-                <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded z-20">
+                <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded z-20 rounded-fullga">
                   New
                 </p>
                 {/* <p className="absolute bg-white/15 px-3 py-1 inset-0 rounded"></p> */}
@@ -128,6 +128,7 @@ const MerchandiseProduct = () => {
             </div>
           ))}
         </div>
+ {products.length >2 &&
 
         <Button
           onClick={() => setSelectedProduct(!selectedProduct)}
@@ -136,6 +137,7 @@ const MerchandiseProduct = () => {
           {selectedProduct ? "Less Games" : "More Games"}
           <MoveRight />
         </Button>
+ }
       </div>
     </section>
   );

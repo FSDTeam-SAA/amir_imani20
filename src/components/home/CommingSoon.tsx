@@ -99,7 +99,7 @@ const CommingSoon = () => {
             <Link key={product._id} href={`/product/${product._id}`}>
               <div className="relative outline-red-500  border-2 rounded-lg  overflow-hidden  flex flex-col  justify-center">
                 <div className="relative">
-                  <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded">
+                  <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded-full!">
                     New
                   </p>
                   <p className="absolute  bg-white/15  px-3 py-1  inset-0 rounded"></p>
@@ -141,7 +141,7 @@ const CommingSoon = () => {
             </Button>
           </div> */}
         </div>
-        <Link href="/games">
+        <Link href="/game">
           <Button className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white">
             More Games
             <MoveRight />
