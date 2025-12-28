@@ -76,6 +76,8 @@ const GameProduct = () => {
       </section>
     );
   }
+
+  console.log(products);
   return (
     <section className="py-12">
       <div>
@@ -123,7 +125,7 @@ const GameProduct = () => {
                         </p>
                         <p className="absolute  bg-white/15  px-3 py-1  inset-0 rounded"></p>
                         <Image
-                          src={product?.img || "/no-image.jpg"}
+                          src={product?.imgs?.[0] || "/no-image.jpg"}
                           width={490}
                           height={670}
                           alt={product.productName}

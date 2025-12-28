@@ -52,9 +52,9 @@ export default function ProductHero({ product }: ProductHeroProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
         <div className="relative aspect-square w-full max-w-120 mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
-          {product.img ? (
+          {product.imgs?.length ? (
             <Image
-              src={product.img}
+              src={product.imgs?.[0]}
               alt={product.productName}
               fill
               className="object-cover"
