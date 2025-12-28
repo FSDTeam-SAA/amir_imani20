@@ -10,6 +10,7 @@ import { productService } from "@/lib/api/product-service";
 
 import { MoveRight } from "lucide-react";
 import WhyChooseUs from "../about/WhyChooseUs";
+import Link from "next/link";
 const AboutGame = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -89,7 +90,7 @@ const AboutGame = () => {
                 className="object-cover  w-full h-full"
               />
             </div> */}
-      <div className="container mx-auto px-6  bg-[#FFF7E9] rounded-xl">
+      <div className="container mx-auto px-6  bg-[#FFF7E9] rounded-xl overflow-hidden">
         <div className="py-5 text-center">
           <h2 className="text-[#000000] text-xl md:text-[48px]">About Game</h2>
           <p className="text-[#535862] text-base">
@@ -121,15 +122,17 @@ const AboutGame = () => {
             </h2>
 
             {/* <p className="inline-block bg-red-50 text-red-600 text-xs font-semibold px-3 py-1 rounded-full mb-4"></p> */}
-            <p className="text-gray-700 leading-relaxed mb-10 lg:mb-14">
-              {product.description ||
-                " Linear helps streamline software projects, sprints, tasks, and bug tracking. Here’s how to get..."}
+            <p dangerouslySetInnerHTML={{ __html: product.description }} className="text-gray-700 leading-relaxed mb-10 lg:mb-14 line-clamp-2">
+              
             </p>
 
             <div className="flex gap-4">
+              <Link href={`/product/${product._id}`}>
+              
               <Button className="  px-6 cursor-pointer">
                 Explore More <MoveRight className="ml-2" />
               </Button>
+              </Link>
             </div>
           </div>
         </div>

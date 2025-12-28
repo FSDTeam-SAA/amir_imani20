@@ -170,14 +170,15 @@ const GameProduct = () => {
               </Link>
             ))} */}
           </div>
-
-          <Button
-            onClick={() => setSelectedProduct(!selectedProduct)}
-            className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"
-          >
-            {selectedProduct ? "Less Games" : "More Games"}
-            <MoveRight />
-          </Button>
+          {products.length > 2 && (
+            <Button
+              onClick={() => setSelectedProduct(!selectedProduct)}
+              className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"
+            >
+              {selectedProduct ? "Less Games" : "More Games"}
+              <MoveRight />
+            </Button>
+          )}
         </div>
       </div>
     </section>

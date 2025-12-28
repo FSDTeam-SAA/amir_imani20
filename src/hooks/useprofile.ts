@@ -1,5 +1,6 @@
 import { changePassword } from "@/lib/api/profile";
-import { useMutation } from "@tanstack/react-query";
+import { getSingleUser } from "@/lib/api/user";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
@@ -31,5 +32,13 @@ export const useChangePassword = () => {
     onError: (error) => {
       toast.error(`Failed to change password: ${error.message}`);
     },
+  });
+};
+
+export const useSingleUser = (userId: string) => {
+  return useQuery({
+    queryKey: ['user', userId],
+    queryFn: () => getSingleUser(userId),
+    enabled: !!userId, // Only run query if userId exists
   });
 };
