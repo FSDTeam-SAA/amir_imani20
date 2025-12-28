@@ -54,7 +54,7 @@ export default function OrderSummary({
       <Button
         onClick={onCheckout}
         disabled={isDisabled || isCheckoutLoading}
-        className="w-full h-12 bg-black hover:bg-[#111111] text-white rounded-full font-bold text-sm tracking-wide shadow-[0px_4px_16px_rgba(0,0,0,0.1)] mb-6"
+        className="w-full h-12 bg-primary hover:bg-[#111111] text-white rounded-full font-bold text-sm tracking-wide shadow-[0px_4px_16px_rgba(0,0,0,0.1)] mb-6"
       >
         {isCheckoutLoading ? (
           <Loader2 className="w-4 h-4 animate-spin" />

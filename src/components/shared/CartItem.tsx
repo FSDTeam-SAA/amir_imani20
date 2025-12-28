@@ -50,9 +50,12 @@ export default function CartItem({
           <h3 className="text-base font-semibold text-[#FF7F50] leading-tight">
             {title}
           </h3>
-          <p className="text-xs text-[#8B8B8B] leading-relaxed">
-            {description}
-          </p>
+          <p
+            className="text-xs text-[#8B8B8B] leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html: description.slice(0, 100) + "...",
+            }}
+          />
           {(color || size) && (
             <div className="flex gap-3 mt-1">
               {color && (

@@ -41,7 +41,7 @@ const MerchandiseProduct = () => {
       <section className="py-12">
         <div className="container mx-auto py-12">
           <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center invisible">
-            Merchandise
+            ALL Merchandise Product
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[...Array(3)].map((_, i) => (
@@ -58,7 +58,7 @@ const MerchandiseProduct = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Our Products
+            ALL Merchandise Product
           </h2>
           <p className="text-center text-red-500">{error}</p>
         </div>
@@ -71,7 +71,7 @@ const MerchandiseProduct = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Our Products
+            ALL Merchandise Product
           </h2>
           <p className="text-center text-gray-500">
             No products available at the moment.
@@ -84,7 +84,7 @@ const MerchandiseProduct = () => {
     <section className=" py-12">
       <div className="container mx-auto py-12">
         <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center">
-          Merchandise
+          ALL Merchandise Product
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

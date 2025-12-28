@@ -8,8 +8,10 @@ export interface Product {
   videoLink?: string;
   img?: string; // Keep for backward compatibility or if API still returns it as primary
   imgs?: string[];
-  colors?: string[];
-  sizes?: string[];
+  colors?: string[]; // Keep for compatibility
+  color?: string[];
+  sizes?: string[]; // Keep for compatibility
+  size?: string[];
   quantity?: number;
 }
 
