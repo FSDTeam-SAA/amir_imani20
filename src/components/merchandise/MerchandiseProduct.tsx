@@ -133,6 +133,7 @@ const MerchandiseProduct = () => {
             )
           )}
         </div>
+ {products.length >2 &&
 
         <Button
           onClick={() => setSelectedProduct(!selectedProduct)}
@@ -141,6 +142,7 @@ const MerchandiseProduct = () => {
           {selectedProduct ? "Less Games" : "More Games"}
           <MoveRight />
         </Button>
+ }
       </div>
     </section>
   );
