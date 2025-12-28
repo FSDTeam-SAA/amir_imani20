@@ -11,23 +11,22 @@ const OurStory = () => {
       "At the heart of every DoUndo project are thirteen unique symbols, a system that links our games, fortune-telling practices, and accessories into one shared universe.",
       "DoUndo is more than a game publisher. It is a brand with its own identity and language. Our journey is just beginning.",
       "We are developing a collection of original games, from strategic duels and memory challenges to party experiences and symbolic readings. Alongside these games, we are exploring accessories, apparel, and digital projects inspired by the same symbolic system.",
-      "Every DoUndo experience is designed to spark memorable shared moments that continue beyond the table, as we grow into a global brand that bridges creativity, design, and storytelling."
+      "Every DoUndo experience is designed to spark memorable shared moments that continue beyond the table, as we grow into a global brand that bridges creativity, design, and storytelling.",
     ],
     image: {
-      src: '/about1.png',
-      alt: 'DoUndo team collaborating on game design',
+      src: "/about1.png",
+      alt: "DoUndo team collaborating on game design",
       width: 600,
-      height: 600
-    }
+      height: 600,
+    },
   };
 
   return (
-    <section 
-      className="mt-20 py-16 md:py-20 bg-gradient-to-b from-white to-amber-50/30"
+    <section
+      className=" py-16 md:py-20 bg-gradient-to-b from-white to-amber-50/30"
       aria-labelledby="story-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-16 lg:mb-20 max-w-3xl mx-auto">
           <div className="inline-flex items-center justify-center mb-4">
@@ -35,14 +34,14 @@ const OurStory = () => {
               About Us
             </span>
           </div>
-          
-          <h2 
+
+          <h2
             id="story-heading"
             className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight"
           >
             {storyData.title}
           </h2>
-          
+
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             {storyData.subtitle}
           </p>
@@ -50,17 +49,16 @@ const OurStory = () => {
 
         {/* Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
           {/* Text Content */}
           <div className="space-y-6 md:space-y-8 order-2 lg:order-1">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2">
                 {/* <div className="w-8 h-0.5 bg-amber-500"></div> */}
                 <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 text-xs font-semibold tracking-wide uppercase rounded-full">
-                 Who We Are
+                  Who We Are
                 </span>
               </div>
-              
+
               <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 {storyData.aboutTitle}
               </h3>
@@ -68,7 +66,7 @@ const OurStory = () => {
 
             <div className="space-y-4 md:space-y-6">
               {storyData.aboutDescription.map((paragraph, index) => (
-                <p 
+                <p
                   key={index}
                   className="text-gray-700 leading-relaxed md:leading-loose text-base "
                 >
@@ -106,7 +104,7 @@ const OurStory = () => {
               {/* Decorative Background Elements */}
               {/* <div className="absolute -top-6 -right-6 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl"></div> */}
               {/* <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-blue-200/10 rounded-full blur-2xl"></div> */}
-              
+
               {/* Main Image Container */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-amber-200/30">
                 <Image
@@ -119,11 +117,11 @@ const OurStory = () => {
                   priority
                   quality={85}
                 />
-                
+
                 {/* Image Overlay Effect */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              
+
               {/* Floating Badge */}
               <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
                 <div className="flex items-center gap-2">
@@ -131,13 +129,17 @@ const OurStory = () => {
                     <span className="text-amber-600 font-bold">✓</span>
                   </div>
                   <div className="text-left">
-                    <div className="text-xs font-semibold text-gray-900">Made in</div>
-                    <div className="text-sm font-bold text-gray-900">Canada</div>
+                    <div className="text-xs font-semibold text-gray-900">
+                      Made in
+                    </div>
+                    <div className="text-sm font-bold text-gray-900">
+                      Canada
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Decorative Pattern */}
             <div className="hidden lg:block absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
               <div className="absolute top-0 left-0 w-32 h-32 border-2 border-amber-200/30 rounded-full"></div>

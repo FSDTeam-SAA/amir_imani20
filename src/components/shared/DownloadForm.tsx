@@ -62,7 +62,7 @@ const DownloadForm = () => {
 
   return (
     <section className="w-full flex justify-center bg-[#FFF7E9] py-16 px-8 rounded-2xl">
-      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-sm">
+      <div className="w-full max-w-2xl rounded-xl bg-white p-6 shadow-sm">
         <h2 className="text-center text-lg font-semibold mb-6">
           Print and play
         </h2>
