@@ -37,16 +37,19 @@ const BlogCard = ({ blog }: BlogCardProps) => {
 
       {/* Content */}
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-medium text-purple-600">
+        <span className="text-sm font-medium text-primary">
           {formattedDate}
         </span>
 
         <div className="flex items-start justify-between gap-4">
-          <h3 className="text-xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors line-clamp-2">
-            {blog.title}
-          </h3>
-          <Link href={`/blogs/${blog._id}`}>
-            <ArrowUpRight className="h-6 w-6 shrink-0 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
+          <Link
+            href={`/blogs/${blog._id}`}
+            className="flex items-center gap-2 justify-between w-full"
+          >
+            <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2">
+              {blog.title}
+            </h3>
+            <ArrowUpRight className="h-6 w-6 shrink-0 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 cursor-pointer group-hover:text-primary" />
           </Link>
         </div>
 

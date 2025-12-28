@@ -50,7 +50,7 @@ const BlogDetailsPage = () => {
         <p className="text-red-500">Error loading blog details.</p>
         <Link
           href="/blogs"
-          className="flex items-center gap-2 text-purple-600 hover:underline"
+          className="flex items-center gap-2 text-primary hover:underline"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Blogs
         </Link>
@@ -66,12 +66,12 @@ const BlogDetailsPage = () => {
   });
 
   return (
-    <div className=" bg-white pt-40 pb-12 ">
+    <div className=" bg-white pt-10 pb-12 ">
       <article className="container mx-auto max-w-4xl px-4">
         {/* Navigation */}
         <Link
           href="/blogs"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-purple-600"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-primary"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Blogs
@@ -79,7 +79,7 @@ const BlogDetailsPage = () => {
 
         {/* Header */}
         <header className="mb-8 flex flex-col gap-4">
-          <time className="text-sm font-medium text-purple-600">
+          <time className="text-sm font-medium text-primary">
             {formattedDate}
           </time>
           <h1 className="text-3xl font-bold leading-tight text-gray-900 md:text-4xl lg:text-5xl">
@@ -102,7 +102,7 @@ const BlogDetailsPage = () => {
 
         {/* Content */}
         <div
-          className="prose prose-lg prose-purple max-w-none text-gray-600"
+          className="prose prose-lg prose-primary max-w-none text-gray-600"
           dangerouslySetInnerHTML={{ __html: blog.description }}
         />
       </article>

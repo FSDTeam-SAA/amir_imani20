@@ -7,8 +7,10 @@ const BlogsPage = () => {
   const { data, isLoading, error } = useBlogs();
 
   return (
-    <div className="min-h-screen bg-white pt-24">
+    <div className="min-h-screen bg-white pt-12">
       {/* <BlogHero /> */}
+
+      <h1 className="text-4xl font-bold text-center">Explore Our Blogs</h1>
 
       <div className="container mx-auto px-4 py-12">
         {isLoading ? (
