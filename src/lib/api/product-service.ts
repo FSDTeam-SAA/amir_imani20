@@ -1,6 +1,6 @@
 import axiosInstance from "./axios-instance";
 import { ProductsResponse, SingleProductResponse } from "../types/ecommerce";
-import { get } from "http";
+// import { get } from "http";
 
 export const productService = {
   /**

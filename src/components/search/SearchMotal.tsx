@@ -7,7 +7,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { Input } from "../ui/input";
 import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
@@ -56,9 +56,9 @@ const SearchMotal = ({
 
   return (
     <section>
-      <div className="search-motal container mx-auto px-4">
+      <div className="search-motal  container mx-auto px-4">
         <AlertDialog open={open} onOpenChange={onSetSearchOpen}>
-          <AlertDialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
+          <AlertDialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
             <AlertDialogHeader className="flex flex-row items-center gap-3 space-y-0">
               <AlertDialogTitle className="hidden">Search Products</AlertDialogTitle>
               <Input
@@ -93,7 +93,7 @@ const SearchMotal = ({
                         onClick={() => onSetSearchOpen(false)}
                         className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group"
                       >
-                        <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden bg-gray-100">
+                        <div className="relative w-16 h-16 shrink-0 rounded-md overflow-hidden bg-gray-100">
                            <Image
                             src={
                               (product.imgs && product.imgs.length > 0 ? product.imgs[0] : product.img) ||

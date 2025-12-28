@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 
 const GetInTouch = () => {
-  const { mutate, isPending, isSuccess, isError, error } = useContact();
+  const { mutate } = useContact();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
-import ProductNavbar from "@/components/shared/ProductNavbar"
+// import ProductNavbar from "@/components/shared/ProductNavbar"
 import ProductHero from "@/components/shared/ProductHero"
 import ProductDetails from "@/components/shared/ProductDetails"
 import MediaSection from "@/components/shared/MediaSection"
-import ProductFooter from "@/components/shared/ProductFooter"
+// import ProductFooter from "@/components/shared/ProductFooter"
 import { Product } from "@/lib/types/ecommerce"
 import { productService } from "@/lib/api/product-service"
 

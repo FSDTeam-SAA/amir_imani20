@@ -18,7 +18,7 @@ const ProfileMain = () => {
   ] as const;
 
   return (
-    <div className='container mx-auto my-8 md:my-40 px-4'>
+    <div className='container mx-auto my-20 md:my-40 px-4'>
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'>
         
         {/* Sidebar - Left Column */}
@@ -40,7 +40,7 @@ const ProfileMain = () => {
                 className={`
                   w-full sm:w-auto px-6 py-3 rounded-lg font-medium transition-all
                   ${activeTab === tab.id 
-                    ? 'bg-primary text-primary-foreground shadow-sm' 
+                    ? 'bg-primary text-white shadow-sm' 
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   }
                 `}

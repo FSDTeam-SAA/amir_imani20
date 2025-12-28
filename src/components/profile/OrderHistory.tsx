@@ -1,74 +1,21 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
+import { useOrderHistory, Product } from '@/hooks/order';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const OrderHistory = () => {
-  // Mock data for order history
-  const orders = [
-    {
-      id: 1,
-      invoice: '12345',
-      item: 'Product Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Unpaid'
-    },
-    {
-      id: 2,
-      invoice: '12345',
-      item: 'Product Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Paid'
-    },
-    {
-      id: 3,
-      invoice: '12345',
-      item: 'Service Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Paid'
-    },
-    {
-      id: 4,
-      invoice: '12345',
-      item: 'Product Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Paid'
-    },
-    {
-      id: 5,
-      invoice: '12345',
-      item: 'Product Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Paid'
-    },
-    {
-      id: 6,
-      invoice: '12345',
-      item: 'Service Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Unpaid'
-    },
-    {
-      id: 7,
-      invoice: '12345',
-      item: 'Product Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Paid'
-    },
-    {
-      id: 8,
-      invoice: '12345',
-      item: 'Product Name',
-      date: '27/10/2025',
-      amount: '$500.00',
-      status: 'Paid'
-    },
-  ];
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+  
+  // Fetch order history
+  const { data: apiResponse, isLoading, error } = useOrderHistory(userId);
+  
+  // Access the products array properly depending on API structure
+  const orders: Product[] = Array.isArray(apiResponse) ? apiResponse : (apiResponse?.data || []);
+
+  if (isLoading) return <div className="p-4 text-center">Loading history...</div>;
+  if (error) return <div className="p-4 text-center text-red-500">Failed to load history</div>;
 
   return (
     <div className='w-full'>
@@ -98,23 +45,30 @@ const OrderHistory = () => {
             </tr>
           </thead>
           <tbody className='divide-y divide-gray-50'>
-            {orders.map((order) => (
-              <tr key={order.id} className='hover:bg-gray-50/50 transition-colors'>
-                <td className='py-4 pl-4 text-sm font-medium text-gray-600'>{order.invoice}</td>
-                <td className='py-4 text-sm text-gray-600'>{order.item}</td>
-                <td className='py-4 text-sm text-gray-600'>{order.date}</td>
-                <td className='py-4 text-sm font-semibold text-gray-900 text-center'>{order.amount}</td>
-                <td className='py-4 text-right pr-4'>
-                  <span className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium
-                    ${order.status === 'Paid' 
-                      ? 'bg-green-50 text-green-600' 
-                      : 'bg-red-50 text-red-500'
-                    }`}>
-                    {order.status}
-                  </span>
-                </td>
+            {orders.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="py-8 text-center text-gray-500">No orders found.</td>
               </tr>
-            ))}
+            ) : (
+              orders.map((order: Product) => (
+                <tr key={order._id} className='hover:bg-gray-50/50 transition-colors'>
+                  <td className='py-4 pl-4 text-sm font-medium text-gray-600'>#{order._id.slice(-6).toUpperCase()}</td>
+                  <td className='py-4 text-sm text-gray-600'>
+                    <div className="flex items-center gap-2">
+                      {order.img && <Image width={40} height={40} src={order.img} alt={order.productName} className="w-8 h-8 rounded object-cover" />}
+                      <span>{order.productName}</span>
+                    </div>
+                  </td>
+                  <td className='py-4 text-sm text-gray-600'>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td className='py-4 text-sm font-semibold text-gray-900 text-center'>${order.price}</td>
+                  <td className='py-4 text-right pr-4'>
+                    <span className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-green-50 text-green-600`}>
+                      Paid
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

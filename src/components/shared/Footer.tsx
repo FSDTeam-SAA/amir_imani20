@@ -26,11 +26,11 @@ const RESOURCES_LINKS = [
   { label: "Cart", href: "/cart" },
   { label: "Blog", href: "/blogs" },
   { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms and Conditions", href: "/terms" },
+  // { label: "Terms and Conditions", href: "/terms" },
 ];
 
 const LEGAL_LINKS = [
-  { label: "Terms", href: "/terms" },
+  // { label: "Terms", href: "/terms" },
   { label: "Privacy", href: "/privacy-policy" },
   // { label: "Cookies", href: "/cookies" },
   // { label: "Sitemap", href: "/sitemap.xml" },

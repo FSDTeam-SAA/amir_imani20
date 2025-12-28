@@ -1,6 +1,6 @@
 import React from "react"
-import { Play, Download } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Play } from "lucide-react"
+// import { Button } from "@/components/ui/button"
 
 interface MediaSectionProps {
   videoLink?: string
@@ -16,6 +16,7 @@ export default function MediaSection({ videoLink }: MediaSectionProps) {
   return (
     <section className="py-12 border-t border-[#EFEFEF]">
       {/* Video Card */}
+      <h2 className="text-[#0E1D2B] text-2xl md:text-3xl lg:text-5xl mb-5 text-center">Watch To Learn </h2>
       <div 
         className="relative w-full aspect-video rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)] bg-gray-100 mb-8 cursor-pointer"
         onClick={handlePlayClick}
@@ -47,7 +48,7 @@ export default function MediaSection({ videoLink }: MediaSectionProps) {
       </div>
 
       {/* Caption and Download Button */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      {/* <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <p className="text-lg font-medium text-[#111111]">
           Learn how to play. Download the instructions
         </p>
@@ -55,7 +56,7 @@ export default function MediaSection({ videoLink }: MediaSectionProps) {
           Download
           <Download className="w-5 h-5" />
         </Button>
-      </div>
+      </div> */}
     </section>
   )
 }

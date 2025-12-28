@@ -26,10 +26,10 @@ const ProfileSideBar: React.FC = () => {
   };
 
   return (
-    <aside className="max-w-xs w-full bg-white rounded-2xl shadow-lg overflow-hidden ">
+    <aside className="max-w-xs w-full mx-auto bg-white rounded-2xl shadow-lg overflow-hidden ">
       {/* Profile Header */}
       <div className="relative">
-        <div className="bg-gradient-to-r relative from-cyan-600 to-teal-500 h-32 rounded-t-2xl p-5 h-20">
+        <div className="bg-gradient-to-r relative from-cyan-600 to-teal-500 md:h-32 rounded-t-2xl p-5 h-20">
           <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
             <div className="w-20 h-20 bg-white rounded-full border-4 border-white flex items-center justify-center shadow-lg">
               <div className="w-16 h-16 bg-gradient-to-r from-cyan-600 to-teal-500 rounded-full flex items-center justify-center">
@@ -63,7 +63,7 @@ const ProfileSideBar: React.FC = () => {
 
 // ProfileField component for consistent field rendering
 const ProfileField: React.FC<ProfileFieldProps> = ({ label, value }) => (
-  <li className="flex justify-between items-center py-3 px-4 hover:bg-gray-50 transition-colors">
+  <li className="flex justify-start gap-4 items-center py-3 px-4 hover:bg-gray-50 transition-colors">
     <span className="font-medium text-gray-600">{label}:</span>
     <span className="text-gray-800 text-right">{value}</span>
   </li>
