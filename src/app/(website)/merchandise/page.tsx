@@ -1,12 +1,11 @@
-import MerchandiseProduct from '@/components/merchandise/MerchandiseProduct'
-import React from 'react'
+import MerchandiseProduct from "@/components/merchandise/MerchandiseProduct";
 
 const page = () => {
   return (
     <div>
-      <MerchandiseProduct/>
+      <MerchandiseProduct />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

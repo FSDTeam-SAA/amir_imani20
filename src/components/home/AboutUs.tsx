@@ -14,13 +14,13 @@ const AboutUs = () => {
           </p>
         </div>
         <h2 className="text-lg md:text-2xl lg:text-[48px] 2xl:text-[60px] text-[#000000] mb-10 leading-tight  font-medium  mx-auto">
-          DoUndo connects people through games that live beyond the table.
+          DoUndo connects people through games <br /> that live beyond the
+          table.
         </h2>
         <Link href="/about-us">
-        
-        <Button className="border-gray-300 text-white cursor-pointer hover:scale-105 ">
-          About Us <MoveRight />
-        </Button>
+          <Button className="border-gray-300 text-white cursor-pointer hover:scale-105 ">
+            About Us <MoveRight />
+          </Button>
         </Link>
       </div>
     </div>

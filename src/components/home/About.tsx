@@ -16,7 +16,6 @@ const About = () => {
           className="object-cover  w-full h-full"
         />
       </div>
-      
 
       <AboutUs />
       <CommingSoon />

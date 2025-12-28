@@ -1,21 +1,47 @@
 "use client";
 
 import { useBlog } from "@/hooks/use-blogs";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const BlogDetailsSkeleton = () => {
+  return (
+    <div className="min-h-screen bg-white pt-40 pb-12 ">
+      <article className="container mx-auto max-w-4xl px-4">
+        {/* Navigation Skeleton */}
+        <Skeleton className="mb-8 h-5 w-32" />
+
+        {/* Header Skeleton */}
+        <div className="mb-8 flex flex-col gap-4">
+          <Skeleton className="h-5 w-24" />
+          <Skeleton className="h-12 w-full md:w-3/4" />
+        </div>
+
+        {/* Hero Image Skeleton */}
+        <Skeleton className="mb-10 aspect-video w-full rounded-3xl" />
+
+        {/* Content Skeleton */}
+        <div className="space-y-6">
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-5/6" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-2/3" />
+        </div>
+      </article>
+    </div>
+  );
+};
 
 const BlogDetailsPage = () => {
   const { id } = useParams() as { id: string };
   const { data, isLoading, error } = useBlog(id);
 
   if (isLoading) {
-    return (
-      <div className="flex bg-white h-screen w-full items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
-      </div>
-    );
+    return <BlogDetailsSkeleton />;
   }
 
   if (error || !data?.success) {
@@ -24,7 +50,7 @@ const BlogDetailsPage = () => {
         <p className="text-red-500">Error loading blog details.</p>
         <Link
           href="/blogs"
-          className="flex items-center gap-2 text-purple-600 hover:underline"
+          className="flex items-center gap-2 text-primary hover:underline"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Blogs
         </Link>
@@ -40,12 +66,12 @@ const BlogDetailsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-white pt-40 pb-12 ">
+    <div className=" bg-white pt-10 pb-12 ">
       <article className="container mx-auto max-w-4xl px-4">
         {/* Navigation */}
         <Link
           href="/blogs"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-purple-600"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-primary"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Blogs
@@ -53,7 +79,7 @@ const BlogDetailsPage = () => {
 
         {/* Header */}
         <header className="mb-8 flex flex-col gap-4">
-          <time className="text-sm font-medium text-purple-600">
+          <time className="text-sm font-medium text-primary">
             {formattedDate}
           </time>
           <h1 className="text-3xl font-bold leading-tight text-gray-900 md:text-4xl lg:text-5xl">
@@ -75,13 +101,10 @@ const BlogDetailsPage = () => {
         )}
 
         {/* Content */}
-        <div className="prose prose-lg prose-purple max-w-none text-gray-600">
-          {blog.description.split("\n").map((paragraph, index) => (
-            <p key={index} className="mb-4">
-              {paragraph}
-            </p>
-          ))}
-        </div>
+        <div
+          className="prose prose-lg prose-primary max-w-none text-gray-600"
+          dangerouslySetInnerHTML={{ __html: blog.description }}
+        />
       </article>
     </div>
   );

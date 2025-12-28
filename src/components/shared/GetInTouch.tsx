@@ -37,7 +37,7 @@ const GetInTouch = () => {
 
   return (
     <section className="py-16 ">
-      <div className="container mx-auto px-6 bg-[#F2E3C6] rounded-2xl shadow-xl py-6 md:py-12 md:px-14">
+      <div className="container mx-auto px-6 bg-[#F2E3C6] rounded-2xl border py-6 md:py-[95px] md:px-[150px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
           <div>
@@ -99,7 +99,13 @@ const GetInTouch = () => {
               <div className="flex items-center gap-2">
                 <input type="checkbox" id="privacy" className="w-4 h-4" />
                 <label htmlFor="privacy" className="text-[#343A40] text-sm">
-                  I agree to the <Link href="/privacy-policy" className="underline cursor-pointer">privacy policy</Link>
+                  I agree to the{" "}
+                  <Link
+                    href="/privacy-policy"
+                    className="underline cursor-pointer"
+                  >
+                    privacy policy
+                  </Link>
                 </label>
               </div>
 
