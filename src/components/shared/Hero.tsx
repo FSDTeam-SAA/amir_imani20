@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -29,10 +30,12 @@ export default function Hero() {
 
           {/* CTA Button */}
           <div className="flex justify-center">
-            <Button className=" cursor-pointer   px-8 py-6 rounded-full text-base  font-semibold inline-flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Link href={'/game'}>
+            <Button className=" cursor-pointer   px-8 py-6 rounded-full text-base  font-medium inline-flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300">
               Get Your Game Now
               <ArrowRight className="w-5 h-5" />
             </Button>
+            </Link>
           </div>
         </div>
       </div>

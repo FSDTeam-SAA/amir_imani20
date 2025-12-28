@@ -18,12 +18,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { updateUserInfo } from '@/lib/api/profile';
+import { useSingleUser } from '@/hooks/useprofile';
 
 const profileSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Invalid email address'),
-  phone: z.number().optional(),
+  phone: z.string().optional(),
   address: z.string().optional(),
 });
 
@@ -31,7 +32,10 @@ type ProfileFormValues = z.infer<typeof profileSchema>;
 
 const ChangeInformation = () => {
   const { data: session } = useSession();
+  const {data:userData}=useSingleUser(session?.user?.id || '')
   const [isPending, setIsPending] = React.useState(false);
+
+  console.log('user data',userData)
 
   // Helper to split name
   const splitName = (fullName: string | null | undefined) => {
@@ -48,23 +52,22 @@ const ChangeInformation = () => {
       firstName: '',
       lastName: '',
       email: '',
-      phone: undefined,
+      phone: '',
       address: '',
     },
   });
-  // Update form values when session loads
+  // Update form values when userData loads
   useEffect(() => {
-    if (session?.user) {
-      const { firstName, lastName } = splitName(session.user.name);
+    if (userData) {
       form.reset({
-        firstName: firstName,
-        lastName: lastName,
-        email: session.user.email || '',
-        phone: undefined, 
-        address: '',
+        firstName: userData.firstName || '',
+        lastName: userData.lastName || '',
+        email: userData.email || session?.user?.email || '',
+        phone: userData.phoneNum?.toString() || '', 
+        address: userData.address || '',
       });
     }
-  }, [session, form]);
+  }, [userData, session, form]);
 
   async function onSubmit(values: ProfileFormValues) {
     if (!session?.user?.id || !session?.accessToken) {
@@ -77,9 +80,9 @@ const ChangeInformation = () => {
       const updateData = {
         firstName: values.firstName,
         lastName: values.lastName,
-        email: values.email, // Include email if API supports updating it
+        email: values.email,
         address: values.address,
-        phoneNum: values.phone ? values.phone: undefined
+        phoneNum: values.phone || undefined
       };
 
       const response = await updateUserInfo(session.user.id, updateData, session.accessToken);

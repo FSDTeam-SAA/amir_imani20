@@ -9,19 +9,20 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 import { MoveRightIcon } from "lucide-react";
+import GetInTouch from "../shared/GetInTouch";
 const MeetOurTeam = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: sectionRef,
+  //   offset: ["start end", "end start"],
+  // });
 
   // Left column → bottom to top
-  const leftY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  // const leftY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   // Right column → top to bottom
-  const rightY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
+  // const rightY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   const data = [
     {
@@ -50,7 +51,7 @@ const MeetOurTeam = () => {
     },
   ];
   return (
-    <section className="py-16 lg:py-20">
+    <section className="pt-16 lg:pt-20">
       <div className="container mx-auto">
         <span className=" text-amber-200 text-base px-3 py-2 rounded-2xl">
           Team
@@ -94,11 +95,11 @@ const MeetOurTeam = () => {
           ))}
         </div>
 
-        <div className="mt-16 md:mt-24  bg-[#f2e3c6] rounded-3xl  px-8  relative overflow-hidden">
-          {/* <div className="absolute inset-0 opacity-10">
+        {/* <div className="mt-16 md:mt-24  bg-[#f2e3c6] rounded-3xl  px-8  relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
             <div className="absolute bottom-0 right-0 w-48 h-48 bg-white rounded-full translate-x-1/2 translate-y-1/2"></div>
-          </div> */}
+          </div>
 
           <div className="relative   grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-20 flex-col md:flex-row justify-between items-center">
             <div className="md:col-span-2 flex flex-col justify-center items-start py-10 md:py-0">
@@ -113,7 +114,52 @@ const MeetOurTeam = () => {
               </p>
               <Button className="hover:bg-[#4296a2] transform transition-all duration-300 py-5 rounded-2xl text-white mt-4">
                 Get Your Game Now <MoveRightIcon />
-              </Button>
+              </Button>  <div
+              ref={sectionRef}
+              className=" bg-[#f2e3c6] rounded-3xl  relative overflow-hidden flex gap-5 md:gap-10 md:grid-cols-1"
+            >
+              <motion.div style={{ y: leftY }} className="flex flex-col gap-5">
+                <Image
+                  src="/images/aboutbottom1.png"
+                  alt="Decorative Background"
+                  width={600}
+                  height={400}
+                  className="w-full pointer-events-none select-none"
+                />
+                <Image
+                  src="/images/aboutbottom2.png"
+                  alt="Decorative Background"
+                  width={600}
+                  height={400}
+                  className="w-full pointer-events-none select-none"
+                />
+                <Image
+                  src="/images/aboutbottom3.png"
+                  alt="Decorative Background"
+                  width={600}
+                  height={400}
+                  className="w-full pointer-events-none select-none"
+                />
+              </motion.div>
+
+              <motion.div style={{ y: rightY }} className="flex flex-col gap-5">
+                <Image
+                  src="/images/aboutbottom4.png"
+                  alt="Decorative Background"
+                  width={600}
+                  height={400}
+                  className="w-full pointer-events-none select-none"
+                />
+                <Image
+                  src="/images/aboutbottom5.png"
+                  alt="Decorative Background"
+                  width={600}
+                  height={400}
+                  className="w-full pointer-events-none select-none"
+                />
+                <p className="w-full aspect-5/1 bg-black/30 rounded-4xl backdrop-blur-3xl" />
+              </motion.div>
+            </div>
             </div>
             <div
               ref={sectionRef}
@@ -162,7 +208,8 @@ const MeetOurTeam = () => {
               </motion.div>
             </div>
           </div>
-        </div>
+      
+        </div> */}
       </div>
     </section>
   );
