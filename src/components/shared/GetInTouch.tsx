@@ -41,10 +41,10 @@ const GetInTouch = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
           <div>
-            <h2 className="text-4xl font-bold text-[#343A40] mb-2 text-start">
+            <h2 className="text-5xl font-bold text-primary-foreground mb-2 text-start">
               Get in touch
             </h2>
-            <p className="text-p[#343A40] text-start mb-5 lg:mb-10 max-w-2xl">
+            <p className="text-primary-foreground text-start mb-5 lg:mb-10 max-w-2xl">
               Our friendly team would love to hear from you.
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">

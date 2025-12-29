@@ -83,7 +83,7 @@ const ComingSoon = () => {
     return (
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-primary-foreground mb-12">
             Our Products
           </h2>
           <div className="flex justify-center items-center h-64">
@@ -98,7 +98,7 @@ const ComingSoon = () => {
     return (
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-primary-foreground mb-12">
             Our Products
           </h2>
           <p className="text-center text-red-500">{error}</p>
@@ -111,7 +111,7 @@ const ComingSoon = () => {
     return (
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-primary-foreground mb-12">
             Our Products
           </h2>
           <p className="text-center text-gray-500">
@@ -126,7 +126,7 @@ const ComingSoon = () => {
     <section className="relative px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto py-12">
         <div className="text-center max-w-[1146px] mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-[#0C0D0E] font-bold mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl text-primary-foreground font-bold mb-6 tracking-tight">
             Symbolverse: Stories Told Through Games
           </h2>
           <p className="text-gray-600 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
@@ -138,13 +138,13 @@ const ComingSoon = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {/* Main Product Card */}
           {products.slice(0, 1).map((product) => (
             <Link
               key={product._id}
               href={`/product/${product._id}`}
-              className="group block"
+              className="group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] max-w-[490px]"
             >
               <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                 {/* Image Container with Overlay */}
@@ -172,10 +172,10 @@ const ComingSoon = () => {
                       {product.productName}
                     </h3>
 
-                    <div className="flex flex-col sm:flex-row gap-3 opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    <div className="flex flex-col sm:flex-row gap-3 transition-all duration-300 ">
                       <Button
                         variant="secondary"
-                        className="flex-1 bg-white hover:bg-gray-100 text-gray-900 font-semibold"
+                        className="flex-1 bg-white hover:bg-gray-100 text-primary-foreground font-semibold"
                         onClick={(e) => handleAddToCart(e, product)}
                         disabled={addingToCartId === product._id}
                       >
@@ -183,7 +183,8 @@ const ComingSoon = () => {
                           "..."
                         ) : (
                           <>
-                            <ShoppingCart className="w-4 h-4 mr-2" /> Add
+                            <ShoppingCart className="w-4 h-4 mr-2" /> Add to
+                            Cart
                           </>
                         )}
                       </Button>
@@ -203,21 +204,21 @@ const ComingSoon = () => {
           ))}
 
           {/* Coming Soon Teaser Card */}
-          <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-primary/30 bg-secondary/50 p-8 flex flex-col items-center justify-center text-center transition-all hover:bg-secondary/80">
+          <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-primary/30 bg-secondary/50 p-8 flex flex-col items-center justify-center text-center transition-all hover:bg-secondary/80 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] max-w-[490px] min-h-[400px]">
             <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
 
             <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-2">
               Next Release
             </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[#1a1a1a] mb-2">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-primary-foreground mb-2">
               Walnize
             </h2>
             <p className="text-[#BDBDBD] text-xl md:text-2xl font-medium mb-8">
               Coming Very Soon
             </p>
 
-            <Button className="rounded-full bg-white border-2 border-[#1a1a1a] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white transition-colors px-8 py-2 h-auto font-bold flex items-center gap-2 group">
+            <Button className="rounded-full bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors px-8 py-2 h-auto font-bold flex items-center gap-2 group">
               Get Verified
               <MoveRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
