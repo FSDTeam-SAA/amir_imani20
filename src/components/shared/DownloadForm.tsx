@@ -61,8 +61,8 @@ const DownloadForm = () => {
   };
 
   return (
-    <section className="w-full flex justify-center bg-[#FFF7E9] py-16 px-8 rounded-2xl">
-      <div className="w-full max-w-2xl rounded-xl bg-white p-6 shadow-sm">
+    <section className="w-full flex justify-center py-16 px-8 rounded-2xl">
+      <div className="w-full max-w-2xl rounded-xl bg-secondary p-6 shadow-sm">
         <h2 className="text-center text-lg font-semibold mb-6">
           Print and play
         </h2>
@@ -110,7 +110,7 @@ const DownloadForm = () => {
             {/* Submit */}
             <Button
               type="submit"
-              className="w-full rounded-full bg-orange-500 hover:bg-orange-600 text-white"
+              className="w-full rounded-full bg-primary hover:bg-primary/80 text-white"
             >
               Submit
             </Button>

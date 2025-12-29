@@ -90,7 +90,7 @@ const OurMission = () => {
             aria-label="Mission tag"
           >
             <span
-              className="inline-block px-4 py-2 bg-secondary text-black/70 text-sm font-semibold tracking-wide uppercase rounded-full border "
+              className="inline-block px-4 py-2 bg-secondary text-primary-foreground/70 text-sm font-semibold tracking-wide uppercase rounded-full border "
               itemProp="keywords"
             >
               Our Mission & Values
@@ -125,7 +125,7 @@ const OurMission = () => {
             return (
               <article
                 key={value.id}
-                className={`group relative rounded-2xl border-2 bg-secondary text-black/70 border-none  p-8 md:p-10 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-${
+                className={`group relative rounded-2xl border-2 bg-secondary text-primary-foreground/70 border-none  p-8 md:p-10 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-${
                   value.iconColor.split("-")[1]
                 }-200/30 hover:-translate-y-1`}
                 role="listitem"
@@ -145,7 +145,7 @@ const OurMission = () => {
                     aria-hidden="true"
                   >
                     <IconComponent
-                      className={`w-7 h-7 text-black`}
+                      className={`w-7 h-7 text-primary-foreground`}
                       aria-label={`${value.title} icon`}
                     />
                   </div>

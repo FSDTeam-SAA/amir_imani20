@@ -36,15 +36,15 @@ const GetInTouch = () => {
   };
 
   return (
-    <section className="py-16 ">
-      <div className="container mx-auto px-6 bg-[#F2E3C6] rounded-2xl border py-6 md:py-[95px] md:px-[150px]">
+    <section className="py-16 mx-4">
+      <div className="container mx-auto px-6 bg-secondary rounded-2xl border py-6 md:py-[95px] md:px-[150px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
           <div>
-            <h2 className="text-4xl font-bold text-[#343A40] mb-2 text-start">
+            <h2 className="text-5xl font-bold text-primary-foreground mb-2 text-start">
               Get in touch
             </h2>
-            <p className="text-p[#343A40] text-start mb-5 lg:mb-10 max-w-2xl">
+            <p className="text-primary-foreground text-start mb-5 lg:mb-10 max-w-2xl">
               Our friendly team would love to hear from you.
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -127,7 +127,7 @@ const GetInTouch = () => {
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00601892346914!3d40.71282513110044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3855555%3A0x1c6ad15f64403e11!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d963.6179371730356!2d-79.27375832139533!3d43.83166698826154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4d6bbc2dca6db%3A0xdcb08ca7548aaf0c!2s7011%20McCowan%20Rd%2C%20Markham%2C%20ON%20L3S%203L7%2C%20Canada!5e0!3m2!1sen!2sbd!4v1767039079283!5m2!1sen!2sbd"
             />
           </div>
         </div>

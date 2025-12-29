@@ -2,14 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  Menu,
-  ChevronDown,
-  LogOut,
-  Search,
-  ShoppingCart,
-  User2Icon,
-} from "lucide-react";
+import { Menu, LogOut, Search, ShoppingCart, User2Icon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -29,12 +22,11 @@ import SearchMotal from "../search/SearchMotal";
 
 const navigationItems = [
   { name: "Home", href: "/" },
-  { name: "Merchandise", href: "/merchandise" },
-  { name: "Blogs", href: "/blogs" },
-  { name: "Fortune Telling", href: "/fortune-telling" },
-  { name: "Game", href: "/game" },
-  { name: "Contact", href: "/contact" },
   { name: "About Us", href: "/about-us" },
+  { name: "Games", href: "/game" },
+  { name: "Merchandise", href: "/merchandise" },
+  { name: "Fortune Telling", href: "/fortune-telling" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -45,9 +37,7 @@ export default function Navbar() {
   const { profile, loading } = useUserProfile();
   const { cart } = useCart();
 
-  const cartItemCount =cart?.productIds?.length || 0;
-
-    // cart?.productIds?.reduce((total, item) => total + item.quantity, 0) || 0;
+  const cartItemCount = cart?.productIds?.length || 0;
 
   const getUserInitials = () => {
     if (!profile) return "U";
@@ -64,273 +54,311 @@ export default function Navbar() {
   };
 
   return (
-    <header className=" top-0 z-50 w-full">
-      <nav className="w-full backdrop-blur-2xl bg-white/50 border-white/10 py-0 ">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between lg:h-20 h-16">
+    <header className="fixed top-0 z-50 w-full animate-in fade-in duration-500">
+      <nav className="w-full backdrop-blur-md bg-white/70 border-b border-white/10 transition-all duration-300">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <div className="shrink-0 pl-5 xl:pl-0">
-              <Link href="/" className="flex items-center space-x-2">
+            <div className="flex-shrink-0">
+              <Link href="/" className="flex items-center">
                 <Image
                   src="/logo.svg"
                   alt="Logo"
                   width={271}
-                  height={40}
-                  className="w-26 lg:max-w-67.75 max-h-10"
+                  height={60}
+                  className="h-10 w-60 sm:h-12 lg:h-14"
+                  priority
                 />
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden xl:block">
-              <div className="ml-10 flex items-baseline space-x-6">
-                {navigationItems.map((item) => {
-                  const isActive = item.href === pathname;
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={`${
-                        isActive ? "text-[#F1562D]" : "text-[#0E1D2B]"
-                      } px-3 py-2 text-sm 2xl:text-lg  font-medium transition-colors duration-200 hover:text-cyan-400`}
-                    >
-                      {item.name}
-                    </Link>
-                  );
-                })}
-                {/* <div className="text-white text-lg font-medium transition-colors duration-200 hover:text-cyan-400">
-                  {session?.user?.role === "user" && (
-                    <Link href="/account/data-sets">My Data Sets</Link>
-                  )}
-                </div> */}
-              </div>
-            </div>
-
-            {/* Right side - Desktop */}
-            <div className=" flex items-center space-x-4">
-              {status === "authenticated" && session ? (
-                // Profile Dropdown for authenticated users
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="flex items-center space-x-2 relative bg-transparent text-white hover:bg-white/10 "
-                    >
-                      <User2Icon className="lg:w-7! lg:h-7! text-[#F04D2A]" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
-                    <div className="flex flex-col space-y-1 p-2">
-                      <p className="text-sm font-medium">
-                        {loading ? "Loading..." : getFullName()}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {loading
-                          ? "Loading..."
-                          : profile?.email || session.user?.email || "No email"}
-                      </p>
-                      {profile?.role && (
-                        <p className="text-xs text-muted-foreground capitalize">
-                          Role: {profile.role}
-                        </p>
-                      )}
-                      {profile?.companyName && (
-                        <p className="text-xs text-muted-foreground">
-                          Company: {profile.companyName}
-                        </p>
-                      )}
-                    </div>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
-                      {profile?.role === "admin" ? (
-                        <Link href="/dashboard" className="cursor-pointer">
-                          Dashboard
-                        </Link>
-                      ) : (
-                        <Link href="/profile" className="cursor-pointer">
-                          Account Setting
-                        </Link>
-                      )}
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      className="cursor-pointer text-red-600 focus:text-red-600"
-                      onClick={() => signOut()}
-                    >
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Log out
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                // Login button for non-authenticated users
-                <Link href="/login">
-                  <Button
-                    // variant="outline"
-                    className="border-white hover:bg-white hover:text-black "
+            {/* Desktop Navigation - Hidden on mobile/tablet */}
+            <nav className="hidden xl:flex xl:items-center xl:space-x-1 2xl:space-x-2">
+              {navigationItems.map((item) => {
+                const isActive = item.href === pathname;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`${
+                      isActive ? "text-primary font-semibold" : "text-[#0E1D2B]"
+                    } px-3 py-2 text-sm 2xl:text-base rounded-lg transition-all duration-200 hover:text-primary hover:bg-white/30`}
                   >
-                    Log In
-                  </Button>
-                </Link>
-              )}
-              <Link
-                href="/cart"
-                className="relative inline-block cursor-pointer"
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Right side actions */}
+            <div className="flex items-center space-x-2">
+              {/* Search Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="relative bg-transparent hover:bg-white/20 transition-colors"
+                aria-label="Search"
               >
+                <Search className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
+              </Button>
+
+              {/* Cart Button */}
+              <Link href="/cart" className="relative">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative bg-transparent text-white hover:bg-white/10"
+                  className="relative bg-transparent hover:bg-white/20 transition-colors"
+                  aria-label={`Shopping cart with ${cartItemCount} items`}
                 >
-                  <ShoppingCart className="lg:h-7! lg:w-7! text-[#F04D2A]" />
-
+                  <ShoppingCart className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
                   {cartItemCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                    <span className="absolute top-1 right-1 bg-primary text-white text-[10px] font-bold rounded-full h-3 w-3 flex items-center justify-center shadow-lg animate-in fade-in zoom-in">
                       {cartItemCount > 99 ? "99+" : cartItemCount}
                     </span>
                   )}
                 </Button>
               </Link>
-              <Button
-                variant="ghost"
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="relative bg-transparent text-white hover:bg-white/10 cursor-pointer"
-              >
-                <Search className="lg:h-7! lg:w-7! text-[#F04D2A]" />
-              </Button>
-            </div>
 
-            {/* Mobile menu button */}
-            <div className="xl:hidden ">
-              <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-white hover:text-cyan-400 hover:bg-white/10"
-                  >
-                    <Menu className="h-6 w-6" />
-                    <span className="sr-only">Open main menu</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-75 sm:w-100 ">
-                  <div className="flex flex-col space-y-4 mt-8">
-                    {/* User info section for mobile */}
-                    {status === "authenticated" && session && (
-                      <div className="p-4 border rounded-lg bg-gray-50">
-                        <div className="flex items-center space-x-3">
-                          {profile?.imageLink ? (
-                            <Image
-                              src={profile.imageLink}
-                              alt={getFullName()}
-                              width={40}
-                              height={40}
-                              className="rounded-full object-cover border-2 border-cyan-400"
-                            />
-                          ) : (
-                            <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center border-2 border-cyan-400">
-                              {loading ? (
-                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                              ) : (
-                                <span className="text-white font-medium text-sm">
-                                  {getUserInitials()}
-                                </span>
-                              )}
-                            </div>
-                          )}
-                          <div>
-                            <p className="font-medium text-sm">
-                              {loading ? "Loading..." : getFullName()}
-                            </p>
-                            <p className="text-xs text-gray-600 truncate">
-                              {loading
-                                ? "Loading..."
-                                : profile?.email ||
-                                  session.user?.email ||
-                                  "No email"}
-                            </p>
-                            {profile?.role && (
-                              <p className="text-xs text-gray-500 capitalize">
-                                Role: {profile.role}
-                              </p>
-                            )}
+              {/* User Profile/Login - Desktop */}
+              <div className="hidden sm:block">
+                {status === "authenticated" && session ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="relative bg-transparent hover:bg-white/20 transition-colors"
+                        aria-label="User menu"
+                      >
+                        {profile?.imageLink ? (
+                          <Image
+                            src={profile.imageLink}
+                            alt={getFullName()}
+                            width={32}
+                            height={32}
+                            className="rounded-full object-cover border-2 border-primary"
+                          />
+                        ) : (
+                          <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+                            <span className="text-white text-sm font-semibold">
+                              {getUserInitials()}
+                            </span>
                           </div>
+                        )}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-64">
+                      <div className="flex items-center space-x-3 p-3">
+                        {profile?.imageLink ? (
+                          <Image
+                            src={profile.imageLink}
+                            alt={getFullName()}
+                            width={40}
+                            height={40}
+                            className="rounded-full object-cover border-2 border-primary"
+                          />
+                        ) : (
+                          <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center">
+                            <span className="text-white font-semibold">
+                              {getUserInitials()}
+                            </span>
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold truncate">
+                            {loading ? "Loading..." : getFullName()}
+                          </p>
+                          <p className="text-xs text-muted-foreground truncate">
+                            {loading
+                              ? "Loading..."
+                              : profile?.email ||
+                                session.user?.email ||
+                                "No email"}
+                          </p>
+                          {profile?.role && (
+                            <p className="text-xs text-muted-foreground capitalize">
+                              {profile.role}
+                            </p>
+                          )}
                         </div>
                       </div>
-                    )}
-
-                    {/* Navigation items */}
-                    {navigationItems.map((item) => {
-                      const isActive = item.href === pathname;
-                      return (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className={`${
-                            isActive ? "text-cyan-400" : "text-foreground"
-                          } text-lg font-medium text-center hover:text-cyan-600 transition-colors duration-200`}
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      );
-                    })}
-
-                    {/* My Data Sets for mobile */}
-                    {/* {session?.user?.role === "user" && (
-                      <Link
-                        href="/account/data-sets"
-                        className="text-foreground text-lg font-medium hover:text-cyan-600 transition-colors duration-200"
-                        onClick={() => setIsOpen(false)}
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        {profile?.role === "admin" ? (
+                          <Link href="/dashboard" className="cursor-pointer">
+                            Dashboard
+                          </Link>
+                        ) : (
+                          <Link href="/profile" className="cursor-pointer">
+                            Account Settings
+                          </Link>
+                        )}
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        className="cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
+                        onClick={() => signOut()}
                       >
-                        My Data Sets
-                      </Link>
-                    )} */}
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Log Out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Link href="/login">
+                    <Button
+                      size="sm"
+                      className="bg-primary hover:bg-[#D63E1F] text-white font-medium"
+                    >
+                      Log In
+                    </Button>
+                  </Link>
+                )}
+              </div>
 
-                    {/* <div className="pt-4 border-t space-y-2">
-                      <Link href="/strategy-solution">
-                        <Button className="w-full bg-[#38B1EA] hover:bg-cyan-600 text-white mb-4">
-                          Strategy session
+              {/* Mobile menu button */}
+              <div className="xl:hidden">
+                <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                  <SheetTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-[#0E1D2B] hover:bg-white/20"
+                      aria-label="Open menu"
+                    >
+                      <Menu className="h-6 w-6" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent
+                    side="right"
+                    className="w-[85vw] sm:w-[400px] p-0"
+                  >
+                    <div className="flex flex-col h-full">
+                      {/* Mobile Header */}
+                      <div className="flex items-center justify-between p-6 border-b">
+                        <Image
+                          src="/logo.svg"
+                          alt="Logo"
+                          width={150}
+                          height={40}
+                          className="h-10 w-auto"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => setIsOpen(false)}
+                          aria-label="Close menu"
+                        >
+                          <X className="h-5 w-5" />
                         </Button>
-                      </Link>
+                      </div>
 
-                      {status === "authenticated" && session ? (
-                        <>
-                          <Button
-                            variant="ghost"
-                            className="w-full justify-start"
-                            asChild
-                          >
-                            <Link
-                              href={
-                                profile?.role === "admin"
-                                  ? "/dashboard"
-                                  : "/account"
-                              }
-                              onClick={() => setIsOpen(false)}
+                      {/* User info section for mobile */}
+                      {status === "authenticated" && session && (
+                        <div className="p-6 bg-gradient-to-r from-primary/10 to-transparent border-b">
+                          <div className="flex items-center space-x-4">
+                            {profile?.imageLink ? (
+                              <Image
+                                src={profile.imageLink}
+                                alt={getFullName()}
+                                width={48}
+                                height={48}
+                                className="rounded-full object-cover border-2 border-primary"
+                              />
+                            ) : (
+                              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                                {loading ? (
+                                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                ) : (
+                                  <span className="text-white font-semibold">
+                                    {getUserInitials()}
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <p className="font-semibold text-base truncate">
+                                {loading ? "Loading..." : getFullName()}
+                              </p>
+                              <p className="text-sm text-muted-foreground truncate">
+                                {loading
+                                  ? "Loading..."
+                                  : profile?.email ||
+                                    session.user?.email ||
+                                    "No email"}
+                              </p>
+                              {profile?.role && (
+                                <p className="text-xs text-muted-foreground capitalize mt-1">
+                                  {profile.role}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Navigation items */}
+                      <nav className="flex-1 overflow-y-auto py-6">
+                        <div className="space-y-1 px-4">
+                          {navigationItems.map((item) => {
+                            const isActive = item.href === pathname;
+                            return (
+                              <Link
+                                key={item.name}
+                                href={item.href}
+                                className={`${
+                                  isActive
+                                    ? "bg-primary/10 text-primary font-semibold"
+                                    : "text-[#0E1D2B] font-medium"
+                                } block px-4 py-3 rounded-lg hover:bg-primary/5 transition-colors duration-200`}
+                                onClick={() => setIsOpen(false)}
+                              >
+                                {item.name}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </nav>
+
+                      {/* Mobile Footer Actions */}
+                      <div className="border-t p-6 space-y-3">
+                        {status === "authenticated" && session ? (
+                          <>
+                            <Button
+                              variant="outline"
+                              className="w-full justify-start"
+                              asChild
                             >
-                              {profile?.role === "admin"
-                                ? "Dashboard"
-                                : "Account Settings"}
-                            </Link>
-                          </Button>
+                              <Link
+                                href={
+                                  profile?.role === "admin"
+                                    ? "/dashboard"
+                                    : "/profile"
+                                }
+                                onClick={() => setIsOpen(false)}
+                              >
+                                <User2Icon className="mr-2 h-4 w-4" />
+                                {profile?.role === "admin"
+                                  ? "Dashboard"
+                                  : "Account Settings"}
+                              </Link>
+                            </Button>
+                            <Button
+                              variant="outline"
+                              className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
+                              onClick={() => {
+                                signOut();
+                                setIsOpen(false);
+                              }}
+                            >
+                              <LogOut className="mr-2 h-4 w-4" />
+                              Log Out
+                            </Button>
+                          </>
+                        ) : (
                           <Button
-                            variant="ghost"
-                            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
-                            onClick={() => {
-                              signOut();
-                              setIsOpen(false);
-                            }}
-                          >
-                            <LogOut className="mr-2 h-4 w-4" />
-                            Log Out
-                          </Button>
-                        </>
-                      ) : (
-                        <>
-                          <Button
-                            variant="ghost"
-                            className="w-full justify-start"
+                            className="w-full bg-primary hover:bg-[#D63E1F] text-white"
                             asChild
                           >
                             <Link
@@ -340,24 +368,12 @@ export default function Navbar() {
                               Log In
                             </Link>
                           </Button>
-                          <Button
-                            variant="ghost"
-                            className="w-full justify-start"
-                            asChild
-                          >
-                            <Link
-                              href="/signup"
-                              onClick={() => setIsOpen(false)}
-                            >
-                              Sign Up
-                            </Link>
-                          </Button>
-                        </>
-                      )}
-                    </div> */}
-                  </div>
-                </SheetContent>
-              </Sheet>
+                        )}
+                      </div>
+                    </div>
+                  </SheetContent>
+                </Sheet>
+              </div>
             </div>
           </div>
         </div>
