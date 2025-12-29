@@ -92,7 +92,9 @@ const AboutGame = () => {
             </div> */}
       <div className="container mx-auto px-6  bg-[#FFF7E9] rounded-xl overflow-hidden">
         <div className="py-5 text-center">
-          <h2 className="text-[#000000] text-xl md:text-[48px]">About Game</h2>
+          <h2 className="text-[#000000] text-xl md:text-[48px] font-bold">
+            About Game
+          </h2>
           <p className="text-[#535862] text-base">
             Learn more about the company and the team behind it.
           </p>
@@ -102,7 +104,7 @@ const AboutGame = () => {
           <div className="flex justify-center">
             <div className="relative w-full aspect-5/3 ">
               <Image
-                src={product.img || "/no-image.jpg"}
+                src={product.imgs?.[0] || "/no-image.jpg"}
                 alt="Wainzite Game"
                 width={700}
                 height={600}
@@ -122,16 +124,16 @@ const AboutGame = () => {
             </h2>
 
             {/* <p className="inline-block bg-red-50 text-red-600 text-xs font-semibold px-3 py-1 rounded-full mb-4"></p> */}
-            <p dangerouslySetInnerHTML={{ __html: product.description }} className="text-gray-700 leading-relaxed mb-10 lg:mb-14 line-clamp-2">
-              
-            </p>
+            <p
+              dangerouslySetInnerHTML={{ __html: product.description }}
+              className="text-gray-700 leading-relaxed mb-10 lg:mb-14 line-clamp-2"
+            ></p>
 
             <div className="flex gap-4">
               <Link href={`/product/${product._id}`}>
-              
-              <Button className="  px-6 cursor-pointer">
-                Explore More <MoveRight className="ml-2" />
-              </Button>
+                <Button className="  px-6 cursor-pointer">
+                  Explore More <MoveRight className="ml-2" />
+                </Button>
               </Link>
             </div>
           </div>

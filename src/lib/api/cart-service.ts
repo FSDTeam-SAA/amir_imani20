@@ -14,22 +14,20 @@ export const cartService = {
   },
 
   /**
-   * Add an item to the cart.
-   * If item exists, backend increases quantity.
+   * Add items to the cart.
    */
   addToCart: async (
-    productId: string,
-    quantity: number,
-    userId: string
+    userId: string,
+    productItems: {
+      productId: string;
+      quantity: number;
+      color?: string;
+      size?: string;
+    }[]
   ): Promise<CartResponse> => {
     const response = await axiosInstance.post<CartResponse>("/cart", {
       userId: userId,
-      productIds: [
-        {
-          productId,
-          quantity,
-        },
-      ],
+      productIds: productItems,
     });
     return response.data;
   },
@@ -37,11 +35,16 @@ export const cartService = {
   /**
    * Update cart items - replaces the entire productIds array.
    * @param userId - The user's ID
-   * @param productIds - Array of { productId, quantity } objects
+   * @param productIds - Array of { productId, quantity, color, size } objects
    */
   updateCart: async (
     userId: string,
-    productIds: { productId: string; quantity: number }[]
+    productIds: {
+      productId: string;
+      quantity: number;
+      color?: string;
+      size?: string;
+    }[]
   ): Promise<CartResponse> => {
     const response = await axiosInstance.put<CartResponse>(
       `/cart/user/${userId}`,
@@ -51,11 +54,14 @@ export const cartService = {
   },
 
   /**
-   * Remove a specific item from the cart.
+   * Remove a specific product from the cart.
    */
-  removeFromCart: async (productId: string): Promise<CartResponse> => {
+  removeFromCart: async (
+    cartId: string,
+    productId: string
+  ): Promise<CartResponse> => {
     const response = await axiosInstance.delete<CartResponse>(
-      `/cart/remove/${productId}`
+      `/cart/${cartId}/product/${productId}`
     );
     return response.data;
   },

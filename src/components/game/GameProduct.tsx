@@ -7,8 +7,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
+import { ArrowRight, MoveRight } from "lucide-react";
 
-import { MoveRight } from "lucide-react";
 const GameProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -76,6 +76,8 @@ const GameProduct = () => {
       </section>
     );
   }
+
+  console.log(products);
   return (
     <section className="py-12">
       <div>
@@ -116,26 +118,26 @@ const GameProduct = () => {
                 ))
               : products.slice(0, 3).map((product) => (
                   <Link key={product._id} href={`/product/${product._id}`}>
-                    <div className="relative outline-red-500  border-2 rounded-lg    flex flex-col  justify-center">
+                    <div className="relative  border-2 rounded-lg    flex flex-col  justify-center">
                       <div className="relative">
                         <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded">
                           New
                         </p>
                         <p className="absolute  bg-white/15  px-3 py-1  inset-0 rounded"></p>
                         <Image
-                          src={product?.img || "/no-image.jpg"}
+                          src={product?.imgs?.[0] || "/no-image.jpg"}
                           width={490}
                           height={670}
                           alt={product.productName}
-                          className="rounded-lg w-full aspect-4/5"
+                          className="rounded-lg w-full aspect-4/5 object-cover"
                         />
 
-                        <h2 className="absolute top-20 w-full text-center text-xl md:text-[48px] font-semibold text-[#F04D2A]">
+                        <h2 className="absolute top-20 w-full text-center text-xl md:text-[48px] font-semibold text-white">
                           {product.productName}
                         </h2>
 
                         <Button className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                          Buy Now
+                          Buy Now <ArrowRight />
                         </Button>
                       </div>
                     </div>

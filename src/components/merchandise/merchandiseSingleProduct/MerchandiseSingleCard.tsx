@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Heart, Minus, Plus } from "lucide-react";
+import { Check, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { useCart } from "@/provider/cart-provider";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProductHeroProps {
   product: Product;
@@ -16,7 +17,7 @@ interface ProductHeroProps {
 const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
-  const [selectColor, setSelectColor] = useState<string | null>("green");
+  const [selectColor, setSelectColor] = useState<string | null>(null);
   const [selectSize, setSelectSize] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { addToCart } = useCart();
@@ -29,8 +30,39 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
       toast.error("Please sign in to add to cart.");
       return;
     }
+
+    if (
+      ((product.colors && product.colors.length > 0) ||
+        (product.color && product.color.length > 0)) &&
+      !selectColor
+    ) {
+      toast.error("Please select a color.");
+      setIsAdding(false);
+      return;
+    }
+
+    if (
+      ((product.sizes && product.sizes.length > 0) ||
+        (product.size && product.size.length > 0)) &&
+      !selectSize
+    ) {
+      toast.error("Please select a size.");
+      setIsAdding(false);
+      return;
+    }
+
     try {
-      await addToCart(product._id, quantity, session?.user?.id as string);
+      await addToCart(
+        [
+          {
+            productId: product._id,
+            quantity,
+            color: selectColor || undefined,
+            size: selectSize || undefined,
+          },
+        ],
+        session?.user?.id as string
+      );
       toast.success(`${product.productName} added to cart!`);
     } catch (error) {
       toast.error("Failed to add to cart. Please try again.");
@@ -43,7 +75,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
     <section className="py-12 lg:py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
-        <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
+        <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden ">
           <div className="flex gap-3 relative aspect-square">
             <div className="w-20 flex flex-col gap-3 overflow-y-auto no-scrollbar">
               {product.imgs && product.imgs.length > 0 ? (
@@ -145,62 +177,70 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
             </div>
             <div>
               {/* Color and Size Options */}
-              <div className="flex flex-col gap-6 mb-7 md:mb-10 lg:mb-14">
-                {product.colors && product.colors.length > 0 && (
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm font-medium min-w-[60px]">
-                      Colors:
-                    </span>
-                    <div className="flex items-center gap-2">
-                      {product.colors.map((color) => (
-                        <div
-                          key={color}
-                          onClick={() => setSelectColor(color)}
-                          className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer border ${
-                            selectColor === color
-                              ? "border-black ring-1 ring-black"
-                              : "border-gray-200"
-                          }`}
-                          style={{ backgroundColor: color }}
-                          title={color}
-                        >
-                          {selectColor === color && (
-                            <Check className="text-white drop-shadow-md w-4 h-4" />
-                          )}
-                        </div>
-                      ))}
+              <div className="flex gap-12 mb-7 ">
+                {(product.color || product.colors) &&
+                  (product.color?.length || 0) + (product.colors?.length || 0) >
+                    0 && (
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm font-medium min-w-[60px]">
+                        Colors:
+                      </span>
+                      <div className="flex items-center gap-2">
+                        {(product.color || product.colors)?.map((color) => (
+                          <div
+                            key={color}
+                            onClick={() => setSelectColor(color)}
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer border ${
+                              selectColor === color
+                                ? "border-black ring-1 ring-black"
+                                : "border-gray-200"
+                            }`}
+                            style={{
+                              backgroundColor: color.startsWith("#")
+                                ? color
+                                : `#${color}`,
+                            }}
+                            title={color}
+                          >
+                            {selectColor === color && (
+                              <Check className="text-primary w-4 h-4" />
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {product.sizes && product.sizes.length > 0 && (
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm font-medium min-w-[60px]">
-                      Sizes:
-                    </span>
-                    <div className="flex items-center gap-2">
-                      {product.sizes.map((size) => (
-                        <div
-                          key={size}
-                          onClick={() => setSelectSize(size)}
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer text-xs font-bold transition-colors ${
-                            selectSize === size
-                              ? "bg-[#111111] text-white"
-                              : "bg-[#EFEFEF] text-[#111111] hover:bg-gray-200"
-                          }`}
-                        >
-                          {size}
-                        </div>
-                      ))}
+                {(product.size || product.sizes) &&
+                  (product.size?.length || 0) + (product.sizes?.length || 0) >
+                    0 && (
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm font-medium min-w-[60px]">
+                        Sizes:
+                      </span>
+                      <div className="flex items-center gap-2">
+                        {(product.size || product.sizes)?.map((size) => (
+                          <div
+                            key={size}
+                            onClick={() => setSelectSize(size)}
+                            className={`w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer text-xs font-bold transition-colors ${
+                              selectSize === size
+                                ? "bg-[#111111] text-white"
+                                : "bg-[#EFEFEF] text-[#111111] hover:bg-gray-200"
+                            }`}
+                          >
+                            {size}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </div>
               {/* CTA Button */}
               <Button
                 onClick={handleAddToCart}
                 disabled={isAdding}
-                className="w-full h-14 bg-[#000000] hover:bg-[#111111] text-white rounded-full text-base font-semibold shadow-[0px_8px_16px_rgba(0,0,0,0.15)] transition-all transform active:scale-[0.98] disabled:opacity-50"
+                className="w-full h-14 bg-primary hover:bg-[#111111] text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50"
               >
                 {isAdding ? "Adding..." : "Add to Cart"}
               </Button>
@@ -212,6 +252,41 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
               </button> */}
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export const MerchandiseSingleCardSkeleton = () => {
+  return (
+    <section className="py-12 lg:py-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+        {/* Left Column Skeleton */}
+        <div className="flex gap-3 relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 overflow-hidden">
+          <div className="w-20 flex flex-col gap-3">
+            {[...Array(4)].map((_, i) => (
+              <Skeleton key={i} className="w-full h-20 rounded-md" />
+            ))}
+          </div>
+          <Skeleton className="flex-1 h-full rounded-xl" />
+        </div>
+
+        {/* Right Column Skeleton */}
+        <div className="flex flex-col gap-6">
+          <Skeleton className="h-6 w-20" />
+          <Skeleton className="h-12 w-full md:w-3/4" />
+          <Skeleton className="h-10 w-24" />
+          <div className="space-y-3">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+          <div className="space-y-4">
+            <Skeleton className="h-6 w-32" />
+            <Skeleton className="h-10 w-48" />
+          </div>
+          <Skeleton className="h-14 w-full rounded-full" />
         </div>
       </div>
     </section>

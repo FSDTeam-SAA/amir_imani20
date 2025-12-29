@@ -51,18 +51,18 @@ export default function NewsletterForm({ className = "" }: NewsletterFormProps) 
   return (
     <form 
       onSubmit={handleSubmit} 
-      className={`space-y-3 ${className}`}
+      className={`space-y-3  ${className}`}
       noValidate
       aria-label="Newsletter subscription form"
     >
-      <div className="flex flex-col sm:flex-row gap-2">
+      <div className="flex gap-2">
         <Input
           type="email"
           name="newsletter-email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="grow rounded-full px-4 py-3 bg-white border-white/20 text-white placeholder-white/60 focus:ring-2 focus:ring-white/30"
+          className="grow rounded-full px-4 py-3 w-20 bg-white border-white/20 text-black placeholder-white/60 focus:ring-2 focus:ring-white/30"
           required
           aria-label="Email address"
           aria-describedby="newsletter-message"

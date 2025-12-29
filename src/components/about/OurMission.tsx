@@ -3,62 +3,66 @@ import React from "react";
 
 const OurMission = () => {
   const missionData = {
-    title: "Our Mission",
-    description: "Our mission is to design games and symbolic experiences that bring people closer. Each DoUndo project is made to spark moments of play, discovery, and joy. We believe games are more than entertainment. They are a way to share stories, explore ideas, and create lasting memories.",
-    
+    title: "Our Mission...",
+    description:
+      "Our mission is to design games and symbolic experiences that bring people closer. Each DoUndo project is made to spark moments of play, discovery, and joy. We believe games are more than entertainment. They are a way to share stories, explore ideas, and create lasting memories.",
+
     values: [
       {
         id: "vision",
         title: "Vision",
-        description: "Creating games that turn play into meaning, and moments into memories.",
+        description:
+          "Creating games that turn play into meaning, and moments into memories.",
         icon: Eye,
         iconColor: "text-blue-600",
         bgColor: "bg-blue-50",
         borderColor: "border-blue-200",
-        gradient: "from-blue-50 to-white"
+        gradient: "from-blue-50 to-white",
       },
       {
         id: "creativity",
         title: "Creativity",
-        description: "Designing playful worlds where imagination and strategy thrive together.",
+        description:
+          "Designing playful worlds where imagination and strategy thrive together.",
         icon: Brain,
         iconColor: "text-purple-600",
         bgColor: "bg-purple-50",
         borderColor: "border-purple-200",
-        gradient: "from-purple-50 to-white"
+        gradient: "from-purple-50 to-white",
       },
       {
         id: "exploration",
         title: "Exploration",
-        description: "Building symbolic experiences that reveal depth through simple rules.",
+        description:
+          "Building symbolic experiences that reveal depth through simple rules.",
         icon: Globe,
         iconColor: "text-amber-600",
         bgColor: "bg-amber-50",
         borderColor: "border-amber-200",
-        gradient: "from-amber-50 to-white"
+        gradient: "from-amber-50 to-white",
       },
       {
         id: "community",
         title: "Community",
-        description: "Crafting moments of joy that bring people closer through play.",
+        description:
+          "Crafting moments of joy that bring people closer through play.",
         icon: Users,
         iconColor: "text-green-600",
         bgColor: "bg-green-50",
         borderColor: "border-green-200",
-        gradient: "from-green-50 to-white"
-      }
-    ]
+        gradient: "from-green-50 to-white",
+      },
+    ],
   };
 
   return (
-    <section 
-      className="py-16 md:py-20  bg-gradient-to-b from-white to-gray-50"
+    <section
+      className="py-16 md:py-20  bg-linear-to-b from-white to-gray-50"
       aria-labelledby="mission-heading"
       itemScope
       itemType="https://schema.org/AboutPage"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        
         {/* Schema.org structured data for About Page */}
         <script
           type="application/ld+json"
@@ -66,37 +70,42 @@ const OurMission = () => {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "AboutPage",
-              "name": missionData.title,
-              "description": missionData.description,
-              "publisher": {
+              name: missionData.title,
+              description: missionData.description,
+              publisher: {
                 "@type": "Organization",
-                "name": "DoUndo",
-                "description": "Independent game company creating symbolic experiences"
-              }
-            })
+                name: "DoUndo",
+                description:
+                  "Independent game company creating symbolic experiences",
+              },
+            }),
           }}
         />
 
         {/* Header Section */}
         <header className="text-center mb-12 md:mb-16 lg:mb-20 max-w-4xl mx-auto">
-          <div className="inline-flex items-center justify-center mb-4" role="region" aria-label="Mission tag">
-            <span 
-              className="inline-block px-4 py-2 bg-gradient-to-r from-blue-100 to-amber-100 text-blue-700 text-sm font-semibold tracking-wide uppercase rounded-full border border-blue-200"
+          <div
+            className="inline-flex items-center justify-center mb-4"
+            role="region"
+            aria-label="Mission tag"
+          >
+            <span
+              className="inline-block px-4 py-2 bg-secondary text-black/70 text-sm font-semibold tracking-wide uppercase rounded-full border "
               itemProp="keywords"
             >
               Our Mission & Values
             </span>
           </div>
-          
-          <h1 
+
+          <h1
             id="mission-heading"
             className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
             itemProp="headline"
           >
             {missionData.title}
           </h1>
-          
-          <p 
+
+          <p
             className="text-lg md:text-xl text-gray-600 leading-relaxed md:leading-loose"
             itemProp="description"
           >
@@ -105,60 +114,66 @@ const OurMission = () => {
         </header>
 
         {/* Values Grid */}
-        <div 
+        <div
           className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
           role="list"
           aria-label="Company values"
         >
           {missionData.values.map((value, index) => {
             const IconComponent = value.icon;
-            
+
             return (
-              <article 
+              <article
                 key={value.id}
-                className={`group relative rounded-2xl border-2 ${value.borderColor} bg-gradient-to-br ${value.gradient} p-8 md:p-10 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-${value.iconColor.split('-')[1]}-200/30 hover:-translate-y-1`}
+                className={`group relative rounded-2xl border-2 bg-secondary text-black/70 border-none  p-8 md:p-10 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-${
+                  value.iconColor.split("-")[1]
+                }-200/30 hover:-translate-y-1`}
                 role="listitem"
                 itemScope
                 itemType="https://schema.org/Intangible"
                 itemProp="mainEntity"
               >
                 {/* Hover Effect Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-                
+                {/* <div
+                  className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                ></div> */}
+
                 <div className="relative z-10">
                   {/* Icon Container */}
-                  <div 
-                    className={`inline-flex items-center justify-center p-4 rounded-2xl ${value.bgColor} mb-6 border ${value.borderColor} group-hover:scale-110 transition-transform duration-300`}
+                  <div
+                    className={`inline-flex items-center justify-center p-4 bg-white rounded-full mb-6 border`}
                     aria-hidden="true"
                   >
-                    <IconComponent 
-                      className={`w-10 h-10 md:w-12 md:h-12 ${value.iconColor}`} 
+                    <IconComponent
+                      className={`w-7 h-7 text-black`}
                       aria-label={`${value.title} icon`}
                     />
                   </div>
-                  
+
                   {/* Value Title */}
-                  <h2 
-                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight"
+                  <h2
+                    className="text-xl md:text-xl lg:text-3xl font-semibold text-gray-900 mb-4 leading-tight"
                     itemProp="name"
                   >
                     {value.title}
                   </h2>
-                  
+
                   {/* Value Description */}
-                  <p 
+                  <p
                     className="text-gray-700 leading-relaxed md:leading-loose text-base md:text-lg"
                     itemProp="description"
                   >
                     {value.description}
                   </p>
-                  
+
                   {/* Decorative Elements */}
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                    <div className={`w-12 h-1 ${value.bgColor} rounded-full group-hover:w-24 transition-all duration-500`}></div>
+                  <div className="mt-6 pt-6">
+                    <div
+                      className={`w-12 h-1 ${value.bgColor} rounded-full group-hover:w-24 transition-all duration-500`}
+                    ></div>
                   </div>
                 </div>
-                
+
                 {/* Hidden Schema.org data */}
                 <meta itemProp="position" content={String(index + 1)} />
               </article>
@@ -167,13 +182,18 @@ const OurMission = () => {
         </div>
 
         {/* Mission Statement Schema.org */}
-    
 
         {/* Additional SEO Content - Hidden from view but accessible to screen readers */}
         <div className="sr-only" aria-hidden="false">
           <h2>DoUndo Company Values</h2>
-          <p>Our mission focuses on creating meaningful gaming experiences that foster connection and creativity.</p>
-          <p>As an independent game studio, we value innovation, community, exploration, and design excellence.</p>
+          <p>
+            Our mission focuses on creating meaningful gaming experiences that
+            foster connection and creativity.
+          </p>
+          <p>
+            As an independent game studio, we value innovation, community,
+            exploration, and design excellence.
+          </p>
         </div>
       </div>
     </section>

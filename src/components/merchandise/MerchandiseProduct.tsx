@@ -9,6 +9,7 @@ import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
 
 import { MoveRight } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const MerchandiseProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -37,13 +38,15 @@ const MerchandiseProduct = () => {
 
   if (loading) {
     return (
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Our Products
+      <section className="py-12">
+        <div className="container mx-auto py-12">
+          <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center invisible">
+            ALL Merchandise Product
           </h2>
-          <div className="flex justify-center items-center h-64">
-            <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[...Array(3)].map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
           </div>
         </div>
       </section>
@@ -55,7 +58,7 @@ const MerchandiseProduct = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Our Products
+            ALL Merchandise Product
           </h2>
           <p className="text-center text-red-500">{error}</p>
         </div>
@@ -68,7 +71,7 @@ const MerchandiseProduct = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Our Products
+            ALL Merchandise Product
           </h2>
           <p className="text-center text-gray-500">
             No products available at the moment.
@@ -81,52 +84,54 @@ const MerchandiseProduct = () => {
     <section className=" py-12">
       <div className="container mx-auto py-12">
         <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center">
-          Merchandise
+          ALL Merchandise Product
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {(selectedProduct ? products : products.slice(0, 3)).map((product) => (
-            <div
-              key={product._id}
-              className="group relative border-2 border-gray-100 rounded-lg overflow-hidden flex flex-col justify-center bg-white"
-            >
-              <div className="relative">
-                <Link
-                  href={`/merchandise/${product._id}`}
-                  className="absolute inset-0 z-10"
-                />
-                <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded z-20 rounded-fullga">
-                  New
-                </p>
-                {/* <p className="absolute bg-white/15 px-3 py-1 inset-0 rounded"></p> */}
-                <Image
-                  src={product?.img || "/no-image.jpg"}
-                  width={490}
-                  height={670}
-                  alt={product.productName}
-                  className="w-full aspect-square object-cover"
-                />
-              </div>
+          {(selectedProduct ? products : products.slice(0, 3)).map(
+            (product) => (
+              <div
+                key={product._id}
+                className="group relative border-2 border-gray-100 rounded-lg overflow-hidden flex flex-col justify-center bg-white"
+              >
+                <div className="relative">
+                  <Link
+                    href={`/merchandise/${product._id}`}
+                    className="absolute inset-0 z-10"
+                  />
+                  <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded z-20">
+                    New
+                  </p>
+                  {/* <p className="absolute bg-white/15 px-3 py-1 inset-0 rounded"></p> */}
+                  <Image
+                    src={product?.img || "/no-image.jpg"}
+                    width={490}
+                    height={670}
+                    alt={product.productName}
+                    className="w-full aspect-square object-cover"
+                  />
+                </div>
 
-              <div className="p-4 bg-white">
-                <h2 className="text-center text-xl font-semibold text-[#000000]">
-                  {product.productName}
-                </h2>
+                <div className="p-4 bg-white">
+                  <h2 className="text-center text-xl font-semibold text-[#000000]">
+                    {product.productName}
+                  </h2>
 
-                <div className="flex justify-between items-center px-2 py-4 gap-2">
-                  <Button
-                    variant="outline"
-                    className="border-gray-200 hover:bg-[#d63f1f] text-black min-w-[80px]"
-                  >
-                    ${product.price}
-                  </Button>
-                  <Button className="bg-[#F04D2A] text-white cursor-pointer hover:bg-[#d63f1f] flex-1">
-                    Buy Now
-                  </Button>
+                  <div className="flex justify-between items-center px-2 py-4 gap-2">
+                    <Button
+                      variant="outline"
+                      className="border-gray-200 hover:bg-[#d63f1f] text-black min-w-[80px]"
+                    >
+                      ${product.price}
+                    </Button>
+                    <Button className="bg-[#F04D2A] text-white cursor-pointer hover:bg-[#d63f1f] flex-1">
+                      Buy Now
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
  {products.length >2 &&
 
@@ -140,6 +145,21 @@ const MerchandiseProduct = () => {
  }
       </div>
     </section>
+  );
+};
+
+export const ProductCardSkeleton = () => {
+  return (
+    <div className="group relative border-2 border-gray-100 rounded-lg overflow-hidden flex flex-col justify-center bg-white p-4">
+      <Skeleton className="w-full aspect-square rounded-lg mb-4" />
+      <div className="space-y-4">
+        <Skeleton className="h-6 w-3/4 mx-auto" />
+        <div className="flex justify-between items-center gap-2">
+          <Skeleton className="h-10 w-20" />
+          <Skeleton className="h-10 flex-1" />
+        </div>
+      </div>
+    </div>
   );
 };
 

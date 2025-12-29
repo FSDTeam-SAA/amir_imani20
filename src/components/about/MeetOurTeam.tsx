@@ -53,16 +53,18 @@ const MeetOurTeam = () => {
   return (
     <section className="pt-16 lg:pt-20">
       <div className="container mx-auto">
-        <span className=" text-amber-200 text-base px-3 py-2 rounded-2xl">
-          Team
-        </span>
-        <h2 className="text-xl md:text-2xl xl:text-5xl">Meet Our Founders</h2>
+        <div className="text-center space-y-2">
+          <p className="inline-block text-primary-foreground bg-secondary text-base px-3 py-2 rounded-2xl">
+            Team
+          </p>
+          <h2 className="text-xl md:text-2xl xl:text-5xl">Meet Our Founders</h2>
+        </div>
         <div>
           {data.map((item, index) => (
             <div
               key={index}
               className={`flex flex-col md:flex-row items-center my-12 md:my-20 ${
-                item.side === "right" ? "lg:flex-row-reverse" : ""
+                item.side === "right" ? "md:flex-row-reverse" : ""
               }`}
             >
               <div className="w-full md:w-1/2 px-4 ">
@@ -71,7 +73,7 @@ const MeetOurTeam = () => {
                   alt={item.name}
                   width={600}
                   height={700}
-                  className="rounded-lg shadow-lg w-full aspect-5/4 object-cover rounded-3xl"
+                  className=" shadow-lg w-full aspect-5/4 object-cover rounded-3xl"
                 />
               </div>
               <div className="w-full md:w-1/2 px-4 mt-6 md:mt-0">
@@ -81,7 +83,7 @@ const MeetOurTeam = () => {
                 <h4 className="text-xl lg:text-2xl text-gray-400 mb-4">
                   {item.position}
                 </h4>
-                <p className="text-gray-600">{item.discription}</p>
+                <p className="text-gray-600 text-base md:text-lg">{item.discription}</p>
                 <p className=" flex gap-3 items-center pt-8">
                   <Link href={"#"}>
                     <FaXTwitter className=" w-10 h-10 hover:rounded-full hover:bg-[#4296a2] p-2" />
