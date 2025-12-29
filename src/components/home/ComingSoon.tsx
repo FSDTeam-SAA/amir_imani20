@@ -1,24 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { Button } from "../ui/button";
-
-import Link from "next/link";
-import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
 
-import { MoveRight, ShoppingCart } from "lucide-react";
+import { MoveRight } from "lucide-react";
+import ProductCard from "../shared/product-card";
+import { Button } from "../ui/button";
 import { useCart } from "@/provider/cart-provider";
 import { useSession } from "next-auth/react";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const ComingSoon = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [addingToCartId, setAddingToCartId] = useState<string | null>(null);
+
   const { addToCart } = useCart();
   const { data: session } = useSession();
   const router = useRouter();
@@ -141,66 +140,12 @@ const ComingSoon = () => {
         <div className="flex flex-wrap justify-center gap-8">
           {/* Main Product Card */}
           {products.slice(0, 1).map((product) => (
-            <Link
+            <ProductCard
               key={product._id}
-              href={`/product/${product._id}`}
-              className="group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] max-w-[490px]"
-            >
-              <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                {/* Image Container with Overlay */}
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-foreground/80 via-primary-foreground/20 to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-90" />
-
-                  <Image
-                    src={product?.imgs?.[0] || "/no-image.jpg"}
-                    width={490}
-                    height={670}
-                    alt={product.productName}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-
-                  {/* Badge */}
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="bg-primary text-white text-[12px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full shadow-lg">
-                      New Arrival
-                    </span>
-                  </div>
-
-                  {/* Product Info - Always visible on top of overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 z-20">
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 line-clamp-2">
-                      {product.productName}
-                    </h3>
-
-                    <div className="flex flex-col sm:flex-row gap-3 transition-all duration-300 ">
-                      <Button
-                        variant="secondary"
-                        className="flex-1 bg-white hover:bg-gray-100 text-primary-foreground font-semibold"
-                        onClick={(e) => handleAddToCart(e, product)}
-                        disabled={addingToCartId === product._id}
-                      >
-                        {addingToCartId === product._id ? (
-                          "..."
-                        ) : (
-                          <>
-                            <ShoppingCart className="w-4 h-4 mr-2" /> Add to
-                            Cart
-                          </>
-                        )}
-                      </Button>
-                      <Button
-                        className="flex-1 bg-primary hover:bg-primary/80 text-white font-semibold"
-                        onClick={(e) => handleAddToCart(e, product, true)}
-                        disabled={addingToCartId === product._id}
-                      >
-                        Buy Now
-                        <MoveRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+              product={product}
+              handleAddToCart={handleAddToCart}
+              addingToCartId={addingToCartId}
+            />
           ))}
 
           {/* Coming Soon Teaser Card */}
