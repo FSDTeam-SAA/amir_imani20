@@ -104,7 +104,7 @@ const BlogDetailsPage = () => {
         {/* Content */}
         <div className="blog-content">
           <div
-            className="prose prose-lg prose-primary max-w-none"
+            className="prose prose-lg prose-primary max-w-none wrap-break-word" 
             dangerouslySetInnerHTML={{ __html: blog.description }}
           />
         </div>
