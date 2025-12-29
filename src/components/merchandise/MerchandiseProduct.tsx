@@ -3,19 +3,27 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "../ui/button";
 
-import Link from "next/link";
-import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
-
 import { MoveRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useCart } from "@/provider/cart-provider";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import ProductCard from "../shared/product-card";
 
 const MerchandiseProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState(false);
+  const [addingToCartId, setAddingToCartId] = useState<string | null>(null);
+
+  const { addToCart } = useCart();
+  const { data: session } = useSession();
+  const router = useRouter();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -35,6 +43,42 @@ const MerchandiseProduct = () => {
 
     fetchProducts();
   }, []);
+
+  const handleAddToCart = async (
+    e: React.MouseEvent,
+    product: Product,
+    redirect: boolean = false
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!session?.user?.id) {
+      toast.error("Please sign in to add to cart.");
+      return;
+    }
+
+    setAddingToCartId(product._id);
+    try {
+      await addToCart(
+        [
+          {
+            productId: product._id,
+            quantity: 1,
+          },
+        ],
+        session.user.id
+      );
+      toast.success(`${product.productName} added to cart!`);
+      if (redirect) {
+        router.push("/cart");
+      }
+    } catch (error) {
+      toast.error("Failed to add to cart. Please try again.");
+      console.error("Add to cart error:", error);
+    } finally {
+      setAddingToCartId(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -87,49 +131,15 @@ const MerchandiseProduct = () => {
           ALL Merchandise Product
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="flex flex-wrap justify-center gap-5">
           {(selectedProduct ? products : products.slice(0, 3)).map(
             (product) => (
-              <div
+              <ProductCard
                 key={product._id}
-                className="group relative border-2 border-gray-100 rounded-lg overflow-hidden flex flex-col justify-center bg-white"
-              >
-                <div className="relative">
-                  <Link
-                    href={`/merchandise/${product._id}`}
-                    className="absolute inset-0 z-10"
-                  />
-                  <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded z-20">
-                    New
-                  </p>
-                  {/* <p className="absolute bg-white/15 px-3 py-1 inset-0 rounded"></p> */}
-                  <Image
-                    src={product?.img || "/no-image.jpg"}
-                    width={490}
-                    height={670}
-                    alt={product.productName}
-                    className="w-full aspect-square object-cover"
-                  />
-                </div>
-
-                <div className="p-4 bg-white">
-                  <h2 className="text-center text-xl font-semibold text-[#000000]">
-                    {product.productName}
-                  </h2>
-
-                  <div className="flex justify-between items-center px-2 py-4 gap-2">
-                    <Button
-                      variant="outline"
-                      className="border-gray-200 hover:bg-primary text-primary-foreground min-w-[80px]"
-                    >
-                      ${product.price}
-                    </Button>
-                    <Button className="bg-primary text-white cursor-pointer hover:bg-primary flex-1">
-                      Buy Now
-                    </Button>
-                  </div>
-                </div>
-              </div>
+                product={product}
+                handleAddToCart={handleAddToCart}
+                addingToCartId={addingToCartId}
+              />
             )
           )}
         </div>

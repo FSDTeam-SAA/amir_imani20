@@ -34,7 +34,7 @@ export default function ProductCard({
           <div className="absolute inset-0 bg-gradient-to-t from-primary-foreground/80 via-primary-foreground/20 to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-90" />
 
           <Image
-            src={product?.imgs?.[0] || "/no-image.jpg"}
+            src={product?.imgs?.[0] || product?.img || "/no-image.jpg"}
             width={490}
             height={670}
             alt={product.productName}
@@ -50,9 +50,12 @@ export default function ProductCard({
 
           {/* Product Info - Always visible on top of overlay */}
           <div className="absolute inset-0 flex flex-col justify-end p-6 z-20">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 line-clamp-2">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 line-clamp-2">
               {product.productName}
             </h3>
+            <p className="text-white/90 text-lg font-semibold mb-4">
+              ${product.price}
+            </p>
 
             <div className="flex flex-col sm:flex-row gap-3 transition-all duration-300 ">
               <Button
