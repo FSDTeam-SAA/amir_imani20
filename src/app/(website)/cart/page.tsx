@@ -121,8 +121,8 @@ export default function CartPage() {
     }, 0);
   }, [items, localQuantities]);
 
-  const shipping = 5.0;
-  const tax = 5.0;
+  // const shipping = 0;
+  // const tax = 0;
 
   const { mutate: createPayment, isPending: isCheckoutLoading } = usePayment();
 
@@ -131,7 +131,7 @@ export default function CartPage() {
 
     // Calculate total amount including shipping and tax
     // Using simple addition here, backend should ideally validate prices
-    const totalAmount = subtotal + shipping + tax;
+    const totalAmount = subtotal;
 
     // Get array of product IDs
     const itemIds = cart._id;
@@ -232,8 +232,8 @@ export default function CartPage() {
           <div className="w-full lg:w-[380px]">
             <OrderSummary
               subtotal={subtotal}
-              shipping={shipping}
-              tax={tax}
+              // shipping={shipping}
+              // tax={tax}
               onCheckout={handleCheckout}
               isCheckoutLoading={isCheckoutLoading}
               isDisabled={items.length === 0}
