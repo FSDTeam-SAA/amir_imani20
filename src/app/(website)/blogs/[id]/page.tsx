@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const BlogDetailsSkeleton = () => {
   return (
-    <div className="min-h-screen bg-white pt-40 pb-12 ">
+    <div className="min-h-screen bg-white pt-40 pb-12">
       <article className="container mx-auto max-w-4xl px-4">
         {/* Navigation Skeleton */}
         <Skeleton className="mb-8 h-5 w-32" />
@@ -66,8 +66,8 @@ const BlogDetailsPage = () => {
   });
 
   return (
-    <div className=" bg-white pt-10 pb-12 ">
-      <article className="container mx-auto max-w-4xl px-4">
+    <div className="bg-white pt-10 pb-12">
+      <article className="container mx-auto px-4 ">
         {/* Navigation */}
         <Link
           href="/blogs"
@@ -89,22 +89,42 @@ const BlogDetailsPage = () => {
 
         {/* Hero Image */}
         {blog.img && (
-          <div className="mb-10 aspect-video w-full overflow-hidden rounded-3xl bg-gray-100">
+          <div className="mb-10 aspect-video overflow-hidden rounded-3xl bg-gray-100">
             <Image
               src={blog.img}
               alt={blog.title}
               width={1900}
               height={700}
               className="h-full w-full object-cover"
+              priority
             />
           </div>
         )}
 
         {/* Content */}
-        <div
-          className="prose prose-lg prose-primary max-w-none text-gray-600"
-          dangerouslySetInnerHTML={{ __html: blog.description }}
-        />
+        <div className="blog-content">
+          <div
+            className="prose prose-lg prose-primary max-w-none"
+            dangerouslySetInnerHTML={{ __html: blog.description }}
+          />
+        </div>
+
+        {/* Metadata Footer */}
+        <footer className="mt-12 pt-8 border-t border-gray-200">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+            <span>Published on: {formattedDate}</span>
+            {blog.updatedAt !== blog.createdAt && (
+              <span>
+                Updated:{" "}
+                {new Date(blog.updatedAt).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
+            )}
+          </div>
+        </footer>
       </article>
     </div>
   );

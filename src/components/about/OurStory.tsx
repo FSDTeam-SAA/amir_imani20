@@ -30,7 +30,7 @@ const OurStory = () => {
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-16 lg:mb-20 max-w-3xl mx-auto">
           <div className="inline-flex items-center justify-center mb-4">
-            <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 text-xs font-semibold tracking-wide uppercase rounded-full">
+            <span className="inline-block px-4 py-2 bg-[#f2e3c6] text-black/70 text-xs font-semibold tracking-wide uppercase rounded-full">
               About Us
             </span>
           </div>
@@ -54,7 +54,7 @@ const OurStory = () => {
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2">
                 {/* <div className="w-8 h-0.5 bg-amber-500"></div> */}
-                <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 text-xs font-semibold tracking-wide uppercase rounded-full">
+                <span className="inline-block px-4 py-2 bg-[#f2e3c6] text-black/70 text-xs font-semibold tracking-wide uppercase rounded-full">
                   Who We Are
                 </span>
               </div>
