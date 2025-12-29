@@ -4,12 +4,14 @@ import Link from "next/link";
 import { IoLogoTiktok } from "react-icons/io5";
 import { IoLogoInstagram } from "react-icons/io5";
 import { FaFacebookF } from "react-icons/fa";
+import { IoLogoYoutube } from "react-icons/io5";
+
 
 const SocialIcons = () => {
   return (
     <div className="flex space-x-4" aria-label="Social media links">
       {/* Facebook */}
-      <Link
+      {/* <Link
         href="https://facebook.com"
         className="
           group relative flex items-center justify-center
@@ -22,7 +24,7 @@ const SocialIcons = () => {
         rel="noopener noreferrer"
       >
         <FaFacebookF className="text-xl md:text-2xl text-white" />
-      </Link>
+      </Link> */}
 
       {/* Instagram */}
       <Link
@@ -54,6 +56,22 @@ const SocialIcons = () => {
       >
         {/* TikTok */}
         <IoLogoTiktok className="text-xl md:text-2xl text-white" />
+      </Link>
+            <Link
+        href="https://www.youtube.com/@doundo-games"
+        className="
+          group relative flex items-center justify-center
+          w-10 h-10 md:w-12 md:h-12 rounded-full
+       
+          transition-all duration-300 hover:scale-110
+     
+        "
+        aria-label="Follow us on TikTok"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {/* TikTok */}
+        <IoLogoYoutube className="text-xl md:text-2xl text-white" />
       </Link>
     </div>
   );

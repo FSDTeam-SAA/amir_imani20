@@ -123,7 +123,7 @@ export default function Footer() {
 
       {/* Footer Bottom Bar */}
       <div className="bg-white py-4 md:py-6">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
             {/* Copyright */}
             <p className="text-xs md:text-sm text-[#717680] order-2 md:order-1">
