@@ -66,7 +66,7 @@ export default function Navbar() {
                   alt="Logo"
                   width={271}
                   height={60}
-                  className="h-10 w-60 sm:h-12 lg:h-14"
+                  className="h-10 w-40 md:w-60 sm:h-12 lg:h-14"
                   priority
                 />
               </Link>
@@ -218,7 +218,7 @@ export default function Navbar() {
               </div>
 
               {/* Mobile menu button */}
-              <div className="xl:hidden">
+              <div className="xl:hidden ">
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                   <SheetTrigger asChild>
                     <Button
@@ -236,7 +236,7 @@ export default function Navbar() {
                   >
                     <div className="flex flex-col h-full">
                       {/* Mobile Header */}
-                      <div className="flex items-center justify-between p-6 border-b">
+                      {/* <div className="flex items-center justify-between p-6 border-b">
                         <Image
                           src="/logo.svg"
                           alt="Logo"
@@ -252,7 +252,7 @@ export default function Navbar() {
                         >
                           <X className="h-5 w-5" />
                         </Button>
-                      </div>
+                      </div> */}
 
                       {/* User info section for mobile */}
                       {status === "authenticated" && session && (
@@ -299,7 +299,7 @@ export default function Navbar() {
                       )}
 
                       {/* Navigation items */}
-                      <nav className="flex-1 overflow-y-auto py-6">
+                      <nav className="flex-1 overflow-y-auto py-6 mt-8">
                         <div className="space-y-1 px-4">
                           {navigationItems.map((item) => {
                             const isActive = item.href === pathname;

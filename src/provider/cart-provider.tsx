@@ -10,6 +10,8 @@ import React, {
 import { Cart } from "../lib/types/ecommerce";
 import { cartService } from "../lib/api/cart-service";
 import { useSession } from "next-auth/react";
+import { toast } from "sonner";
+
 
 interface CartContextType {
   cart: Cart | null;
@@ -147,6 +149,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         const response = await cartService.removeFromCart(cart._id, productId);
         if (response.success) {
           setCart(response.data);
+          toast.success(response.message || 'Item has remove form cart')
         }
       } catch (error) {
         console.error("Failed to remove from cart:", error);

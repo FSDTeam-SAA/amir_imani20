@@ -16,6 +16,7 @@ import OrderSummary from "@/components/shared/OrderSummary";
 import { useCart } from "@/provider/cart-provider";
 import { debounce } from "@/lib/utils/debounce";
 import { usePayment } from "@/hooks/use-payment";
+import { toast } from "sonner";
 
 export default function CartPage() {
   const { cart, loading, updateQuantity, removeFromCart } = useCart();
@@ -103,6 +104,7 @@ export default function CartPage() {
   ) => {
     try {
       await removeFromCart(productId, color, size);
+      // toast.success( )
     } catch (error) {
       console.error("Failed to remove item:", error);
     }
