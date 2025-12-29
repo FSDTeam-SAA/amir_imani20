@@ -2,14 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  Menu,
-  ChevronDown,
-  LogOut,
-  Search,
-  ShoppingCart,
-  User2Icon,
-} from "lucide-react";
+import { Menu, LogOut, Search, ShoppingCart, User2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -29,12 +22,12 @@ import SearchMotal from "../search/SearchMotal";
 
 const navigationItems = [
   { name: "Home", href: "/" },
-  { name: "Merchandise", href: "/merchandise" },
-  { name: "Blogs", href: "/blogs" },
-  { name: "Fortune Telling", href: "/fortune-telling" },
-  { name: "Game", href: "/game" },
-  { name: "Contact", href: "/contact" },
   { name: "About Us", href: "/about-us" },
+  { name: "Game", href: "/game" },
+  { name: "Merchandise", href: "/merchandise" },
+  // { name: "Blogs", href: "/blogs" },
+  { name: "Fortune Telling", href: "/fortune-telling" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -45,9 +38,9 @@ export default function Navbar() {
   const { profile, loading } = useUserProfile();
   const { cart } = useCart();
 
-  const cartItemCount =cart?.productIds?.length || 0;
+  const cartItemCount = cart?.productIds?.length || 0;
 
-    // cart?.productIds?.reduce((total, item) => total + item.quantity, 0) || 0;
+  // cart?.productIds?.reduce((total, item) => total + item.quantity, 0) || 0;
 
   const getUserInitials = () => {
     if (!profile) return "U";
