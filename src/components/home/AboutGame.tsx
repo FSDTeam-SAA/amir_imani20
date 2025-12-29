@@ -90,54 +90,67 @@ const AboutGame = () => {
                 className="object-cover  w-full h-full"
               />
             </div> */}
-      <div className="container mx-auto px-6  bg-[#FFF7E9] rounded-xl overflow-hidden">
-        <div className="py-5 text-center">
-          <h2 className="text-[#000000] text-xl md:text-[48px] font-bold">
-            About Game
-          </h2>
-          <p className="text-[#535862] text-base">
-            Learn more about the company and the team behind it.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image */}
-          <div className="flex justify-center">
-            <div className="relative w-full aspect-5/3 ">
-              <Image
-                src={product.imgs?.[0] || "/no-image.jpg"}
-                alt="Wainzite Game"
-                width={700}
-                height={600}
-                className="w-full aspect-5/3 rounded-lg shadow-lg object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Content */}
-          <div>
-            <p className="text-[#4597A0] text-base md:text-xl mb-4 font-semibold leading-[150%]">
-              {product.feature || ""}
-            </p>
-
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              {product.productName || ""}
+      <div className="container mx-auto rounded-xl overflow-hidden">
+        <section className="bg-secondary py-12 px-6 md:px-12 lg:px-[117px] space-y-9">
+          {/* Header */}
+          <header className="text-center space-y-2">
+            <h2 className="text-primary-foreground text-2xl md:text-4xl lg:text-[48px] font-bold">
+              About Game
             </h2>
+            <p className="text-[#535862] text-sm md:text-base">
+              Learn more about the company and the team behind it.
+            </p>
+          </header>
 
-            {/* <p className="inline-block bg-red-50 text-red-600 text-xs font-semibold px-3 py-1 rounded-full mb-4"></p> */}
-            <p
-              dangerouslySetInnerHTML={{ __html: product.description }}
-              className="text-gray-700 leading-relaxed mb-10 lg:mb-14 line-clamp-2"
-            ></p>
+          {/* Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Image Section */}
+            <figure className="flex justify-center lg:justify-start">
+              <div className="relative w-full max-w-[700px] aspect-[5/3]">
+                <Image
+                  src={product.imgs?.[0] || "/no-image.jpg"}
+                  alt={`${product.productName || "Game"} preview image`}
+                  width={700}
+                  height={420}
+                  className="w-full h-full rounded-lg shadow-lg object-cover"
+                  priority
+                />
+              </div>
+            </figure>
 
-            <div className="flex gap-4">
-              <Link href={`/product/${product._id}`}>
-                <Button className="  px-6 cursor-pointer">
-                  Explore More <MoveRight className="ml-2" />
-                </Button>
-              </Link>
-            </div>
+            {/* Content Section */}
+            <article className="space-y-4">
+              {product.feature && (
+                <p className="text-[#4597A0] text-base md:text-xl font-semibold leading-[150%]">
+                  {product.feature}
+                </p>
+              )}
+
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+                {product.productName || "Untitled Game"}
+              </h3>
+
+              {product.description && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: product.description?.slice(0, 500),
+                  }}
+                  className="text-gray-700 text-sm md:text-base leading-relaxed line-clamp-3 lg:line-clamp-4"
+                />
+              )}
+
+              <div className="pt-6 lg:pt-10">
+                <Link href={`/product/${product._id}`} className="inline-block">
+                  <Button className="px-6 py-2.5 group">
+                    Explore More
+                    <MoveRight className="ml-2 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
+            </article>
           </div>
-        </div>
+        </section>
+
         <WhyChooseUs />
       </div>
     </section>

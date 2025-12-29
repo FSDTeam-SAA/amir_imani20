@@ -3,17 +3,26 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "../ui/button";
 
-import Link from "next/link";
-import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
-import { ArrowRight, MoveRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
+import { useCart } from "@/provider/cart-provider";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import ProductCard from "../shared/product-card";
 
 const GameProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState(false);
+  const [addingToCartId, setAddingToCartId] = useState<string | null>(null);
+
+  const { addToCart } = useCart();
+  const { data: session } = useSession();
+  const router = useRouter();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -33,6 +42,42 @@ const GameProduct = () => {
 
     fetchProducts();
   }, []);
+
+  const handleAddToCart = async (
+    e: React.MouseEvent,
+    product: Product,
+    redirect: boolean = false
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!session?.user?.id) {
+      toast.error("Please sign in to add to cart.");
+      return;
+    }
+
+    setAddingToCartId(product._id);
+    try {
+      await addToCart(
+        [
+          {
+            productId: product._id,
+            quantity: 1,
+          },
+        ],
+        session.user.id
+      );
+      toast.success(`${product.productName} added to cart!`);
+      if (redirect) {
+        router.push("/cart");
+      }
+    } catch (error) {
+      toast.error("Failed to add to cart. Please try again.");
+      console.error("Add to cart error:", error);
+    } finally {
+      setAddingToCartId(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -77,7 +122,6 @@ const GameProduct = () => {
     );
   }
 
-  console.log(products);
   return (
     <section className="py-12">
       <div>
@@ -86,91 +130,17 @@ const GameProduct = () => {
             Play, Explore & Discover Your Next Adventure
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {/* Card 1 */}
-            {selectedProduct
-              ? products.map((product) => (
-                  <Link key={product._id} href={`/product/${product._id}`}>
-                    <div className="relative outline-red-500  border-2 rounded-lg    flex flex-col  justify-center">
-                      <div className="relative">
-                        <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded">
-                          New
-                        </p>
-                        <p className="absolute  bg-white/15  px-3 py-1  inset-0 rounded"></p>
-                        <Image
-                          src={product?.img || "/no-image.jpg"}
-                          width={490}
-                          height={670}
-                          alt={product.productName}
-                          className="rounded-lg w-full aspect-4/5"
-                        />
-
-                        <h2 className="absolute top-20 w-full text-center text-xl md:text-[48px] font-semibold text-[#F04D2A]">
-                          {product.productName}
-                        </h2>
-
-                        <Button className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                          Buy Now
-                        </Button>
-                      </div>
-                    </div>
-                  </Link>
-                ))
-              : products.slice(0, 3).map((product) => (
-                  <Link key={product._id} href={`/product/${product._id}`}>
-                    <div className="relative  border-2 rounded-lg    flex flex-col  justify-center">
-                      <div className="relative">
-                        <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded">
-                          New
-                        </p>
-                        <p className="absolute  bg-white/15  px-3 py-1  inset-0 rounded"></p>
-                        <Image
-                          src={product?.imgs?.[0] || "/no-image.jpg"}
-                          width={490}
-                          height={670}
-                          alt={product.productName}
-                          className="rounded-lg w-full aspect-4/5 object-cover"
-                        />
-
-                        <h2 className="absolute top-20 w-full text-center text-xl md:text-[48px] font-semibold text-white">
-                          {product.productName}
-                        </h2>
-
-                        <Button className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                          Buy Now <ArrowRight />
-                        </Button>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-
-            {/* {products.slice(0, 3).map((product) => (
-              <Link key={product._id} href={`/product/${product._id}`}>
-                <div className="relative outline-red-500  border-2 rounded-lg    flex flex-col  justify-center">
-                  <div className="relative">
-                    <p className="absolute top-6 left-8 bg-[#4296A2] text-white px-3 py-1 rounded">
-                      New
-                    </p>
-                    <p className="absolute  bg-white/15  px-3 py-1  inset-0 rounded"></p>
-                    <Image
-                      src={product?.img || "/no-image.jpg"}
-                      width={490}
-                      height={670}
-                      alt={product.productName}
-                      className="rounded-lg w-full aspect-4/5"
-                    />
-
-                    <h2 className="absolute top-20 w-full text-center text-xl md:text-[48px] font-semibold text-[#F04D2A]">
-                      {product.productName}
-                    </h2>
-
-                    <Button className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                      Buy Now
-                    </Button>
-                  </div>
-                </div>
-              </Link>
-            ))} */}
+          <div className="flex flex-wrap justify-center gap-5">
+            {(selectedProduct ? products : products.slice(0, 3)).map(
+              (product) => (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  handleAddToCart={handleAddToCart}
+                  addingToCartId={addingToCartId}
+                />
+              )
+            )}
           </div>
           {products.length > 2 && (
             <Button

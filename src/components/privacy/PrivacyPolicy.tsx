@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
       <div className="container mx-auto px-4 overflow-hidden">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-semibold text-[#000000] leading-[150%] mb-2">
+          <h1 className="text-4xl md:text-5xl font-semibold text-primary-foreground leading-[150%] mb-2">
             Privacy policy
           </h1>
         </div>
@@ -55,7 +55,7 @@ const PrivacyPolicy = () => {
                         "Name, email address, phone number, billing and shipping address",
                         "Account details (if you create an account)",
                         "Order and transaction information",
-                        "Messages and content you send to us (e.g., support requests, feedback, surveys)"
+                        "Messages and content you send to us (e.g., support requests, feedback, surveys)",
                       ]}
                     />
                     <SubSection
@@ -65,23 +65,25 @@ const PrivacyPolicy = () => {
                         "IP address and approximate location",
                         "Browser type, device type, operating system",
                         "Pages viewed, time spent on pages, referring URLs, clickstream data",
-                        "Cookie and tracking data (e.g., Google Analytics, Meta Pixel)"
+                        "Cookie and tracking data (e.g., Google Analytics, Meta Pixel)",
                       ]}
                     />
                     <SubSection
                       title="1.3 Payment Information"
                       description={
                         <>
-                          Payments are processed by third-party providers such as Stripe
-                          or PayPal.
+                          Payments are processed by third-party providers such
+                          as Stripe or PayPal.
                           <br />
-                          They collect and process your payment card details directly. We do not store your full card number or CVV. We may receive:
+                          They collect and process your payment card details
+                          directly. We do not store your full card number or
+                          CVV. We may receive:
                         </>
                       }
                       items={[
                         "Confirmation of payment",
                         "Partial card details (e.g., last 4 digits)",
-                        "Transaction IDs for record-keeping and fraud prevention"
+                        "Transaction IDs for record-keeping and fraud prevention",
                       ]}
                     />
                     <SubSection
@@ -90,7 +92,7 @@ const PrivacyPolicy = () => {
                       items={[
                         "Analytics providers",
                         "Advertising partners",
-                        "Payment and fraud prevention services"
+                        "Payment and fraud prevention services",
                       ]}
                     />
                   </div>
@@ -115,7 +117,7 @@ const PrivacyPolicy = () => {
                       "Send marketing communications where allowed (you can opt out at any time)",
                       "Monitor Site performance and usage",
                       "Detect, prevent, and investigate fraud, abuse, and security incidents",
-                      "Comply with legal and regulatory requirements"
+                      "Comply with legal and regulatory requirements",
                     ].map((item, index) => (
                       <li key={index} className="flex gap-3">
                         <span className="text-[#6C757D]">•</span>
@@ -138,14 +140,17 @@ const PrivacyPolicy = () => {
               content={
                 <>
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mb-4">
-                    If you are in the EEA or UK, we process your personal data based on:
+                    If you are in the EEA or UK, we process your personal data
+                    based on:
                   </p>
-                  <List items={[
-                    "Performance of a contract (e.g., order fulfillment)",
-                    "Legitimate interests (e.g., improving services, preventing fraud)",
-                    "Compliance with legal obligations (e.g., tax, accounting)",
-                    "Consent (e.g., certain marketing or cookies where required)"
-                  ]} />
+                  <List
+                    items={[
+                      "Performance of a contract (e.g., order fulfillment)",
+                      "Legitimate interests (e.g., improving services, preventing fraud)",
+                      "Compliance with legal obligations (e.g., tax, accounting)",
+                      "Consent (e.g., certain marketing or cookies where required)",
+                    ]}
+                  />
                 </>
               }
             />
@@ -158,15 +163,17 @@ const PrivacyPolicy = () => {
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mb-4">
                     We use cookies and similar technologies to:
                   </p>
-                  <List items={[
-                    "Enable core Site functions",
-                    "Remember your preferences",
-                    "Analyze traffic and performance",
-                    "Support advertising and retargeting (where applicable)"
-                  ]} />
+                  <List
+                    items={[
+                      "Enable core Site functions",
+                      "Remember your preferences",
+                      "Analyze traffic and performance",
+                      "Support advertising and retargeting (where applicable)",
+                    ]}
+                  />
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mt-4">
-                    You can manage or disable cookies in your browser settings. Some
-                    features may not work properly if cookies are disabled.
+                    You can manage or disable cookies in your browser settings.
+                    Some features may not work properly if cookies are disabled.
                   </p>
                 </>
               }
@@ -180,15 +187,18 @@ const PrivacyPolicy = () => {
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mb-4">
                     We may share your information with:
                   </p>
-                  <List items={[
-                    "Service providers (hosting, payment, analytics, email services, support tools)",
-                    "Shipping and logistics partners (for delivery of products)",
-                    "Professional advisors (lawyers, accountants)",
-                    "Authorities or law enforcement when required by law or to protect rights and safety",
-                    "Successors in business transactions (e.g., merger, acquisition), subject to safeguards"
-                  ]} />
+                  <List
+                    items={[
+                      "Service providers (hosting, payment, analytics, email services, support tools)",
+                      "Shipping and logistics partners (for delivery of products)",
+                      "Professional advisors (lawyers, accountants)",
+                      "Authorities or law enforcement when required by law or to protect rights and safety",
+                      "Successors in business transactions (e.g., merger, acquisition), subject to safeguards",
+                    ]}
+                  />
                   <p className="text-[#6C757D] text-xl leading-[150%] font-semibold mt-4">
-                    We do not allow service providers to use your data for their own independent marketing.
+                    We do not allow service providers to use your data for their
+                    own independent marketing.
                   </p>
                 </>
               }
@@ -202,14 +212,16 @@ const PrivacyPolicy = () => {
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mb-4">
                     We retain personal information for as long as necessary to:
                   </p>
-                  <List items={[
-                    "Provide products and services",
-                    "Comply with legal, tax, and accounting obligations",
-                    "Resolve disputes and enforce agreements"
-                  ]} />
+                  <List
+                    items={[
+                      "Provide products and services",
+                      "Comply with legal, tax, and accounting obligations",
+                      "Resolve disputes and enforce agreements",
+                    ]}
+                  />
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mt-4">
-                    When data is no longer required, it will be deleted, anonymized,
-                    or securely archived.
+                    When data is no longer required, it will be deleted,
+                    anonymized, or securely archived.
                   </p>
                 </>
               }
@@ -221,17 +233,19 @@ const PrivacyPolicy = () => {
               content={
                 <>
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mb-4">
-                    We implement reasonable technical and organizational measures,
-                    such as:
+                    We implement reasonable technical and organizational
+                    measures, such as:
                   </p>
-                  <List items={[
-                    "SSL/HTTPS encryption",
-                    "Restricted access to data",
-                    "Secure storage practices"
-                  ]} />
+                  <List
+                    items={[
+                      "SSL/HTTPS encryption",
+                      "Restricted access to data",
+                      "Secure storage practices",
+                    ]}
+                  />
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mt-4">
-                    However, no method of transmission or storage is 100% secure. We
-                    cannot guarantee absolute security.
+                    However, no method of transmission or storage is 100%
+                    secure. We cannot guarantee absolute security.
                   </p>
                 </>
               }
@@ -243,9 +257,9 @@ const PrivacyPolicy = () => {
               content={
                 <p className="text-[#6C757D] text-xl leading-[150%] font-normal">
                   Your information may be transferred and processed in countries
-                  other than your own, including Canada and the United States. These
-                  countries may have different data protection laws. Where required,
-                  we use appropriate safeguards for such transfers.
+                  other than your own, including Canada and the United States.
+                  These countries may have different data protection laws. Where
+                  required, we use appropriate safeguards for such transfers.
                 </p>
               }
             />
@@ -258,14 +272,16 @@ const PrivacyPolicy = () => {
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mb-4">
                     Depending on your jurisdiction, you may have the right to:
                   </p>
-                  <List items={[
-                    "Access the personal information we hold about you",
-                    "Request corrections to inaccurate information",
-                    "Request deletion of your information (subject to legal exceptions)",
-                    "Object to or restrict certain processing",
-                    "Request data portability",
-                    "Withdraw consent where we rely on consent"
-                  ]} />
+                  <List
+                    items={[
+                      "Access the personal information we hold about you",
+                      "Request corrections to inaccurate information",
+                      "Request deletion of your information (subject to legal exceptions)",
+                      "Object to or restrict certain processing",
+                      "Request data portability",
+                      "Withdraw consent where we rely on consent",
+                    ]}
+                  />
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mt-4">
                     To exercise your rights, contact: privacy@doundogames.com
                   </p>
@@ -282,10 +298,10 @@ const PrivacyPolicy = () => {
               content={
                 <p className="text-[#6C757D] text-xl leading-[150%] font-normal">
                   Our Site is intended primarily for adults (such as parents and
-                  guardians). We do not knowingly collect personal information from
-                  children under 13 (or as defined by local law) without parental
-                  consent. If you believe we have collected such data, contact us
-                  and we will act promptly.
+                  guardians). We do not knowingly collect personal information
+                  from children under 13 (or as defined by local law) without
+                  parental consent. If you believe we have collected such data,
+                  contact us and we will act promptly.
                 </p>
               }
             />
@@ -295,9 +311,10 @@ const PrivacyPolicy = () => {
               title="11. Third-Party Websites"
               content={
                 <p className="text-[#6C757D] text-xl leading-[150%] font-normal">
-                  The Site may contain links to third-party websites or services. We
-                  are not responsible for their content, privacy policies, or
-                  practices. You should review their policies separately.
+                  The Site may contain links to third-party websites or
+                  services. We are not responsible for their content, privacy
+                  policies, or practices. You should review their policies
+                  separately.
                 </p>
               }
             />
@@ -307,10 +324,10 @@ const PrivacyPolicy = () => {
               title="12. Changes to This Policy"
               content={
                 <p className="text-[#6C757D] text-xl leading-[150%] font-normal">
-                  We may update this Privacy Policy from time to time. Updates will
-                  be posted on this page with a new &quot;Last Updated&quot; date.
-                  Continued use of the Site after changes means you accept the
-                  updated Policy.
+                  We may update this Privacy Policy from time to time. Updates
+                  will be posted on this page with a new &quot;Last
+                  Updated&quot; date. Continued use of the Site after changes
+                  means you accept the updated Policy.
                 </p>
               }
             />
@@ -321,7 +338,8 @@ const PrivacyPolicy = () => {
               content={
                 <>
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mb-4">
-                    For questions about this Privacy Policy or our data practices:
+                    For questions about this Privacy Policy or our data
+                    practices:
                   </p>
                   <ul className="space-y-2 ml-4">
                     <li className="flex items-center gap-3">
@@ -341,8 +359,8 @@ const PrivacyPolicy = () => {
                     <li className="flex gap-3">
                       <span className="text-[#6C757D]">•</span>
                       <span className="text-[#6C757D] text-xl leading-[150%] font-normal">
-                        Mailing Address: DoUndo Corp., 7011 McCowan Road, Markham,
-                        Ontario, L3S 3L7, Canada
+                        Mailing Address: DoUndo Corp., 7011 McCowan Road,
+                        Markham, Ontario, L3S 3L7, Canada
                       </span>
                     </li>
                   </ul>
@@ -357,7 +375,13 @@ const PrivacyPolicy = () => {
 };
 
 // Reusable Section Component
-const Section = ({ title, content }: { title: string; content: React.ReactNode }) => (
+const Section = ({
+  title,
+  content,
+}: {
+  title: string;
+  content: React.ReactNode;
+}) => (
   <div className="space-y-4">
     <h3 className="font-inter font-semibold text-2xl leading-[150%] text-[#0E1D2B]">
       {title}
@@ -367,14 +391,14 @@ const Section = ({ title, content }: { title: string; content: React.ReactNode }
 );
 
 // Reusable SubSection Component
-const SubSection = ({ 
-  title, 
-  description, 
-  items 
-}: { 
-  title: string; 
-  description?: string | React.ReactNode; 
-  items: string[] 
+const SubSection = ({
+  title,
+  description,
+  items,
+}: {
+  title: string;
+  description?: string | React.ReactNode;
+  items: string[];
 }) => (
   <div>
     <h4 className="font-inter font-semibold text-xl leading-[150%] text-[#0E1D2B] mb-2">

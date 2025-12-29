@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Poppins } from "next/font/google";
 import "../globals.css";
 import TanstackProvider from "@/provider/Tanstack-provider";
@@ -7,7 +8,7 @@ import { CartProvider } from "@/provider/cart-provider";
 
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/Footer";
-// import { SessionProvider } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -20,15 +21,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   return (
     <html lang="en" className={poppins.variable}>
-      <body className="antialiased">
+      <body className="antialiased font-sans">
         <TanstackProvider>
           <Provider>
             <CartProvider>
-              <div className=" h-screen flex flex-col justify-between ">
+              <div className="min-h-screen flex flex-col text-primary-foreground">
                 <Navbar />
-                {children}
+                <main className={`flex-1 ${!isHome ? "pt-16 lg:pt-20" : ""}`}>
+                  {children}
+                </main>
                 <Footer />
               </div>
             </CartProvider>
