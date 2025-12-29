@@ -94,7 +94,7 @@ const AboutGame = () => {
         <section className="bg-secondary py-12 px-6 md:px-12 lg:px-[117px] space-y-9">
           {/* Header */}
           <header className="text-center space-y-2">
-            <h2 className="text-[#000000] text-2xl md:text-4xl lg:text-[48px] font-bold">
+            <h2 className="text-primary-foreground text-2xl md:text-4xl lg:text-[48px] font-bold">
               About Game
             </h2>
             <p className="text-[#535862] text-sm md:text-base">

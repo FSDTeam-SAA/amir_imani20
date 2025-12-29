@@ -22,7 +22,9 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export default function NewsletterForm({ className = "" }: NewsletterFormProps) {
+export default function NewsletterForm({
+  className = "",
+}: NewsletterFormProps) {
   const {
     register,
     handleSubmit,
@@ -52,30 +54,30 @@ export default function NewsletterForm({ className = "" }: NewsletterFormProps) 
   };
 
   return (
-    <form 
-      onSubmit={handleSubmit(onSubmit)} 
+    <form
+      onSubmit={handleSubmit(onSubmit)}
       className={`space-y-3 ${className}`}
       noValidate
       aria-label="Newsletter subscription form"
     >
       {/* Hidden name field since you're using "Subscriber" as default */}
       <input type="hidden" {...register("name")} />
-      
+
       <div className="flex gap-2">
         <div className="grow">
           <Input
             type="email"
             placeholder="Enter your email"
             {...register("email")}
-            className="w-full rounded-full px-4 py-3 bg-white border-white/20 text-black placeholder-gray-500 focus:ring-2 focus:ring-white/30"
+            className="w-full rounded-full px-4 py-3 bg-white border-white/20 text-primary-foreground placeholder-gray-500 focus:ring-2 focus:ring-white/30"
             aria-label="Email address"
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "email-error" : undefined}
             disabled={mutation.isPending}
           />
           {errors.email && (
-            <p 
-              id="email-error" 
+            <p
+              id="email-error"
               className="mt-1 text-sm text-red-300"
               role="alert"
             >
@@ -83,7 +85,7 @@ export default function NewsletterForm({ className = "" }: NewsletterFormProps) 
             </p>
           )}
         </div>
-        
+
         <Button
           type="submit"
           className="rounded-full px-6 whitespace-nowrap text-white transition-colors disabled:opacity-50"
@@ -100,21 +102,15 @@ export default function NewsletterForm({ className = "" }: NewsletterFormProps) 
           )}
         </Button>
       </div>
-      
+
       {mutation.isSuccess && (
-        <p 
-          className="text-sm text-green-300"
-          role="alert"
-        >
+        <p className="text-sm text-green-300" role="alert">
           Successfully subscribed to newsletter!
         </p>
       )}
-      
+
       {mutation.error && (
-        <p 
-          className="text-sm text-red-300"
-          role="alert"
-        >
+        <p className="text-sm text-red-300" role="alert">
           {mutation.error.message || "Failed to subscribe. Please try again."}
         </p>
       )}

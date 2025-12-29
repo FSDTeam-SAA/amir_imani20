@@ -84,11 +84,11 @@ export default function ProductHero({ product }: ProductHeroProps) {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold text-primary-foreground/80 mb-2">
+            <h3 className="text-xl font-semibold text-primary-foreground/90 mb-2">
               Features:
             </h3>
             {/* Summary / Features */}
-            <p className="text-primary-foreground text-base leading-relaxed mb-6 whitespace-pre-line break-words">
+            <p className="text-primary-foreground/80 text-base leading-relaxed mb-6 whitespace-pre-line break-words">
               {product.feature}
             </p>
           </div>
