@@ -10,7 +10,7 @@ const AboutUs = () => {
       <div className="">
         <div className="inline-block mb-6">
           <p className="text-[#0E1D2B]  bg-[#F2E3C6] py-3 px-6  text-sm font-semibold tracking-widest uppercase rounded-full">
-            ABOUT US
+            About Us
           </p>
         </div>
         <h2 className="text-lg md:text-2xl lg:text-[48px] 2xl:text-[60px] text-[#000000] mb-10 leading-tight  font-medium  mx-auto">

@@ -120,11 +120,11 @@ const MerchandiseProduct = () => {
                   <div className="flex justify-between items-center px-2 py-4 gap-2">
                     <Button
                       variant="outline"
-                      className="border-gray-200 hover:bg-[#d63f1f] text-black min-w-[80px]"
+                      className="border-gray-200 hover:bg-primary text-primary-foreground min-w-[80px]"
                     >
                       ${product.price}
                     </Button>
-                    <Button className="bg-[#F04D2A] text-white cursor-pointer hover:bg-[#d63f1f] flex-1">
+                    <Button className="bg-primary text-white cursor-pointer hover:bg-primary flex-1">
                       Buy Now
                     </Button>
                   </div>
@@ -133,16 +133,15 @@ const MerchandiseProduct = () => {
             )
           )}
         </div>
- {products.length >2 &&
-
-        <Button
-          onClick={() => setSelectedProduct(!selectedProduct)}
-          className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"
-        >
-          {selectedProduct ? "Less Games" : "More Games"}
-          <MoveRight />
-        </Button>
- }
+        {products.length > 2 && (
+          <Button
+            onClick={() => setSelectedProduct(!selectedProduct)}
+            className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"
+          >
+            {selectedProduct ? "Less Games" : "More Games"}
+            <MoveRight />
+          </Button>
+        )}
       </div>
     </section>
   );

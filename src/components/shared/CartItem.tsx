@@ -53,7 +53,7 @@ export default function CartItem({
           <p
             className="text-xs text-[#8B8B8B] leading-relaxed"
             dangerouslySetInnerHTML={{
-              __html: description.slice(0, 100) + "...",
+              __html: description?.slice(0, 100) + "...",
             }}
           />
           {(color || size) && (

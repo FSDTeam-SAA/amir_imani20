@@ -23,7 +23,7 @@ import SearchMotal from "../search/SearchMotal";
 const navigationItems = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about-us" },
-  { name: "Game", href: "/game" },
+  { name: "Games", href: "/game" },
   { name: "Merchandise", href: "/merchandise" },
   { name: "Fortune Telling", href: "/fortune-telling" },
   { name: "Contact", href: "/contact" },
