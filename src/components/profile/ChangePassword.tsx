@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from 'sonner'
+// import { toast } from 'sonner'
 import {
   Form,
   FormControl,
@@ -114,7 +114,7 @@ const ChangePassword = () => {
             <Button
               type="submit"
               disabled={isPending}
-              className="bg-primary hover:bg-primary/90 text-white min-w-[140px]"
+              className="bg-primary hover:bg-primary/90 text-white min-w-35"
             >
               {isPending ? "Updating..." : "Update Password"}
             </Button>
