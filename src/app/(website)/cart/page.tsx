@@ -16,7 +16,6 @@ import OrderSummary from "@/components/shared/OrderSummary";
 import { useCart } from "@/provider/cart-provider";
 import { debounce } from "@/lib/utils/debounce";
 import { usePayment } from "@/hooks/use-payment";
-import { toast } from "sonner";
 
 export default function CartPage() {
   const { cart, loading, updateQuantity, removeFromCart } = useCart();
@@ -164,7 +163,7 @@ export default function CartPage() {
     <div className=" bg-[#FBFBFB]">
       {/* <ProductNavbar /> */}
 
-      <main className="container mx-auto px-6 pt-32 pb-20 max-w-[1240px]">
+      <main className="container mx-auto px-6 pt-16 pb-20 max-w-[1240px]">
         {/* Back Link */}
         <Link
           href="/game"

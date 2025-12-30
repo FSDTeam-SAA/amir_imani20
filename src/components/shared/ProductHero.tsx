@@ -49,10 +49,10 @@ export default function ProductHero({ product }: ProductHeroProps) {
   };
 
   return (
-    <section className="py-12 lg:py-16">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+    <section className="py-8">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
-        <div className="relative aspect-square w-full max-w-120 mx-auto lg:ml-0 overflow-hidden ">
+        <div className="relative aspect-square w-full mx-auto lg:ml-0 overflow-hidden col-span-4 gap-3">
           <div className="flex gap-3 relative aspect-square">
             {/* Thumbnails */}
             <div className="w-20 flex flex-col gap-3 overflow-y-auto no-scrollbar">
@@ -62,7 +62,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                     key={index}
                     className={`relative w-full h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
                       selectedImage === img || (!selectedImage && index === 0)
-                        ? "border-gray-900"
+                        ? "border-primary"
                         : "border-transparent"
                     }`}
                     onClick={() => setSelectedImage(img)}
@@ -98,14 +98,14 @@ export default function ProductHero({ product }: ProductHeroProps) {
                 }
                 alt={product.productName}
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </div>
         </div>
 
         {/* Right Column: Product Info */}
-        <div className="flex flex-col text-left">
+        <div className="flex flex-col text-left col-span-2 gap-3">
           {/* Badge */}
           <div className="mb-4">
             <span className="inline-block bg-secondary rounded-full text-primary-foreground text-[10px] font-bold uppercase tracking-widest px-3 py-1 ">
