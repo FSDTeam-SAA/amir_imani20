@@ -22,7 +22,7 @@ const OurStory = () => {
 
   return (
     <section
-      className=" py-16 md:py-10 bg-gradient-to-b from-white to-amber-50/30"
+      className=" py-16 md:py-10 bg-linear-to-b from-white to-amber-50/30"
       aria-labelledby="story-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -118,11 +118,11 @@ const OurStory = () => {
                 />
 
                 {/* Image Overlay Effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
+              {/* <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                     <span className="text-primary font-bold">✓</span>
@@ -136,7 +136,7 @@ const OurStory = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Decorative Pattern */}
