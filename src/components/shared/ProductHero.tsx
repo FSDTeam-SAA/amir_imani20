@@ -98,7 +98,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                 }
                 alt={product.productName}
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
           </div>

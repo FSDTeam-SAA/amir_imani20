@@ -26,11 +26,11 @@ export default function ProductCard({
     <Link
       key={product._id}
       href={`/product/${product._id}`}
-      className="group block w-[496px] h-[678px]"
+      className="group block w-full max-w-[496px]"
     >
-      <div className="relative h-full overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+      <div className="relative aspect-[496/678] overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         {/* Image Container with Overlay */}
-        <div className="relative h-full overflow-hidden">
+        <div className="relative w-full h-full overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-primary-foreground/80 via-primary-foreground/20 to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-90" />
 
           <Image
@@ -38,7 +38,7 @@ export default function ProductCard({
             width={496}
             height={678}
             alt={product.productName}
-            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
 
           {/* Badge */}
