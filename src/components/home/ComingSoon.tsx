@@ -11,6 +11,8 @@ import { useCart } from "@/provider/cart-provider";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Link from "next/link";
+import Image from "next/image";
 
 const ComingSoon = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -150,23 +152,37 @@ const ComingSoon = () => {
 
           {/* Coming Soon Teaser Card */}
           <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-primary/30 bg-secondary/50 p-8 flex flex-col items-center justify-center text-center transition-all hover:bg-secondary/80 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] max-w-[490px] min-h-[400px]">
-            <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+            <Image
+              src="/images/WalnizeProductCard.jpg"
+              alt="walnize"
+              width={400}
+              height={400}
+              className="w-full h-full object-cover absolute z-0 top-0 left-0"
+            />
+            {/* Dark overlay for readability */}
+            <div className="absolute inset-0 bg-black/40 z-[5]" />
 
-            <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-2">
-              Next Release
-            </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-primary-foreground mb-2">
-              Walnize
-            </h2>
-            <p className="text-[#BDBDBD] text-xl md:text-2xl font-medium mb-8">
-              Coming Very Soon
-            </p>
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl z-[1]" />
+            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl z-[1]" />
 
-            <Button className="rounded-full bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors px-8 py-2 h-auto font-bold flex items-center gap-2 group">
-              Get Verified
-              <MoveRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <div className="relative z-10 flex flex-col items-center">
+              {/* <span className="text-white/80 font-bold tracking-[0.2em] uppercase text-sm mb-2">
+                Next Release
+              </span>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-2">
+                Walnize
+              </h2>
+              <p className="text-white/70 text-xl md:text-2xl font-medium mb-8">
+                Coming Very Soon
+              </p> */}
+
+              <Link href="/game/coming-soon">
+                <Button className="rounded-full bg-primary border-2 border-primary text-white hover:bg-primary hover:text-white transition-colors px-8 py-2 h-auto font-bold flex items-center gap-2 group">
+                  Get Verified
+                  <MoveRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
 

@@ -123,10 +123,10 @@ const GameProduct = () => {
   }
 
   return (
-    <section className="py-12">
+    <section className="py-16">
       <div>
-        <div className="container mx-auto py-12">
-          <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center">
+        <div className="container mx-auto ">
+          <h2 className="text-lg md:text-2xl xl:text-[48px] text-primary-foreground leading-[150%] font-semibold mb-8 text-center">
             Play, Explore & Discover Your Next Adventure
           </h2>
 
@@ -145,7 +145,7 @@ const GameProduct = () => {
           {products.length > 2 && (
             <Button
               onClick={() => setSelectedProduct(!selectedProduct)}
-              className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"
+              className="mt-6 mx-auto flex items-center gap-2 border-gray-300 text-white"
             >
               {selectedProduct ? "Less Games" : "More Games"}
               <MoveRight />
