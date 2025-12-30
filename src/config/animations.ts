@@ -1,4 +1,6 @@
-export const fadeInUp = {
+import { Variants } from "framer-motion";
+
+export const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -7,7 +9,7 @@ export const fadeInUp = {
   },
 };
 
-export const staggerContainer = {
+export const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -18,7 +20,7 @@ export const staggerContainer = {
   },
 };
 
-export const scaleIn = {
+export const scaleIn: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -27,7 +29,7 @@ export const scaleIn = {
   },
 };
 
-export const accordionVariants = {
+export const accordionVariants: Variants = {
   hidden: { height: 0, opacity: 0 },
   visible: {
     height: "auto",
@@ -44,9 +46,9 @@ export const accordionVariants = {
 export const hoverScale = {
   scale: 1.05,
   transition: { duration: 0.2 },
-};
+} as const;
 
 export const tapScale = {
   scale: 0.95,
   transition: { duration: 0.1 },
-};
+} as const;
