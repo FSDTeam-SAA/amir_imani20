@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Minus, Plus } from "lucide-react";
+import {  Minus, Plus } from "lucide-react";
 
 interface FAQItem {
   id?: number;
