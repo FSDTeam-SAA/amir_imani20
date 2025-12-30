@@ -39,7 +39,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
         ],
         session?.user?.id as string
       );
-      toast.success(`${product.productName} added to cart!`);
+      toast.success(`${product.productName} added to cart for Pre Order!`);
     } catch (error) {
       toast.error("Failed to add to cart. Please try again.");
       console.error("Add to cart error:", error);
@@ -166,7 +166,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
               disabled={isAdding}
               className="w-full h-14 bg-primary hover:bg-primary/80 text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50 "
             >
-              {isAdding ? "Adding..." : "Add to Cart"}
+              {isAdding ? "Adding..." : "Pre Order"}
             </Button>
 
             {/* Secondary Action */}
