@@ -1,7 +1,5 @@
-
 import { orderHistory } from "@/lib/api/order";
-import {  useQuery } from "@tanstack/react-query";
-
+import { useQuery } from "@tanstack/react-query";
 
 export interface ProductImage {
   url: string;
@@ -31,7 +29,7 @@ export interface ApiResponse {
 
 export const useOrderHistory = (userId: string | undefined) => {
   return useQuery({
-    queryKey: ['orderHistory', userId],
+    queryKey: ["orderHistory", userId],
     queryFn: () => orderHistory(userId!),
     enabled: !!userId,
   });
