@@ -90,7 +90,7 @@ const OurMission = () => {
             aria-label="Mission tag"
           >
             <span
-              className="inline-block px-4 py-2 bg-secondary text-primary-foreground/70 text-sm font-semibold tracking-wide uppercase rounded-full border "
+              className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-sm font-semibold tracking-wide uppercase rounded-full border "
               itemProp="keywords"
             >
               Our Mission & Values
@@ -99,7 +99,7 @@ const OurMission = () => {
 
           <h1
             id="mission-heading"
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight"
             itemProp="headline"
           >
             {missionData.title}
@@ -169,7 +169,7 @@ const OurMission = () => {
                   {/* Decorative Elements */}
                   <div className="mt-6 pt-6">
                     <div
-                      className={`w-12 h-1 ${value.bgColor} rounded-full group-hover:w-24 transition-all duration-500`}
+                      className={`w-12 h-1 bg-primary rounded-full group-hover:w-24 transition-all duration-500`}
                     ></div>
                   </div>
                 </div>

@@ -1,151 +1,55 @@
 "use client";
 
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-  useEffect,
-} from "react";
+import React from "react";
 import Link from "next/link";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import ProductNavbar from "@/components/shared/ProductNavbar";
 import ProductFooter from "@/components/shared/ProductFooter";
 import CartItem from "@/components/shared/CartItem";
 import OrderSummary from "@/components/shared/OrderSummary";
-import { useCart } from "@/provider/cart-provider";
-import { debounce } from "@/lib/utils/debounce";
 import { usePayment } from "@/hooks/use-payment";
-// import { toast } from "sonner";
+import {
+  useCartQuery,
+  useUpdateCartQuantity,
+  useRemoveFromCart,
+} from "@/hooks/use-cart-query";
+import { useCartLogic, getCartItemKey } from "@/hooks/use-cart-logic";
 
 export default function CartPage() {
-  const { cart, loading, updateQuantity, removeFromCart } = useCart();
+  // Fetch cart data
+  const { data: cart, isLoading } = useCartQuery();
 
-  // Pending quantities for optimistic UI updates (only stores items being actively changed)
-  const [pendingQuantities, setPendingQuantities] = useState<
-    Record<string, number>
-  >({});
+  // Mutations
+  const { mutate: updateQuantity } = useUpdateCartQuantity();
+  const { mutate: removeFromCart } = useRemoveFromCart();
 
-  // Compute quantities from cart data, with pending optimistic updates overlaid
-  const localQuantities = useMemo(() => {
-    const quantities: Record<string, number> = {};
-    if (cart?.productIds) {
-      cart.productIds.forEach((item) => {
-        const key = `${item?.productId?._id}-${item.color || ""}-${
-          item.size || ""
-        }`;
-        quantities[key] = item.quantity;
-      });
-    }
-    // Overlay any pending optimistic updates
-    return { ...quantities, ...pendingQuantities };
-  }, [cart, pendingQuantities]);
+  // Cart UI logic
+  const {
+    items,
+    localQuantities,
+    subtotal,
+    handleQuantityChange,
+    handleRemove,
+  } = useCartLogic({
+    cart: cart || null,
+    onUpdateQuantity: updateQuantity,
+    onRemoveFromCart: removeFromCart,
+  });
 
-  const debouncedUpdateRef =
-    useRef<
-      (
-        productId: string,
-        quantity: number,
-        color?: string,
-        size?: string
-      ) => void
-    >(null);
-
-  useEffect(() => {
-    debouncedUpdateRef.current = debounce(
-      async (
-        productId: string,
-        quantity: number,
-        color?: string,
-        size?: string
-      ) => {
-        const key = `${productId}-${color || ""}-${size || ""}`;
-        try {
-          await updateQuantity(productId, quantity, color, size);
-          // Clear the pending quantity once server confirms the update
-          setPendingQuantities((prev) => {
-            const next = { ...prev };
-            delete next[key];
-            return next;
-          });
-        } catch (error) {
-          console.error("Failed to update quantity:", error);
-          // Revert optimistic update on error by clearing the pending quantity
-          setPendingQuantities((prev) => {
-            const next = { ...prev };
-            delete next[key];
-            return next;
-          });
-        }
-      },
-      500
-    );
-  }, [updateQuantity]);
-
-  const handleQuantityChange = useCallback(
-    (productId: string, newQuantity: number, color?: string, size?: string) => {
-      const key = `${productId}-${color || ""}-${size || ""}`;
-      // Optimistic UI update - immediate feedback
-      setPendingQuantities((prev) => ({
-        ...prev,
-        [key]: newQuantity,
-      }));
-
-      // Debounced API call
-      debouncedUpdateRef.current?.(productId, newQuantity, color, size);
-    },
-    []
-  );
-
-  const handleRemove = async (
-    productId: string,
-    color?: string,
-    size?: string
-  ) => {
-    try {
-      await removeFromCart(productId, color, size);
-      // toast.success( )
-    } catch (error) {
-      console.error("Failed to remove item:", error);
-    }
-  };
-
-  const items = useMemo(() => cart?.productIds || [], [cart?.productIds]);
-
-  // Calculate subtotal using local quantities for immediate feedback
-  const subtotal = useMemo(() => {
-    return items.reduce((acc, item) => {
-      const key = `${item?.productId?._id}-${item.color || ""}-${
-        item.size || ""
-      }`;
-      const quantity = localQuantities[key] ?? item.quantity;
-      return acc + item?.productId?.price * quantity;
-    }, 0);
-  }, [items, localQuantities]);
-
-  // const shipping = 0;
-  // const tax = 0;
-
+  // Payment
   const { mutate: createPayment, isPending: isCheckoutLoading } = usePayment();
 
   const handleCheckout = () => {
     if (!cart) return;
 
-    // Calculate total amount including shipping and tax
-    // Using simple addition here, backend should ideally validate prices
-    const totalAmount = subtotal;
-
-    // Get array of product IDs
-    const itemIds = cart._id;
-
     createPayment({
       userId: cart.userId,
-      totalAmount,
-      itemIds,
+      totalAmount: subtotal,
+      itemIds: [cart._id],
     });
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-[#FBFBFB]">
         <ProductNavbar />
@@ -164,7 +68,7 @@ export default function CartPage() {
     <div className=" bg-[#FBFBFB]">
       {/* <ProductNavbar /> */}
 
-      <main className="container mx-auto px-6 pt-32 pb-20 max-w-[1240px]">
+      <main className="container mx-auto px-6 py-8">
         {/* Back Link */}
         <Link
           href="/game"
@@ -180,9 +84,11 @@ export default function CartPage() {
             {items.length > 0 ? (
               <div className="flex flex-col">
                 {items.map((item) => {
-                  const key = `${item?.productId?._id}-${item.color || ""}-${
-                    item.size || ""
-                  }`;
+                  const key = getCartItemKey(
+                    item?.productId?._id,
+                    item.color,
+                    item.size
+                  );
                   return (
                     <CartItem
                       key={key}

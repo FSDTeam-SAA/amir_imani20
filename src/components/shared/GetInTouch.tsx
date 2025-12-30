@@ -78,26 +78,30 @@ const GetInTouch = () => {
       <div className="container mx-auto px-6 bg-secondary rounded-2xl border py-6 md:py-[95px] md:px-[150px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
-          <div>
+        <div>
             <h2 className="text-5xl font-bold text-primary-foreground mb-2 text-start">
               Get in touch
-            </h2>
+          </h2>
             <p className="text-primary-foreground text-start mb-5 lg:mb-10 max-w-2xl">
               Our friendly team would love to hear from you.
-            </p>
+          </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col">
+              <div className="flex flex-col">
                   <input
                     type="text"
                     name="firstName"
                     placeholder="First Name"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${errors.firstName ? 'ring-2 ring-red-500' : ''}`}
+                    className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${
+                      errors.firstName ? "ring-2 ring-red-500" : ""
+                    }`}
                   />
                   {errors.firstName && (
-                    <span className="text-red-500 text-xs mt-1 px-4">{errors.firstName}</span>
+                    <span className="text-red-500 text-xs mt-1 px-4">
+                      {errors.firstName}
+                    </span>
                   )}
                 </div>
                 <div className="flex flex-col">
@@ -107,10 +111,14 @@ const GetInTouch = () => {
                     placeholder="Last Name"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${errors.lastName ? 'ring-2 ring-red-500' : ''}`}
+                    className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${
+                      errors.lastName ? "ring-2 ring-red-500" : ""
+                    }`}
                   />
                   {errors.lastName && (
-                    <span className="text-red-500 text-xs mt-1 px-4">{errors.lastName}</span>
+                    <span className="text-red-500 text-xs mt-1 px-4">
+                      {errors.lastName}
+                    </span>
                   )}
                 </div>
               </div>
@@ -121,10 +129,14 @@ const GetInTouch = () => {
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${errors.email ? 'ring-2 ring-red-500' : ''}`}
+                className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${
+                    errors.email ? "ring-2 ring-red-500" : ""
+                  }`}
                 />
-                {errors.email && (
-                  <span className="text-red-500 text-xs mt-1 px-4">{errors.email}</span>
+              {errors.email && (
+                  <span className="text-red-500 text-xs mt-1 px-4">
+                    {errors.email}
+                  </span>
                 )}
               </div>
               <div className="flex flex-col">
@@ -134,13 +146,16 @@ const GetInTouch = () => {
                   placeholder="Phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${errors.phone ? 'ring-2 ring-red-500' : ''}`}
+                className={`bg-white text-gray-900 placeholder-gray-500 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 ${
+                    errors.phone ? "ring-2 ring-red-500" : ""
+                  }`}
                 />
-                {errors.phone && (
-                  <span className="text-red-500 text-xs mt-1 px-4">{errors.phone}</span>
+              {errors.phone && (
+                  <span className="text-red-500 text-xs mt-1 px-4">
+                    {errors.phone}
+                  </span>
                 )}
               </div>
-
               <div className="flex flex-col">
                 <textarea
                   name="message"
@@ -148,10 +163,14 @@ const GetInTouch = () => {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full bg-white text-gray-900 placeholder-gray-500 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 resize-none ${errors.message ? 'ring-2 ring-red-500' : ''}`}
+                  className={`w-full bg-white text-gray-900 placeholder-gray-500 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 resize-none ${
+                    errors.message ? "ring-2 ring-red-500" : ""
+                  }`}
                 />
                 {errors.message && (
-                  <span className="text-red-500 text-xs mt-1 px-4">{errors.message}</span>
+                  <span className="text-red-500 text-xs mt-1 px-4">
+                    {errors.message}
+                  </span>
                 )}
               </div>
 
@@ -162,9 +181,15 @@ const GetInTouch = () => {
                     id="privacy"
                     checked={formData.privacyAgreed as boolean}
                     onChange={(e) => {
-                      setFormData((prev) => ({ ...prev, privacyAgreed: e.target.checked as unknown as true }));
+                      setFormData((prev) => ({
+                        ...prev,
+                        privacyAgreed: e.target.checked as unknown as true,
+                      }));
                       if (errors.privacyAgreed) {
-                        setErrors((prev) => ({ ...prev, privacyAgreed: undefined }));
+                        setErrors((prev) => ({
+                          ...prev,
+                          privacyAgreed: undefined,
+                        }));
                       }
                     }}
                     className="w-4 h-4"
@@ -180,7 +205,9 @@ const GetInTouch = () => {
                   </label>
                 </div>
                 {errors.privacyAgreed && (
-                  <span className="text-red-500 text-xs mt-1">{errors.privacyAgreed}</span>
+                  <span className="text-red-500 text-xs mt-1">
+                    {errors.privacyAgreed}
+                  </span>
                 )}
               </div>
 
@@ -192,10 +219,10 @@ const GetInTouch = () => {
                 {isPending ? "Sending..." : "Send message"}
               </Button>
             </form>
-          </div>
+        </div>
 
           {/* Map */}
-          <div className="rounded-lg overflow-hidden h-96 lg:h-auto">
+        <div className="rounded-lg overflow-hidden h-96 lg:h-auto">
             <iframe
               width="100%"
               height="100%"
@@ -205,7 +232,7 @@ const GetInTouch = () => {
               referrerPolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d963.6179371730356!2d-79.27375832139533!3d43.83166698826154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4d6bbc2dca6db%3A0xdcb08ca7548aaf0c!2s7011%20McCowan%20Rd%2C%20Markham%2C%20ON%20L3S%203L7%2C%20Canada!5e0!3m2!1sen!2sbd!4v1767039079283!5m2!1sen!2sbd"
             />
-          </div>
+        </div>
         </div>
       </div>
     </section>

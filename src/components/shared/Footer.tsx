@@ -29,7 +29,6 @@ const RESOURCES_LINKS = [
   { label: "Terms and Conditions", href: "/term-condition" },
   { label: "Shipping policy", href: "/shipping-policy" },
   { label: "Disclaimer", href: "/disclaimer" },
-
 ];
 
 const LEGAL_LINKS = [
@@ -124,7 +123,7 @@ export default function Footer() {
       </div>
 
       {/* Footer Bottom Bar */}
-      <div className="bg-white py-4 md:py-6">
+      <div className="bg-white py-2">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
             {/* Copyright */}
@@ -144,7 +143,7 @@ export default function Footer() {
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className="text-[#717680] hover:text-gray-400 transition-colors duration-300 text-xs md:text-sm font-medium"
+                      className="text-[#717680] hover:text-primary underline transition-colors duration-300 text-xs md:text-sm font-medium"
                       prefetch={false}
                       itemProp="url"
                     >

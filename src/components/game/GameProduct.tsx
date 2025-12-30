@@ -123,7 +123,7 @@ const GameProduct = () => {
   }
 
   return (
-    <section className="py-16">
+    <section className="py-8">
       <div>
         <div className="container mx-auto ">
           <h2 className="text-lg md:text-2xl xl:text-[48px] text-primary-foreground leading-[150%] font-semibold mb-8 text-center">
