@@ -13,7 +13,7 @@ const About = () => {
           src="/images/Texture Background.jpg"
           alt="shape"
           fill
-          className="object-contain  w-screen h-screen object-cover opacity-50"
+          className="w-screen h-screen object-cover opacity-40"
         />
       </div>
 

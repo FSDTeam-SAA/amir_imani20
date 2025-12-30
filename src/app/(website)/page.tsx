@@ -1,5 +1,4 @@
 import About from "@/components/home/About";
-import Products from "@/components/home/Products";
 import FAQ from "@/components/shared/FAQ";
 
 import GetInTouch from "@/components/shared/GetInTouch";

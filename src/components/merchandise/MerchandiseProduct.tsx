@@ -143,7 +143,7 @@ const MerchandiseProduct = () => {
             )
           )}
         </div>
-        {products.length > 2 && (
+        {products.length > 3 && (
           <Button
             onClick={() => setSelectedProduct(!selectedProduct)}
             className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"

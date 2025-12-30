@@ -1,32 +1,33 @@
 "use client";
 
-import { ArrowRight, MoveRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-end">
+    <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-evenly sm:justify-end">
       {/* Background image */}
       <div
-        className="absolute inset-0 bg-[url('/hero-section.jpg')] bg-cover bg-center transition-transform duration-700 hover:scale-105"
+        className="absolute inset-0 bg-[url('/hero-section.jpg')] bg-cover bg-right sm:bg-center transition-transform duration-700 hover:scale-105 origin-right"
         role="img"
         aria-label="Hero background"
       />
+      <div></div>
 
       {/* Gradient overlay */}
-      {/* <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(89,163,173,0.00)_42.79%,#3A7270_75.13%)] mix-blend-multiply" /> */}
+      <div className="md:hidden block absolute inset-0 bg-[linear-gradient(180deg,rgba(89,163,173,0.100)_10%,#3A7270_100%)] backdrop-blur-[3px] mix-blend-multiply" />
 
       {/* Center content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 md:pb-20 lg:pb-34">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-0 lg:pb-34">
         <div className="text-center max-w-3xl mx-auto">
           {/* Main heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-4 sm:mb-6 leading-[1.1] tracking-tight">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white md:text-primary-foreground mb-4 sm:mb-6 leading-[1.1] tracking-tight">
             <span className="block text-balance">Different Games</span>
             <span className="block text-balance">One Language</span>
           </h1>
 
-          <p className="text-primary-foreground text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-light">
+          <p className="text-white md:text-primary-foreground text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-light">
             DoUndo connects strategy, perception, imagination, and story through
             thirteen symbols that tie every experience together.
           </p>
