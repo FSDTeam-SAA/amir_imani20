@@ -17,7 +17,7 @@ interface CartItemProps {
   onRemove: (id: string) => void;
 }
 
-export default function CartItem({
+const CartItem = React.memo(function CartItem({
   id,
   title,
   description,
@@ -30,11 +30,11 @@ export default function CartItem({
   onRemove,
 }: CartItemProps) {
   return (
-    <div className="flex items-center gap-4 p-4 border border-[#EFEFEF] rounded-lg mb-4 bg-white hover:border-[#FF7F50]/30 transition-colors">
+    <div className="flex items-center gap-4 p-4 border border-[#EFEFEF] rounded-lg mb-4 bg-white hover:border-primary/30 transition-colors">
       {/* Remove Button */}
       <button
         onClick={() => onRemove(id)}
-        className="p-2 text-[#FF7F50] hover:bg-[#FF7F50]/10 rounded-full transition-colors shrink-0"
+        className="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors shrink-0"
       >
         <Trash2 className="w-5 h-5" />
       </button>
@@ -47,13 +47,13 @@ export default function CartItem({
       {/* Product Details */}
       <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex flex-col gap-1 max-w-[300px]">
-          <h3 className="text-base font-semibold text-[#FF7F50] leading-tight">
+          <h3 className="text-base font-semibold text-primary leading-tight">
             {title}
           </h3>
-          <p
-            className="text-xs text-[#8B8B8B] leading-relaxed"
+          <div
+            className="text-xs text-[#8B8B8B] leading-relaxed line-clamp-2"
             dangerouslySetInnerHTML={{
-              __html: description?.slice(0, 100) + "...",
+              __html: description,
             }}
           />
           {(color || size) && (
@@ -74,7 +74,7 @@ export default function CartItem({
                   <span className="text-[10px] uppercase font-bold text-[#8B8B8B]">
                     Size:
                   </span>
-                  <span className="text-[10px] font-bold text-[#111111]">
+                  <span className="text-[10px] font-bold text-primary-foreground">
                     {size}
                   </span>
                 </div>
@@ -85,7 +85,7 @@ export default function CartItem({
 
         {/* Price and Stepper */}
         <div className="flex flex-col items-end gap-3 shrink-0">
-          <span className="text-lg font-bold text-[#FF7F50]">
+          <span className="text-lg font-bold text-primary">
             ${price?.toFixed(2)}
           </span>
 
@@ -96,7 +96,7 @@ export default function CartItem({
             >
               <Minus className="w-3 h-3" />
             </button>
-            <span className="w-8 text-center text-sm font-medium text-[#333333]">
+            <span className="w-8 text-center text-sm font-medium text-primary">
               {quantity}
             </span>
             <button
@@ -110,4 +110,6 @@ export default function CartItem({
       </div>
     </div>
   );
-}
+});
+
+export default CartItem;

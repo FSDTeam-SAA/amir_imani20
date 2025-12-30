@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import ProductNavbar from "@/components/shared/ProductNavbar";
 import ProductFooter from "@/components/shared/ProductFooter";
 import CartItem from "@/components/shared/CartItem";
@@ -14,6 +13,7 @@ import {
   useRemoveFromCart,
 } from "@/hooks/use-cart-query";
 import { useCartLogic, getCartItemKey } from "@/hooks/use-cart-logic";
+import CartSkeleton from "@/components/shared/CartSkeleton";
 
 export default function CartPage() {
   // Fetch cart data
@@ -53,12 +53,7 @@ export default function CartPage() {
     return (
       <div className="min-h-screen bg-[#FBFBFB]">
         <ProductNavbar />
-        <main className="container mx-auto px-6 pt-32 pb-20 max-w-[1240px] flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4">
-            <Loader2 className="w-8 h-8 animate-spin text-[#FF7F50]" />
-            <p className="text-[#8B8B8B]">Loading your cart...</p>
-          </div>
-        </main>
+        <CartSkeleton />
         <ProductFooter />
       </div>
     );
@@ -72,7 +67,7 @@ export default function CartPage() {
         {/* Back Link */}
         <Link
           href="/game"
-          className="inline-flex items-center gap-2 text-[#FF7F50] text-sm font-semibold mb-8 hover:underline decoration-2 underline-offset-4 transition-all"
+          className="inline-flex items-center gap-2 text-primary text-sm font-semibold mb-8 hover:underline decoration-2 underline-offset-4 transition-all"
         >
           <ArrowLeft className="w-4 h-4" />
           Continue Shopping
