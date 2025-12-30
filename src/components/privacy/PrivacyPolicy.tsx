@@ -348,7 +348,7 @@ const PrivacyPolicy = () => {
                         Email:{" "}
                         <Link
                           href="mailto:privacy@doundogames.com"
-                          className=" hover:underline transition-colors"
+                          className="text-blue-600 hover:underline transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
