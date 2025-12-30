@@ -50,13 +50,13 @@ const ComingSoonGame = () => {
           {/* Left Column: Product Image */}
           <div className="relative group">
             <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-secondary/30 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-gray-100 shadow-2xl">
+            <div className="relative aspect-square overflow-hidden rounded-2xl border border-gray-100 ">
               <Image
                 src="/images/WalnizeProductCard.jpg"
                 alt="Walnize Game"
                 fill
                 priority
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-contain transition-transform duration-700 group-hover:scale-105"
               />
             </div>
           </div>
@@ -82,7 +82,7 @@ const ComingSoonGame = () => {
                 <DialogTrigger asChild>
                   <Button
                     size="lg"
-                    className="h-14 px-12 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                    className="h-14 px-12 rounded-full text-lg font-bold transition-all hover:-translate-y-1"
                   >
                     Subscribe
                   </Button>
@@ -121,7 +121,7 @@ const ComingSoonGame = () => {
             <div className="flex items-center justify-center lg:justify-start space-x-6 text-gray-400">
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-primary-foreground font-semibold text-2xl">
-                  2025
+                  2026
                 </span>
                 <span className="text-xs uppercase tracking-widest font-medium">
                   Release Year
