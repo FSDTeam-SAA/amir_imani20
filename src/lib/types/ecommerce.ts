@@ -62,7 +62,7 @@ export interface PaymentData {
 export interface CreatePaymentRequest {
   userId: string;
   totalAmount: number;
-  itemIds: string;
+  itemIds: string[];
 }
 
 export interface CreatePaymentResponse {

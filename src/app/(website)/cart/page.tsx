@@ -45,7 +45,7 @@ export default function CartPage() {
     createPayment({
       userId: cart.userId,
       totalAmount: subtotal,
-      itemIds: cart._id,
+      itemIds: [cart._id],
     });
   };
 
@@ -68,7 +68,7 @@ export default function CartPage() {
     <div className=" bg-[#FBFBFB]">
       {/* <ProductNavbar /> */}
 
-      <main className="container mx-auto px-6 pt-32 pb-20 max-w-[1240px]">
+      <main className="container mx-auto px-6 py-8">
         {/* Back Link */}
         <Link
           href="/game"
