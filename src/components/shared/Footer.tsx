@@ -28,6 +28,8 @@ const RESOURCES_LINKS = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms and Conditions", href: "/term-condition" },
   { label: "Shipping policy", href: "/shipping-policy" },
+  { label: "Disclaimer", href: "/disclaimer" },
+
 ];
 
 const LEGAL_LINKS = [

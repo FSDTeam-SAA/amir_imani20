@@ -57,7 +57,7 @@ const OurMission = () => {
 
   return (
     <section
-      className="py-16 md:py-20  bg-linear-to-b from-white to-gray-50"
+      className="py-16 md:py-20  "
       aria-labelledby="mission-heading"
       itemScope
       itemType="https://schema.org/AboutPage"
