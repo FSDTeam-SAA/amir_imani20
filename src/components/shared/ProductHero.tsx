@@ -16,6 +16,7 @@ interface ProductHeroProps {
 export default function ProductHero({ product }: ProductHeroProps) {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { addToCart } = useCart();
   const { data: session } = useSession();
 
@@ -51,19 +52,56 @@ export default function ProductHero({ product }: ProductHeroProps) {
     <section className="py-12 lg:py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
-        <div className="relative aspect-square w-full max-w-120 mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
-          {product.imgs?.length ? (
-            <Image
-              src={product.imgs?.[0]}
-              alt={product.productName}
-              fill
-              className="object-cover"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-200">
-              <span className="text-gray-400">No Image</span>
+        <div className="relative aspect-square w-full max-w-120 mx-auto lg:ml-0 overflow-hidden ">
+          <div className="flex gap-3 relative aspect-square">
+            {/* Thumbnails */}
+            <div className="w-20 flex flex-col gap-3 overflow-y-auto no-scrollbar">
+              {product.imgs && product.imgs.length > 0 ? (
+                product.imgs.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`relative w-full h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
+                      selectedImage === img || (!selectedImage && index === 0)
+                        ? "border-gray-900"
+                        : "border-transparent"
+                    }`}
+                    onClick={() => setSelectedImage(img)}
+                  >
+                    <Image
+                      src={img}
+                      alt={`${product.productName} thumbnail ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ))
+              ) : (
+                <div className="relative w-full h-20 shrink-0 border-2 border-transparent">
+                  <Image
+                    src={product.img || "/no-image.jpg"}
+                    alt={product.productName}
+                    fill
+                    className="object-cover rounded-md"
+                  />
+                </div>
+              )}
             </div>
-          )}
+            {/* Main Image */}
+            <div className="relative flex-1 h-full rounded-xl overflow-hidden bg-white shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
+              <Image
+                src={
+                  selectedImage ||
+                  (product.imgs && product.imgs.length > 0
+                    ? product.imgs[0]
+                    : product.img) ||
+                  "/no-image.jpg"
+                }
+                alt={product.productName}
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Right Column: Product Info */}

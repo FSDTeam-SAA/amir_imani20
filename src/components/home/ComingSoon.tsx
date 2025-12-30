@@ -141,14 +141,17 @@ const ComingSoon = () => {
 
         <div className="flex flex-wrap justify-center gap-8">
           {/* Main Product Card */}
-          {products.slice(0, 1).map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              handleAddToCart={handleAddToCart}
-              addingToCartId={addingToCartId}
-            />
-          ))}
+          {products
+            .filter((product) => product.productType === "card")
+            .slice(0, 1)
+            .map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                handleAddToCart={handleAddToCart}
+                addingToCartId={addingToCartId}
+              />
+            ))}
 
           {/* Coming Soon Teaser Card */}
           <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-primary/30 bg-secondary/50 p-8 flex flex-col items-center justify-center text-center transition-all hover:bg-secondary/80 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] max-w-[490px] min-h-[400px]">
