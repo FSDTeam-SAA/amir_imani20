@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import {  Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  fadeInUp,
+  staggerContainer,
+  accordionVariants,
+} from "@/config/animations";
 
 interface FAQItem {
   id?: number;
@@ -112,9 +118,16 @@ const FAQ = () => {
           Here are the top questions our players ask before getting started.
         </p>
 
-        <div className="max-w-4xl mx-auto space-y-1">
+        <motion.div
+          className="max-w-4xl mx-auto space-y-1"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {faqs.map((faq) => (
-            <div
+            <motion.div
+              variants={fadeInUp}
               key={faq.id}
               className="border-b border-gray-200  overflow-hidden hover:border-gray-300 transition"
             >
@@ -138,16 +151,24 @@ const FAQ = () => {
                 )}
               </button>
 
-              {openId === faq.id && (
-                <div className="px-6 pb-3">
-                  <p className="text-gray-700 text-lg leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
-            </div>
+              <AnimatePresence>
+                {openId === faq.id && (
+                  <motion.div
+                    className="px-6 pb-3 overflow-hidden"
+                    variants={accordionVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  >
+                    <p className="text-gray-700 text-lg leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

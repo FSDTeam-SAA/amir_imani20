@@ -29,7 +29,7 @@ const OurStory = () => {
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-16 lg:mb-20 max-w-3xl mx-auto">
           <div className="inline-flex items-center justify-center mb-4">
-            <span className="inline-block px-4 py-2 bg-[#f2e3c6] text-primary-foreground/70 text-xs font-semibold tracking-wide uppercase rounded-full">
+            <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs font-semibold tracking-wide uppercase rounded-full">
               About Us
             </span>
           </div>
@@ -53,7 +53,7 @@ const OurStory = () => {
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2">
                 {/* <div className="w-8 h-0.5 bg-amber-500"></div> */}
-                <span className="inline-block px-4 py-2 bg-[#f2e3c6] text-primary-foreground/70 text-xs font-semibold tracking-wide uppercase rounded-full">
+                <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs font-semibold tracking-wide uppercase rounded-full">
                   Who We Are
                 </span>
               </div>
@@ -124,8 +124,8 @@ const OurStory = () => {
               {/* Floating Badge */}
               {/* <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
-                    <span className="text-amber-600 font-bold">✓</span>
+                  <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                    <span className="text-primary font-bold">✓</span>
                   </div>
                   <div className="text-left">
                     <div className="text-xs font-semibold text-gray-900">

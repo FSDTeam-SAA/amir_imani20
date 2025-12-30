@@ -186,7 +186,11 @@ export default function Navbar() {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem asChild>
                         {profile?.role === "admin" ? (
-                          <Link href="/dashboard" className="cursor-pointer">
+                          <Link
+                            href="https://admin.doundogames.com/"
+                            className="cursor-pointer"
+                            target="_blank"
+                          >
                             Dashboard
                           </Link>
                         ) : (

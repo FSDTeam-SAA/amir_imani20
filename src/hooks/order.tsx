@@ -18,6 +18,7 @@ export interface Product {
   img: string;
   createdAt: string;
   updatedAt: string;
+  productType: string;
   __v: number;
 }
 

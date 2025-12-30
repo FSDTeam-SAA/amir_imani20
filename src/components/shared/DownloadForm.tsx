@@ -52,6 +52,9 @@ const DownloadForm = () => {
     mutation.mutate(values, {
       onSuccess: (data) => {
         console.log("Success:", data);
+        toast.success(
+          data.message || "Successfuly submitted for 'Print and Play'"
+        );
         // form.reset(); // optional
       },
       onError: (error) => {
