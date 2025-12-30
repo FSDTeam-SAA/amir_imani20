@@ -125,9 +125,9 @@ const MerchandiseProduct = () => {
     );
   }
   return (
-    <section className=" py-12">
-      <div className="container mx-auto py-12">
-        <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center">
+    <section className=" py-8">
+      <div className="container mx-auto">
+        <h2 className="text-lg md:text-2xl xl:text-[48px] text-primary-foreground leading-[150%] font-semibold mb-8 text-center">
           ALL Merchandise Product
         </h2>
 
@@ -143,7 +143,7 @@ const MerchandiseProduct = () => {
             )
           )}
         </div>
-        {products.length > 2 && (
+        {products.length > 3 && (
           <Button
             onClick={() => setSelectedProduct(!selectedProduct)}
             className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"

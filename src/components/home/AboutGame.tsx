@@ -90,8 +90,8 @@ const AboutGame = () => {
                 className="object-cover  w-full h-full"
               />
             </div> */}
-      <div className="container mx-auto rounded-xl overflow-hidden">
-        <section className="bg-secondary py-12 px-6 md:px-12 lg:px-[117px] space-y-9">
+      <div className="container mx-auto overflow-hidden">
+        <section className="bg-secondary py-12 px-6 md:px-12 lg:px-[117px] space-y-9 rounded-xl border border-[#EFEFEF]">
           {/* Header */}
           <header className="text-center space-y-2">
             <h2 className="text-primary-foreground text-2xl md:text-4xl lg:text-[48px] font-bold">

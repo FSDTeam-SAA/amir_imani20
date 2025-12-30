@@ -57,7 +57,9 @@ const MeetOurTeam = () => {
           <p className="inline-block text-primary-foreground bg-secondary text-base px-3 py-2 rounded-2xl">
             Team
           </p>
-          <h2 className="text-xl md:text-2xl xl:text-5xl">Meet Our Founders</h2>
+          <h2 className="text-xl md:text-2xl xl:text-6xl font-bold">
+            Meet Our Founders
+          </h2>
         </div>
         <div>
           {data.map((item, index) => (
@@ -83,13 +85,15 @@ const MeetOurTeam = () => {
                 <h4 className="text-xl lg:text-2xl text-gray-400 mb-4">
                   {item.position}
                 </h4>
-                <p className="text-gray-600 text-base md:text-lg">{item.discription}</p>
+                <p className="text-gray-600 text-base md:text-lg">
+                  {item.discription}
+                </p>
                 <p className=" flex gap-3 items-center pt-8">
                   <Link href={"#"}>
-                    <FaXTwitter className=" w-10 h-10 hover:rounded-full hover:bg-[#4296a2] p-2" />
+                    <FaXTwitter className=" w-10 h-10 hover:text-primary p-2 " />
                   </Link>
                   <Link href={"#"}>
-                    <FaLinkedinIn className=" w-10 h-10 hover:rounded-full hover:bg-[#4296a2] p-2" />
+                    <FaLinkedinIn className=" w-10 h-10 hover:text-primary p-2" />
                   </Link>
                 </p>
               </div>
@@ -114,7 +118,7 @@ const MeetOurTeam = () => {
                 endless ways to play. Start your journey today and bring
                 unforgettable moments home with every game.
               </p>
-              <Button className="hover:bg-[#4296a2] transform transition-all duration-300 py-5 rounded-2xl text-white mt-4">
+              <Button className="hover:bg-secondary transform transition-all duration-300 py-5 rounded-2xl text-white mt-4">
                 Get Your Game Now <MoveRightIcon />
               </Button>  <div
               ref={sectionRef}
