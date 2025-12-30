@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { IoLogoTiktok } from "react-icons/io5";
 import { IoLogoInstagram } from "react-icons/io5";
-import { FaFacebookF } from "react-icons/fa";
+// import { FaFacebookF } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io5";
 
 

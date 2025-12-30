@@ -4,14 +4,14 @@ import Link from "next/link";
 import React from "react";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
-import { Button } from "../ui/button";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+// import { Button } from "../ui/button";
+// import { motion, useScroll, useTransform } from "framer-motion";
+// import { useRef } from "react";
 
-import { MoveRightIcon } from "lucide-react";
-import GetInTouch from "../shared/GetInTouch";
+// import { MoveRightIcon } from "lucide-react";
+// import GetInTouch from "../shared/GetInTouch";
 const MeetOurTeam = () => {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  // const sectionRef = useRef<HTMLDivElement | null>(null);
 
   // const { scrollYProgress } = useScroll({
   //   target: sectionRef,
