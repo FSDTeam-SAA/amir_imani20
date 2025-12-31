@@ -57,7 +57,7 @@ const OurMission = () => {
 
   return (
     <section
-      className="py-16 md:py-20  "
+      className="my-12 md:my-20  "
       aria-labelledby="mission-heading"
       itemScope
       itemType="https://schema.org/AboutPage"
@@ -90,7 +90,7 @@ const OurMission = () => {
             aria-label="Mission tag"
           >
             <span
-              className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-sm font-semibold tracking-wide uppercase rounded-full border "
+              className="inline-block text-xs px-4 py-2 bg-secondary text-primary-foreground sm:text-sm font-semibold tracking-wide uppercase rounded-full border "
               itemProp="keywords"
             >
               Our Mission & Values
@@ -99,7 +99,7 @@ const OurMission = () => {
 
           <h1
             id="mission-heading"
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 leading-tight"
             itemProp="headline"
           >
             {missionData.title}
@@ -160,7 +160,7 @@ const OurMission = () => {
 
                   {/* Value Description */}
                   <p
-                    className="text-gray-700 leading-relaxed md:leading-loose text-base md:text-lg"
+                    className="text-gray-700 leading-relaxed md:leading-loose  md:text-lg   text-base"
                     itemProp="description"
                   >
                     {value.description}

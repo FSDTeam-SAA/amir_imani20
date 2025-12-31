@@ -74,12 +74,12 @@ const GetInTouch = () => {
   };
 
   return (
-    <section className="py-8 md:py-16 mx-4">
-      <div className="container mx-auto px-6 bg-secondary rounded-2xl border py-6 md:py-[95px] md:px-[150px]">
+    <section className="my-8 md:my-16 mx-4">
+      <div className="container mx-auto px-6 bg-secondary rounded-2xl border py-6 md:py-23.75 md:px-37.5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
           <div>
-            <h2 className="text-5xl font-bold text-primary-foreground mb-2 text-start">
+            <h2 className="text-2xl md:text-4xl lg:text-[48px] font-bold text-primary-foreground mb-2 text-start">
               Get in touch
             </h2>
             <p className="text-primary-foreground text-start mb-5 lg:mb-10 max-w-2xl">
