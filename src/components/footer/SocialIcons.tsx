@@ -9,7 +9,7 @@ import { IoLogoYoutube } from "react-icons/io5";
 
 const SocialIcons = () => {
   return (
-    <div className="flex space-x-4" aria-label="Social media links">
+    <div className="flex space-x-4 justify-center md:justify-start" aria-label="Social media links">
       {/* Facebook */}
       {/* <Link
         href="https://facebook.com"

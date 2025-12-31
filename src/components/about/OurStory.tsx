@@ -22,7 +22,7 @@ const OurStory = () => {
 
   return (
     <section
-      className=" py-16 md:py-10 bg-linear-to-b from-white to-amber-50/30"
+      className=" my-8 md:my-10 bg-linear-to-b from-white to-amber-50/30"
       aria-labelledby="story-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -53,7 +53,7 @@ const OurStory = () => {
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2">
                 {/* <div className="w-8 h-0.5 bg-amber-500"></div> */}
-                <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs font-semibold tracking-wide uppercase rounded-full">
+                <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs sm:text-xs font-semibold tracking-wide uppercase rounded-full">
                   Who We Are
                 </span>
               </div>
