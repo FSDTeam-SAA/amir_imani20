@@ -122,12 +122,14 @@ const AboutGame = () => {
 
             {/* Content Section */}
             <article className="space-y-4">
-              {product.feature && (
+              {/* {product.feature && (
                 <p className="text-primary text-base md:text-xl font-semibold leading-[150%]">
                   {product.feature}
                 </p>
-              )}
-
+              )} */}
+              <div>
+                <p className="bg-secondary rounded-full p-2 text-primary">Card Games </p>
+              </div>
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
                 {product.productName || "Untitled Game"}
               </h3>
