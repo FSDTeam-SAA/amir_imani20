@@ -83,7 +83,7 @@ const AboutGame = () => {
   )[0];
 
   return (
-    <section className=" relative py-16">
+    <section className=" relative py-8 md:py-16">
       {/* <div className="absolute inset-0 opacity-10 -z-10">
               <Image
                 src="/shape.png"

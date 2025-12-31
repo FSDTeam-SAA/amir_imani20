@@ -58,9 +58,11 @@ const SearchMotal = ({
     <section>
       <div className="search-motal  container mx-auto px-4">
         <AlertDialog open={open} onOpenChange={onSetSearchOpen}>
-          <AlertDialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+          <AlertDialogContent className="w-[95vw] md:max-w-3xl max-h-[80vh] overflow-hidden flex flex-col p-4 md:p-6">
             <AlertDialogHeader className="flex flex-row items-center gap-3 space-y-0">
-              <AlertDialogTitle className="hidden">Search Products</AlertDialogTitle>
+              <AlertDialogTitle className="hidden">
+                Search Products
+              </AlertDialogTitle>
               <Input
                 type="text"
                 placeholder="Search products..."
@@ -72,12 +74,12 @@ const SearchMotal = ({
               />
               <AlertDialogCancel className="mt-0">Close</AlertDialogCancel>
             </AlertDialogHeader>
-            
+
             <div className="flex-1 overflow-y-auto mt-4 pr-2">
               {loading && (
-                 <div className="flex justify-center p-4">
-                 <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-               </div>
+                <div className="flex justify-center p-4">
+                  <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
               )}
 
               {!loading && results.length > 0 && (
@@ -89,15 +91,20 @@ const SearchMotal = ({
                     {results.map((product) => (
                       <Link
                         key={product._id}
-                        href={product.productType === 'marchandice' ? `/merchandise/${product._id}` : `/product/${product._id}`}
+                        href={
+                          product.productType === "marchandice"
+                            ? `/merchandise/${product._id}`
+                            : `/product/${product._id}`
+                        }
                         onClick={() => onSetSearchOpen(false)}
-                        className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group"
+                        className="flex items-center gap-2 md:gap-4 p-2 md:p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group"
                       >
-                        <div className="relative w-16 h-16 shrink-0 rounded-md overflow-hidden bg-gray-100">
-                           <Image
+                        <div className="relative w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-md overflow-hidden bg-gray-100">
+                          <Image
                             src={
-                              (product.imgs && product.imgs.length > 0 ? product.imgs[0] : product.img) ||
-                              "/no-image.jpg"
+                              (product.imgs && product.imgs.length > 0
+                                ? product.imgs[0]
+                                : product.img) || "/no-image.jpg"
                             }
                             alt={product.productName}
                             fill
@@ -108,8 +115,8 @@ const SearchMotal = ({
                           <h4 className="font-medium text-gray-900 group-hover:text-cyan-600 transition-colors line-clamp-1">
                             {product.productName}
                           </h4>
-                          <p className="text-sm text-gray-500 line-clamp-1">
-                             {product.feature}
+                          <p className="text-xs md:text-sm text-gray-500 line-clamp-1">
+                            {product.feature}
                           </p>
                         </div>
                         <div className="font-semibold text-gray-900">
@@ -126,12 +133,12 @@ const SearchMotal = ({
                   No products found for &apos;{query}&apos;
                 </div>
               )}
-               
-               {!loading && query.trim() === "" && (
-                 <div className="text-center py-12 text-gray-400">
-                   Start typing to search...
-                 </div>
-               )}
+
+              {!loading && query.trim() === "" && (
+                <div className="text-center py-12 text-gray-400">
+                  Start typing to search...
+                </div>
+              )}
             </div>
             <AlertDialogFooter className="hidden">
               {/* Footer hidden as content manages itself, but kept for accessibility structure if needed */}

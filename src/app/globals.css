@@ -133,26 +133,48 @@ Link {
   cursor: pointer;
 }
 
-
-
 /* styles/globals.css */
 
 /* Quill Editor content styles */
-.ql-indent-1 { padding-left: 1.5em; }
-.ql-indent-2 { padding-left: 3em; }
-.ql-indent-3 { padding-left: 4.5em; }
-.ql-indent-4 { padding-left: 6em; }
-.ql-indent-5 { padding-left: 7.5em; }
-.ql-indent-6 { padding-left: 9em; }
-.ql-indent-7 { padding-left: 10.5em; }
-.ql-indent-8 { padding-left: 12em; }
+.ql-indent-1 {
+  padding-left: 1.5em;
+}
+.ql-indent-2 {
+  padding-left: 3em;
+}
+.ql-indent-3 {
+  padding-left: 4.5em;
+}
+.ql-indent-4 {
+  padding-left: 6em;
+}
+.ql-indent-5 {
+  padding-left: 7.5em;
+}
+.ql-indent-6 {
+  padding-left: 9em;
+}
+.ql-indent-7 {
+  padding-left: 10.5em;
+}
+.ql-indent-8 {
+  padding-left: 12em;
+}
 
-.ql-align-center { text-align: center; }
-.ql-align-right { text-align: right; }
-.ql-align-justify { text-align: justify; }
+.ql-align-center {
+  text-align: center;
+}
+.ql-align-right {
+  text-align: right;
+}
+.ql-align-justify {
+  text-align: justify;
+}
 
 /* Quill list styles */
-.ql-list { list-style-type: disc; }
+.ql-list {
+  list-style-type: disc;
+}
 .ql-list[data-checked="true"],
 .ql-list[data-checked="false"] {
   list-style-type: none;
@@ -167,7 +189,7 @@ Link {
 
 /* Custom styles for blog content */
 .blog-content h1 {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -176,7 +198,7 @@ Link {
 }
 
 .blog-content h2 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 600;
   margin-top: 1.75rem;
   margin-bottom: 0.875rem;
@@ -185,7 +207,7 @@ Link {
 }
 
 .blog-content h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
@@ -200,7 +222,7 @@ Link {
   color: #4b5563;
 }
 
-.blog-content ul, 
+.blog-content ul,
 .blog-content ol {
   margin-left: 1.5rem;
   margin-bottom: 1.25rem;
@@ -253,7 +275,7 @@ Link {
   background-color: #f3f4f6;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-size: 0.875rem;
 }
 
@@ -279,7 +301,7 @@ Link {
   margin: 1.5rem 0;
 }
 
-.blog-content th, 
+.blog-content th,
 .blog-content td {
   border: 1px solid #e5e7eb;
   padding: 0.75rem;
