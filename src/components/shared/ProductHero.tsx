@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
@@ -38,7 +38,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
 
     setIsAdding(true);
     if (!session?.user?.id) {
-      toast.error("Please sign in to add to cart.");
+      toast.error("Please sign in to add to Pre Order.");
       setIsAdding(false);
       return;
     }
@@ -237,7 +237,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
               disabled={isAdding}
               className="w-full h-14 bg-primary hover:bg-primary/80 text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50 "
             >
-              {isAdding ? "Adding..." : "Pre Order"}
+              {isAdding ? "Adding..." : "Pre Order"} <ShoppingCart />
             </Button>
 
             {/* Secondary Action */}
