@@ -90,7 +90,7 @@ export default function Footer() {
                 </Link>
               </div>
 
-              <p className="text-sm text-[#FFFFFF] lg:text-[19px] leading-relaxed max-w-xs">
+              <p className="text-sm text-[#FFFFFF] md:text-base leading-relaxed max-w-xs">
                 {COMPANY_INFO.description}
               </p>
 

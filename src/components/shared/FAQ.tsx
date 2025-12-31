@@ -111,10 +111,10 @@ const FAQ = () => {
   return (
     <section className="py-8 md:py-16 bg-white">
       <div className="container mx-auto">
-        <h2 className="md:text-3xl xl:text-5xl font-bold text-center text-[#181D27]">
+        <h2 className="text-2xl md:text-4xl lg:text-[48px] font-bold text-center text-[#181D27]">
           Frequently Asked Questions
         </h2>
-        <p className="text-[#6C757D] text-base md:text-xl leading-[150%]  mb-12 text-center mt-2">
+        <p className="text-[#6C757D] text-base md:text-xl leading-[150%] mb-8  md:mb-12 text-center mt-2">
           Here are the top questions our players ask before getting started.
         </p>
 

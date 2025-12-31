@@ -127,7 +127,7 @@ const ComingSoon = () => {
     <section className="relative px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto py-8 md:py-20">
         <div className="text-center max-w-[1146px] mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-primary-foreground font-bold mb-6 tracking-tight">
+          <h2 className="text-2xl md:text-4xl lg:text-[48px] text-primary-foreground font-bold mb-6 tracking-tight">
             Symbolverse: Stories Told Through Games
           </h2>
           <p className="text-gray-600 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
