@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
@@ -17,15 +17,28 @@ export default function ProductHero({ product }: ProductHeroProps) {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const { addToCart } = useCart();
   const { data: session } = useSession();
 
   console.log(session?.user.id);
 
   const handleAddToCart = async () => {
+    if (product.productType === "marchandice") {
+      if (!selectedSize && product.size && product.size.length > 0) {
+        toast.error("Please select a size.");
+        return;
+      }
+      if (!selectedColor && product.color && product.color.length > 0) {
+        toast.error("Please select a color.");
+        return;
+      }
+    }
+
     setIsAdding(true);
     if (!session?.user?.id) {
-      toast.error("Please sign in to add to cart.");
+      toast.error("Please sign in to add to Pre Order.");
       setIsAdding(false);
       return;
     }
@@ -35,6 +48,8 @@ export default function ProductHero({ product }: ProductHeroProps) {
           {
             productId: product._id,
             quantity,
+            color: selectedColor || undefined,
+            size: selectedSize || undefined,
           },
         ],
         session?.user?.id as string
@@ -160,13 +175,69 @@ export default function ProductHero({ product }: ProductHeroProps) {
               </div>
             </div>
 
+            {product.productType === "marchandice" && (
+              <div className="space-y-6">
+                {/* Size Selection */}
+                {product.size && product.size.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
+                      Size
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {product.size.map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedSize(size)}
+                          className={`px-4 py-2 text-sm font-medium border rounded-md transition-all ${
+                            selectedSize === size
+                              ? "border-primary bg-primary/5 text-primary"
+                              : "border-[#b4b4b4] text-primary-foreground hover:border-primary"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Color Selection */}
+                {product.color && product.color.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
+                      Color
+                    </label>
+                    <div className="flex flex-wrap gap-3">
+                      {product.color.map((color) => (
+                        <button
+                          key={color}
+                          onClick={() => setSelectedColor(color)}
+                          title={color}
+                          className={`w-8 h-8 rounded-full border-2 transition-all flex items-center justify-center ${
+                            selectedColor === color
+                              ? "border-primary scale-110"
+                              : "border-transparent hover:border-[#b4b4b4]"
+                          }`}
+                        >
+                          <div
+                            className="w-6 h-6 rounded-full border border-black/10 shadow-sm"
+                            style={{ backgroundColor: color.toLowerCase() }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* CTA Button */}
             <Button
               onClick={handleAddToCart}
               disabled={isAdding}
               className="w-full h-14 bg-primary hover:bg-primary/80 text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50 "
             >
-              {isAdding ? "Adding..." : "Pre Order"}
+              {isAdding ? "Adding..." : "Pre Order"} <ShoppingCart />
             </Button>
 
             {/* Secondary Action */}

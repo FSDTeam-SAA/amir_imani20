@@ -77,9 +77,11 @@ const AboutGame = () => {
       </section>
     );
   }
-  console.log("image", products[1]);
-  const product = products[0];
-  console.log("data", product);
+
+  const product = products.filter(
+    (product) => product.productType === "card"
+  )[0];
+
   return (
     <section className=" relative py-16">
       {/* <div className="absolute inset-0 opacity-10 -z-10">
@@ -103,10 +105,10 @@ const AboutGame = () => {
           </header>
 
           {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="flex flex-col-8 gap-8 lg:gap-12 items-center">
             {/* Image Section */}
             <figure className="flex justify-center lg:justify-start">
-              <div className="relative w-full max-w-[700px] aspect-[5/3]">
+              <div className="relative w-full max-w-[700px] aspect-square">
                 <Image
                   src={product.imgs?.[0] || "/no-image.jpg"}
                   alt={`${product.productName || "Game"} preview image`}
@@ -120,12 +122,14 @@ const AboutGame = () => {
 
             {/* Content Section */}
             <article className="space-y-4">
-              {product.feature && (
-                <p className="text-[#4597A0] text-base md:text-xl font-semibold leading-[150%]">
+              {/* {product.feature && (
+                <p className="text-primary text-base md:text-xl font-semibold leading-[150%]">
                   {product.feature}
                 </p>
-              )}
-
+              )} */}
+              <div>
+                <p className="bg-secondary rounded-full p-2 text-primary">Card Games </p>
+              </div>
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
                 {product.productName || "Untitled Game"}
               </h3>

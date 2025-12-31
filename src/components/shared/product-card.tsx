@@ -62,7 +62,7 @@ export default function ProductCard({
             <div className="flex flex-col sm:flex-row gap-3 transition-all duration-300 ">
               <Button
                 variant="secondary"
-                className="flex-1 bg-white hover:bg-gray-100 text-primary-foreground font-semibold"
+                className="flex-1 hover:bg-white bg-secondary text-primary-foreground font-semibold"
                 onClick={(e) => handleAddToCart(e, product)}
                 disabled={isAddingToCart}
               >

@@ -13,7 +13,7 @@ interface OrderSummaryProps {
   isDisabled?: boolean;
 }
 
-export default function OrderSummary({
+const OrderSummary = React.memo(function OrderSummary({
   subtotal,
   // shipping,
   // tax,
@@ -69,4 +69,6 @@ export default function OrderSummary({
       </div>
     </div>
   );
-}
+});
+
+export default OrderSummary;
