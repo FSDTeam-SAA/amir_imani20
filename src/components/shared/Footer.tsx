@@ -72,23 +72,25 @@ export default function Footer() {
       {/* Main Footer Content */}
       <div className="bg-[#3D8D9A] text-white py-10 md:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-1 ">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4">
             {/* Company Info - Column 1 */}
-            <div className="space-y-4 lg:col-span-2">
+            <div className="col-span-2 md:col-span-1 lg:col-span-2 space-y-4">
               <div className="flex items-center space-x-2">
-                <Image
-                  src={COMPANY_INFO.logo}
-                  alt={COMPANY_INFO.logoAlt}
-                  width={320}
-                  height={47}
-                  className=" w-full object-cover max-w-81"
-                  priority={false}
-                  loading="lazy"
-                  // sizes="(max-width: 328px) 100px, 120px"
-                />
+                <Link href="/" className="block">
+                  <Image
+                    src={COMPANY_INFO.logo}
+                    alt={COMPANY_INFO.logoAlt}
+                    width={320}
+                    height={47}
+                    className=" w-full object-cover max-w-81"
+                    priority={false}
+                    loading="lazy"
+                    // sizes="(max-width: 328px) 100px, 120px"
+                  />
+                </Link>
               </div>
 
-              <p className="text-sm text-[#FFFFFF] lg:text-[19px] leading-relaxed max-w-xs">
+              <p className="text-sm text-[#FFFFFF] md:text-base leading-relaxed max-w-xs">
                 {COMPANY_INFO.description}
               </p>
 
@@ -104,7 +106,7 @@ export default function Footer() {
             <FooterLinks title="Resources" links={RESOURCES_LINKS} />
 
             {/* Newsletter - Column 4 */}
-            <div className="lg:col-span-2">
+            <div className="col-span-2 md:col-span-1 lg:col-span-2">
               <h3 className="font-semibold text-lg mb-4">Stay Updated</h3>
               {/* <p className="text-white/80 text-sm mb-4">
                 Subscribe to our newsletter for the latest updates and offers.
