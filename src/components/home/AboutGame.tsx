@@ -92,7 +92,7 @@ const AboutGame = () => {
                 className="object-cover  w-full h-full"
               />
             </div> */}
-      <div className="container mx-auto overflow-hidden">
+      <div className="container mx-auto">
         <section className="bg-secondary py-12 px-6 md:px-12 lg:px-[117px] space-y-9 rounded-xl border border-[#EFEFEF]">
           {/* Header */}
           <header className="text-center space-y-2">
@@ -105,31 +105,26 @@ const AboutGame = () => {
           </header>
 
           {/* Content Grid */}
-          <div className="flex flex-col-8 gap-8 lg:gap-12 items-center">
+          <div className="lg:flex lg:flex-row lg:gap-12 items-center">
             {/* Image Section */}
-            <figure className="flex justify-center lg:justify-start">
-              <div className="relative w-full max-w-[700px] aspect-square">
+            <figure className="w-full lg:w-1/2 pb-6 ">
+              <div className="relative w-full max-w-[700px] aspect-[5/3] mx-auto lg:mx-0">
                 <Image
                   src={product.imgs?.[0] || "/no-image.jpg"}
                   alt={`${product.productName || "Game"} preview image`}
-                  width={700}
-                  height={420}
-                  className="w-full h-full rounded-lg shadow-lg object-cover"
+                  fill
+                  className="rounded-lg shadow-lg object-cover"
                   priority
                 />
               </div>
             </figure>
 
             {/* Content Section */}
-            <article className="space-y-4">
-              {/* {product.feature && (
-                <p className="text-primary text-base md:text-xl font-semibold leading-[150%]">
-                  {product.feature}
-                </p>
-              )} */}
-              <div>
-                <p className="bg-secondary rounded-full p-2 text-primary">Card Games </p>
-              </div>
+            <article className="space-y-4 lg:w-1/2 overflow-hidden box-border">
+              <span className="bg-secondary rounded-full lg:px-4 hidden lg:block py-1 text-primary text-sm font-medium">
+                Card Games
+              </span>
+
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
                 {product.productName || "Untitled Game"}
               </h3>
@@ -137,9 +132,9 @@ const AboutGame = () => {
               {product.description && (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: product.description?.slice(0, 500),
+                    __html: product.description,
                   }}
-                  className="text-gray-700 text-sm md:text-base leading-relaxed line-clamp-3 lg:line-clamp-4"
+                  className="text-gray-700 text-sm md:text-base leading-relaxed line-clamp-4"
                 />
               )}
 
