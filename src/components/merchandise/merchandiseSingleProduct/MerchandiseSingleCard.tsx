@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Minus, Plus } from "lucide-react";
+import { Check, Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
@@ -63,9 +63,9 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
         ],
         session?.user?.id as string
       );
-      toast.success(`${product.productName} added to cart!`);
+      toast.success(`${product.productName} added to cart for pre-order!`);
     } catch (error) {
-      toast.error("Failed to add to cart. Please try again.");
+      toast.error("Failed to add to cart for pre-order. Please try again.");
       console.error("Add to cart error:", error);
     } finally {
       setIsAdding(false);
@@ -84,7 +84,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
                     key={index}
                     className={`relative w-full h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
                       selectedImage === img || (!selectedImage && index === 0)
-                        ? "border-gray-900"
+                        ? "border-primary"
                         : "border-transparent"
                     }`}
                     onClick={() => setSelectedImage(img)}
@@ -177,11 +177,11 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
             </div>
             <div>
               {/* Color and Size Options */}
-              <div className="flex gap-12 mb-7 ">
+              <div className="md:flex items-center justify-between gap-12 mb-7 md:space-y-0 space-y-4">
                 {(product.color || product.colors) &&
                   (product.color?.length || 0) + (product.colors?.length || 0) >
                     0 && (
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 ">
                       <span className="text-sm font-medium min-w-[60px]">
                         Colors:
                       </span>
@@ -190,9 +190,9 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
                           <div
                             key={color}
                             onClick={() => setSelectColor(color)}
-                            className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer border ${
+                            className={`w-8 h-8 rounded-full flex items-center justify-center cursor-pointer border ${
                               selectColor === color
-                                ? "border-black ring-1 ring-black"
+                                ? "border-primary ring-1 ring-primary"
                                 : "border-gray-200"
                             }`}
                             style={{
@@ -223,7 +223,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
                           <div
                             key={size}
                             onClick={() => setSelectSize(size)}
-                            className={`w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer text-xs font-bold transition-colors ${
+                            className={`w-10 h-10 rounded-lg flex items-center justify-center uppercase cursor-pointer text-sm font-medium transition-colors ${
                               selectSize === size
                                 ? "bg-[#111111] text-white"
                                 : "bg-[#EFEFEF] text-[#111111] hover:bg-gray-200"
@@ -242,7 +242,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
                 disabled={isAdding}
                 className="w-full h-14 bg-primary hover:bg-[#111111] text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50"
               >
-                {isAdding ? "Adding..." : "Add to Cart"}
+                {isAdding ? "Adding..." : "Pre-Order"} <ShoppingCart />
               </Button>
 
               {/* Secondary Action */}
