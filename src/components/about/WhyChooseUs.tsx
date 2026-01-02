@@ -24,7 +24,7 @@ const WhyChooseUs = () => {
     },
   ];
   return (
-    <section className="my-16">
+    <section className="my-10 md:my-16 lg:my-20">
       <div className="">
         <h2 className="text-2xl md:text-5xl font-bold text-center text-primary-foreground">
           Why We’re Unique?
