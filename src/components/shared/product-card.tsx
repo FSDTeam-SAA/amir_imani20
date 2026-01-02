@@ -25,7 +25,11 @@ export default function ProductCard({
   return (
     <Link
       key={product._id}
-      href={`/product/${product._id}`}
+      href={`${
+        product.productType === "card"
+          ? `/product/${product._id}`
+          : `/merchandise/${product._id}`
+      }`}
       className="group block w-full max-w-[496px]"
     >
       <div className="relative aspect-[496/678] overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
