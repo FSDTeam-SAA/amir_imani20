@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
-import { ShoppingCart } from "lucide-react";
+import { MoveRight, ShoppingCart } from "lucide-react";
 import { Product } from "@/lib/types/ecommerce";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export default function ProductCard({
   handleAddToCart,
   addingToCartId,
 }: ProductCardProps) {
-  const isAddingToCart = addingToCartId === product._id;
+  const isAddingToCart = addingToCartId === product?._id;
 
   return (
     <Link
@@ -41,7 +41,7 @@ export default function ProductCard({
             src={product?.imgs?.[0] || product?.img || "/no-image.jpg"}
             width={496}
             height={678}
-            alt={product.productName}
+            alt={product?.productName}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
 
@@ -56,14 +56,14 @@ export default function ProductCard({
           <div className="absolute inset-0 flex flex-col gap-3 justify-end p-6 z-20">
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 line-clamp-2">
-                {product.productName}
+                {product?.productName}
               </h3>
               <p className="text-white/90 text-lg font-semibold mb-4">
-                ${product.price}
+                ${product?.price}
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 transition-all duration-300 ">
+            <div className="flex sm:flex-row gap-3 transition-all duration-300 ">
               <Button
                 variant="secondary"
                 className="flex-1 hover:bg-white bg-secondary text-primary-foreground font-semibold"
@@ -81,7 +81,7 @@ export default function ProductCard({
               <Button
                 className="flex-1 bg-primary hover:bg-primary/80 text-white font-semibold"
                 onClick={(e) => handleAddToCart(e, product, true)}
-                disabled={addingToCartId === product._id}
+                disabled={addingToCartId === product?._id}
               >
                 Pre-order
                 {/* <MoveRight className="w-4 h-4 ml-2" /> */}

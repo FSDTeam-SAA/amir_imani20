@@ -79,11 +79,11 @@ const AboutGame = () => {
   }
 
   const product = products.filter(
-    (product) => product.productType === "card"
+    (product) => product?.productType === "card"
   )[0];
 
   return (
-    <section className=" relative py-8 md:py-16">
+    <section className=" relative my-16 md:my-20">
       {/* <div className="absolute inset-0 opacity-10 -z-10">
               <Image
                 src="/shape.png"
@@ -93,9 +93,9 @@ const AboutGame = () => {
               />
             </div> */}
       <div className="container mx-auto">
-        <section className="bg-secondary py-12 px-6 md:px-12 lg:px-[117px] space-y-9 rounded-xl border border-[#EFEFEF]">
+        <section className="bg-secondary my-12 px-6 py-8 md:px-12 lg:px-[117px] space-y-9 rounded-xl border border-[#EFEFEF]">
           {/* Header */}
-          <header className="text-center space-y-2">
+          <header className="text-center space-y-2 ">
             <h2 className="text-primary-foreground text-2xl md:text-4xl lg:text-[48px] font-bold">
               About Game
             </h2>
@@ -110,8 +110,8 @@ const AboutGame = () => {
             <figure className="w-full lg:w-1/2 pb-6 ">
               <div className="relative w-full max-w-[700px] aspect-[5/3] mx-auto lg:mx-0">
                 <Image
-                  src={product.imgs?.[0] || "/no-image.jpg"}
-                  alt={`${product.productName || "Game"} preview image`}
+                  src={product?.imgs?.[0] || "/no-image.jpg"}
+                  alt={`${product?.productName || "Game"} preview image`}
                   fill
                   className="rounded-lg shadow-lg object-cover"
                   priority
@@ -126,20 +126,23 @@ const AboutGame = () => {
               </span>
 
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
-                {product.productName || "Untitled Game"}
+                {product?.productName || "Untitled Game"}
               </h3>
 
-              {product.description && (
+              {product?.description && (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: product.description,
+                    __html: product?.description,
                   }}
                   className="text-gray-700 text-sm md:text-base leading-relaxed line-clamp-4"
                 />
               )}
 
               <div className="pt-6 lg:pt-10">
-                <Link href={`/product/${product._id}`} className="inline-block">
+                <Link
+                  href={`/product/${product?._id}`}
+                  className="inline-block"
+                >
                   <Button className="px-6 py-2.5 group">
                     Explore More
                     <MoveRight className="ml-2 transition-transform group-hover:translate-x-1" />

@@ -64,8 +64,8 @@ const DownloadForm = () => {
   };
 
   return (
-    <section className="w-full flex justify-center py-16 px-8 rounded-2xl">
-      <div className="w-full max-w-2xl rounded-xl bg-secondary p-6 shadow-sm">
+    <section className="w-full flex justify-center my-10 lg:my-20 lg:px-8 rounded-2xl">
+      <div className="w-full lg:max-w-2xl rounded-xl bg-secondary p-6 shadow-sm">
         <h2 className="text-center text-lg font-semibold mb-6">
           Print and play
         </h2>
@@ -82,7 +82,7 @@ const DownloadForm = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your name"
-                      className="rounded-full"
+                      className="rounded-full text-sm lg:text-base"
                       {...field}
                     />
                   </FormControl>
@@ -101,7 +101,7 @@ const DownloadForm = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your email"
-                      className="rounded-full"
+                      className="rounded-full text-sm lg:text-base"
                       {...field}
                     />
                   </FormControl>

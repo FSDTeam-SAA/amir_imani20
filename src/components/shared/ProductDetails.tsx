@@ -11,12 +11,12 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const isCard = product.productType === "card";
 
   return (
-    <section className="py-12 border-t border-[#EFEFEF] overflow-hidden ">
+    <section className="my-12 border-t border-[#EFEFEF] overflow-hidden ">
       <div className="container mx-auto px-4">
         <div
           className={`grid grid-cols-1 ${
             isCard ? "lg:grid-cols-12" : "lg:grid-cols-1"
-          } gap-8 mx-auto`}
+          } lg:gap-8 mx-auto`}
         >
           {/* LEFT CONTENT */}
           <div className={isCard ? "lg:col-span-7" : "lg:col-span-1"}>
@@ -43,7 +43,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
 export const ProductDetailsSkeleton = () => {
   return (
-    <section className="py-12 border-t border-[#EFEFEF]">
+    <section className="my-12 border-t border-[#EFEFEF]">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-7">
