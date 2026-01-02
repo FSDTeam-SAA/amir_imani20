@@ -54,7 +54,7 @@ const MeetOurTeam = () => {
     <section className="my-16 lg:my-20">
       <div className="container mx-auto">
         <div className="text-center space-y-2">
-          <p className="text-xs  inline-block text-primary-foreground bg-secondary sm:text-sx px-3 py-2 rounded-2xl">
+          <p className="inline-block text-xs px-4 py-2 bg-secondary text-primary-foreground sm:text-sm font-semibold tracking-wide uppercase rounded-full border">
             Team
           </p>
           <h2 className="text-2xl md:text-4xl xl:text-5xl font-bold">

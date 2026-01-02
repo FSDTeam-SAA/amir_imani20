@@ -141,11 +141,11 @@ const OurMission = () => {
                 <div className="relative z-10">
                   {/* Icon Container */}
                   <div
-                    className={`inline-flex items-center justify-center p-4 bg-white rounded-full mb-6 border`}
+                    className={`inline-flex items-center justify-center p-4 bg-white rounded-full mb-6 `}
                     aria-hidden="true"
                   >
                     <IconComponent
-                      className={`w-7 h-7 text-primary-foreground`}
+                      className={`w-7 h-7 text-primary`}
                       aria-label={`${value.title} icon`}
                     />
                   </div>

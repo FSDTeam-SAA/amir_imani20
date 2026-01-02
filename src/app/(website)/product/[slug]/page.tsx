@@ -68,7 +68,7 @@ export default function ProductPage() {
 
       {/* <ProductNavbar /> */}
 
-      <main className="relative z-10 pb-20 container mx-auto px-6 lg:px-0  max-w-6xl">
+      <main className="relative z-10 lg:mb-20 container mx-auto px-6 lg:px-0  max-w-6xl">
         <ProductHero product={product} />
         <ProductDetails product={product} />
         <MediaSection videoLink={product.videoLink} />
