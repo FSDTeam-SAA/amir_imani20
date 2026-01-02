@@ -123,10 +123,10 @@ const GameProduct = () => {
   }
 
   return (
-    <section className="py-8">
+    <section className="my-16 lg:my-20">
       <div>
-        <div className="container mx-auto ">
-          <h2 className="text-lg md:text-2xl xl:text-[48px] text-primary-foreground leading-[150%] font-semibold mb-8 text-center">
+        <div className="container mx-auto w-[95%] md:w-full ">
+          <h2 className="text-lg md:text-2xl xl:text-[48px]  text-primary-foreground leading-[150%] font-semibold mb-8 text-center">
             Play, Explore & Discover Your Next Adventure
           </h2>
 

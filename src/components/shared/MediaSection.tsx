@@ -29,7 +29,7 @@ export default function MediaSection({ videoLink }: MediaSectionProps) {
   const embedUrl = videoLink ? getYouTubeEmbedUrl(videoLink) : null;
 
   return (
-    <section className="py-12 border-t border-[#EFEFEF]">
+    <section className="my-10 border-[#EFEFEF]">
       <h2 className="text-[#0E1D2B] text-2xl md:text-3xl lg:text-5xl mb-5 text-center">
         Watch To Learn
       </h2>

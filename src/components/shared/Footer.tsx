@@ -57,7 +57,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="text-white"
+      className="text-white "
       role="contentinfo"
       aria-label="Website footer"
       itemScope
@@ -82,7 +82,7 @@ export default function Footer() {
                     alt={COMPANY_INFO.logoAlt}
                     width={320}
                     height={47}
-                    className=" w-full object-cover max-w-81"
+                    className="w-[60%] md:w-full object-cover max-w-81"
                     priority={false}
                     loading="lazy"
                     // sizes="(max-width: 328px) 100px, 120px"

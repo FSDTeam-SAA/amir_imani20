@@ -64,18 +64,18 @@ export default function ProductHero({ product }: ProductHeroProps) {
   };
 
   return (
-    <section className="py-8">
+    <section className="my-10 lg:my-20">
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
         <div className="relative aspect-square w-full mx-auto lg:ml-0 overflow-hidden col-span-4 gap-3">
-          <div className="flex gap-3 relative aspect-square">
+          <div className="flex flex-col-reverse md:flex-row gap-3 relative aspect-square">
             {/* Thumbnails */}
-            <div className="w-20 flex flex-col gap-3 overflow-y-auto no-scrollbar">
+            <div className="flex flex-row md:flex-col gap-3 overflow-x-auto md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-20">
               {product.imgs && product.imgs.length > 0 ? (
                 product.imgs.map((img, index) => (
                   <div
                     key={index}
-                    className={`relative w-full h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
+                    className={`relative w-20 h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
                       selectedImage === img || (!selectedImage && index === 0)
                         ? "border-primary"
                         : "border-transparent"
@@ -91,7 +91,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                   </div>
                 ))
               ) : (
-                <div className="relative w-full h-20 shrink-0 border-2 border-transparent">
+                <div className="relative w-20 h-20 shrink-0 border-2 border-transparent">
                   <Image
                     src={product.img || "/no-image.jpg"}
                     alt={product.productName}

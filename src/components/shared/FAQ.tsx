@@ -109,7 +109,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-8 md:py-16 bg-white">
+    <section className="my-16 md:my-20` ">
       <div className="container mx-auto">
         <h2 className="text-2xl md:text-4xl lg:text-[48px] font-bold text-center text-[#181D27]">
           Frequently Asked Questions
@@ -160,7 +160,7 @@ const FAQ = () => {
                     animate="visible"
                     exit="exit"
                   >
-                    <p className="text-gray-700 text-lg leading-relaxed">
+                    <p className="text-gray-700 text-sm md:text-lg leading-relaxed">
                       {faq.answer}
                     </p>
                   </motion.div>
