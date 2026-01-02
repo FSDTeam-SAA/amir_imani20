@@ -64,7 +64,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
   };
 
   return (
-    <section className="my-10 lg:my-20">
+    <section className="my-10 md:my-16 lg:my-20">
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
         <div className="relative aspect-square w-full mx-auto lg:ml-0 overflow-hidden col-span-4 gap-3">
