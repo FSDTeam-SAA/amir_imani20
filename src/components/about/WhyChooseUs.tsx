@@ -24,20 +24,20 @@ const WhyChooseUs = () => {
     },
   ];
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-6">
-        <h2 className="text-2xl md:text-5xl font-bold text-center text-[#181D27]">
+    <section className="my-16">
+      <div className="">
+        <h2 className="text-2xl md:text-5xl font-bold text-center text-primary-foreground">
           Why We’re Unique?
         </h2>
 
         <ul className="md:mt-12 grid gap-8 md:gap-12 max-w-4xl mx-auto text-center">
-          {data.map((item, idx) => (
+          {data?.map((item, idx) => (
             <li key={idx} className="mb-1">
-              <h3 className="text-xl md:text-2xl font-semibold text-[#181D27] leading-[150%] text-center mb-4 mt-8">
-                {item.title}
+              <h3 className="text-xl md:text-2xl font-semibold text-primary-foreground leading-[150%] text-center mb-4 mt-4 md:mt-8">
+                {item?.title}
               </h3>
               <p className="text-[#181D27] text-base lg:text-lg  leading-[150%]">
-                {item.description}
+                {item?.description}
               </p>
             </li>
           ))}

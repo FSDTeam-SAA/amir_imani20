@@ -53,22 +53,22 @@ const ComingSoon = () => {
     e.stopPropagation();
 
     if (!session?.user?.id) {
-      toast.error("Please sign in to add to cart.");
+      toast.error("Please sign in to add to Pre-order cart.");
       return;
     }
 
-    setAddingToCartId(product._id);
+    setAddingToCartId(product?._id);
     try {
       await addToCart(
         [
           {
-            productId: product._id,
+            productId: product?._id,
             quantity: 1,
           },
         ],
         session.user.id
       );
-      toast.success(`${product.productName} added to cart!`);
+      toast.success(`${product?.productName} added to cart!`);
       if (redirect) {
         router.push("/cart");
       }
@@ -108,7 +108,7 @@ const ComingSoon = () => {
     );
   }
 
-  if (products.length === 0) {
+  if (products?.length === 0) {
     return (
       <section className="py-8 md:py-16 bg-white">
         <div className="container mx-auto px-6">
@@ -124,7 +124,7 @@ const ComingSoon = () => {
   }
 
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8">
+    <section className="relative ">
       <div className="container mx-auto py-8 md:py-20">
         <div className="text-center max-w-[1146px] mx-auto mb-12">
           <h2 className="text-2xl md:text-4xl lg:text-[48px] text-primary-foreground font-bold mb-6 tracking-tight">
@@ -142,11 +142,11 @@ const ComingSoon = () => {
         <div className="flex flex-wrap justify-center gap-8">
           {/* Main Product Card */}
           {products
-            .filter((product) => product.productType === "card")
+            ?.filter((product) => product?.productType === "card")
             .slice(0, 1)
             .map((product) => (
               <ProductCard
-                key={product._id}
+                key={product?._id}
                 product={product}
                 handleAddToCart={handleAddToCart}
                 addingToCartId={addingToCartId}
