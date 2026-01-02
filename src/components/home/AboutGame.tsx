@@ -37,7 +37,7 @@ const AboutGame = () => {
 
   if (loading) {
     return (
-      <section className="py-16 bg-white">
+      <section className="md:my-16 lg:my-20 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
             Our Products
@@ -83,7 +83,7 @@ const AboutGame = () => {
   )[0];
 
   return (
-    <section className=" relative my-16 md:my-20">
+    <section className=" relative my-10 md:my-16 lg:my-20">
       {/* <div className="absolute inset-0 opacity-10 -z-10">
               <Image
                 src="/shape.png"

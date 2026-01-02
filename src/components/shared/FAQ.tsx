@@ -25,18 +25,18 @@ const FAQ = () => {
       answer:
         "DoUndo is a two-player strategy board game built around a unique system of symbols, layered memory, and psychological reading. It is designed to be easy to learn but deeply replayable, combining logic, pattern recognition, and interpretation of your opponent's intentions.",
     },
-    {
-      id: 2,
-      question: "Is DoUndo suitable for children?",
-      answer:
-        "DoUndo can be enjoyed by families and older children, but it contains small components and is not suitable for very young children. Please always follow the age recommendation on the box and ensure that young players are supervised by an adult.",
-    },
-    {
-      id: 3,
-      question: "Is DoUndo a fortune-telling or psychological tool?",
-      answer:
-        "DoUndo is first and foremost a strategy and entertainment game. Some related products or content may include symbolic or narrative experiences, but these are for creative and entertainment purposes only and should not be treated as psychological, medical, financial, or legal advice.",
-    },
+    // {
+    //   id: 2,
+    //   question: "Is DoUndo suitable for children?",
+    //   answer:
+    //     "DoUndo can be enjoyed by families and older children, but it contains small components and is not suitable for very young children. Please always follow the age recommendation on the box and ensure that young players are supervised by an adult.",
+    // },
+    // {
+    //   id: 3,
+    //   question: "Is DoUndo a fortune-telling or psychological tool?",
+    //   answer:
+    //     "DoUndo is first and foremost a strategy and entertainment game. Some related products or content may include symbolic or narrative experiences, but these are for creative and entertainment purposes only and should not be treated as psychological, medical, financial, or legal advice.",
+    // },
     {
       id: 4,
       question: "Who owns the rights to DoUndo?",
@@ -104,12 +104,12 @@ const FAQ = () => {
       id: 14,
       question: "How can I contact DoUndo for general questions or support?",
       answer:
-        "For general questions, product support, or order-related inquiries, please contact us at support@doundogames.com or through the contact form on our official website. For privacy or legal matters, you may use privacy@doundogames.com or legal@doundogames.com as indicated in our policies.",
+        "For general questions, product support, or order-related inquiries, please contact us at support@doundogames.com or through the contact form on our official website. For privacy or legal matters, you may use indicated in our policies.",
     },
   ];
 
   return (
-    <section className="my-16 md:my-20` ">
+    <section className="my-10 md:my-16 lg:my-20 ">
       <div className="container mx-auto">
         <h2 className="text-2xl md:text-4xl lg:text-[48px] font-bold text-center text-[#181D27]">
           Frequently Asked Questions

@@ -30,9 +30,9 @@ export default function ProductCard({
           ? `/product/${product._id}`
           : `/merchandise/${product._id}`
       }`}
-      className="group block w-full max-w-[496px]"
+      className="group block w-full max-w-124"
     >
-      <div className="relative aspect-[496/678] overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+      <div className="relative lg:aspect-400/498 xl:aspect-450/558 overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         {/* Image Container with Overlay */}
         <div className="relative w-full h-full overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-primary-foreground/80 via-primary-foreground/20 to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-90" />

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const AboutUs = () => {
   return (
-    <div className="flex container mx-auto justify-center text-center my-8 md:mt-40">
+    <div className="flex container mx-auto justify-center text-center my-10 md:my-16 lg:my-20">
       {/* Badge */}
       <div className="">
         <div className="inline-block mb-6">
