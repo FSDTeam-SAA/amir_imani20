@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Eye, EyeOff } from "lucide-react";
 
 import {
   Form,
@@ -44,6 +45,9 @@ type FormValues = z.infer<typeof formSchema>;
 const Signup = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+  
 
   const router = useRouter();
 
@@ -138,9 +142,10 @@ const Signup = () => {
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Lorem" {...field} 
-                      className=" placeholder:text-gray-400"
-                      
+                      <Input
+                        placeholder="Lorem"
+                        {...field}
+                        className=" placeholder:text-gray-400"
                       />
                     </FormControl>
                     <FormMessage />
@@ -155,9 +160,10 @@ const Signup = () => {
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Ipsum" {...field} 
-                      className=" placeholder:text-gray-400"
-                      
+                      <Input
+                        placeholder="Ipsum"
+                        {...field}
+                        className=" placeholder:text-gray-400"
                       />
                     </FormControl>
                     <FormMessage />
@@ -174,9 +180,10 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Phone Number (Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="(704) 555-0027" {...field} 
+                    <Input
+                      placeholder="(704) 555-0027"
+                      {...field}
                       className=" placeholder:text-gray-400"
-                    
                     />
                   </FormControl>
                   <FormMessage />
@@ -192,9 +199,10 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Email Address</FormLabel>
                   <FormControl>
-                    <Input placeholder="hello@example.com" {...field}
+                    <Input
+                      placeholder="hello@example.com"
+                      {...field}
                       className=" placeholder:text-gray-400"
-                    
                     />
                   </FormControl>
                   <FormMessage />
@@ -212,9 +220,9 @@ const Signup = () => {
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select your gender" 
-                      className=" placeholder:text-gray-400"
-                        
+                        <SelectValue
+                          placeholder="Select your gender"
+                          className=" placeholder:text-gray-400"
                         />
                       </SelectTrigger>
                     </FormControl>
@@ -236,9 +244,10 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Age (Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="26" {...field} 
+                    <Input
+                      placeholder="26"
+                      {...field}
                       className=" placeholder:text-gray-400"
-                    
                     />
                   </FormControl>
                   <FormMessage />
@@ -253,12 +262,25 @@ const Signup = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} 
-                      className=" placeholder:text-gray-400"
-                    
-                    />
-                  </FormControl>
+                    <div className="relative">
+                      <FormControl>
+                        <Input
+                          // type="password"
+                          type={showPassword ? "text" : "password"}
+                          {...field}
+                          placeholder="••••••••"
+                          className=" placeholder:text-gray-400"
+                        />
+                      </FormControl>
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-2.5 text-gray-500"
+                        disabled={isLoading}
+                      >
+                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -276,7 +298,6 @@ const Signup = () => {
                       placeholder="2972 Westheimer Rd. Santa Ana, Illinois 85488"
                       {...field}
                       className=" placeholder:text-gray-400"
-                      
                     />
                   </FormControl>
                   <FormMessage />

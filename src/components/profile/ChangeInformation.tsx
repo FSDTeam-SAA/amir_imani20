@@ -120,7 +120,9 @@ const ChangeInformation = () => {
                 <FormItem>
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Hasibul" {...field} />
+                    <Input placeholder="Hasibul" {...field}
+                    className=' placeholder:text-gray-400'
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -134,7 +136,9 @@ const ChangeInformation = () => {
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Hasan" {...field} />
+                    <Input placeholder="Hasan" {...field} 
+                    className=' placeholder:text-gray-400'
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -149,7 +153,9 @@ const ChangeInformation = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="email@example.com" type="email" {...field} />
+                  <Input placeholder="email@example.com" type="email" {...field} 
+                  className=' placeholder:text-gray-400'
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -163,7 +169,9 @@ const ChangeInformation = () => {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input placeholder="+1234567890" {...field} />
+                  <Input placeholder="+1234567890" {...field} 
+                  className=' placeholder:text-gray-400'
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -177,7 +185,9 @@ const ChangeInformation = () => {
               <FormItem>
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="123 Street Name, City, Country" {...field} />
+                  <Input placeholder="123 Street Name, City, Country" {...field}
+                  className=' placeholder:text-gray-400'
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
