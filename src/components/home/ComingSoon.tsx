@@ -126,7 +126,7 @@ const ComingSoon = () => {
   return (
     <section className="relative ">
       <div className="container mx-auto my-10 md:my-16 lg:my-20">
-        <div className="text-center max-w-[1146px] mx-auto mb-12">
+        <div className="text-center max-w-286.5 mx-auto mb-12">
           <h2 className="text-2xl md:text-4xl lg:text-[48px] text-primary-foreground font-bold mb-6 tracking-tight">
             Symbolverse: Stories Told Through Games
           </h2>
