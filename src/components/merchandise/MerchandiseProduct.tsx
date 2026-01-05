@@ -131,7 +131,7 @@ const MerchandiseProduct = () => {
           ALL Merchandise Product
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center  justify-center gap-5">
           {(selectedProduct ? products : products.slice(0, 3)).map(
             (product) => (
               <ProductCard
