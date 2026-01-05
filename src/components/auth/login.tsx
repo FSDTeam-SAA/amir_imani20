@@ -105,10 +105,11 @@ const Login = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="hello@example.com" 
-                      {...field} 
+                    <Input
+                      placeholder="hello@example.com"
+                      {...field}
                       disabled={isLoading}
+                      className=" placeholder:text-gray-400"
                     />
                   </FormControl>
                   <FormMessage />
@@ -129,6 +130,8 @@ const Login = () => {
                         type={showPassword ? "text" : "password"}
                         {...field}
                         disabled={isLoading}
+                        placeholder="Enter Your password"
+                        className=" placeholder:text-gray-400"
                       />
                       <button
                         type="button"
@@ -161,6 +164,15 @@ const Login = () => {
                         checked={field.value}
                         onCheckedChange={field.onChange}
                         disabled={isLoading}
+                        className="
+            border-gray-400
+            checked:bg-blue-600
+          
+            text-white
+            focus:ring-2
+            focus:ring-blue-400
+            transition-colors
+          "
                       />
                     </FormControl>
                     <FormLabel className="text-sm font-normal cursor-pointer">
@@ -170,8 +182,8 @@ const Login = () => {
                 )}
               />
 
-              <Link 
-                href="/forget-password" 
+              <Link
+                href="/forget-password"
                 className="text-sm font-medium text-orange-500 hover:text-orange-700 cursor-pointer transition-colors"
               >
                 Forgot Password
@@ -191,7 +203,10 @@ const Login = () => {
 
         <p className="text-sm text-gray-500 mt-4 text-center">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-orange-500 hover:text-orange-700 cursor-pointer">
+          <Link
+            href="/signup"
+            className="text-orange-500 hover:text-orange-700 cursor-pointer"
+          >
             Sign Up
           </Link>
         </p>
