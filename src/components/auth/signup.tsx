@@ -138,7 +138,10 @@ const Signup = () => {
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Lorem" {...field} />
+                      <Input placeholder="Lorem" {...field} 
+                      className=" placeholder:text-gray-400"
+                      
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -152,7 +155,10 @@ const Signup = () => {
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Ipsum" {...field} />
+                      <Input placeholder="Ipsum" {...field} 
+                      className=" placeholder:text-gray-400"
+                      
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -168,7 +174,10 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Phone Number (Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="(704) 555-0027" {...field} />
+                    <Input placeholder="(704) 555-0027" {...field} 
+                      className=" placeholder:text-gray-400"
+                    
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -183,7 +192,10 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Email Address</FormLabel>
                   <FormControl>
-                    <Input placeholder="hello@example.com" {...field} />
+                    <Input placeholder="hello@example.com" {...field}
+                      className=" placeholder:text-gray-400"
+                    
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -200,7 +212,10 @@ const Signup = () => {
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select your gender" />
+                        <SelectValue placeholder="Select your gender" 
+                      className=" placeholder:text-gray-400"
+                        
+                        />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -221,7 +236,10 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Age (Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="26" {...field} />
+                    <Input placeholder="26" {...field} 
+                      className=" placeholder:text-gray-400"
+                    
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -236,7 +254,10 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <Input type="password" placeholder="••••••••" {...field} 
+                      className=" placeholder:text-gray-400"
+                    
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -254,6 +275,8 @@ const Signup = () => {
                     <Input
                       placeholder="2972 Westheimer Rd. Santa Ana, Illinois 85488"
                       {...field}
+                      className=" placeholder:text-gray-400"
+                      
                     />
                   </FormControl>
                   <FormMessage />

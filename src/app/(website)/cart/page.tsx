@@ -77,7 +77,7 @@ export default function CartPage() {
           {/* Cart Items List */}
           <div className="w-full lg:flex-1">
             {items.length > 0 ? (
-              <div className="flex flex-col">
+              <div className="flex flex-col item-between">
                 {items.map((item) => {
                   const key = getCartItemKey(
                     item?.productId?._id,
