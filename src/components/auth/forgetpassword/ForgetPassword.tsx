@@ -85,8 +85,8 @@ export default function ForgetPassword() {
           className="w-auto h-auto"
         />
       </div>
-    <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-      <h2 className="text-3xl md:text-[48px] font-bold leading-[150%] font-playfair text-primary mb-2 font-heading text-center">
+    <div className="w-full max-w-xl bg-white rounded-xl shadow-lg p-8">
+      <h2 className="text-3xl md:text-[48px] font-bold leading-[100%] font-playfair text-primary mb-2 font-heading tracking-tight text-center">
         Reset Your Password
       </h2>
       <p className="text-gray-500 mb-6">

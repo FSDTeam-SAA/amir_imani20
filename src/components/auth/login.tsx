@@ -171,7 +171,7 @@ const Login = () => {
               />
 
               <Link 
-                href="/reset-your-password" 
+                href="/forget-password" 
                 className="text-sm font-medium text-orange-500 hover:text-orange-700 cursor-pointer transition-colors"
               >
                 Forgot Password

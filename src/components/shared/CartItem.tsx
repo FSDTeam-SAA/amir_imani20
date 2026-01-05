@@ -29,8 +29,10 @@ const CartItem = React.memo(function CartItem({
   onQuantityChange,
   onRemove,
 }: CartItemProps) {
+  const shortDescription = description?.replace(/<[^>]*>/g, "").slice(0, 60);
+
   return (
-    <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border border-[#EFEFEF] rounded-lg mb-4 bg-white hover:border-primary/30 transition-colors">
+    <div className="relative flex flex-col sm:flex-row items-start sm:items-cente  gap-4 p-4 border border-[#EFEFEF] rounded-lg mb-4 bg-white hover:border-primary/30 transition-colors">
       {/* Remove Button */}
       <button
         onClick={() => onRemove(id)}
@@ -40,7 +42,7 @@ const CartItem = React.memo(function CartItem({
         <Trash2 className="w-5 h-5" />
       </button>
 
-      <div className="flex w-full sm:w-auto gap-4">
+      <div className="flex justify-between w-full gap-4">
         {/* Product Image */}
         <div className="w-20 h-20 relative rounded-md overflow-hidden shrink-0 border border-[#EFEFEF]">
           <Image src={imageUrl} alt={title} fill className="object-cover" />
@@ -53,11 +55,12 @@ const CartItem = React.memo(function CartItem({
               {title}
             </h3>
             <div
-              className="text-xs text-[#8B8B8B] leading-relaxed line-clamp-2"
+              className="text-xs text-[#8B8B8B] leading-relaxed line-clamp-1"
               dangerouslySetInnerHTML={{
-                __html: description,
+                __html: shortDescription,
               }}
             />
+
             {(color || size) && (
               <div className="flex flex-wrap gap-3 mt-1">
                 {color && (
