@@ -241,10 +241,10 @@ const LegalDisclaimerPage = () => {
                   <span className="text-[#6C757D]">•</span>
                   <span className="text-[#6C757D] text-xl leading-[150%] font-normal">
                     Email: <Link 
-                      href="mailto:legal@doundogames.com" 
+                      href="mailto:info@doundogames.com" 
                       className="text-blue-600 hover:underline transition-colors"
                     >
-                      legal@doundogames.com
+                      info@doundogames.com
                     </Link>
                   </span>
                 </li>

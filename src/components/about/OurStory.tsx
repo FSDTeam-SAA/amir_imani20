@@ -22,14 +22,14 @@ const OurStory = () => {
 
   return (
     <section
-      className=" my-8 md:my-10 bg-linear-to-b from-white to-amber-50/30"
+      className=" my-8 md:my-10 "
       aria-labelledby="story-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-16 lg:mb-20 max-w-3xl mx-auto">
           <div className="inline-flex items-center justify-center mb-4">
-            <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs font-semibold tracking-wide uppercase rounded-full">
+            <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs font-semibold border-none outline-none tracking-wide uppercase rounded-full">
               About Us
             </span>
           </div>
@@ -53,7 +53,7 @@ const OurStory = () => {
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2">
                 {/* <div className="w-8 h-0.5 bg-amber-500"></div> */}
-                <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs sm:text-xs font-semibold tracking-wide uppercase rounded-full">
+                <span className="inline-block px-4 py-2 bg-secondary text-primary-foreground text-xs sm:text-xs font-semibold tracking-wide border-none outline-none uppercase rounded-full">
                   Who We Are
                 </span>
               </div>
@@ -105,7 +105,7 @@ const OurStory = () => {
               {/* <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-blue-200/10 rounded-full blur-2xl"></div> */}
 
               {/* Main Image Container */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-amber-200/30">
+              <div className="relative rounded-3xl overflow-hidden  ">
                 <Image
                   src={storyData.image.src}
                   alt={storyData.image.alt}
@@ -118,7 +118,7 @@ const OurStory = () => {
                 />
 
                 {/* Image Overlay Effect */}
-                <div className="absolute inset-0 bg-linear-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                {/* <div className="absolute inset-0 bg-linear-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div> */}
               </div>
 
               {/* Floating Badge */}
@@ -140,10 +140,10 @@ const OurStory = () => {
             </div>
 
             {/* Decorative Pattern */}
-            <div className="hidden lg:block absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
+            {/* <div className="hidden lg:block absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
               <div className="absolute top-0 left-0 w-32 h-32 border-2 border-amber-200/30 rounded-full"></div>
               <div className="absolute bottom-0 right-0 w-24 h-24 border-2 border-blue-200/30 rounded-full"></div>
-            </div>
+            </div> */}
           </div>
         </div>
 

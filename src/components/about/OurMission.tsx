@@ -90,7 +90,7 @@ const OurMission = () => {
             aria-label="Mission tag"
           >
             <span
-              className="inline-block text-xs px-4 py-2 bg-secondary text-primary-foreground sm:text-sm font-semibold tracking-wide uppercase rounded-full border "
+              className="inline-block text-xs px-4 py-2 bg-secondary text-primary-foreground sm:text-sm font-semibold tracking-wide uppercase rounded-full  "
               itemProp="keywords"
             >
               Our Mission & Values

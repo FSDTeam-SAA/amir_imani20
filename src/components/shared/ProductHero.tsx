@@ -129,7 +129,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
           </div>
 
           {/* Title and Price */}
-          <h1 className="text-4xl lg:text-[40px] font-bold text-primary-foreground mb-2 leading-tight break-words">
+          <h1 className="text-4xl lg:text-[40px] font-bold text-primary-foreground mt-4 mb-2 leading-tight wrap-break-word">
             {product.productName}
           </h1>
           <div className="text-3xl font-bold text-primary-foreground mb-6">
@@ -141,7 +141,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
               Features:
             </h3>
             {/* Summary / Features */}
-            <p className="text-primary-foreground/80 text-base leading-relaxed mb-6 whitespace-pre-line break-words">
+            <p className="text-primary-foreground/80 text-base leading-relaxed mb-6 whitespace-pre-line wrap-break-word">
               {product.feature}
             </p>
           </div>

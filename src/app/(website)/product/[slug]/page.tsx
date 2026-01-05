@@ -55,7 +55,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className=" bg-[#FBFBFB] selection:bg-[#2E8F8A]/20 selection:text-[#2E8F8A]">
+    <div className="  selection:text-[#2E8F8A]">
       {/* Patterned Background Overlay (Subtle) */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"

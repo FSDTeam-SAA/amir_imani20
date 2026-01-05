@@ -46,7 +46,7 @@ const MeetOurTeam = () => {
       name: "Shikha Singh",
       position: "Designer",
       discription:
-        "Shikha is the creative force behind DoUndo’s visual identity. As the graphic designer, she brings Amir’s vision to life, crafting every symbol, card, and box design with care and imagination. From brainstorming with the team to shaping the game’s look and feel, Shikha ensures that DoUndo’s design truly connects with its players.",
+        "Shikha is the creative designer force behind DoUndo’s visual identity. As the graphic designer, she brings Amir’s vision to life, crafting every symbol, card, and box design with care and imagination. From brainstorming with the team to shaping the game’s look and feel, Shikha ensures that DoUndo’s design truly connects with its players.",
       side: `left`,
     },
   ];
@@ -54,7 +54,7 @@ const MeetOurTeam = () => {
     <section className="my-10 lg:my-16">
       <div className="container mx-auto">
         <div className="text-center space-y-2">
-          <p className="inline-block text-xs px-4 py-2 bg-secondary text-primary-foreground sm:text-sm font-semibold tracking-wide uppercase rounded-full border">
+          <p className="inline-block text-xs px-4 py-2 bg-secondary text-primary-foreground sm:text-sm font-semibold tracking-wide uppercase rounded-full ">
             Team
           </p>
           <h2 className="text-2xl md:text-4xl xl:text-5xl font-bold">
@@ -88,14 +88,14 @@ const MeetOurTeam = () => {
                 <p className="text-gray-600 text-base md:text-lg">
                   {item.discription}
                 </p>
-                <p className=" flex gap-3 items-center pt-8">
+                {/* <p className=" flex gap-3 items-center pt-8">
                   <Link href={"#"}>
                     <FaXTwitter className=" w-10 h-10 hover:text-primary p-2 " />
                   </Link>
                   <Link href={"#"}>
                     <FaLinkedinIn className=" w-10 h-10 hover:text-primary p-2" />
                   </Link>
-                </p>
+                </p> */}
               </div>
             </div>
           ))}

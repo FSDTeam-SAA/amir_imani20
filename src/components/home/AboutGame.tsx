@@ -93,65 +93,7 @@ const AboutGame = () => {
               />
             </div> */}
       <div className="container mx-auto">
-        <section className="bg-secondary my-12 px-6 py-8 md:px-12 lg:px-[117px] space-y-9 rounded-xl border border-[#EFEFEF]">
-          {/* Header */}
-          <header className="text-center space-y-2 ">
-            <h2 className="text-primary-foreground text-2xl md:text-4xl lg:text-[48px] font-bold">
-              About Game
-            </h2>
-            <p className="text-[#535862] text-sm md:text-base">
-              Learn more about the company and the team behind it.
-            </p>
-          </header>
-
-          {/* Content Grid */}
-          <div className="lg:flex lg:flex-row lg:gap-12 items-center">
-            {/* Image Section */}
-            <figure className="w-full lg:w-1/2 pb-6 ">
-              <div className="relative w-full max-w-[700px] aspect-[5/3] mx-auto lg:mx-0">
-                <Image
-                  src={product?.imgs?.[0] || "/no-image.jpg"}
-                  alt={`${product?.productName || "Game"} preview image`}
-                  fill
-                  className="rounded-lg shadow-lg object-cover"
-                  priority
-                />
-              </div>
-            </figure>
-
-            {/* Content Section */}
-            <article className="space-y-4 lg:w-1/2 overflow-hidden box-border">
-              <span className="bg-secondary rounded-full lg:px-4 hidden lg:block py-1 text-primary text-sm font-medium">
-                Card Games
-              </span>
-
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
-                {product?.productName || "Untitled Game"}
-              </h3>
-
-              {product?.description && (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: product?.description,
-                  }}
-                  className="text-gray-700 text-sm md:text-base leading-relaxed line-clamp-4"
-                />
-              )}
-
-              <div className="pt-6 lg:pt-10">
-                <Link
-                  href={`/product/${product?._id}`}
-                  className="inline-block"
-                >
-                  <Button className="px-6 py-2.5 group">
-                    Explore More
-                    <MoveRight className="ml-2 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-              </div>
-            </article>
-          </div>
-        </section>
+       
 
         <WhyChooseUs />
       </div>
