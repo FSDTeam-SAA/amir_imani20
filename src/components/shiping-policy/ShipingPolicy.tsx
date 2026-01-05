@@ -257,10 +257,10 @@ const ShipingPolicy = () => {
                   <span className="text-[#6C757D] text-xl leading-[150%] font-normal">
                     Email:{" "}
                     <a
-                      href="mailto:legal@doundogames.com"
+                      href="mailto:info@doundogames.com"
                       className="text-blue-600 hover:underline"
                     >
-                      legal@doundogames.com
+                      info@doundogames.com
                     </a>
                   </span>
                 </li>
