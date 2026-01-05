@@ -32,10 +32,10 @@ export default function ProductCard({
       }`}
       className="group block w-full max-w-124"
     >
-      <div className="relative lg:aspect-400/498 xl:aspect-450/558 overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+      <div className="relative  md:aspect-300/398 lg:aspect-350/400 xl:aspect-450/558 overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         {/* Image Container with Overlay */}
         <div className="relative w-full h-full overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-foreground/80 via-primary-foreground/20 to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-90" />
+          <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-primary-foreground/80 via-primary-foreground/20 to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-90" />
 
           <Image
             src={product?.imgs?.[0] || product?.img || "/no-image.jpg"}
@@ -53,12 +53,12 @@ export default function ProductCard({
           </div>
 
           {/* Product Info - Always visible on top of overlay */}
-          <div className="absolute inset-0 flex flex-col gap-3 justify-end p-6 z-20">
+          <div className="md:absolute inset-0 flex flex-col gap-3 justify-end p-6 z-20">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 line-clamp-2">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold md:text-white mb-2 line-clamp-2">
                 {product?.productName}
               </h3>
-              <p className="text-white/90 text-lg font-semibold mb-4">
+              <p className="md:text-white/90 text-lg font-semibold mb-4">
                 ${product?.price}
               </p>
             </div>
