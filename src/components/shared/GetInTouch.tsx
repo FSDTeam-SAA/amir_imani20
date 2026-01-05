@@ -75,7 +75,7 @@ const GetInTouch = () => {
 
   return (
     <section className="md:my-16 lg:my-20">
-      <div className="container mx-auto px-6 bg-secondary rounded-2xl border py-6 md:py-23.75 md:px-37.5">
+      <div className="container mx-auto px-6 bg-secondary rounded-2xl  py-6 md:py-23.75 md:px-37.5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
           <div>
@@ -178,6 +178,7 @@ const GetInTouch = () => {
                 <div className="flex items-center gap-2">
                   <input
                     type="checkbox"
+                    
                     id="privacy"
                     checked={formData.privacyAgreed as boolean}
                     onChange={(e) => {
@@ -192,7 +193,7 @@ const GetInTouch = () => {
                         }));
                       }
                     }}
-                    className="w-4 h-4"
+                    className="w-4 h-4 outline-none "
                   />
                   <label htmlFor="privacy" className="text-[#343A40] text-sm">
                     I agree to the{" "}

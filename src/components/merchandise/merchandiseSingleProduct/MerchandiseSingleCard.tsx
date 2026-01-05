@@ -75,7 +75,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
     <section className="py-12 lg:py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
-        <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0 bg-white rounded-xl overflow-hidden ">
+        <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0  rounded-xl overflow-hidden ">
           <div className="flex gap-3 relative aspect-square">
             <div className="w-20 flex flex-col gap-3 overflow-y-auto no-scrollbar">
               {product.imgs && product.imgs.length > 0 ? (
@@ -135,7 +135,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
           </div>
 
           {/* Title and Price */}
-          <h1 className="text-4xl lg:text-[40px] font-bold text-[#111111] mb-2 leading-tight">
+          <h1 className="text-4xl lg:text-[40px] font-bold text-[#111111] mt-4 mb-2 leading-tight">
             {product.productName}
           </h1>
           <div className="text-3xl font-bold text-[#111111] mb-6">
@@ -240,7 +240,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
               <Button
                 onClick={handleAddToCart}
                 disabled={isAdding}
-                className="w-full h-14 bg-primary hover:bg-[#111111] text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50"
+                className="w-full h-14 bg-primary hover:bg-primary/85 text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50"
               >
                 {isAdding ? "Adding..." : "Pre-Order"} <ShoppingCart />
               </Button>

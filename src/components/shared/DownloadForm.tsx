@@ -82,7 +82,7 @@ const DownloadForm = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your name"
-                      className="rounded-full text-sm lg:text-base"
+                      className="rounded-full text-sm border-2 border-gray-400 bg-white outline-none lg:text-base"
                       {...field}
                     />
                   </FormControl>
@@ -101,7 +101,7 @@ const DownloadForm = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your email"
-                      className="rounded-full text-sm lg:text-base"
+                      className="rounded-full border-2 border-gray-400 text-sm bg-white lg:text-base"
                       {...field}
                     />
                   </FormControl>

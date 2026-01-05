@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -12,7 +12,7 @@ import {
 interface FAQItem {
   id?: number;
   question?: string;
-  answer?: string;
+  answer?: string | JSX.Element;
 }
 
 const FAQ = () => {
@@ -103,8 +103,20 @@ const FAQ = () => {
     {
       id: 14,
       question: "How can I contact DoUndo for general questions or support?",
-      answer:
-        "For general questions, product support, or order-related inquiries, please contact us at support@doundogames.com or through the contact form on our official website. For privacy or legal matters, you may use indicated in our policies.",
+        answer: (
+        <>
+          For general questions, product support, or order-related inquiries, 
+          please contact us at{" "}
+          <a 
+            href="mailto:Info@doundogames.com" 
+            className="text-blue-600 hover:text-blue-800 underline"
+          >
+            Info@doundogames.com
+          </a>{" "}
+          or through the contact form on our official website. 
+          For privacy or legal matters, you may use indicated in our policies.
+        </>
+      ),
     },
   ];
 

@@ -283,7 +283,7 @@ const PrivacyPolicy = () => {
                     ]}
                   />
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal mt-4">
-                    To exercise your rights, contact: privacy@doundogames.com
+                    To exercise your rights, contact: info@doundogames.com
                   </p>
                   <p className="text-[#6C757D] text-xl leading-[150%] font-normal">
                     We may ask you to verify your identity before responding.
@@ -347,12 +347,12 @@ const PrivacyPolicy = () => {
                       <span className="text-[#6C757D] text-xl leading-[150%] font-normal">
                         Email:{" "}
                         <Link
-                          href="mailto:privacy@doundogames.com"
+                          href="mailto:info@doundogames.com"
                           className="text-blue-600 hover:underline transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          privacy@doundogames.com
+                         info@doundogames.com
                         </Link>
                       </span>
                     </li>
