@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -19,40 +19,95 @@ export default function ProductHero({ product }: ProductHeroProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
   const { addToCart } = useCart();
   const { data: session } = useSession();
 
-  console.log(session?.user.id);
+  // Memoized values
+  const isMerchandise = useMemo(
+    () => product.productType === "marchandice",
+    [product.productType]
+  );
 
-  const handleAddToCart = async () => {
-    if (product.productType === "marchandice") {
-      if (!selectedSize && product.size && product.size.length > 0) {
-        toast.error("Please select a size.");
-        return;
-      }
-      if (!selectedColor && product.color && product.color.length > 0) {
-        toast.error("Please select a color.");
-        return;
-      }
+  const hasSizes = useMemo(
+    () => product.size && product.size.length > 0,
+    [product.size]
+  );
+
+  const hasColors = useMemo(
+    () => product.color && product.color.length > 0,
+    [product.color]
+  );
+
+  const displayImage = useMemo(
+    () => selectedImage || product.imgs?.[0] || product.img || "/no-image.jpg",
+    [selectedImage, product.imgs, product.img]
+  );
+
+  const thumbnails = useMemo(
+    () =>
+      product.imgs && product.imgs.length > 0
+        ? product.imgs
+        : [product.img || "/no-image.jpg"],
+    [product.imgs, product.img]
+  );
+
+  // Optimized handlers with useCallback
+  const handleQuantityChange = useCallback((delta: number) => {
+    setQuantity((prev) => Math.max(1, prev + delta));
+  }, []);
+
+  const handleImageSelect = useCallback((img: string) => {
+    setSelectedImage(img);
+  }, []);
+
+  const handleSizeSelect = useCallback((size: string) => {
+    setSelectedSize(size);
+  }, []);
+
+  const handleColorSelect = useCallback((color: string) => {
+    setSelectedColor(color);
+  }, []);
+
+  const validateSelection = useCallback((): boolean => {
+    if (!isMerchandise) return true;
+
+    if (hasSizes && !selectedSize) {
+      toast.error("Please select a size.");
+      return false;
     }
 
-    setIsAdding(true);
+    if (hasColors && !selectedColor) {
+      toast.error("Please select a color.");
+      return false;
+    }
+
+    return true;
+  }, [isMerchandise, hasSizes, hasColors, selectedSize, selectedColor]);
+
+  const handleAddToCart = useCallback(async () => {
+    // Validate authentication
     if (!session?.user?.id) {
       toast.error("Please sign in to add to Pre Order.");
-      setIsAdding(false);
       return;
     }
+
+    // Validate selections
+    if (!validateSelection()) return;
+
+    setIsAdding(true);
+
     try {
       await addToCart(
         [
           {
             productId: product._id,
             quantity,
-            color: selectedColor || undefined,
-            size: selectedSize || undefined,
+            ...(selectedColor && { color: selectedColor }),
+            ...(selectedSize && { size: selectedSize }),
           },
         ],
-        session?.user?.id as string
+        session.user.id
       );
       toast.success(`${product.productName} added to cart for Pre Order!`);
     } catch (error) {
@@ -61,191 +116,242 @@ export default function ProductHero({ product }: ProductHeroProps) {
     } finally {
       setIsAdding(false);
     }
-  };
+  }, [
+    session,
+    validateSelection,
+    addToCart,
+    product._id,
+    product.productName,
+    quantity,
+    selectedColor,
+    selectedSize,
+  ]);
 
   return (
-    <section className="my-10 md:my-16 lg:my-20">
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 lg:gap-24 items-start">
-        {/* Left Column: Product Image */}
-        <div className="relative aspect-square w-full mx-auto lg:ml-0 overflow-hidden col-span-4 gap-3">
-          <div className="flex flex-col-reverse md:flex-row gap-3 relative aspect-square">
-            {/* Thumbnails */}
-            <div className="flex flex-row md:flex-col gap-3 overflow-x-auto md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-20">
-              {product.imgs && product.imgs.length > 0 ? (
-                product.imgs.map((img, index) => (
-                  <div
-                    key={index}
-                    className={`relative w-20 h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
+    <section
+      className="my-6 md:my-12 lg:my-20 md:px-6 lg:px-8"
+      aria-labelledby="product-title"
+    >
+      <div className="">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16">
+          {/* Product Images */}
+          <div className="w-full">
+            <div className="flex flex-col-reverse md:flex-row gap-3 ">
+              {/* Thumbnail Gallery */}
+              <nav
+                className="flex flex-row md:flex-col gap-2 overflow-x-auto items-center justify-center md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-32"
+                aria-label="Product image thumbnails"
+              >
+                {thumbnails.map((img, index) => (
+                  <button
+                    key={`${img}-${index}`}
+                    onClick={() => handleImageSelect(img)}
+                    className={`relative w-24 h-24 shrink-0 border-2 rounded-md overflow-hidden transition-all focus:outline-none focus:ring-primary focus:ring-offset-2 ${
                       selectedImage === img || (!selectedImage && index === 0)
-                        ? "border-primary"
-                        : "border-transparent"
+                        ? "border-primary shadow-md scale-105"
+                        : "border-gray-200 hover:border-primary/50"
                     }`}
-                    onClick={() => setSelectedImage(img)}
+                    aria-label={`View image ${index + 1} of ${
+                      product.productName
+                    }`}
+                    aria-pressed={
+                      selectedImage === img || (!selectedImage && index === 0)
+                    }
                   >
                     <Image
                       src={img}
-                      alt={`${product.productName} thumbnail ${index + 1}`}
+                      alt=""
                       fill
+                      sizes="80px"
                       className="object-cover"
                     />
-                  </div>
-                ))
-              ) : (
-                <div className="relative w-20 h-20 shrink-0 border-2 border-transparent">
-                  <Image
-                    src={product.img || "/no-image.jpg"}
-                    alt={product.productName}
-                    fill
-                    className="object-cover rounded-md"
-                  />
-                </div>
-              )}
-            </div>
-            {/* Main Image */}
-            <div className="relative flex-1 h-full rounded-xl overflow-hidden bg-white shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
-              <Image
-                src={
-                  selectedImage ||
-                  (product.imgs && product.imgs.length > 0
-                    ? product.imgs[0]
-                    : product.img) ||
-                  "/no-image.jpg"
-                }
-                alt={product.productName}
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Product Info */}
-        <div className="flex flex-col text-left col-span-2 gap-3">
-          {/* Badge */}
-          <div className="mb-4">
-            <span className="inline-block bg-secondary rounded-full text-primary-foreground text-[10px] font-bold uppercase tracking-widest px-3 py-1 ">
-              New!
-            </span>
-          </div>
-
-          {/* Title and Price */}
-          <h1 className="text-4xl lg:text-[40px] font-bold text-primary-foreground mt-4 mb-2 leading-tight wrap-break-word">
-            {product.productName}
-          </h1>
-          <div className="text-3xl font-bold text-primary-foreground mb-6">
-            ${product.price}
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold text-primary-foreground/90 mb-2">
-              Features:
-            </h3>
-            {/* Summary / Features */}
-            <p className="text-primary-foreground/80 text-base leading-relaxed mb-6 whitespace-pre-line wrap-break-word">
-              {product.feature}
-            </p>
-          </div>
-
-          {/* Controls */}
-          <div className="space-y-6 mb-8">
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
-                Quantity
-              </label>
-              <div className="flex items-center space-x-2">
-                <div className="flex items-center border border-[#b4b4b4] rounded-md overflow-hidden bg-[#FBFBFB]">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-2 py-2 hover:bg-[#EFEFEF] transition-colors"
-                    disabled={isAdding}
-                  >
-                    <Minus className="w-3 h-3 text-primary-foreground" />
                   </button>
-                  <span className="w-10 text-center text-sm font-medium text-primary-foreground">
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="px-2 py-2 hover:bg-[#EFEFEF] transition-colors"
-                    disabled={isAdding}
-                  >
-                    <Plus className="w-3 h-3 text-primary-foreground" />
-                  </button>
-                </div>
+                ))}
+              </nav>
+
+              {/* Main Product Image */}
+              <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-white shadow-[0px_20px_40px_rgba(0,0,0,0.08)]">
+                <Image
+                  src={displayImage}
+                  alt={product.productName}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                />
               </div>
             </div>
+          </div>
 
-            {product.productType === "marchandice" && (
-              <div className="space-y-6">
-                {/* Size Selection */}
-                {product.size && product.size.length > 0 && (
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
-                      Size
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {product.size.map((size) => (
-                        <button
-                          key={size}
-                          onClick={() => setSelectedSize(size)}
-                          className={`px-4 py-2 text-sm font-medium border rounded-md transition-all ${
-                            selectedSize === size
-                              ? "border-primary bg-primary/5 text-primary"
-                              : "border-[#b4b4b4] text-primary-foreground hover:border-primary"
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
+          {/* Product Details */}
+          <article className="w-full flex flex-col">
+            {/* Badge */}
+            <div className="mb-3">
+              <span className="inline-block bg-secondary rounded-full text-primary-foreground text-[10px] font-bold uppercase tracking-widest px-3 py-1">
+                New!
+              </span>
+            </div>
 
-                {/* Color Selection */}
-                {product.color && product.color.length > 0 && (
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
-                      Color
-                    </label>
-                    <div className="flex flex-wrap gap-3">
-                      {product.color.map((color) => (
-                        <button
-                          key={color}
-                          onClick={() => setSelectedColor(color)}
-                          title={color}
-                          className={`w-8 h-8 rounded-full border-2 transition-all flex items-center justify-center ${
-                            selectedColor === color
-                              ? "border-primary scale-110"
-                              : "border-transparent hover:border-[#b4b4b4]"
-                          }`}
-                        >
-                          <div
-                            className="w-6 h-6 rounded-full border border-black/10 shadow-sm"
-                            style={{ backgroundColor: color.toLowerCase() }}
-                          />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+            {/* Product Info */}
+            <header className="mb-4">
+              <h1
+                id="product-title"
+                className="text-3xl md:text-4xl lg:text-[40px] font-bold text-primary-foreground mb-3 leading-tight break-words"
+              >
+                {product.productName}
+              </h1>
+              <p
+                className="text-2xl md:text-3xl font-bold text-primary-foreground"
+                aria-label={`Price: ${product.price} dollars`}
+              >
+                ${product.price}
+              </p>
+            </header>
+
+            {/* Features */}
+            {product.feature && (
+              <section className="mb-6">
+                <h2 className="text-lg md:text-xl font-semibold text-primary-foreground/90 mb-2">
+                  Features:
+                </h2>
+                <p className="text-sm md:text-base text-primary-foreground/80 leading-relaxed whitespace-pre-line break-words">
+                  {product.feature}
+                </p>
+              </section>
             )}
 
-            {/* CTA Button */}
-            <Button
-              onClick={handleAddToCart}
-              disabled={isAdding}
-              className="w-full h-14 bg-primary hover:bg-primary/80 text-white rounded-full text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50 "
-            >
-              {isAdding ? "Adding..." : "Pre Order"} <ShoppingCart />
-            </Button>
+            {/* Product Options */}
+            <div className="space-y-5 mt-auto">
+              {/* Quantity Selector */}
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="quantity"
+                  className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]"
+                >
+                  Quantity
+                </label>
+                <div
+                  className="flex items-center"
+                  role="group"
+                  aria-labelledby="quantity"
+                >
+                  <div className="flex items-center border border-[#b4b4b4] rounded-md overflow-hidden bg-[#FBFBFB]">
+                    <button
+                      onClick={() => handleQuantityChange(-1)}
+                      disabled={isAdding || quantity <= 1}
+                      className="px-3 py-2 hover:bg-[#EFEFEF] transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                      aria-label="Decrease quantity"
+                    >
+                      <Minus className="w-4 h-4 text-primary-foreground" />
+                    </button>
+                    <span
+                      id="quantity"
+                      className="w-12 text-center text-sm font-medium text-primary-foreground"
+                      aria-live="polite"
+                    >
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => handleQuantityChange(1)}
+                      disabled={isAdding}
+                      className="px-3 py-2 hover:bg-[#EFEFEF] transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                      aria-label="Increase quantity"
+                    >
+                      <Plus className="w-4 h-4 text-primary-foreground" />
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-            {/* Secondary Action */}
-            {/* <button className="flex items-center gap-2 text-[13px] text-[#8B8B8B] hover:text-primary-foreground transition-colors mx-auto lg:mx-0">
-              <Heart className="w-4 h-4" />
-              Add to Wishlist
-            </button> */}
-          </div>
+              {/* Size and Color Selection for Merchandise */}
+              {isMerchandise && (
+                <div className="space-y-5">
+                  {/* Size Selection */}
+                  {hasSizes && (
+                    <fieldset className="flex flex-col gap-2">
+                      <legend className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
+                        Size{" "}
+                        {hasSizes && <span className="text-red-500">*</span>}
+                      </legend>
+                      <div className="flex flex-wrap gap-2" role="radiogroup">
+                        {product.size!.map((size) => (
+                          <button
+                            key={size}
+                            onClick={() => handleSizeSelect(size)}
+                            role="radio"
+                            aria-checked={selectedSize === size}
+                            className={`px-4 py-2 text-sm font-medium border rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                              selectedSize === size
+                                ? "border-primary bg-primary/5 text-primary"
+                                : "border-[#b4b4b4] text-primary-foreground hover:border-primary"
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        ))}
+                      </div>
+                    </fieldset>
+                  )}
+
+                  {/* Color Selection */}
+                  {hasColors && (
+                    <fieldset className="flex flex-col gap-2">
+                      <legend className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
+                        Color{" "}
+                        {hasColors && <span className="text-red-500">*</span>}
+                      </legend>
+                      <div className="flex flex-wrap gap-3" role="radiogroup">
+                        {product.color!.map((color) => (
+                          <button
+                            key={color}
+                            onClick={() => handleColorSelect(color)}
+                            role="radio"
+                            aria-checked={selectedColor === color}
+                            aria-label={`Select ${color}`}
+                            className={`w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                              selectedColor === color
+                                ? "border-primary scale-110"
+                                : "border-transparent hover:border-[#b4b4b4]"
+                            }`}
+                          >
+                            <div
+                              className="w-8 h-8 rounded-full border border-black/10 shadow-sm"
+                              style={{ backgroundColor: color.toLowerCase() }}
+                              aria-hidden="true"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </fieldset>
+                  )}
+                </div>
+              )}
+
+              {/* Add to Cart Button */}
+              <Button
+                onClick={handleAddToCart}
+                disabled={isAdding}
+                className="w-full h-12 md:h-14 bg-primary hover:bg-primary/80 text-white rounded-full text-sm md:text-base font-semibold transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label={
+                  isAdding ? "Adding to cart" : "Add to pre order cart"
+                }
+              >
+                {isAdding ? (
+                  <>
+                    <span className="animate-pulse">Adding...</span>
+                  </>
+                ) : (
+                  <>
+                    Pre Order{" "}
+                    <ShoppingCart
+                      className="ml-2 w-4 h-4 md:w-5 md:h-5"
+                      aria-hidden="true"
+                    />
+                  </>
+                )}
+              </Button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
