@@ -46,8 +46,7 @@ const Signup = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-  
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -70,8 +69,7 @@ const Signup = () => {
     setError("");
     console.log("values", values);
     try {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
       const res = await fetch(`${baseUrl}/auth/register`, {
         method: "POST",
         headers: {
@@ -81,16 +79,19 @@ const Signup = () => {
       });
 
       const data = await res.json();
-      console.log("datas", data?.message);
+      // console.log("datas", data?.message);
       if (!res.ok) {
         throw new Error(data.message || "Registration failed");
       } else if (data.success === "mail already registered") {
-        router.push(`/email-verify?email=${values.email}`);
+        // router.push(`/email-verify?email=${values.email}`);
+        router.push(`/login`);
+
         throw new Error("Email already registered");
       }
 
       toast.success("Account created successfully!");
-      router.push(`/email-verify?email=${values.email}`);
+      // router.push(`/email-verify?email=${values.email}`);
+      router.push(`/login`);
     } catch (err: any) {
       console.error(err);
       setError(err.message || "Something went wrong");
@@ -262,25 +263,25 @@ const Signup = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
-                    <div className="relative">
-                      <FormControl>
-                        <Input
-                          // type="password"
-                          type={showPassword ? "text" : "password"}
-                          {...field}
-                          placeholder="••••••••"
-                          className=" placeholder:text-gray-400"
-                        />
-                      </FormControl>
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-2.5 text-gray-500"
-                        disabled={isLoading}
-                      >
-                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                      </button>
-                    </div>
+                  <div className="relative">
+                    <FormControl>
+                      <Input
+                        // type="password"
+                        type={showPassword ? "text" : "password"}
+                        {...field}
+                        placeholder="••••••••"
+                        className=" placeholder:text-gray-400"
+                      />
+                    </FormControl>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-2.5 text-gray-500"
+                      disabled={isLoading}
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}

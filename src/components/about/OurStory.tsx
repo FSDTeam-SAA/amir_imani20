@@ -13,7 +13,7 @@ const OurStory = () => {
       "Every DoUndo experience is designed to spark memorable shared moments that continue beyond the table, as we grow into a global brand that bridges creativity, design, and storytelling.",
     ],
     image: {
-      src: "/images/About Us images.jpg",
+      src: "/images/About-Us-images.jpg",
       alt: "DoUndo team collaborating on game design",
       width: 600,
       height: 600,
