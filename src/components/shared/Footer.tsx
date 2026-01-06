@@ -71,11 +71,11 @@ export default function Footer() {
 
       {/* Main Footer Content */}
       <div className="bg-[#3D8D9A] text-white py-10 md:py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-0 ">
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4">
             {/* Company Info - Column 1 */}
-            <div className="col-span-2 md:col-span-1 lg:col-span-2 space-y-4">
-              <div className="flex items-center space-x-2">
+            <div className="col-span-2 md:col-span-2 lg:col-span-2 space-y-4">
+              <div className="flex items-center space-x-2 pl-3">
                 <Link href="/" className="block">
                   <Image
                     src={COMPANY_INFO.logo}
@@ -90,23 +90,26 @@ export default function Footer() {
                 </Link>
               </div>
 
-              <p className="text-sm text-[#FFFFFF] md:text-base leading-relaxed max-w-xs">
+              <p className="text-sm text-[#FFFFFF] md:text-base leading-relaxed max-w-sm pl-3">
                 {COMPANY_INFO.description}
               </p>
 
-              <div className="">
+              <div className="w-full">
                 <SocialIcons />
               </div>
             </div>
-
-            {/* Products Links - Column 2 */}
-            <FooterLinks title="Products" links={PRODUCTS_LINKS} />
-
-            {/* Resources Links - Column 3 */}
-            <FooterLinks title="Resources" links={RESOURCES_LINKS} />
+            <div className="pl-3">
+              {/* Products Links - Column 2 */}
+              <FooterLinks title="Products" links={PRODUCTS_LINKS} />
+            </div>
+            <div className="pl-3">
+              {/* Resources Links - Column 3 */}
+              <FooterLinks title="Resources" links={RESOURCES_LINKS} />
+              
+            </div>
 
             {/* Newsletter - Column 4 */}
-            <div className="col-span-2 md:col-span-1 lg:col-span-2">
+            <div className="col-span-2 md:col-span-1 lg:col-span-2 pl-3">
               <h3 className="font-semibold text-lg mb-4">Stay Updated</h3>
               {/* <p className="text-white/80 text-sm mb-4">
                 Subscribe to our newsletter for the latest updates and offers.
