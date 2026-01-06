@@ -71,7 +71,7 @@ const Signup = () => {
     console.log("values", values);
     try {
       const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+        process.env.NEXT_PUBLIC_API_URL;
       const res = await fetch(`${baseUrl}/auth/register`, {
         method: "POST",
         headers: {
@@ -81,7 +81,7 @@ const Signup = () => {
       });
 
       const data = await res.json();
-      console.log("datas", data?.message);
+      // console.log("datas", data?.message);
       if (!res.ok) {
         throw new Error(data.message || "Registration failed");
       } else if (data.success === "mail already registered") {
@@ -90,7 +90,9 @@ const Signup = () => {
       }
 
       toast.success("Account created successfully!");
-      router.push(`/email-verify?email=${values.email}`);
+      // router.push(`/email-verify?email=${values.email}`);
+      router.push(`/login`);
+
     } catch (err: any) {
       console.error(err);
       setError(err.message || "Something went wrong");
