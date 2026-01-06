@@ -13,7 +13,7 @@ const OurStory = () => {
       "Every DoUndo experience is designed to spark memorable shared moments that continue beyond the table, as we grow into a global brand that bridges creativity, design, and storytelling.",
     ],
     image: {
-      src: "/about1.png",
+      src: "/images/About-Us-images.jpg",
       alt: "DoUndo team collaborating on game design",
       width: 600,
       height: 600,
@@ -21,10 +21,7 @@ const OurStory = () => {
   };
 
   return (
-    <section
-      className=" my-8 md:my-10 "
-      aria-labelledby="story-heading"
-    >
+    <section className=" my-8 md:my-10 " aria-labelledby="story-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-16 lg:mb-20 max-w-3xl mx-auto">

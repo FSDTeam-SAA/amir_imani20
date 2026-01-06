@@ -10,7 +10,7 @@ import { FaLinkedin } from "react-icons/fa6";
 const SocialIcons = () => {
   return (
     <div
-      className="flex space-x-2 justify-start items-center md:justify-start"
+      className="flex w-full justify-start items-center  md:justify-start"
       aria-label="Social media links"
     >
       {/* Facebook */}
@@ -30,22 +30,22 @@ const SocialIcons = () => {
       </Link> */}
 
       <Link
-        href="https://www.instagram.com/doundo_game_board/"
+        href="https://www.linkedin.com/in/doundo-games/"
         className="
           group relative flex items-center justify-center
           w-10 h-10 md:w-12 md:h-12 rounded-full
         hover:to-orange-600
-          transition-all duration-300 hover:scale-110
+          transition-all duration-300 hover:scale-110 
         "
-        aria-label="Follow us on Instagram"
+        aria-label="Follow us on LinkedIn"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaLinkedin className="text-xl md:text-2xl text-white" />
+        <FaLinkedin className="text-xl md:text-2xl" />
       </Link>
       {/* Instagram */}
       <Link
-        href="https://www.instagram.com/doundo_game_board/"
+        href="https://www.instagram.com/doundo.official/"
         className="
           group relative flex items-center justify-center
           w-10 h-10 md:w-12 md:h-12 rounded-full
