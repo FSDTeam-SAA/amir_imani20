@@ -13,10 +13,11 @@ import {
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-evenly sm:justify-end">
+    <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center sm:justify-end">
       {/* Background image */}
       <motion.div
-        className="absolute inset-0 bg-[url('/hero-section.jpg')] bg-cover bg-right sm:bg-center origin-right"
+        className="absolute inset-0 bg-[url('/hero-section.jpg')] bg-cover bg-center md:bg-center origin-center"
+        style={{ backgroundPosition: "center 40%" }}
         role="img"
         aria-label="Hero background"
         initial={{ scale: 1.1, opacity: 0 }}
@@ -24,10 +25,12 @@ export default function Hero() {
         transition={{ duration: 1.2, ease: "easeOut" }}
         whileHover={{ scale: 1.05, transition: { duration: 0.7 } }}
       />
-      <div></div>
 
       {/* Gradient overlay */}
-      <div className="md:hidden block absolute inset-0 bg-[linear-gradient(180deg,rgba(89,163,173,0.100)_10%,#3A7270_100%)] backdrop-blur-[3px] mix-blend-multiply" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/60 md:bg-linear-to-b md:from-transparent md:via-transparent md:to-black/20" />
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/60 md:bg-linear-to-b md:from-transparent md:via-transparent md:to-black/20" />
 
       {/* Center content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-0 lg:pb-34">

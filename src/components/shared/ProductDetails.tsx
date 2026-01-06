@@ -12,7 +12,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   return (
     <section className="my-12 border-t border-[#EFEFEF] overflow-hidden ">
-      <div className="container mx-auto px-4">
+      <div className="">
         <div
           className={`grid grid-cols-1 ${
             isCard ? "lg:grid-cols-12" : "lg:grid-cols-1"
