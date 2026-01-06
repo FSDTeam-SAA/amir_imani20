@@ -30,13 +30,11 @@ export default function ProductCard({
           ? `/product/${product._id}`
           : `/merchandise/${product._id}`
       }`}
-      className="group block w-full max-w-124"
+      className="group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] max-w-[400px]"
     >
-      <div className="relative  md:aspect-300/398 lg:aspect-350/400 xl:aspect-450/558 overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-        {/* Image Container with Overlay */}
-        <div className="relative w-full h-full overflow-hidden">
-          <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-primary-foreground/80 via-primary-foreground/20 to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-90" />
-
+      <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-secondary transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+        {/* Image Container */}
+        <div className="relative w-full aspect-square overflow-hidden">
           <Image
             src={product?.imgs?.[0] || product?.img || "/no-image.jpg"}
             width={496}
@@ -51,42 +49,41 @@ export default function ProductCard({
               New Arrival
             </span>
           </div>
+        </div>
 
-          {/* Product Info - Always visible on top of overlay */}
-          <div className="md:absolute inset-0 flex flex-col gap-3 justify-end p-6 z-20">
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold md:text-white mb-2 line-clamp-2">
-                {product?.productName}
-              </h3>
-              <p className="md:text-white/90 text-lg font-semibold mb-4">
-                ${product?.price}
-              </p>
-            </div>
+        {/* Product Info - Below image on all screen sizes */}
+        <div className="flex flex-col gap-3 p-4">
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="text-lg md:text-xl font-bold text-primary-foreground line-clamp-2">
+              {product?.productName}
+            </h3>
+            <p className="text-primary-foreground text-base font-semibold whitespace-nowrap">
+              ${product?.price}
+            </p>
+          </div>
 
-            <div className="flex sm:flex-row gap-3 transition-all duration-300 ">
-              <Button
-                variant="secondary"
-                className="flex-1 hover:bg-white bg-secondary text-primary-foreground font-semibold"
-                onClick={(e) => handleAddToCart(e, product)}
-                disabled={isAddingToCart}
-              >
-                {isAddingToCart ? (
-                  "..."
-                ) : (
-                  <>
-                    <ShoppingCart className="w-4 h-4 mr-2" /> Add to Cart
-                  </>
-                )}
-              </Button>
-              <Button
-                className="flex-1 bg-primary hover:bg-primary/80 text-white font-semibold"
-                onClick={(e) => handleAddToCart(e, product, true)}
-                disabled={addingToCartId === product?._id}
-              >
-                Pre-order
-                {/* <MoveRight className="w-4 h-4 ml-2" /> */}
-              </Button>
-            </div>
+          <div className="flex flex-row gap-3 transition-all duration-300">
+            <Button
+              variant="secondary"
+              className="flex-1 hover:bg-amber-100 bg-white border text-primary-foreground font-semibold"
+              onClick={(e) => handleAddToCart(e, product)}
+              disabled={isAddingToCart}
+            >
+              {isAddingToCart ? (
+                "..."
+              ) : (
+                <>
+                  <ShoppingCart className="w-4 h-4 mr-2" /> Add to Cart
+                </>
+              )}
+            </Button>
+            <Button
+              className="flex-1 bg-primary hover:bg-primary/80 text-white font-semibold"
+              onClick={(e) => handleAddToCart(e, product, true)}
+              disabled={addingToCartId === product?._id}
+            >
+              Pre-order
+            </Button>
           </div>
         </div>
       </div>
