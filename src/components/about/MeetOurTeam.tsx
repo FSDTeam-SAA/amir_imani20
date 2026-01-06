@@ -1,55 +1,55 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
-// import { Button } from "../ui/button";
-// import { motion, useScroll, useTransform } from "framer-motion";
-// import { useRef } from "react";
 
-// import { MoveRightIcon } from "lucide-react";
-// import GetInTouch from "../shared/GetInTouch";
 const MeetOurTeam = () => {
-  // const sectionRef = useRef<HTMLDivElement | null>(null);
-
-  // const { scrollYProgress } = useScroll({
-  //   target: sectionRef,
-  //   offset: ["start end", "end start"],
-  // });
-
-  // Left column → bottom to top
-  // const leftY = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
-  // Right column → top to bottom
-  // const rightY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-
   const data = [
     {
-      img: "/images/team-1.png",
+      img: "/images/Amir_image.JPG",
       name: "Amir Imani",
       position: "Founder",
       discription:
         "Amir Imani is the creator of DoUndo, a series of games with simple rules and endless possibilities. Thirteen unique symbols lie at the heart of his work, each carrying a story that brings depth and meaning to every game.",
       side: `left`,
+      socialLink: [
+        {
+          icon: <FaXTwitter />,
+          link: "https://www.linkedin.com/in/amir-imani-fazel-5166a359/",
+        },
+      ],
     },
     {
-      img: "/images/team-2.png",
+      img: "/images/sara_image.jpg",
       name: "Sara Seydi",
       position: "Co Founder & Director of Strategy and Growthr",
       discription:
         "Sara is the strategic force behind DoUndo, turning ideas into reality and guiding them toward growth. With expertise in management and leadership, she shapes branding, partnerships, strategy, and funding, laying strong foundations for DoUndo’s journey as a global brand.",
       side: `right`,
+      socialLink: [
+        {
+          icon: <FaXTwitter />,
+          link: "https://www.linkedin.com/in/sara-seydi-7934632a3/",
+        },
+      ],
     },
     {
-      img: "/images/team-3.png",
+      img: "/images/Shikha.png",
       name: "Shikha Singh",
       position: "Designer",
       discription:
         "Shikha is the creative designer force behind DoUndo’s visual identity. As the graphic designer, she brings Amir’s vision to life, crafting every symbol, card, and box design with care and imagination. From brainstorming with the team to shaping the game’s look and feel, Shikha ensures that DoUndo’s design truly connects with its players.",
       side: `left`,
+      socialLink: [
+        {
+          icon: <FaXTwitter />,
+          link: "https://www.linkedin.com/in/shikhasingh100/",
+        },
+      ],
     },
   ];
+
   return (
     <section className="my-10 lg:my-16">
       <div className="container mx-auto">
@@ -74,14 +74,23 @@ const MeetOurTeam = () => {
                   src={item.img}
                   alt={item.name}
                   width={600}
-                  height={700}
-                  className=" shadow-lg w-full aspect-5/4 object-cover rounded-3xl"
+                  height={800}
+                  className=" shadow-lg w-full aspect-5/5 object-cover rounded-3xl"
                 />
               </div>
               <div className="w-full md:w-1/2 px-4 mt-6 md:mt-0">
-                <h3 className="text-xl lg:text-3xl font-semibold mb-2">
-                  {item.name}
-                </h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl lg:text-3xl font-semibold mb-2">
+                    {item.name}
+                  </h3>
+                  <Link
+                    href={item.socialLink[0].link}
+                    target="_blank"
+                    className=" md:hidden"
+                  >
+                    <FaLinkedinIn className=" w-10 h-10 hover:text-primary p-2" />
+                  </Link>
+                </div>
                 <h4 className="text-lg lg:text-xl text-gray-400 mb-4">
                   {item.position}
                 </h4>
@@ -92,10 +101,14 @@ const MeetOurTeam = () => {
                   <Link href={"#"}>
                     <FaXTwitter className=" w-10 h-10 hover:text-primary p-2 " />
                   </Link>
-                  <Link href={"#"}>
-                    <FaLinkedinIn className=" w-10 h-10 hover:text-primary p-2" />
-                  </Link>
-                </p> */}
+                  </p> */}
+                <Link
+                  href={item.socialLink[0].link}
+                  target="_blank"
+                  className="flex gap-3 items-center pt-8 hidden md:block"
+                >
+                  <FaLinkedinIn className=" w-10 h-10 hover:text-primary p-2" />
+                </Link>
               </div>
             </div>
           ))}

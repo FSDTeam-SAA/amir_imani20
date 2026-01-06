@@ -1,14 +1,13 @@
-import FortuneTellingHero from '@/components/fortunetelling/FortuneTellingHero'
-import FAQ from '@/components/shared/FAQ'
-import React from 'react'
+import FortuneTellingHero from "@/components/fortunetelling/FortuneTellingHero";
+import FAQ from "@/components/shared/FAQ";
+import React from "react";
 
 const page = () => {
   return (
     <div>
-        <FortuneTellingHero />
-        <FAQ />
+      <FortuneTellingHero />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -30,14 +30,14 @@ const SocialIcons = () => {
       </Link> */}
 
       <Link
-        href="https://www.instagram.com/doundo_game_board/"
+        href="https://www.linkedin.com/in/doundo-games/"
         className="
           group relative flex items-center justify-center
           w-10 h-10 md:w-12 md:h-12 rounded-full
         hover:to-orange-600
           transition-all duration-300 hover:scale-110
         "
-        aria-label="Follow us on Instagram"
+        aria-label="Follow us on LinkedIn"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -45,7 +45,7 @@ const SocialIcons = () => {
       </Link>
       {/* Instagram */}
       <Link
-        href="https://www.instagram.com/doundo_game_board/"
+        href="https://www.instagram.com/doundo.official/"
         className="
           group relative flex items-center justify-center
           w-10 h-10 md:w-12 md:h-12 rounded-full
