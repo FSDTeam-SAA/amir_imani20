@@ -32,7 +32,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           {/* RIGHT SIDEBAR */}
           {isCard && (
             <div className="lg:col-span-5">
-              <DownloadForm />
+              <DownloadForm gameName={product.productName} />
             </div>
           )}
         </div>

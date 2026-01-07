@@ -82,7 +82,7 @@ const MerchandiseProduct = () => {
 
   if (loading) {
     return (
-      <section className="my-16 md:my-20">
+      <section className="my-10 md:my-16">
         <div className="container mx-auto py-12">
           <h2 className="text-lg md:text-2xl xl:text-[48px] text-[#0C0D0E] leading-[150%] font-semibold mb-8 text-center invisible">
             ALL Merchandise Product
@@ -99,7 +99,7 @@ const MerchandiseProduct = () => {
 
   if (error) {
     return (
-      <section className="my-16 md:my-20 bg-white">
+      <section className="my-10 md:my-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
             ALL Merchandise Product
@@ -125,7 +125,7 @@ const MerchandiseProduct = () => {
     );
   }
   return (
-    <section className="my-10 md:my-16 lg:my-20">
+    <section className="my-10 md:my-16">
       <div className="container mx-auto">
         <h2 className="text-lg md:text-2xl xl:text-[48px] text-primary-foreground leading-[150%] font-semibold mb-8 text-center">
           ALL Merchandise Product

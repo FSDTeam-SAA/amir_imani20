@@ -36,7 +36,7 @@ const MeetOurTeam = () => {
       name: "Shikha Singh",
       position: "Designer",
       discription:
-        "Shikha is the creative designer force behind DoUndo’s visual identity. As the graphic designer, she brings Amir’s vision to life, crafting every symbol, card, and box design with care and imagination. From brainstorming with the team to shaping the game’s look and feel, Shikha ensures that DoUndo’s design truly connects with its players.",
+        "Shikha is the creative force behind DoUndo’s visual identity. As the creative designer, she brings Amir’s vision to life, crafting every symbol, card, and box design with care and imagination. From brainstorming with the team to shaping the game’s look and feel, Shikha ensures that DoUndo’s design truly connects with its players.",
       side: `left`,
       socialLink: [
         {
@@ -45,11 +45,11 @@ const MeetOurTeam = () => {
       ],
     },
     {
-      img: "/images/ashutosh.jpg",
+      img: "/images/AshutoshSingh.png",
       name: "Ashutosh",
       position: "Project Manager",
       discription:
-        "Ashutosh is the project manager force behind DoUndo’s visual identity.",
+        "Ashutosh is the project manager at Doundo and the person who helps turn big ideas into real, playable games. He works closely with the team, keeps everyone aligned, and makes sure no good idea gets lost along the way. From planning and team syncs to fine-tuning the small details, he helps bring the vision to life. With a background in VFX and experience working on major film projects, he brings a strong creative eye and a problem-solver’s mindset to everything we create.",
       side: `right`,
       socialLink: [
         {
@@ -78,12 +78,11 @@ const MeetOurTeam = () => {
                 item.side === "right" ? "md:flex-row-reverse" : ""
               }`}
             >
-              <div className="w-full md:w-1/2 px-4 ">
+              <div className=" relative w-90 h-90 lg:w-150 lg:h-150 px-4 ">
                 <Image
                   src={item.img}
                   alt={item.name}
-                  width={600}
-                  height={800}
+                  fill
                   className=" shadow-lg w-full aspect-5/5 object-cover rounded-3xl"
                 />
               </div>
@@ -95,7 +94,7 @@ const MeetOurTeam = () => {
                   <Link
                     href={item.socialLink[0].link}
                     target="_blank"
-                    className=" md:hidden"
+                    className=" lg:hidden"
                   >
                     <FaLinkedinIn className=" w-10 h-10 hover:text-primary p-2" />
                   </Link>
@@ -103,7 +102,7 @@ const MeetOurTeam = () => {
                 <h4 className="text-lg lg:text-xl text-gray-400 mb-4">
                   {item.position}
                 </h4>
-                <p className="text-gray-600 text-base md:text-lg">
+                <p className="text-gray-600 text-base lg:text-lg">
                   {item.discription}
                 </p>
                 {/* <p className=" flex gap-3 items-center pt-8">
@@ -114,7 +113,7 @@ const MeetOurTeam = () => {
                 <Link
                   href={item.socialLink[0].link}
                   target="_blank"
-                  className="flex gap-3 items-center pt-8 hidden md:block"
+                  className=" gap-3 items-center pt-8 hidden lg:block"
                 >
                   <FaLinkedinIn className=" w-10 h-10 hover:text-primary p-2" />
                 </Link>
