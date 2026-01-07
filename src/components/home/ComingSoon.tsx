@@ -179,13 +179,7 @@ const ComingSoon = () => {
                   </span>
                 </div>
 
-                {/* CTA Button - Centered on image */}
-                <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <Button className="rounded-full bg-primary border-2 border-primary text-white hover:bg-primary/90 transition-colors px-6 py-2 h-auto font-bold flex items-center gap-2">
-                    Get Notified
-                    <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </div>
+            
               </div>
 
               {/* Product Info - Below image on all screen sizes */}
@@ -197,6 +191,13 @@ const ComingSoon = () => {
                   <p className="text-primary-foreground/60 text-sm font-medium whitespace-nowrap">
                     Next Release
                   </p>
+                </div>
+                    {/* CTA Button - Centered on image */}
+                <div className="  flex items-center justify-start z-10">
+                  <Button className="rounded-full bg-primary  border-primary text-white hover:bg-primary/90 transition-colors px-6  h-auto font-bold flex items-center gap-2">
+                    Get Notified
+                    <MoveRight className="w-4  transition-transform group-hover:translate-x-1" />
+                  </Button>
                 </div>
               </div>
             </div>

@@ -28,7 +28,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const DownloadForm = () => {
+const DownloadForm = ({ gameName }: { gameName: string }) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,6 +36,7 @@ const DownloadForm = () => {
       email: "",
     },
   });
+  console.log("product name", gameName);
   const mutation = useMutation({
     mutationFn: (data: { name: string; email: string }) =>
       Download(data.name, data.email),
@@ -49,7 +50,10 @@ const DownloadForm = () => {
 
   /* ------------------ submit function ------------------ */
   const onSubmit = (values: FormValues) => {
-    mutation.mutate(values, {
+    const name = gameName + " print and play request by " + values.name;
+    const email = values.email;
+    const form = { name, email };
+    mutation.mutate(form, {
       onSuccess: (data) => {
         console.log("Success:", data);
         toast.success(
@@ -82,7 +86,7 @@ const DownloadForm = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your name"
-                      className="rounded-full text-sm border-2 border-gray-400 bg-white outline-none lg:text-base"
+                      className="rounded-full text-sm   bg-white outline-none lg:text-base"
                       {...field}
                     />
                   </FormControl>
@@ -101,7 +105,7 @@ const DownloadForm = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your email"
-                      className="rounded-full border-2 border-gray-400 text-sm bg-white lg:text-base"
+                      className="rounded-full outline-none text-sm bg-white lg:text-base"
                       {...field}
                     />
                   </FormControl>

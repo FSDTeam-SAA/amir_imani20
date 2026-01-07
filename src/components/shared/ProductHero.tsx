@@ -139,7 +139,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
             <div className="flex flex-col-reverse md:flex-row gap-3 ">
               {/* Thumbnail Gallery */}
               <nav
-                className="flex flex-row md:flex-col gap-2 overflow-x-auto items-center justify-center md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-32"
+                className="flex flex-row md:flex-col gap-2 overflow-x-auto items-center justify-start md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-32"
                 aria-label="Product image thumbnails"
               >
                 {thumbnails.map((img, index) => (
