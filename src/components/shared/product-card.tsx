@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
-import { MoveRight, ShoppingCart } from "lucide-react";
+import {  ShoppingCart } from "lucide-react";
 import { Product } from "@/lib/types/ecommerce";
 import Image from "next/image";
 import Link from "next/link";

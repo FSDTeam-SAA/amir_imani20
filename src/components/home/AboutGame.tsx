@@ -1,16 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { Button } from "../ui/button";
+// import { Button } from "../ui/button";
 
 // import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
 import { productService } from "@/lib/api/product-service";
 
-import { MoveRight } from "lucide-react";
+// import { MoveRight } from "lucide-react";
 import WhyChooseUs from "../about/WhyChooseUs";
-import Link from "next/link";
+// import Link from "next/link";
 const AboutGame = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);

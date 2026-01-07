@@ -76,17 +76,28 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
         {/* Left Column: Product Image */}
         <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0  rounded-xl overflow-hidden ">
-          <div className="flex gap-3 relative aspect-square">
-            <div className="w-20 flex flex-col gap-3 overflow-y-auto no-scrollbar">
+          <div className="flex flex-col-reverse md:flex-row  gap-3 relative aspect-square">
+            <div
+              className="flex flex-row md:flex-col gap-2 overflow-x-auto items-center overflow-hidden justify-start md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-32"
+              aria-label="Product image thumbnails"
+            >
               {product.imgs && product.imgs.length > 0 ? (
                 product.imgs.map((img, index) => (
                   <div
                     key={index}
-                    className={`relative w-full h-20 shrink-0 cursor-pointer border-2 rounded-md overflow-hidden ${
+                    // key={`${img}-${index}`}
+                    // onClick={() => handleImageSelect(img)}
+                    className={`relative w-24 h-24 shrink-0 border-2 rounded-md overflow-hidden transition-all focus:outline-none focus:ring-primary focus:ring-offset-2 ${
                       selectedImage === img || (!selectedImage && index === 0)
-                        ? "border-primary"
-                        : "border-transparent"
+                        ? "border-primary shadow-md scale-105"
+                        : "border-gray-200 hover:border-primary/50"
                     }`}
+                    aria-label={`View image ${index + 1} of ${
+                      product.productName
+                    }`}
+                    aria-pressed={
+                      selectedImage === img || (!selectedImage && index === 0)
+                    }
                     onClick={() => setSelectedImage(img)}
                   >
                     <Image

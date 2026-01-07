@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "./axios-instance";
 import { CartResponse } from "../types/ecommerce";
 
