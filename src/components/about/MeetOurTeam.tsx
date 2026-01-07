@@ -34,7 +34,7 @@ const MeetOurTeam = () => {
     {
       img: "/images/Shikha.png",
       name: "Shikha Singh",
-      position: "Designer",
+      position: "Creative Head",
       discription:
         "Shikha is the creative force behind DoUndo’s visual identity. As the creative designer, she brings Amir’s vision to life, crafting every symbol, card, and box design with care and imagination. From brainstorming with the team to shaping the game’s look and feel, Shikha ensures that DoUndo’s design truly connects with its players.",
       side: `left`,
