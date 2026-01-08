@@ -27,10 +27,10 @@ export default function Hero() {
       />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/60 md:bg-linear-to-b md:from-transparent md:via-transparent md:to-black/20" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/60 md:bg-linear-to-b md:from-transparent md:via-transparent md:to-black/20 md:hidden" />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/60 md:bg-linear-to-b md:from-transparent md:via-transparent md:to-black/20" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/60 md:bg-linear-to-b md:from-transparent md:via-transparent md:to-black/20 md:hidden" />
 
       {/* Center content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-0 lg:pb-34">

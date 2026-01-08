@@ -1,7 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import { Check, Minus, Plus, ShoppingCart } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Check,
+  Minus,
+  Plus,
+  ShoppingCart,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Product } from "@/lib/types/ecommerce";
@@ -19,7 +26,55 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
   const [isAdding, setIsAdding] = useState(false);
   const [selectColor, setSelectColor] = useState<string | null>(null);
   const [selectSize, setSelectSize] = useState<string | null>(null);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(
+    (product.imgs && product.imgs.length > 0 ? product.imgs[0] : product.img) ||
+      null
+  );
+  const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (product.imgs && product.imgs.length > 0) {
+      setSelectedImage(product.imgs[0]);
+    } else {
+      setSelectedImage(product.img || null);
+    }
+  }, [product]);
+
+  const images =
+    product.imgs && product.imgs.length > 0
+      ? product.imgs
+      : product.img
+      ? [product.img]
+      : [];
+
+  const goNextImage = () => {
+    if (images.length <= 1) return;
+    const currentIndex = images.findIndex((i) => i === selectedImage) ?? 0;
+    const next = images[(currentIndex + 1) % images.length];
+    setSelectedImage(next);
+  };
+
+  const goPrevImage = () => {
+    if (images.length <= 1) return;
+    const currentIndex = images.findIndex((i) => i === selectedImage) ?? 0;
+    const prev = images[(currentIndex - 1 + images.length) % images.length];
+    setSelectedImage(prev);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 50) {
+      if (delta < 0) goNextImage();
+      else goPrevImage();
+    }
+    touchStartX.current = null;
+  };
+
   const { addToCart } = useCart();
 
   const { data: session } = useSession();
@@ -78,7 +133,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
         <div className="relative aspect-square w-full max-w-[480px] mx-auto lg:ml-0  rounded-xl overflow-hidden ">
           <div className="flex flex-col-reverse md:flex-row  gap-3 relative aspect-square">
             <div
-              className="flex flex-row md:flex-col gap-2 overflow-x-auto items-center overflow-hidden justify-start md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-32"
+              className="flex flex-row md:flex-col gap-2 overflow-x-auto items-center overflow-hidden justify-start md:overflow-y-auto md:overflow-x-hidden no-scrollbar md:w-32 p-2"
               aria-label="Product image thumbnails"
             >
               {product.imgs && product.imgs.length > 0 ? (
@@ -87,7 +142,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
                     key={index}
                     // key={`${img}-${index}`}
                     // onClick={() => handleImageSelect(img)}
-                    className={`relative w-24 h-24 shrink-0 border-2 rounded-md overflow-hidden transition-all focus:outline-none focus:ring-primary focus:ring-offset-2 ${
+                    className={`relative w-22 h-22 shrink-0 border-2 rounded-md overflow-hidden transition-all focus:outline-none focus:ring-primary focus:ring-offset-2 ${
                       selectedImage === img || (!selectedImage && index === 0)
                         ? "border-primary shadow-md scale-105"
                         : "border-gray-200 hover:border-primary/50"
@@ -119,7 +174,13 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
                 </div>
               )}
             </div>
-            <div className="relative flex-1 h-full rounded-xl overflow-hidden bg-gray-50">
+
+            {/* Thumbnail big Image  */}
+            <div
+              className="relative w-full aspect-square overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
               <Image
                 src={
                   selectedImage ||
@@ -130,8 +191,43 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
                 }
                 alt={product.productName}
                 fill
-                className="object-cover"
+                className="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-105"
               />
+
+              {images.length > 1 && (
+                <>
+                  <div className="absolute inset-0 flex items-center justify-between p-2 pointer-events-none md:hidden">
+                    <button
+                      onClick={goPrevImage}
+                      aria-label="Previous image"
+                      className="pointer-events-auto w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow"
+                    >
+                      <ChevronLeft className="w-5 h-5 text-[#111111]" />
+                    </button>
+                    <button
+                      onClick={goNextImage}
+                      aria-label="Next image"
+                      className="pointer-events-auto w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow"
+                    >
+                      <ChevronRight className="w-5 h-5 text-[#111111]" />
+                    </button>
+                  </div>
+
+                  {/* Mobile dots */}
+                  <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2 md:hidden">
+                    {images.map((img, idx) => (
+                      <button
+                        key={img}
+                        onClick={() => setSelectedImage(img)}
+                        aria-label={`Show image ${idx + 1}`}
+                        className={`w-2 h-2 rounded-full ${
+                          selectedImage === img ? "bg-primary" : "bg-white/50"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -162,7 +258,7 @@ const MerchandiseSingleCard = ({ product }: ProductHeroProps) => {
           <div className="space-y-6 mb-8">
             <div className="flex flex-col gap-2">
               <label className="text-xs font-semibold uppercase tracking-wider text-[#8B8B8B]">
-                Quantity
+                Quantity:
               </label>
               <div className="flex items-center space-x-2">
                 <div className="flex items-center border border-[#EFEFEF] rounded-md overflow-hidden bg-[#FBFBFB]">

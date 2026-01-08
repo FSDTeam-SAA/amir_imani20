@@ -10,7 +10,7 @@ const MeetOurTeam = () => {
       name: "Amir Imani",
       position: "Founder",
       discription:
-        "Amir Imani is the creator of DoUndo, a series of games with simple rules and endless possibilities. Thirteen unique symbols lie at the heart of his work, each carrying a story that brings depth and meaning to every game.",
+        "Amir Imani is the creator of DoUndo, a series of games with simple rules and open possibilities. Thirteen unique symbols lie at the heart of his work, each carrying a story that brings depth and meaning to every game.",
       side: `left`,
       socialLink: [
         {
@@ -32,7 +32,7 @@ const MeetOurTeam = () => {
       ],
     },
     {
-      img: "/images/Shikha.png",
+      img: "/images/Shikha.webp",
       name: "Shikha Singh",
       position: "Creative Head",
       discription:
@@ -46,7 +46,7 @@ const MeetOurTeam = () => {
     },
     {
       img: "/images/AshutoshSingh.png",
-      name: "Ashutosh",
+      name: "Ashutosh Singh",
       position: "Project Manager",
       discription:
         "Ashutosh is the project manager at Doundo and the person who helps turn big ideas into real, playable games. He works closely with the team, keeps everyone aligned, and makes sure no good idea gets lost along the way. From planning and team syncs to fine-tuning the small details, he helps bring the vision to life. With a background in VFX and experience working on major film projects, he brings a strong creative eye and a problem-solver’s mindset to everything we create.",

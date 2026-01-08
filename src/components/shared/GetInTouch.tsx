@@ -74,7 +74,7 @@ const GetInTouch = () => {
   };
 
   return (
-    <section className="md:my-16 lg:my-20 container mx-auto">
+    <section className="my-10 md:my-16 lg:my-20 container mx-auto">
       <div className=" px-6 bg-secondary rounded-2xl  py-6 md:py-23.75 md:px-37.5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mx-auto">
           {/* Form */}
