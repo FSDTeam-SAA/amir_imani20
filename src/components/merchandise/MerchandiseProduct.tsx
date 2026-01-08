@@ -131,26 +131,19 @@ const MerchandiseProduct = () => {
           ALL Merchandise Product
         </h2>
 
-        <div className="flex flex-wrap items-center  justify-center gap-5">
-          {(selectedProduct ? products : products.slice(0, 3)).map(
-            (product) => (
+        {products?.length === 0 ? (
+          <p className="text-center text-gray-500 text-lg">You have no data</p>
+        ) : (
+          <div className="flex flex-wrap items-center justify-center gap-5">
+            {products.map((product) => (
               <ProductCard
                 key={product._id}
                 product={product}
                 handleAddToCart={handleAddToCart}
                 addingToCartId={addingToCartId}
               />
-            )
-          )}
-        </div>
-        {products.length > 3 && (
-          <Button
-            onClick={() => setSelectedProduct(!selectedProduct)}
-            className="mt-10 mx-auto flex items-center gap-2 border-gray-300 text-white"
-          >
-            {selectedProduct ? "Less Games" : "More Games"}
-            <MoveRight />
-          </Button>
+            ))}
+          </div>
         )}
       </div>
     </section>
