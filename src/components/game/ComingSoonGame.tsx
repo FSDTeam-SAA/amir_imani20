@@ -71,9 +71,11 @@ const ComingSoonGame = () => {
                 Walnize
               </h1>
               <p className="text-xl text-gray-600 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                A new era of strategic board games is arriving. Prepare your
-                psychology, refine your deduction, and be the first to
-                experience Walnize.
+                In Walnize, confidence builds quietly. Each correct decision
+                sharpens your sense of the board. Moments that once caused
+                hesitation begin to feel familiar. Uncertainty gradually turns
+                into control, and every timely choice strengthens that feeling.
+                Walnize rewards the calm satisfaction of getting it right.
               </p>
             </div>
 
