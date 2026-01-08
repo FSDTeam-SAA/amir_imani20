@@ -158,11 +158,11 @@ const ComingSoon = () => {
             href="/game/coming-soon"
             className="group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] max-w-[400px]"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-secondary transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
               {/* Image Container */}
               <div className="relative w-full aspect-square overflow-hidden">
                 <Image
-                  src="/images/WalnizeProductCard.jpg"
+                  src="/images/WalnizeProductCard.jpeg"
                   alt="Walnize - Coming Soon"
                   width={400}
                   height={400}

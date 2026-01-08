@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, Search, ShoppingCart, User2Icon,  } from "lucide-react";
+import { Menu, LogOut, Search, ShoppingCart, User2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -25,6 +25,7 @@ const navigationItems = [
   { name: "About Us", href: "/about-us" },
   { name: "Games", href: "/game" },
   { name: "Merchandise", href: "/merchandise" },
+  // { name: "Merchandise", href: "/merchandise" },
   // { name: "Fortune Telling", href: "/fortune-telling" },
   { name: "Contact", href: "/contact" },
 ];
@@ -75,7 +76,10 @@ export default function Navbar() {
             {/* Desktop Navigation - Hidden on mobile/tablet */}
             <nav className="hidden xl:flex xl:items-center xl:space-x-1 2xl:space-x-2">
               {navigationItems.map((item) => {
-                const isActive = item.href === pathname;
+                const isActive =
+                  pathname === item.href ||
+                  pathname.startsWith(item.href + "/") ||
+                  (item.href === "/game" && pathname.startsWith("/product/"));
                 return (
                   <Link
                     key={item.name}

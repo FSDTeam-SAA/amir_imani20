@@ -11,7 +11,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const isCard = product.productType === "card";
 
   return (
-    <section className="my-12 border-t border-[#EFEFEF] overflow-hidden ">
+    <section className="my-12 border-t pt-4 border-[#EFEFEF] overflow-hidden ">
       <div className="">
         <div
           className={`grid grid-cols-1 ${
