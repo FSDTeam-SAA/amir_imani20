@@ -52,7 +52,7 @@ const ComingSoonGame = () => {
             <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-secondary/30 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
             <div className="relative aspect-square overflow-hidden rounded-2xl border border-gray-100 ">
               <Image
-                src="/images/WalnizeProductCard.jpg"
+                src="/images/WalnizeProductCard.jpeg"
                 alt="Walnize Game"
                 fill
                 priority
