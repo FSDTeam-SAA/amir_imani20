@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, LogOut, Search, ShoppingCart, User2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,7 +25,6 @@ const navigationItems = [
   { name: "About Us", href: "/about-us" },
   { name: "Games", href: "/game" },
   { name: "Merchandise", href: "/merchandise" },
-  // { name: "Merchandise", href: "/merchandise" },
   // { name: "Fortune Telling", href: "/fortune-telling" },
   { name: "Contact", href: "/contact" },
 ];
@@ -53,7 +52,18 @@ export default function Navbar() {
       `${profile.firstName || ""} ${profile.lastName || ""}`.trim() || "User"
     );
   };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+      }
+    };
 
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <header className="fixed top-0  z-50 w-full  animate-in fade-in duration-500 ">
       <nav className="w-screen backdrop-blur-md bg-white/70 border-b border-white/10 transition-all duration-300">
@@ -74,7 +84,7 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Navigation - Hidden on mobile/tablet */}
-            <nav className="hidden xl:flex xl:items-center xl:space-x-1 2xl:space-x-2">
+            <nav className="hidden lg:flex xl:items-center xl:space-x-1 2xl:space-x-2">
               {navigationItems.map((item) => {
                 const isActive =
                   pathname === item.href ||
@@ -125,7 +135,7 @@ export default function Navbar() {
               </Link>
 
               {/* User Profile/Login - Desktop */}
-              <div className="hidden sm:block">
+              <div className="hidden lg:block">
                 {status === "authenticated" && session ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -226,9 +236,9 @@ export default function Navbar() {
               </div>
 
               {/* Mobile menu button */}
-              <div className="xl:hidden ">
+              <div className="block lg:hidden ">
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                  <SheetTrigger asChild>
+                  <SheetTrigger asChild className="">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -240,7 +250,7 @@ export default function Navbar() {
                   </SheetTrigger>
                   <SheetContent
                     side="right"
-                    className="w-[85vw] sm:w-[400px] p-0"
+                    className={`w-[85vw] sm:w-[400px] p-0 `}
                   >
                     <div className="flex flex-col h-full">
                       {/* Mobile Header */}
@@ -310,7 +320,11 @@ export default function Navbar() {
                       <nav className="flex-1 overflow-hidden  py-6 mt-8">
                         <div className="space-y-1 px-4">
                           {navigationItems.map((item) => {
-                            const isActive = item.href === pathname;
+                            const isActive =
+                              pathname === item.href ||
+                              pathname.startsWith(item.href + "/") ||
+                              (item.href === "/game" &&
+                                pathname.startsWith("/product/"));
                             return (
                               <Link
                                 key={item.name}
@@ -385,6 +399,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
+
         <SearchMotal open={searchOpen} onSetSearchOpen={setSearchOpen} />
       </nav>
     </header>
