@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 
 interface OrderSummaryProps {
   subtotal: number;
-  // shipping: number;
-  // tax: number;
+  shipping: number;
+  tax: number;
   onCheckout?: () => void;
   isCheckoutLoading?: boolean;
   isDisabled?: boolean;
@@ -15,13 +15,13 @@ interface OrderSummaryProps {
 
 const OrderSummary = React.memo(function OrderSummary({
   subtotal,
-  // shipping,
-  // tax,
+  shipping,
+  tax,
   onCheckout,
   isCheckoutLoading,
   isDisabled,
 }: OrderSummaryProps) {
-  const total = subtotal;
+  const total = subtotal + shipping + tax;
 
   return (
     <div className="bg-white border border-[#EFEFEF] rounded-2xl p-6 lg:p-10 shadow-[0px_8px_24px_rgba(0,0,0,0.03)] h-fit sticky top-24">
@@ -32,14 +32,14 @@ const OrderSummary = React.memo(function OrderSummary({
           <span className="text-[#333333]">Subtotal</span>
           <span className="text-[#111111]">${subtotal.toFixed(2)}</span>
         </div>
-        {/* <div className="flex justify-between items-center text-sm font-medium">
-          <span className="text-[#333333]">Shipping</span>
-          <span className="text-[#111111]">${shipping.toFixed(2)}</span>
-        </div> */}
-        {/* <div className="flex justify-between items-center text-sm font-medium">
-          <span className="text-[#333333]">Tax</span>
-          <span className="text-[#111111]">${tax.toFixed(2)}</span>
-        </div> */}
+        <div className="flex justify-between items-center text-sm font-medium">
+          <span className="text-gray-500">Shipping</span>
+          <span className="text-gray-500">+ ${shipping.toFixed(2)}</span>
+        </div> 
+         <div className="flex justify-between items-center text-sm font-medium">
+          <span className="text-gray-500">Tax(13%)</span>
+          <span className="text-gray-500">+ ${tax.toFixed(2)}</span>
+        </div>
       </div>
 
       <div className="pt-6 border-t border-[#EFEFEF] mb-8">
