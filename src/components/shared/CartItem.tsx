@@ -32,7 +32,7 @@ const CartItem = React.memo(function CartItem({
   const shortDescription = description?.replace(/<[^>]*>/g, "").slice(0, 60);
 
   return (
-    <div className="relative flex flex-col sm:flex-row items-start sm:items-cente  gap-4 p-4 border border-[#EFEFEF] rounded-lg mb-4 bg-white hover:border-primary/30 transition-colors">
+    <div className="relative flex flex-col  sm:flex-row items-start sm:items-cente  gap-4 p-4 border border-[#EFEFEF] rounded-lg mb-4 bg-white hover:border-primary/30 transition-colors">
       {/* Remove Button */}
       <button
         onClick={() => onRemove(id)}

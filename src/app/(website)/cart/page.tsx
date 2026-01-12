@@ -39,12 +39,19 @@ export default function CartPage() {
   // Payment
   const { mutate: createPayment, isPending: isCheckoutLoading } = usePayment();
 
+  // Constants for shipping and tax
+  const SHIPPING_ESTIMATE = 5;
+  const TAX_RATE = 0.13;
+
+  const tax = subtotal * TAX_RATE;
+  const totalAmount = subtotal + SHIPPING_ESTIMATE + tax;
+
   const handleCheckout = () => {
     if (!cart) return;
 
     createPayment({
       userId: cart.userId,
-      totalAmount: subtotal,
+      totalAmount: totalAmount,
       itemIds: [cart._id],
     });
   };
@@ -135,8 +142,8 @@ export default function CartPage() {
           <div className="w-full lg:w-[380px]">
             <OrderSummary
               subtotal={subtotal}
-              // shipping={shipping}
-              // tax={tax}
+              shipping={SHIPPING_ESTIMATE}
+              tax={tax}
               onCheckout={handleCheckout}
               isCheckoutLoading={isCheckoutLoading}
               isDisabled={items.length === 0}
